@@ -295,7 +295,11 @@
         <div id="pagina">
             <div id="header">
                 <div class="box">
+<<<<<<< HEAD
                     <h1>Protótipo Comi o bolo de quem tá lendo</h1>
+=======
+                    <h1>Protótipo Github Marmelada 2</h1>
+>>>>>>> 55bdd33e1982a4661765d65350343095d3165f5d
                 </div>
             </div>
             <div id="navbar">
