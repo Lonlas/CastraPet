@@ -192,7 +192,7 @@
             </div>
             <div id="boxbtn">
                 <div id="boxesc">
-                    <a href="<?php echo URL.'inicio';?>" class="btn esc">Voltar</a>
+                    <a href="<?php echo URL.'perfil';?>" class="btn esc">Voltar</a>
                 </div>
                 <div id="boxdir">
                     <a href="<?php echo URL.'cadastraanimal';?>" class="btn dir">Cadastrar Animal</a>
