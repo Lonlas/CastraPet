@@ -181,21 +181,21 @@
             <div id="pets">
                 <h1>Meus Animais</h1>
                 <div id="tabela">
-                    <div class="obj a"><a class="link" href="infoAnimal.php">Loki</a></div>
+                    <div class="obj a"><a class="link" href="<?php echo URL.'infoanimal'?>">Loki</a></div>
                             
-                    <div class="obj b"><a class="link" href="infoAnimal.php">Thor</a></div>
+                    <div class="obj b"><a class="link" href="<?php echo URL.'infoanimal'?>">Thor</a></div>
                     <div class="separador"></div>
-                    <div class="obj c"><a class="link" href="infoAnimal.php">Odin</a></div>
+                    <div class="obj c"><a class="link" href="<?php echo URL.'infoanimal'?>">Odin</a></div>
 
-                    <div class="obj d"><a class="link" href="infoAnimal.php">Valquíria</a></div>
+                    <div class="obj d"><a class="link" href="<?php echo URL.'infoanimal'?>">Valquíria</a></div>
                 </div>
             </div>
             <div id="boxbtn">
                 <div id="boxesc">
-                    <a href="infoUsuario.php" class="btn esc">Voltar</a>
+                    <a href="<?php echo URL.'inicio';?>" class="btn esc">Voltar</a>
                 </div>
                 <div id="boxdir">
-                    <a href="cadAnimal.php" class="btn dir">Cadastrar Animal</a>
+                    <a href="<?php echo URL.'cadastraanimal';?>" class="btn dir">Cadastrar Animal</a>
                 </div>
             </div>
         </div>

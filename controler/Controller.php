@@ -10,6 +10,21 @@ class Controler
     function abrirLogin(){
         include "view/login.php";
     }
+    function abrirEsqSenha(){
+        include "view/esqSenha.php";
+    }
+    function abrirPerfil(){
+        include "view/infoUsuario.php";
+    }
+    function abrirMeusAnimais(){
+        include "view/meusAnimais.php";
+    }
+    function abrirCadAnimal(){
+        include "view/cadAnimal.php";
+    }
+    function abrirInfoAnimal(){
+        include "view/infoAnimal.php";
+    }
 
 
 }

@@ -156,7 +156,7 @@
         </style>
     </head>
     <body>
-        <form id="caixa" action="index.php" method="POST">
+        <form id="caixa" action="<?php echo URL.'inicio'?>" method="POST">
             <table id="inputs">
                 <tr>
                     <td>
@@ -172,8 +172,8 @@
                     </td>
                 </tr>    
             </table>
-                <a href="cadastro.php" id="nplink">Não possuo uma conta</a>
-                <a href="esqSenha.php" id="esqlink">Esqueci a senha</a>
+                <a href="<?php echo URL.'cadastro';?>" id="nplink">Não possuo uma conta</a>
+                <a href="<?php echo URL.'esqueciasenha';?>" id="esqlink">Esqueci a senha</a>
             <div id="boxbtn">
                 <input type="submit" name="btnlogin" id="btnloga" value="Entrar">
             </div>

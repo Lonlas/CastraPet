@@ -248,12 +248,12 @@
                         <td><span>Foto do Animal:</span></td>
                     </tr>
                     <tr>
-                        <td><img src="Documentos/imagem_exemplo.jpg" alt="imagem de exemplo"/></td>
+                        <td><img src="recursos/img/imagem_exemplo.jpg" alt="imagem de exemplo"/></td>
                     </tr>
                 </tbody>
             </table>
             <div id="button-box">
-                <a href="meusAnimais.php" id="btnVoltar">Voltar</a>
+                <a href="<?php echo URL.'meusanimais'?>" id="btnVoltar">Voltar</a>
             </div>
         </div>
     </body>

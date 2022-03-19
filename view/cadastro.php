@@ -118,7 +118,6 @@
                 height: 48px;
                 width: 100%;
                 border-radius: 3px;
-                color: black;
                 padding: 3px;
                 font-size: 1.2em;
             }
@@ -272,7 +271,7 @@
     <body>
         <div id="container">
             <center>
-            <form action="index.php">
+            <form action="<?php echo URL.'inicio'?>" method="POST">
                 <table border="0">
                     <tr>
                         <td colspan="3"><h1>Cadastro de Usuário</h1></td>
@@ -315,7 +314,7 @@
                     </tr>
                 </table> 
                 <div id="button-box">
-                    <button name="btnAvancar" id="btnAvancar">Cadastrar</button>
+                    <input type="submit" name="btnAvancar" id="btnAvancar" value="Cadastrar">
                 </div>
             </form>    
         </div>

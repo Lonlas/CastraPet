@@ -310,7 +310,7 @@
     <body>
         <div id="container">
             <center>
-                <form action="index.php">
+                <form action="<?php echo URL.'inicio'?>" method="POST">
                     <table border="0">
                         <tr>
                             <td colspan="4"><h1>Informações do Animal</h1></td>
@@ -360,9 +360,9 @@
                         <tr>
                             <td><input type="file" name="fileFotoAni" id="img" accept="image/*"/><label id="fileImgText" for="img">Imagem do Animal</label></td>
                             <td>
-                                <img src="Documentos/imagem_exemplo.jpg" alt="imagem de exemplo"/>
-                                <img src="Documentos/imagem_exemplo.jpg" alt="imagem de exemplo"/>
-                                <img src="Documentos/imagem_exemplo.jpg" alt="imagem de exemplo"/>
+                                <img src="view/Documentos/imagem_exemplo.jpg" alt="imagem de exemplo"/>
+                                <img src="view/Documentos/imagem_exemplo.jpg" alt="imagem de exemplo"/>
+                                <img src="view/Documentos/imagem_exemplo.jpg" alt="imagem de exemplo"/>
                             </td>
                             <!--
                             <td><div class="imgEx">Imagem de Exemplo</div></td>
@@ -380,7 +380,7 @@
                         </tr>
                     </table>
                     <div id="button-box">
-                        <button name="btnAvancar" id="btnAvancar">Cadastrar</button>
+                        <input type="submit" name="btnAvancar" id="btnAvancar" value="Cadastrar">
                     </div>
                 </form>
             </center>

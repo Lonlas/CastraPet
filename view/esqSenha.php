@@ -66,11 +66,15 @@
                 align-items: center;
             }
             .btnloga{
+                display: flex !important;;
                 height: 80px;
                 width: 200px;
                 font-size: 2em;
                 background: var(--verde);
                 margin: 0 20px;
+                border-radius: var(--borderradius);
+                align-items: center;
+                justify-content: center;
             }
             .btnloga:hover{
                 cursor: pointer;
@@ -81,7 +85,6 @@
             }
             input{
                 border: none;
-                border-radius: var(--borderradius);
             }
             ::placeholder{
                 font-weight:300;
@@ -97,6 +100,7 @@
                 width: auto;
                 height: 50px;
                 text-align: center;
+                border-radius: var(--borderradius);
             }
             #inputcpf:focus,#inputemail:focus{
                 background: rgb(210,210,210);
@@ -132,6 +136,7 @@
             }
             a{
                 display:none;
+                text-decoration: none;
             }
             @media screen and (max-width: 700px){
                 #esqlink, #nplink{
@@ -157,7 +162,7 @@
         </style>
     </head>
     <body>
-        <form id="caixa" action="index.php" method="POST">
+        <form id="caixa" action="<?php echo URL.'inicio'?>" method="POST">
             <table id="inputs">
                 <tr>
                     <td>
@@ -167,9 +172,9 @@
                     </td>
                 </tr>    
             </table>
-                <a href="cadastro.php" id="nplink">Não possuo uma conta</a>
+                <a href="<?php echo URL.'cadastro';?>" id="nplink">Não possuo uma conta</a>
             <div id="boxbtn">
-                <input type="submit" name="btnlogin" class="btnloga" value="Voltar">
+                <a href="<?php echo URL.'inicio';?>" name="btnlogin" class="btnloga" value="Voltar">Voltar</a>
                 <input type="submit" name="btnlogin" class="btnloga" value="Enviar">
             </div>
         </form>
