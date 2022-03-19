@@ -360,9 +360,9 @@
                         <tr>
                             <td><input type="file" name="fileFotoAni" id="img" accept="image/*"/><label id="fileImgText" for="img">Imagem do Animal</label></td>
                             <td>
-                                <img src="view/Documentos/imagem_exemplo.jpg" alt="imagem de exemplo"/>
-                                <img src="view/Documentos/imagem_exemplo.jpg" alt="imagem de exemplo"/>
-                                <img src="view/Documentos/imagem_exemplo.jpg" alt="imagem de exemplo"/>
+                                <img src="recursos/img/imagem_exemplo.jpg" alt="imagem de exemplo"/>
+                                <img src="recursos/img/imagem_exemplo.jpg" alt="imagem de exemplo"/>
+                                <img src="recursos/img/imagem_exemplo.jpg" alt="imagem de exemplo"/>
                             </td>
                             <!--
                             <td><div class="imgEx">Imagem de Exemplo</div></td>
