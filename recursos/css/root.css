@@ -1,14 +1,18 @@
-            @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-            :root{
-                --azul:#0281c6;
-                --azulclaro:#00aff0;
-                --azulmaisclaro: #42c0ee;
-                --verde:#00b48c;
-                --verdeclaro:#5edabf;
-                --amarelo:#f8b32a;
-                --vermelho:#ed323d;
-                --preto:#282828;
-                --cinza:#eee;
-                --margem: 12px;
-                --borda: 1px solid white;
-            }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root{
+    --azul: #0281c6;
+    --azulclaro: #00aff0;
+    --azulmaisclaro: #42c0ee;
+    --verde: #00b48c;
+    --verdeclaro: #5edabf;
+    --amarelo: #f8b32a;
+    --vermelho: #ed323d;
+    --vermelhoclaro: #ff767f;
+    --preto: #282828;
+    --margem: 15px;
+    --margem-menor: 12px;
+    --margem-minuscula: 7px;
+    --tamanhoquadrado: 700px;
+    --borderradius: 5px;
+    --borda-branca: 1px solid white;
+}

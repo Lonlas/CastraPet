@@ -1,249 +1,249 @@
-            *
-            {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                color: white;
-                font-family: 'Montserrat', Verdana, Arial, Helvetica, sans-serif;
-                border: 0;
-            }
-            body
-            {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-            }
-            #container
-            {
-                background-color: var(--azul);
-                margin: 10px;
-                overflow: hidden;
-                height: auto;
-                width: 950px;
-                border-radius: 5px;
-            }
-            #button-box
-            {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: var(--preto);
-                padding: 50px 0px 50px 0px;
-                height: auto;
-                width: 100%;
-                border-bottom-left-radius: 5px;
-                border-bottom-right-radius: 5px;
-            }
-            #btnAvancar
-            {
-                background-color: var(--verde);
-                font-size: 1.6em;
-                height: 70px;
-                font-weight: bold;
-                width: 200px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            #btnAvancar:hover
-            {
-                background-color: var(--verdeclaro);
-            }
-            #btnAvancar:active{
-                transform: scale(90%);
-            }
-            .chkForm:not(:checked), .chkForm:checked 
-            {
-                display: none;
-            }
-            .chkForm + label
-            {
-                display: inline-block;
-                background-color: var(--verde);
-                height: 100%;
-                padding: 5px 0px 5px 0px;
-                width: 100%;
-                border: solid;
-                border-color: white;
-                border-radius: 5px;
-                font-size: 1.3em;
-                font-weight: 600;
-                cursor: pointer;
-                text-align: center;
-            }
-            .chkForm:checked + label 
-            {
-                border-color: black;
-                color: black;
-                background-color: var(--verdeclaro);
-            }
-            label
-            {
-                user-select: none;
-                padding: 2px;
-            }
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Montserrat', Verdana, Arial, Helvetica, sans-serif;
+    border: 0;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+#container
+{
+    background-color: var(--azulclaro);
+    margin: 10px;
+    overflow: hidden;
+    height: auto;
+    width: 950px;
+    border-radius: 5px;
+}
+#button-box
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--preto);
+    padding: 50px 0px 50px 0px;
+    height: auto;
+    width: 100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#btnAvancar
+{
+    background-color: var(--verde);
+    font-size: 1.6em;
+    height: 70px;
+    font-weight: bold;
+    width: 200px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#btnAvancar:hover
+{
+    background-color: var(--verdeclaro);    
+}
+#btnAvancar:active{
+    transform: scale(90%);
+}
+.chkForm:not(:checked), .chkForm:checked 
+{
+    display: none;
+}
+.chkForm + label
+{
+    display: inline-block;
+    background-color: var(--verde);
+    height: 100%;
+    padding: 5px 0px 5px 0px;
+    width: 100%;
+    border: solid;
+    border-color: white;
+    border-radius: 5px;
+    font-size: 1.3em;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+}
+.chkForm:checked + label 
+{
+    border-color: black;
+    color: black;
+    background-color: var(--verdeclaro);
+}
+label
+{
+    user-select: none;
+    padding: 2px;
+}
 
-            table
-            {
-                width: 100%;
-                height: 100%;
-                padding: 50px;
-            }
-            span
-            {
-                font-size: 1.34em;
-                font-weight: 600;
-            }
-            input
-            {
-                height: 48px;
-                width: 100%;
-                border-radius: 3px;
-                padding: 3px;
-                font-size: 1.2em;
-            }
+table
+{
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+}
+span
+{
+    font-size: 1.34em;
+    font-weight: 600;
+}
+input
+{
+    height: 48px;
+    width: 100%;
+    border-radius: 3px;
+    padding: 3px;
+    font-size: 1.2em;
+}
 
-            input::-webkit-input-placeholder
-            {
-                font-size: 1.1em;
-            }
-            h1
-            {
-                text-align: center;
-                height: 80px;
-            }
-            td
-            {
-                padding: 2px;
-            }
-            .vazio
-            {
-                user-select: none;
-            }
-            a{
-                display:none;
-            }
+input::-webkit-input-placeholder
+{
+    font-size: 1.1em;
+}
+h1
+{
+    text-align: center;
+    height: 80px;
+}
+td
+{
+    padding: 2px;
+}
+.vazio
+{
+    user-select: none;
+}
+a{
+    display:none;
+}
 
-            /* Responsividade Antiga */
+/* Responsividade Antiga */
 
-            /*
-            @media screen and (max-width:652px) 
-            {
-                .chkForm + label{
-                    height: 90px;
-                }
-            }
-            @media screen and (max-width:559px) 
-            {
-                .chkForm + label{
-                    height: 115px;
-                }
-            }
-            @media screen and (max-width:500px) 
-            {
-                #container
-                {
-                    transform: scale(65%);
-                    width: 600px;
-                    height: 600px;
-                }
-                .chkForm + label{
-                    font-size: 1em;
-                    height: 50px;
-                }
-                span
-                {
-                    font-size: 1em;
-                }
-                input
-                {
-                    height: 30px;
-                }
-                input::-webkit-input-placeholder
-                {
-                    font-size: 0.9em;
-                }
-                h1
-                {
-                    text-align: center;
-                    height: 100px;
-                }
-                table
-                {
-                    width: 500px;
-                    height: 100%;
-                    padding: 20px;
-                }
-                #botao
-                {
-                    height: 150px;
-                }
-                #btnAvancar
-                {
-                    transform: scale(90%);
-                }
-                #btnAvancar:active{
-                    transform: scale(80%);
-                }
-            }
-            @media screen and (max-width:320px)
-            {
-                #container
-                {
-                    transform: scale(60%);
-                }
-            }
-            */
-            
-            /* Responsividade Nova */
+/*
+@media screen and (max-width:652px) 
+{
+.chkForm + label{
+    height: 90px;
+}
+}
+@media screen and (max-width:559px) 
+{
+.chkForm + label{
+    height: 115px;
+}
+}
+@media screen and (max-width:500px) 
+{
+#container
+{
+    transform: scale(65%);
+    width: 600px;
+    height: 600px;
+}
+.chkForm + label{
+    font-size: 1em;
+    height: 50px;
+}
+span
+{
+    font-size: 1em;
+}
+input
+{
+    height: 30px;
+}
+input::-webkit-input-placeholder
+{
+    font-size: 0.9em;
+}
+h1
+{
+    text-align: center;
+    height: 100px;
+}
+table
+{
+    width: 500px;
+    height: 100%;
+    padding: 20px;
+}
+#botao
+{
+    height: 150px;
+}
+#btnAvancar
+{
+    transform: scale(90%);
+}
+#btnAvancar:active{
+    transform: scale(80%);
+}
+}
+@media screen and (max-width:320px)
+{
+#container
+{
+    transform: scale(60%);
+}
+}
+*/
 
-            @media(max-width: 550px)
-            {
-                td, tr
-                {
-                    display: block;
-                }
-                .vazio
-                {
-                    display: none;
-                }
-                .span-subject
-                {
-                    margin: 20px 0px 0px 0px;
-                }
-                table
-                {
-                    padding: 20px;
-                }
-                h1
-                {
-                    margin-bottom: -10px;
-                    margin-top: 20px;
-                }
-                input
-                {
-                    height: 38px;
-                    font-size: 1em;
-                }
-                input::-webkit-input-placeholder
-                {
-                    font-size: 1em;
-                }
-                .chkForm + label
-                {
-                    height: auto;
-                    padding: 5px 0px 5px 0px;
-                    font-size: 1em;
-                }
-                span
-                {
-                    font-size: 1.2em;
-                }
-                #btnAvancar
-                {
-                    transform: scale(85%);
-                }
-                #btnAvancar:active{
-                    transform: scale(75%);
-                }
-            }
+/* Responsividade Nova */
+
+@media(max-width: 550px)
+{
+td, tr
+{
+    display: block;
+}
+.vazio
+{
+    display: none;
+}
+.span-subject
+{
+    margin: 20px 0px 0px 0px;
+}
+table
+{
+    padding: 20px;
+}
+h1
+{
+    margin-bottom: -10px;
+    margin-top: 20px;
+}
+input
+{
+    height: 38px;
+    font-size: 1em;
+}
+input::-webkit-input-placeholder
+{
+    font-size: 1em;
+}
+.chkForm + label
+{
+    height: auto;
+    padding: 5px 0px 5px 0px;
+    font-size: 1em;
+}
+span
+{
+    font-size: 1.2em;
+}
+#btnAvancar
+{
+    transform: scale(85%);
+}
+#btnAvancar:active{
+    transform: scale(75%);
+}
+}
