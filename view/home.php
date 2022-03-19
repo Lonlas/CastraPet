@@ -295,7 +295,7 @@
         <div id="pagina">
             <div id="header">
                 <div class="box">
-                    <h1>Protótipo Comi o bolo de quem tá lendo uga uga por que o Git é tão bugado?aaa</h1>
+                    <h1>Protótipo Comi o bolo de quem tá lendo uga uga por que o Git é tão bugado?</h1>
                 </div>
             </div>
             <div id="navbar">
