@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="utf-8"/>
-        <title>Meus Animais</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <!--
-        <style type="text/css">
-            @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-            :root{
-                --azul:#0281c6;
-                --azulclaro:#00aff0;
-                --azulmaisclaro: #42c0ee;
-                --verde:#00b48c;
-                --verdeclaro:#5edabf;
-                --amarelo:#f8b32a;
-                --vermelho:#ed323d;
-                --preto:#282828;
-                --cinza:#eee;
-                --margem: 12px;
-                --borda: 1px solid white;
-            }
-            *{
+*{
                 margin: 0;
                 font-family: 'montserrat',Verdana, Arial, Helvetica, sans-serif;
                 font-weight: 600;
@@ -175,31 +153,3 @@
                     right: 10px;
                 }
             }
-        </style>
-        -->
-    </head>
-    <body>
-        <div class="container">
-            <div id="pets">
-                <h1>Meus Animais</h1>
-                <div id="tabela">
-                    <div class="obj a"><a class="link" href="<?php echo URL.'infoanimal'?>">Loki</a></div>
-                            
-                    <div class="obj b"><a class="link" href="<?php echo URL.'infoanimal'?>">Thor</a></div>
-                    <div class="separador"></div>
-                    <div class="obj c"><a class="link" href="<?php echo URL.'infoanimal'?>">Odin</a></div>
-
-                    <div class="obj d"><a class="link" href="<?php echo URL.'infoanimal'?>">Valquíria</a></div>
-                </div>
-            </div>
-            <div id="boxbtn">
-                <div id="boxesc">
-                    <a href="<?php echo URL.'perfil';?>" class="btn esc">Voltar</a>
-                </div>
-                <div id="boxdir">
-                    <a href="<?php echo URL.'cadastraanimal';?>" class="btn dir">Cadastrar Animal</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
