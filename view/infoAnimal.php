@@ -1,62 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8"/>
-        <title>@NomeAnimal</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" href="recursos/css/root.css">
-        <link rel="stylesheet" href="recursos/css/infoAnimal.css">
-    </head>
-    <body>
-        <div id="container">
-            <table id="tbInfoAnimal1">
-                <tbody>
-                    <tr>
-                        <td><span>Nome: @Animal--</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Espécie: Canina/Felina</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Sexo: Mach/Fem</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Idade: 5</span></td>
-                    </tr>
-                </tbody>
-            </table>
-            <table id="tbInfoAnimal2">
-                <tbody>
-                    <tr>
-                        <td><span>Cor: Cor Exemplo</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Raça: Raça Exemplo</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Porte: Peq/Med/Gra</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Pelagem: Cur/Med/Alt</span></td>
-                    </tr>
-                </tbody>
-            </table>
-            <table id="tbInfoAnimal3">
-                <tbody>
-                    <tr>
-                        <td><span>Animal Comunitário: Sim/Não</span></td>
-                    </tr>
-                    <tr>
-                        <td><span>Foto do Animal:</span></td>
-                    </tr>
-                    <tr>
-                        <td><img src="recursos/img/imagem_exemplo.jpg" alt="imagem de exemplo"/></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div id="button-box">
-                <a href="<?php echo URL.'meusanimais'?>" id="btnVoltar">Voltar</a>
-            </div>
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CastraPet</title>
+    <!-- EXTENSÃO BOOTSTRAP -->
+    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
+
+</head>
+<body>
+    <!-- CORPO -->
+
+    <!-- /CORPO -->
+
+    <!-- EXTENSÃO BOOTSTRAP -->
+    <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
+    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+</body>
 </html>

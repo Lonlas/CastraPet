@@ -1,8 +1,8 @@
 *{
     margin: 0;
-    font-family: 'montserrat',Verdana, Arial, Helvetica, sans-serif;
     font-weight: 600;
     box-sizing: border-box;
+    font-family: 'josefin sans','montserrat';
     line-height: 1.5;
 }
 h1{
@@ -15,11 +15,12 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center;   
+
 }
-div{    
+div{
     color: black;
-}                               
+}                
                                             /*RETIRANDO A MARCA D'ÁGUA DO 000WEBSERVER*/
 a{
     display:none;
@@ -31,13 +32,10 @@ p{
     font-weight: 500;
     color: (var(--preto));
 }
-/*p, h2{
-    color: black !important;
-}*/
 #pagina{
     margin: var(--margem);
     min-height: 100%;
-    max-width: 1000px !important;
+    max-width: 1500px !important;
     position: relative;
     border-radius: var(--borderradius);
     contain: paint;
@@ -56,7 +54,7 @@ p{
     grid-template-areas:'m m'
                         's c'
                         'f f';
-    grid-template-columns: 20fr 80fr !important;
+    grid-template-columns: 15fr 90fr !important;
     grid-template-rows: 0 minmax(620px, auto) minmax(150px, auto) !important;
     background: white;
 }
@@ -189,12 +187,13 @@ p{
                                             /*CORPO*/
 #corpo{
     margin: 0 0 0 var(--margem-menor);
-    background: var(--amarelo);
+    background: transparent;
     border: var(--borda);
     padding: var(--margem-menor);
+    color: black !important;
 }
 #img-cachorro{
-    width: 100%;
+    width: 50%;
     display: inline-block;
     border-radius: 10px;
 }
@@ -202,11 +201,9 @@ p{
     font-size: 22px;
     font-weight: 800;
     margin-top: 15px;
-    color: white;
 }
 .corpo-texto{
     font-size: 18px;
-    color: white;
     padding: var(--margem-menor);
 }
                                             /*FOOTER*/

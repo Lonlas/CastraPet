@@ -1,34 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8"/>
-        <title>Meus Animais</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" href="recursos/css/root.css">
-        <link rel="stylesheet" href="recursos/css/meusAnimais.css">
-    </head>
-    <body>
-        <div class="container">
-            <div id="pets">
-                <h1>Meus Animais</h1>
-                <div id="tabela">
-                    <div class="obj a"><a class="link" href="<?php echo URL.'infoanimal'?>">Loki</a></div>
-                            
-                    <div class="obj b"><a class="link" href="<?php echo URL.'infoanimal'?>">Thor</a></div>
-                    <div class="separador"></div>
-                    <div class="obj c"><a class="link" href="<?php echo URL.'infoanimal'?>">Odin</a></div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CastraPet</title>
+    <!-- EXTENSÃO BOOTSTRAP -->
+    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
 
-                    <div class="obj d"><a class="link" href="<?php echo URL.'infoanimal'?>">Valquíria</a></div>
-                </div>
-            </div>
-            <div id="boxbtn">
-                <div id="boxesc">
-                    <a href="<?php echo URL.'perfil';?>" class="btn esc">Voltar</a>
-                </div>
-                <div id="boxdir">
-                    <a href="<?php echo URL.'cadastraanimal';?>" class="btn dir">Cadastrar Animal</a>
-                </div>
-            </div>
-        </div>
-    </body>
+</head>
+<body>
+    <!-- CORPO -->
+
+    <!-- /CORPO -->
+
+    <!-- EXTENSÃO BOOTSTRAP -->
+    <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
+    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+</body>
 </html>
