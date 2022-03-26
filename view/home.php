@@ -12,6 +12,8 @@
 <body>
     <!-- CORPO -->
 
+    <a href="<?php echo URL.'login';?>">Login</a>
+
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
