@@ -1,19 +1,30 @@
 <?php
 
 include_once "model/Animal.php";
+include_once "model/Raca.php";
 
 class AnimalController
 {
-    function abrirMeusAnimais(){
+
+    function abrirMeusAnimais()
+    {
         include "view/meusAnimais.php";
     }
-    function abrirCadAnimal(){
+
+    function abrirCadAnimal()
+    {
+        $animal = new Raca();
+        $dadosRaca = $animal->consultar();
         include "view/cadAnimal.php";
     }
-    function abrirInfoAnimal(){
+
+    function abrirInfoAnimal()
+    {
         include "view/infoAnimal.php";
     }
-    function cadastrarAnimal(){
+
+    function cadastrarAnimal()
+    {
         $cadastra = new Animal();
         $cadastra->idusuario = $_POST["#"];
         $cadastra->idraca = $_POST["listRaca"];

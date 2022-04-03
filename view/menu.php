@@ -13,6 +13,9 @@
         <a class="nav-link"  href="<?php echo URL.'cadastraanimal'; ?>">Cadastrar Animal</a>
       </li>
       <li class="nav-item active">
+        <a class="nav-link"  href="<?php echo URL.'cadastra-raca'; ?>">Cadastrar Raça</a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link"  href="<?php echo URL.'sobre'; ?>">sobre</a>
       </li>
     </ul>

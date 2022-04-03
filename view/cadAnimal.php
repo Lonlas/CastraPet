@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="<?php echo URL;?>recursos/css/bootstrap.min.css">
 </head>
 <body>
     <!-- CORPO -->
@@ -97,9 +96,11 @@
                             <input list="racas" name="listRaca" id="listRaca" maxlength="30" required>
                             <datalist id="racas">
                                 <?php
-                                    for($i = 1; $i <= 5; $i++)
+                                    foreach($dadosRaca as $values)
                                     {
-                                        echo "<option value=\"raca$i\">Raça $i</option>";
+                                        echo"   
+                                            <option value='$values->idRaca'>$values->raca</option>
+                                        ";
                                     }
                                 ?>
                             </datalist>

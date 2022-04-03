@@ -3,6 +3,7 @@
 include "controler/Controller.php";
 include "controler/UsuarioController.php";
 include "controler/AnimalController.php";
+include "controler/RacaController.php";
 
 define("URL","http://localhost/CastraPet/");
 if($_GET)
@@ -17,12 +18,12 @@ if($_GET)
            $direciona->abrirInicio();
         break;
         case "cadastratutor";
-            $direciona = new UsuarioController();
-            $direciona->abrirCadastro();
+            $usu = new UsuarioController();
+            $usu->abrirCadastro();
         break;
         case "cadastrartutor";
-            $direciona = new UsuarioController();
-            $direciona->cadastrarUsuario();
+            $usu = new UsuarioController();
+            $usu->cadastrarUsuario();
         break;
         case "login":
             $direciona = new UsuarioController();
@@ -35,23 +36,31 @@ if($_GET)
         case "perfil":
             $direciona = new Controller();
             $direciona->abrirPerfil();
-            break;
+        break;
         case "meusanimais":
-            $direciona = new AnimalController();
-            $direciona->abrirMeusAnimais();
-            break;
+            $Animal = new AnimalController();
+            $Animal->abrirMeusAnimais();
+        break;
         case "cadastraanimal":
-            $direciona = new AnimalController();
-            $direciona->abrirCadAnimal();
-            break;
+            $Animal = new AnimalController();
+            $Animal->abrirCadAnimal();
+        break;
         case "cadastraranimal":
-            $cadastra = new AnimalController();
-            $direciona->cadastraAnimal();
-            break;
+            $Animal = new AnimalController();
+            $Animal->cadastrarAnimal();
+        break;
         case "infoanimal":
-            $direciona = new AnimalController();
-            $direciona->abrirInfoAnimal();
-            break;
+            $Animal = new AnimalController();
+            $Animal->abrirInfoAnimal();
+        break;
+        case "cadastra-raca":
+            $raca = new RacaController();
+            $raca->abrirCadRaca();
+        break;
+        case "cadastrar-raca":
+            $raca = new RacaController();
+            $raca->cadastrarRaca();
+        break;
         default:
             echo "Página não encontrada";
     }
