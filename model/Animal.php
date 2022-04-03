@@ -11,6 +11,7 @@
         private $pelagem;
         private $idade;
         private $comunitario;
+        private $porte;
 
         //Método get
         function __get($atributo)

@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- CORPO -->
-
+    <a href="<?php echo URL.'cadastratutor';?>">a</a>
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->

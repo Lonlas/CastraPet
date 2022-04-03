@@ -12,7 +12,7 @@
 <body>
     <!-- CORPO -->
     <div class="container">
-        <form method="post" action="#">
+        <form method="post" action="cadastraranimal">
             <h1>CADASTRAR ANIMAL</h1>
             <table>
                 <tbody>

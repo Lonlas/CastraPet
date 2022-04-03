@@ -16,11 +16,11 @@ if($_GET)
            $direciona = new Controller();
            $direciona->abrirInicio();
         break;
-        case "cadastrodoprotetor";
+        case "cadastratutor";
             $direciona = new UsuarioController();
             $direciona->abrirCadastro();
         break;
-        case "cadastrarprotetor";
+        case "cadastrartutor";
             $direciona = new UsuarioController();
             $direciona->cadastrarUsuario();
         break;
@@ -43,6 +43,10 @@ if($_GET)
         case "cadastraanimal":
             $direciona = new AnimalController();
             $direciona->abrirCadAnimal();
+            break;
+        case "cadastraranimal":
+            $cadastra = new AnimalController();
+            $direciona->cadastraAnimal();
             break;
         case "infoanimal":
             $direciona = new AnimalController();
