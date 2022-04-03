@@ -17,11 +17,11 @@ if($_GET)
            $direciona = new Controller();
            $direciona->abrirInicio();
         break;
-        case "cadastratutor";
+        case "cadastra-tutor";
             $usu = new UsuarioController();
             $usu->abrirCadastro();
         break;
-        case "cadastrartutor";
+        case "cadastrar-tutor";
             $usu = new UsuarioController();
             $usu->cadastrarUsuario();
         break;
@@ -29,7 +29,7 @@ if($_GET)
             $direciona = new UsuarioController();
             $direciona->abrirLogin();
         break;
-        case "esqueciasenha":
+        case "esqueci-a-senha":
             $direciona = new Controller();
             $direciona->abrirEsqSenha();
         break;
@@ -37,19 +37,19 @@ if($_GET)
             $direciona = new Controller();
             $direciona->abrirPerfil();
         break;
-        case "meusanimais":
+        case "meus-animais":
             $Animal = new AnimalController();
             $Animal->abrirMeusAnimais();
         break;
-        case "cadastraanimal":
+        case "cadastrar-animal":
             $Animal = new AnimalController();
             $Animal->abrirCadAnimal();
         break;
-        case "cadastraranimal":
+        case "cadastrar-animal":
             $Animal = new AnimalController();
             $Animal->cadastrarAnimal();
         break;
-        case "infoanimal":
+        case "info-animal":
             $Animal = new AnimalController();
             $Animal->abrirInfoAnimal();
         break;

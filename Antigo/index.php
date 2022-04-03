@@ -21,7 +21,7 @@ if($_GET)
             $direciona = new Controler();
             $direciona->abrirLogin();
         break;
-        case "esqueciasenha":
+        case "esqueci-a-senha":
             $direciona = new Controler();
             $direciona->abrirEsqSenha();
         break;
@@ -29,7 +29,7 @@ if($_GET)
             $direciona = new Controler();
             $direciona->abrirPerfil();
             break;
-        case "meusanimais":
+        case "meus-animais":
             $direciona = new Controler();
             $direciona->abrirMeusAnimais();
             break;

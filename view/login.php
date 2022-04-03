@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- CORPO -->
-    <a href="<?php echo URL.'cadastratutor';?>">a</a>
+    <a href="<?php echo URL.'cadastra-tutor';?>">Não possuo conta</a>
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
