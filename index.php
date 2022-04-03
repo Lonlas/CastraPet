@@ -16,11 +16,11 @@ if($_GET)
            $direciona = new Controller();
            $direciona->abrirInicio();
         break;
-        case "cadastrodoprotetor";
+        case "cadastro-usuario";
             $direciona = new UsuarioController();
             $direciona->abrirCadastro();
         break;
-        case "cadastrarprotetor";
+        case "cadastrar-usuario";
             $direciona = new UsuarioController();
             $direciona->cadastrarUsuario();
         break;
@@ -47,6 +47,10 @@ if($_GET)
         case "infoanimal":
             $direciona = new AnimalController();
             $direciona->abrirInfoAnimal();
+            break;
+        case "teste":
+            $direciona = new UsuarioController();
+            $direciona->teste();
             break;
         default:
             echo "Página não encontrada";
