@@ -5,7 +5,6 @@
         private $nome;
         private $email;
         private $senha;
-        //Banana com ketchup
 
         //Método get
         function __get($atributo)
