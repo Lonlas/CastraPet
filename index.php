@@ -1,8 +1,8 @@
 <?php
 
-include "controler/Controller.php";
-include "controler/UsuarioController.php";
-include "controler/AnimalController.php";
+include "controller/Controller.php";
+include "controller/UsuarioController.php";
+include "controller/AnimalController.php";
 
 define("URL","http://localhost/CastraPet/");
 if($_GET)
