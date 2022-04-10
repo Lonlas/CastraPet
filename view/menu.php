@@ -16,7 +16,7 @@
         <a class="nav-link"  href="<?php echo URL.'cadastra-raca'; ?>">Cadastrar Raça</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'sobre'; ?>">sobre</a>
+        <a class="nav-link"  href="<?php echo URL.'sobre'; ?>">Sobre</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

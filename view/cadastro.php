@@ -12,7 +12,11 @@
 <body>
     <!-- CORPO -->
     <div class="container">
+<<<<<<< HEAD
         <form method="post" action="cadastrar-tutor">
+=======
+        <form method="post" action="<?php echo URL. 'teste'; ?>">
+>>>>>>> Nicolas
             <h1>CADASTRAR</h1>
             <table>
                 <tbody>
@@ -101,13 +105,13 @@
                 <tbody>
                     <tr>
                         <td>
-                            <input type="checkbox" name="chkProtetor" id="chkProtetor">
+                            <input type="checkbox" name="chkProtetor" id="chkProtetor" value="1">
                             <label for="chkProtetor">Sou protetor de animais</label>
                             &nbsp;
                             <input type="button" value="Fazer upload" name="btnProtetorUpload">
                         </td>
                         <td>
-                            <input type="checkbox" name="chkNIS" id="chkNIS">
+                            <input type="checkbox" name="chkNIS" id="chkNIS" value="2">
                             <label for="chkNIS">Tenho o benefício do NIS</label>
                             <input type="text" name="txtNIS" id="txtNIS" disabled>
                         </td>
