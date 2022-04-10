@@ -1,9 +1,9 @@
 <?php
 
-include "controler/Controller.php";
-include "controler/UsuarioController.php";
-include "controler/AnimalController.php";
-include "controler/RacaController.php";
+include "controller/Controller.php";
+include "controller/UsuarioController.php";
+include "controller/AnimalController.php";
+include "controller/RacaController.php";
 
 //Definindo uma constante para a URL do site
 define("URL","http://localhost/CastraPet/");

@@ -12,11 +12,7 @@
 <body>
     <!-- CORPO -->
     <div class="container">
-<<<<<<< HEAD
         <form method="post" action="cadastrar-tutor">
-=======
-        <form method="post" action="<?php echo URL. 'teste'; ?>">
->>>>>>> Nicolas
             <h1>CADASTRAR</h1>
             <table>
                 <tbody>
