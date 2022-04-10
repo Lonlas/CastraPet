@@ -64,6 +64,10 @@ if($_GET)
             $raca = new RacaController();
             $raca->cadastrarRaca();
         break;
+        case "teste":
+            $teste = new UsuarioController();
+            $teste->teste();
+            break;
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
             echo "Página não encontrada";

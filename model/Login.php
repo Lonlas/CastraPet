@@ -5,6 +5,7 @@
         private $nome;
         private $email;
         private $senha;
+        private $nivelacesso;
 
         //Método get
         function __get($atributo)
@@ -33,15 +34,19 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO login (nome, email, senha) VALUES (:nome, :email, :senha)");
+            $cmd = $con->prepare("INSERT INTO login (nome, email, senha, nivelacesso) VALUES (:nome, :email, :senha, :nivelacesso)");
             
             //Parâmetros SQL
+            $this->nivelacesso = 0;
             $cmd->bindParam(":nome", $this->nome);
             $cmd->bindParam(":email", $this->email);
             $cmd->bindParam(":senha", $this->senha);
+            $cmd->bindParam(":nivelacesso", $this->nivelacesso);
 
             //Executando o comando SQL
             $cmd->execute();
+
+            return $con->lastInsertId();
         }
 
         //Método consultar

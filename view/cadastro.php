@@ -45,7 +45,7 @@
                         </td>
                         <td>
                             <label for="txtCelular">Celular:</label>
-                            <input type="text" name="txtCelular" id="txtCelular" maxlength="15" required>
+                            <input type="text" name="txtCelular" id="txtCelular" maxlength="15">
                         </td>
                     </tr>
                 </tbody>
@@ -109,7 +109,7 @@
                         <td>
                             <input type="checkbox" name="chkNIS" id="chkNIS" value="2">
                             <label for="chkNIS">Tenho o benefício do NIS</label>
-                            <input type="text" name="txtNIS" id="txtNIS" disabled>
+                            <input type="text" name="txtNIS" id="txtNIS">
                         </td>
                         <td>
                             <input type="submit" value="Cadastrar">

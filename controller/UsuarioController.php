@@ -1,6 +1,7 @@
 <?php
 
 include_once "model/Usuario.php";
+include_once "model/Login.php";
 
 class UsuarioController
 {
@@ -10,21 +11,18 @@ class UsuarioController
     function abrirLogin(){
         include "view/login.php";
     }
-
-    function cadastrarLogin()
-    {
-        $cadastra = new Login();
-        $cadastra->nome = $_POST["txtNome"];
-        $cadastra->email = $_POST["txtEmail"];
-        $cadastra->senha = $_POST["txtSenha"];
-        $cadastra->cadastrar();
-    }
     function cadastrarUsuario(){
+        //Cadastro do Login
+        $login = new Login();
+        $login->nome = $_POST["txtNome"];
+        $login->email = $_POST["txtEmail"];
+        $login->senha = $_POST["txtSenha"];
+
+        //Cadastro do Usuário
         $cadastra = new Usuario();
-        $cadastra->idlogin = $_POST["#"];
+        $cadastra->idlogin = $login->cadastrar();
         $cadastra->rg = $_POST["txtRG"];
         $cadastra->cpf = $_POST["txtCPF"];
-
         if($_POST["chkProtetor"] == 1)
         {
             $cadastra->beneficio = $_POST["chkProtetor"];
@@ -37,7 +35,7 @@ class UsuarioController
         {
             $cadastra->beneficio = 0;
         }
-
+        
         $cadastra->telefone = $_POST["txtTel"];
         $cadastra->celular = $_POST["txtCelular"];
         $cadastra->punicao = 0;
@@ -45,6 +43,11 @@ class UsuarioController
         $cadastra->usubairro = $_POST["txtBairro"];
         $cadastra->usunumero = $_POST["txtNumero"];
         $cadastra->usucep = $_POST["txtCEP"];
+        if(empty($_POST["txtNIS"]))
+        {
+            $cadastra->nis = "";
+        }
+        
         $cadastra->cadastrar();
     }
     function teste()
