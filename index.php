@@ -1,12 +1,12 @@
 <?php
 
-include "controller/Controller.php";
-include "controller/UsuarioController.php";
-include "controller/AnimalController.php";
-include "controller/RacaController.php";
+include_once "controller/Controller.php";
+include_once "controller/UsuarioController.php";
+include_once "controller/AnimalController.php";
+include_once "controller/RacaController.php";
 
 //Definindo uma constante para a URL do site
-define("URL","http://localhost/CastraPet/");
+define("URL","http://localhost:8080/CastraPet/CastraPet/");
 if($_GET)
 {
     //Pegando a URL e apagando a "/" no final dela.
