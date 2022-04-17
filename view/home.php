@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- CORPO -->
-    <?php include "menu.php";?>
+    <?php include_once "menu.php";?>
 
     <div class="container-fluid">
         <div class="container-fluid bg-primary">
