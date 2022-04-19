@@ -7,15 +7,36 @@
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
     <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
-
 </head>
 <body>
     <!-- CORPO -->
-    <form action="cadastrar-raca" method="POST">
-        <label for="raca">Cadastrar Raça:</label>
-        <input type="text" id="raca" name="txtRaca" required>
-        <input type="submit" value="Cadastrar">
-    </form>
+    <?php include_once "menu.php";?>
+
+    <div class="container-fluid">
+        <div class="bg-danger">
+            <div class="row p-3">
+                <div class="container bg-dark text-light font-weight-bold p-3">
+                    Cadastro de Raça
+                </div>
+                <div class="container bg-white">
+                    <form action="cadastrar-raca" class="p-5" method="POST">
+                        <div class="form-group">
+                            <label for="raca">Raça:</label>
+                            <input type="text" id="raca" name="txtRaca" class="form-control" placeholder="" required>
+                            <small class="form-text text-muted">Informe o nome da raça que deseja cadastrar</small>
+                        </div>
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-success align-middle" value="Cadastrar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
+            <a href="<?php echo URL.'inicio'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
+        </footer>
+    </div>
+    
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
