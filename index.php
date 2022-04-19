@@ -6,7 +6,7 @@ include_once "controller/AnimalController.php";
 include_once "controller/RacaController.php";
 
 //Definindo uma constante para a URL do site
-define("URL","http://localhost:8080/CastraPet/CastraPet/");
+define("URL","http://localhost/CastraPet/");
 if($_GET)
 {
     //Pegando a URL e apagando a "/" no final dela.
