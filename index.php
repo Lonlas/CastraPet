@@ -4,6 +4,7 @@ include_once "controller/Controller.php";
 include_once "controller/UsuarioController.php";
 include_once "controller/AnimalController.php";
 include_once "controller/RacaController.php";
+include_once "controller/LoginController.php";
 
 //Definindo uma constante para a URL do site
 define("URL","http://localhost/CastraPet/");
@@ -31,6 +32,10 @@ if($_GET)
         case "login":
             $direciona = new UsuarioController();
             $direciona->abrirLogin();
+        break;
+        case "logar":
+            $usuario = new LoginController();
+            $usuario->logar();
         break;
         case "esqueci-a-senha":
             $direciona = new Controller();
