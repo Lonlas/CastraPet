@@ -12,7 +12,7 @@
 <body>
     <!-- CORPO -->
     <div class="container">
-        <form method="post" action="<?php echo URL. 'teste'; ?>">
+        <form method="post" action="<?php echo URL. 'cadastrar-tutor'; ?>">
             <h1>CADASTRAR</h1>
             <table>
                 <tbody>
@@ -31,7 +31,7 @@
                     <tr>
                         <td>
                             <label for="txtCPF">CPF:</label>
-                            <input type="text" name="txtCPF" id="txtCPF" maxlength="14" required>
+                            <input type="text" name="txtCPF" id="txtCPF" required>
                         </td>
                         <td>
                             <label for="txtTel">Telefone:</label>
@@ -104,7 +104,7 @@
                             <input type="checkbox" name="chkProtetor" id="chkProtetor" value="1">
                             <label for="chkProtetor">Sou protetor de animais</label>
                             &nbsp;
-                            <input type="button" value="Fazer upload" name="btnProtetorUpload">
+                            <input type="button" value="Fazer upload" name="btnProtetorUpload" id="btnProtetor" disabled>
                         </td>
                         <td>
                             <input type="checkbox" name="chkNIS" id="chkNIS" value="2">
@@ -128,5 +128,27 @@
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+
+    <script>
+        //NIS
+        $('#chkNIS').change(function() {
+        if(this.checked) {
+            $('#txtNIS').prop('disabled',false);
+        } else {
+            $('#txtNIS').prop('disabled',true);
+            $('#txtNIS').val(null);
+        }
+        });
+    </script>
+    <script>
+        //Protetor de Animais
+        $('#chkProtetor').change(function() {
+        if(this.checked) {
+            $('#btnProtetor').prop('disabled', false);
+        } else {
+            $('#btnProtetor').prop('disabled', true);
+        }
+        });
+    </script>
 </body>
 </html>
