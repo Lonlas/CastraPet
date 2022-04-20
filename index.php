@@ -1,15 +1,20 @@
 <?php
 
-include "controler/Controller.php";
-include "controler/UsuarioController.php";
-include "controler/AnimalController.php";
+//Importando arquivos da pasta Controller
+include "controller/Controller.php";
+include "controller/UsuarioController.php";
+include "controller/AnimalController.php";
+include "controller/RacaController.php";
 
+//Definindo uma constante para a URL do site
 define("URL","http://localhost/CastraPet/");
 if($_GET)
 {
+    //Pegando a URL e apagando a "/" no final dela.
     $url = $_GET["url"];
     $url = explode("/",$url);
 
+    //Definindo os nomes das telas que vão aparecer na URL
     switch($url[0])
     {   
         case "inicio":
@@ -52,16 +57,26 @@ if($_GET)
             $direciona = new AnimalController();
             $direciona->abrirInfoAnimal();
             break;
+        case "cadastro-raca":
+            $raca = new RacaController();
+            $raca->abrirCadRaca();
+            break;
+        case "cadastrar-raca":
+            $raca = new RacaController();
+            $raca->cadastrarRaca();
+            break;
         case "teste":
             $direciona = new UsuarioController();
             $direciona->teste();
             break;
         default:
+            //Mostrando um aviso de erro para caso entre em uma URL inválida
             echo "Página não encontrada";
     }
 }
 else
 {
+    //Abrindo página inicial do site 
     $direciona = new Controller();
     $direciona->abrirInicio();
 }
