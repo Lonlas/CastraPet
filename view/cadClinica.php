@@ -21,8 +21,8 @@
                 </div>
                 <div class="container bg-white p-0">
                     <form action="cadastrar-clinica" class="p-sm-2 py-sm-3 p-md-3 p-lg-4 py-3" method="POST">
-                        <div class="container row m-0">
-                            <div class="col-6">
+                        <div class="row m-0">
+                            <div class="col-md-6">
                                 <div class="form-group row-3">
                                     <label for="txtNome">Nome:</label>
                                     <input type="text" id="txtNome" name="txtNome" class="form-control" placeholder="" required>
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
@@ -83,8 +83,10 @@
                                     </div>
                             </div>
                         </div>
-                        <div class="row ">
-                            <input type="submit" class="btn btn-success align-center mx-auto" value="Cadastrar">
+                        <div class="row m-0">
+                            <div class="col">
+                                <input type="submit" class="btn btn-success float-right" value="Cadastrar">
+                            </div>
                         </div>
                     </form>
                 </div>
