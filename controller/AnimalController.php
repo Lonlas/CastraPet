@@ -33,10 +33,10 @@ class AnimalController
         $cadastra->sexo = $_POST["rdbSexo"];
         $cadastra->cor = $_POST["txtCor"];
         $cadastra->pelagem = $_POST["rdbPelagem"];
+        $cadastra->porte = $_POST["rdbPorte"];
         $cadastra->idade = $_POST["numIdade"];
         $cadastra->comunitario = $_POST["rdbComunitario"];
         $cadastra->foto = $_POST["#"];
-        $cadastra->porte = $_POST["rdbPorte"];
 
         $cadastra->cadastrar();
 

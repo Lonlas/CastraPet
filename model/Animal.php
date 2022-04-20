@@ -9,9 +9,9 @@
         private $sexo;
         private $cor;
         private $pelagem;
+        private $porte;
         private $idade;
         private $comunitario;
-        private $porte;
 
         //Método get
         function __get($atributo)
@@ -40,7 +40,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO animal (idusuario, idraca, aninome, especie, sexo, cor, pelagem, idade, comunitario) VALUES (:idusuario, :idraca, :aninome, :especie, :sexo, :cor, :pelagem, :idade, :comunitario)");
+            $cmd = $con->prepare("INSERT INTO animal (idusuario, idraca, aninome, especie, sexo, cor, pelagem, porte, idade, comunitario) VALUES (:idusuario, :idraca, :aninome, :especie, :sexo, :cor, :pelagem, :porte, :idade, :comunitario)");
             
             //Parâmetros SQL
             $cmd->bindParam(":idusuario", $this->idusuario);
@@ -50,6 +50,7 @@
             $cmd->bindParam(":sexo", $this->sexo);
             $cmd->bindParam(":cor", $this->cor);
             $cmd->bindParam(":pelagem", $this->pelagem);
+            $cmd->bindParam(":porte", $this->porte);
             $cmd->bindParam(":idade", $this->idade);
             $cmd->bindParam(":comunitario", $this->comunitario);
 
@@ -95,7 +96,7 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE animal SET idusuario = :idusuario, idraca = :idraca, aninome = :aninome, especie = :especie, sexo = :sexo, cor = :cor, pelagem = :pelagem, idade = :idade, comunitario = :comunitario WHERE idanimal = :idanimal");
+            $cmd = $con->prepare("UPDATE animal SET idusuario = :idusuario, idraca = :idraca, aninome = :aninome, especie = :especie, sexo = :sexo, cor = :cor, pelagem = :pelagem, porte = :porte, idade = :idade, comunitario = :comunitario WHERE idanimal = :idanimal");
             
             //Parâmetros SQL
             $cmd->bindParam(":idusuario", $this->idusuario);
@@ -105,6 +106,7 @@
             $cmd->bindParam(":sexo", $this->sexo);
             $cmd->bindParam(":cor", $this->cor);
             $cmd->bindParam(":pelagem", $this->pelagem);
+            $cmd->bindParam(":porte", $this->porte);
             $cmd->bindParam(":idade", $this->idade);
             $cmd->bindParam(":comunitario", $this->comunitario);
             $cmd->bindParam(":idanimal", $this->idanimal);
