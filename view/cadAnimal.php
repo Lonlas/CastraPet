@@ -10,6 +10,8 @@
 </head>
 <body>
     <!-- CORPO -->
+    <?php include_once "menu.php";?>
+
     <div class="container">
         <form method="post" action="cadastrar-animal">
             <h1>CADASTRAR ANIMAL</h1>
