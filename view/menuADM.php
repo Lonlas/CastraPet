@@ -10,16 +10,10 @@
         <a class="nav-link"  href="<?php echo URL; ?>">Inicío <span class="sr-only">(página atual)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'cadastrar-animal'; ?>">Cadastrar Animal</a>
-      </li>
-      <li class="nav-item active">
         <a class="nav-link"  href="<?php echo URL.'cadastra-raca'; ?>">Cadastrar Raça</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link"  href="<?php echo URL.'cadastra-clinica'; ?>">Cadastrar Clínica</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'sobre'; ?>">Sobre</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- CORPO -->
-    <?php include_once "menu.php";?>
+    <?php include_once "menuADM.php";?>
 
     <div class="container-fluid">
         <div class="bg-danger">

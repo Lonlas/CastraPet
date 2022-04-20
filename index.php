@@ -5,6 +5,7 @@ include_once "controller/UsuarioController.php";
 include_once "controller/AnimalController.php";
 include_once "controller/RacaController.php";
 include_once "controller/LoginController.php";
+include_once "controller/ClinicaController.php";
 
 //Definindo uma constante para a URL do site
 define("URL","http://localhost/CastraPet/");
@@ -68,6 +69,14 @@ if($_GET)
         case "cadastrar-raca":
             $raca = new RacaController();
             $raca->cadastrarRaca();
+        break;
+        case "cadastra-clinica":
+            $clinica = new ClinicaController();  
+            $clinica->abrirCadClinica();
+        break;
+        case "cadastrar-clinica":
+            $clinica = new ClinicaController();  
+            $clinica->cadastrarClinica();
         break;
         case "teste":
             $teste = new UsuarioController();
