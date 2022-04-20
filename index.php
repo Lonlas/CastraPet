@@ -50,7 +50,7 @@ if($_GET)
             $Animal = new AnimalController();
             $Animal->abrirMeusAnimais();
         break;
-        case "cadastrar-animal":
+        case "cadastra-animal":
             $Animal = new AnimalController();
             $Animal->abrirCadAnimal();
         break;
@@ -81,7 +81,12 @@ if($_GET)
         case "teste":
             $teste = new UsuarioController();
             $teste->teste();
-            break;
+        break;
+        case "sobre":
+            //Criado para visualizar as diferentes telas de níveis de acesso 
+            $teste = new Controller();
+            $teste->abrirADM();
+        break;
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
             echo "Página não encontrada";
