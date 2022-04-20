@@ -28,7 +28,7 @@ if($_GET)
             $direciona = new UsuarioController();
             $direciona->abrirLogin();
         break;
-        case "esqueciasenha":
+        case "esqueci-a-senha":
             $direciona = new Controller();
             $direciona->abrirEsqSenha();
         break;
@@ -36,7 +36,7 @@ if($_GET)
             $direciona = new Controller();
             $direciona->abrirPerfil();
             break;
-        case "meusanimais":
+        case "meus-animais":
             $direciona = new AnimalController();
             $direciona->abrirMeusAnimais();
             break;
@@ -48,7 +48,7 @@ if($_GET)
             $direciona = new AnimalController();
             $direciona->cadastrarAnimal();
             break;
-        case "infoanimal":
+        case "info-animal":
             $direciona = new AnimalController();
             $direciona->abrirInfoAnimal();
             break;
