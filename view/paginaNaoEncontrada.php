@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL;?>recursos/css/bootstrap.min.css">
 
 </head>
 <body>
@@ -17,12 +17,12 @@
             <div class="bg-primary">
                 <div class="row p-3">
                     <div class="container bg-dark text-light font-weight-bold">
-                        </p class="font-size-1"> 
+                        </p class=""> 
                             Ops... Parece que esta página não existe
                         <p>
                     </div>
                     <div class="container bg-white" style="height:500px; display:flex; justify-content:center; align-items:center;">
-                        <a href="<?php echo URL ?>">
+                        <a href="<?php echo URL;?>">
                             <p class="btn btn-link">
                                 Voltar para a página principal
                             </p>
@@ -37,8 +37,9 @@
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
-    <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL; ?>/recursos/js/jquery-3.3.1.slim.min.js"></script>
+    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
+    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>-->
+    <script src="<?php echo URL;?>/recursos/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

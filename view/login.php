@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL;?>recursos/css/bootstrap.min.css">
 
 </head>
 <body>
@@ -17,7 +17,7 @@
         <div class="bg-primary">
             <div class="row p-3">
                 <div class="container bg-dark text-light font-weight-bold p-3">
-                    Entrar na minha conta
+                    Entrar na minha conta 
                 </div>
                 <div class="container bg-white">
                     <form action="logar" class="p-5" method="POST">
