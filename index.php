@@ -82,6 +82,14 @@ if($_GET)
             $teste = new UsuarioController();
             $teste->teste();
         break;
+        case "home-adm":
+            $adm = new LoginController();
+            $adm->abrirHomeAdm();
+        break;
+        case "home-clinica":
+            $clinica = new LoginController();
+            $clinica->abrirHomeClinica();
+        break;
         case "sobre":
             //Criado para visualizar as diferentes telas de níveis de acesso 
             $teste = new Controller();
