@@ -20,7 +20,7 @@
       </li>
       
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline me-2 my-lg-0">
       <a href="<?php echo URL.'login'; ?>" class="btn btn-success my-2 my-sm-0">Login</a>
     </form>
   </div>
