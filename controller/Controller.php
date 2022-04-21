@@ -15,5 +15,9 @@ class Controller
         //include "view/homeClinica.php";
         include "view/homeAdm.php";
     }
+    function paginaNaoEncontrada()
+    {
+        include "view/paginaNaoEncontrada.php";
+    }
 }
 ?>

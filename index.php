@@ -89,7 +89,8 @@ if($_GET)
         break;
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
-            echo "Página não encontrada";
+            $pagina = new Controller();
+            $pagina->paginaNaoEncontrada();
     }
 }
 else
@@ -98,7 +99,4 @@ else
     $direciona = new Controller();
     $direciona->abrirInicio();
 }
-
-
-
 ?>
