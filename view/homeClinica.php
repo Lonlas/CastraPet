@@ -15,7 +15,7 @@
 
     <div class="container-fluid">
         <div class="container-fluid bg-warning">
-            <div class="row p-3">
+            <div class="container mx-auto row p-3">
                 <div class="col-md-12 p-3 bg-white">
                     
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacus mi, venenatis et scelerisque a, consectetur eu neque. Cras id rhoncus tortor, eget     aliquam erat. Aliquam erat volutpat. Pellentesque vehicula quam quis elementum maximus. Suspendisse ut congue nibh. Quisque vitae imperdiet nulla, eget pellentesque orci. In nunc mauris, tristique ut ex nec, volutpat pretium elit. Etiam sollicitudin ullamcorper elit in ultricies.
@@ -39,7 +39,8 @@
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado
+    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>-->
+    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -15,7 +15,7 @@
 
     <div class="container-fluid">
         <div class="container-fluid bg-danger">
-            <div class="row p-3">
+            <div class="container mx-auto row p-3">
                 <div class="col-md-12 p-3 bg-white">
                     
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacus mi, venenatis et scelerisque a, consectetur eu neque. Cras id rhoncus tortor, eget     aliquam erat. Aliquam erat volutpat. Pellentesque vehicula quam quis elementum maximus. Suspendisse ut congue nibh. Quisque vitae imperdiet nulla, eget pellentesque orci. In nunc mauris, tristique ut ex nec, volutpat pretium elit. Etiam sollicitudin ullamcorper elit in ultricies.

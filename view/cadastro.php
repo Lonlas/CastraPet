@@ -7,6 +7,7 @@
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
     <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
 
 </head>
 <body>
@@ -15,17 +16,17 @@
 
     <div class="container-fluid">
         <div class="container-fluid bg-primary">
-            <div class="row p-3 ">
+            <div class="container mx-auto row p-3">
                 <div class="container bg-dark text-light font-weight-bold p-3">
                     CADASTRAR
                 </div>
                 <div class="container bg-white">
                     <form method="post" action="cadastrar-tutor">
                     <div class="row">
-                        <div class="col-md-6 float-md-end mb-3 ms-md-3">
+                        <div class="col-6 float-md-end mb-3 ms-md-3">
                             <table class="table table-borderless">
                                 <tbody>
-                                    <tr >
+                                    <tr>
                                         <td class="row-mb-1">
                                             <label for="txtNome" class="col-form-label">Nome:</label>
                                         </td>
@@ -91,7 +92,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-6 float-md-end mb-3 ms-md-3">
+                        <div class="col-6 float-md-end mb-3 ms-md-3">
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
@@ -151,7 +152,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row ">
+                    <div class="row">
                         <div class="col-md-12 mb-4 ms-md-3 text-right">
                             <input type="submit" class="btn btn-success justify-content-md-end col-2 mx-auto" value="Cadastrar">
                         </div>       
@@ -169,7 +170,8 @@
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado
+    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>-->
+    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

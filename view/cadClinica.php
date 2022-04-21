@@ -15,7 +15,7 @@
 
         <div class="container-fluid">
         <div class="bg-danger">
-            <div class="row p-3">
+            <div class="container mx-auto row p-3">
                 <div class="container bg-dark text-light font-weight-bold p-3">
                     Cadastrar Clínica
                 </div>

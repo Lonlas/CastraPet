@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
-    <link rel="stylesheet" href="<?php echo URL;?>recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
 
 </head>
 <body>
@@ -15,7 +16,7 @@
 
     <div class="container-fluid">
         <div class="bg-primary">
-            <div class="row p-3">
+            <div class="container mx-auto row p-3">
                 <div class="container bg-dark text-light font-weight-bold p-3">
                     Entrar na minha conta 
                 </div>
@@ -25,15 +26,15 @@
                             <label for="email">E-mail:</label>
                             <input type="text" id="email" name="txtEmail" class="form-control" placeholder="" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group my-4">
                             <label for="senha">Senha:</label>
                             <input type="password" id="senha" name="txtSenha" class="form-control" placeholder="" required>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center ">
                             <input type="submit" class="btn btn-success align-middle" value="Entrar">
                         </div>
                     </form>
-                    <div class="row p-3">
+                    <div class="row mb-4">
                         <a href="<?php echo URL.'cadastra-tutor';?>" class="col-6 text-center">Não possuo cadastro</a>
                         <a href="<?php echo URL.'esqueci-a-senha';?>" class="col-6 text-center">Esqueci minha senha</a>
                     </div>
@@ -49,7 +50,8 @@
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado
+    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>-->
+    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

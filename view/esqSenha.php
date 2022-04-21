@@ -7,6 +7,7 @@
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
     <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
 
 </head>
 <body>
@@ -15,7 +16,7 @@
 
     <div class="container-fluid">
         <div class="container-fluid bg-primary">
-            <div class="row p-3 ">
+            <div class="container mx-auto row p-3 ">
                 <div class="container bg-dark text-light font-weight-bold p-3">
                     Recuperação de senha
                 </div>
@@ -35,7 +36,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row ">
+                    <div class="row">
                         <div class="col mb-4 ms-md-3 text-center">
                             <input type="submit" class="btn btn-success mx-auto" value="Enviar">
                         </div>       
@@ -53,7 +54,8 @@
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado
+    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>-->
+    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

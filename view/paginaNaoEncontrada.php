@@ -7,6 +7,7 @@
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
     <link rel="stylesheet" href="<?php echo URL;?>recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
 
 </head>
 <body>
@@ -15,13 +16,13 @@
 
         <div class="container-fluid">
             <div class="bg-primary">
-                <div class="row p-3">
-                    <div class="container bg-dark text-light font-weight-bold">
-                        </p class=""> 
+                <div class="container mx-auto row p-3">
+                    <div class="bg-dark text-light font-weight-bold">
+                        <h4 class="p-3"> 
                             Ops... Parece que esta página não existe
-                        <p>
+                        </h4>
                     </div>
-                    <div class="container bg-white" style="height:500px; display:flex; justify-content:center; align-items:center;">
+                    <div class="bg-white" style="height:500px; display:flex; justify-content:center; align-items:center;">
                         <a href="<?php echo URL;?>">
                             <p class="btn btn-link">
                                 Voltar para a página principal
@@ -29,7 +30,7 @@
                         </a>
                     </div>
                 </div>
-                <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
+                <footer class="text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
                     <a href="<?php echo URL.'inicio'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
                 </footer>
             </div>
