@@ -85,7 +85,7 @@ if($_GET)
         case "sobre":
             //Criado para visualizar as diferentes telas de níveis de acesso 
             $teste = new Controller();
-            $teste->abrirADM();
+            $teste->abrirSobre();
         break;
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
