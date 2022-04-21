@@ -10,18 +10,11 @@
         <a class="nav-link"  href="<?php echo URL; ?>">Inicío <span class="sr-only">(página atual)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'cadastro-animal'; ?>">Cadastrar Animal</a>
+        <a class="nav-link"  href="<?php echo URL.'#'; ?>">Consultar castrações</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'sobre'; ?>">Sobre</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'#'; ?>">Prefeitura Franco da Rocha</a>
-      </li>
-      
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <a href="<?php echo URL.'login'; ?>" class="btn btn-success my-2 my-sm-0">Login</a>
+      <a href="<?php echo URL.'#'; ?>" class="btn btn-success my-2 my-sm-0">Login</a>
     </form>
   </div>
 </nav>

@@ -5,6 +5,7 @@ include_once "controller/UsuarioController.php";
 include_once "controller/AnimalController.php";
 include_once "controller/RacaController.php";
 include_once "controller/LoginController.php";
+include_once "controller/ClinicaController.php";
 
 //Definindo uma constante para a URL do site
 define("URL","http://localhost/CastraPet/");
@@ -53,7 +54,7 @@ if($_GET)
             $Animal = new AnimalController();
             $Animal->abrirMeusAnimais();
         break;
-        case "cadastrar-animal":
+        case "cadastra-animal":
             $Animal = new AnimalController();
             $Animal->abrirCadAnimal();
         break;
@@ -73,10 +74,23 @@ if($_GET)
             $raca = new RacaController();
             $raca->cadastrarRaca();
         break;
+        case "cadastra-clinica":
+            $clinica = new ClinicaController();  
+            $clinica->abrirCadClinica();
+        break;
+        case "cadastrar-clinica":
+            $clinica = new ClinicaController();  
+            $clinica->cadastrarClinica();
+        break;
         case "teste":
             $teste = new UsuarioController();
             $teste->teste();
-            break;
+        break;
+        case "sobre":
+            //Criado para visualizar as diferentes telas de níveis de acesso 
+            $teste = new Controller();
+            $teste->abrirADM();
+        break;
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
             echo "Página não encontrada";
