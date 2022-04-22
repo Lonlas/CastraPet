@@ -22,6 +22,9 @@
     <span class="material-symbols-outlined align-middle fs-1 me-3">
         account_circle
     </span>
+        <a href="#" class="pe-auto text-decoration-none">
+            <img src="<?php echo URL; ?>recursos/img/Logo-Castra-Pet.svg" alt="Perfil" width="50" class="me-3">
+        </a>
         <a href="<?php echo URL.'login';?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
     </form>
 </div>
