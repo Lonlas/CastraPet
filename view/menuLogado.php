@@ -19,9 +19,6 @@
     </li>
     </ul>
     <form class="form-inline ms-auto my-2 my-lg-0">
-    <span class="material-symbols-outlined align-middle fs-1 me-3">
-        account_circle
-    </span>
         <a href="#" class="pe-auto text-decoration-none">
             <img src="<?php echo URL; ?>recursos/img/Logo-Castra-Pet.svg" alt="Perfil" width="50" class="me-3">
         </a>
