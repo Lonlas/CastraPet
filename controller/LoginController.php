@@ -12,7 +12,7 @@ class LoginController
         switch([$email, $senha])
         {
             case [$email == "user@user.com" , $senha == "123"]:
-                echo"<script>alert('Usuário Logado'); window.location='".URL."Inicio'; </script>";
+                echo"<script>alert('Usuário Logado'); window.location='".URL."home-usuario'; </script>";
             break;
             case [$email == "clinica@clinica.com" , $senha == "123"]:
                 echo"<script>alert('Usuário Clínica Logado'); window.location='".URL."home-clinica'; </script>";
@@ -31,6 +31,9 @@ class LoginController
     function abrirHomeAdm()
     {
         include "view/homeAdm.php";
+    }
+    function abrirHomeUsuario(){
+        include "view/homeUsuario.php";
     }
 }
 
