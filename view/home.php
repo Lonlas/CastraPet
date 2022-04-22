@@ -45,7 +45,7 @@
             </div>
         </div>
         <footer class="container-fluid text-center" style="padding: 2.5rem; color:white; background:var(--preto);">
-                aaaa
+                
         </footer>
     </div>
     <!-- /CORPO -->
