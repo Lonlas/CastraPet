@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- CORPO -->
-    <?php include_once "menu.php";?>
+    <?php include_once "menuLogado.php";?>
 
     <div class="container">
         <form method="post" action="cadastrar-animal">

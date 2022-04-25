@@ -11,6 +11,9 @@ class UsuarioController
     function abrirLogin(){
         include "view/login.php";
     }
+    function abrirSolicitacao(){
+        include "view/solicitaCastra.php";
+    }
     function cadastrarUsuario(){
         //Cadastro do Login
         $login = new Login();

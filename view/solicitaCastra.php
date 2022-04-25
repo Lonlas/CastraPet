@@ -12,6 +12,25 @@
 </head>
 <body>
     <!-- CORPO -->
+    <?php include_once "menuLogado.php";?>
+
+    <div class="container-fluid">
+        <div class="container-fluid bg-primary">
+            <div class="container mx-auto row p-3">
+                <div class="container bg-dark text-light font-weight-bold p-3">
+                    Solicitar Castração
+                </div>
+                <div class="container bg-white">
+                    <!-- Componentes aqui -->
+
+                    
+                </div>
+            </div>
+        </div>
+        <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
+            <a href="<?php echo URL.'meus-animais'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
+        </footer>
+    </div>
 
     <!-- /CORPO -->
 
