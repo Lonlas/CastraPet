@@ -22,29 +22,25 @@ if($_GET)
            $direciona = new Controller();
            $direciona->abrirInicio();
         break;
-        case "cadastra-tutor";
-            $usu = new UsuarioController();
-            $usu->abrirCadastro();
-        break;
-        case "cadastrar-tutor";
-            $usu = new UsuarioController();
-            $usu->cadastrarUsuario();
-        break;
-        case "login":
+        case "login": 
             $direciona = new UsuarioController();
             $direciona->abrirLogin();
         break;
-        case "logar":
+        case "logar": 
             $usuario = new LoginController();
             $usuario->logar();
         break;
-        case "esqueci-a-senha":
+        case "esqueci-a-senha": 
             $direciona = new Controller();
             $direciona->abrirEsqSenha();
         break;
-        case "recuperar-senha":
-            $direciona = new Controller();
-            //$direciona->abrirRecuperaSenha();     
+        case "cadastra-tutor":
+            $usu = new UsuarioController();
+            $usu->abrirCadastro();
+        break;
+        case "cadastrar-tutor":
+            $usu = new UsuarioController();
+            $usu->cadastrarUsuario();
         break;
         case "perfil":
             $direciona = new Controller();
@@ -62,10 +58,6 @@ if($_GET)
             $Animal = new AnimalController();
             $Animal->cadastrarAnimal();
         break;
-        case "info-animal":
-            $Animal = new AnimalController();
-            $Animal->abrirInfoAnimal();
-        break;
         case "cadastra-raca":
             $raca = new RacaController();
             $raca->abrirCadRaca();
@@ -82,18 +74,48 @@ if($_GET)
             $clinica = new ClinicaController();  
             $clinica->cadastrarClinica();
         break;
+        case "solicita-castracao":
+            $usuario = new UsuarioController();
+            $usuario->abrirSolicitacao();
+        break;
         case "teste":
             $teste = new UsuarioController();
             $teste->teste();
         break;
+        case "home-adm":
+            $adm = new LoginController();
+            $adm->abrirHomeAdm();
+        break;
+        case "home-clinica":
+            $clinica = new LoginController();
+            $clinica->abrirHomeClinica();
+        break;
+        case "home-usuario":
+            $usuario = new LoginController();
+            $usuario->abrirHomeUsuario();
+        break;
         case "sobre":
-            //Criado para visualizar as diferentes telas de níveis de acesso 
             $teste = new Controller();
-            $teste->abrirADM();
+            $teste->abrirSobre();
+        break;
+
+        // Telas consulta
+        case "consulta-usuario":
+            $adm = new Controller();
+            $adm->abrirConsultaUsuario();
+        break;
+        case "consulta-clinica":
+            $adm = new Controller();
+            $adm->abrirConsultaClinica();
+        break;
+        case "consulta-castracao":
+            $adm = new Controller();
+            $adm->abrirConsultaCastracao();
         break;
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
-            echo "Página não encontrada";
+            $pagina = new Controller();
+            $pagina->paginaNaoEncontrada();
     }
 }
 else
@@ -102,7 +124,4 @@ else
     $direciona = new Controller();
     $direciona->abrirInicio();
 }
-
-
-
 ?>

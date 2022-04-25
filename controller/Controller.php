@@ -11,9 +11,22 @@ class Controller
         include "view/infoUsuario.php";
     }
     function abrirADM(){
-        //Função criada para visualizar as diferentes telas de níveis de acesso
-        //include "view/homeClinica.php";
         include "view/homeAdm.php";
+    }
+    function paginaNaoEncontrada(){
+        include "view/paginaNaoEncontrada.php";
+    }
+    function abrirSobre(){
+        include "view/sobre.php";
+    }
+    function abrirConsultaUsuario(){
+        include "view/consultaUsuario.php";
+    }
+    function abrirConsultaClinica(){
+        include "view/consultaClinica.php";
+    }
+    function abrirConsultaCastracao(){
+        include "view/consultaCastracao.php";
     }
 }
 ?>

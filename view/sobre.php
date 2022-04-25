@@ -12,31 +12,26 @@
 </head>
 <body>
     <!-- CORPO -->
-    <?php include_once "menuLogado.php";?>
+        <?php include_once "menu.php";?>
 
-    <div class="container-fluid">
-        <div class="container-fluid bg-primary">
+        <div class="container-fluid">
+        <div class="bg-primary">
             <div class="container mx-auto row p-3">
                 <div class="container bg-dark text-light font-weight-bold p-3">
-                    Olá usuário!
+                    Sobre a castração em Franco da Rocha
                 </div>
-                <div class="container bg-white ">
-                    <div class="row">
-                        <div class="col">
-                        <!-- Componentes aqui -->
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-4 ms-md-3 text-right">
-                            <a href="<?php echo URL.'meus-animais'; ?>" class="btn btn-success justify-content-end col-2 mx-auto">Meus animais</a>
-                        </div>
-                    </div>
+                <div class="container bg-white p-3 pb-0" style="min-height:500px;">
+                    <h3>
+                        Título
+                    </h3>
+                    <p>
+                        Texto
+                    </p>
                 </div>
             </div>
         </div>
         <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
-            <a href="<?php echo URL.'home-usuario'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
+            <a href="<?php echo URL.'inicio'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
         </footer>
     </div>
 

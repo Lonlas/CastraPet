@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
-    <link rel="stylesheet" href="<?php echo URL;?>recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
 </head>
 <body>
     <!-- CORPO -->
-    <?php include_once "menu.php";?>
+    <?php include_once "menuLogado.php";?>
 
     <div class="container">
         <form method="post" action="cadastrar-animal">
@@ -144,7 +145,8 @@
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
+    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado-->
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
