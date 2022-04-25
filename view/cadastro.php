@@ -23,10 +23,10 @@
                 <div class="container bg-white">
                     <form method="post" action="cadastrar-tutor">
                     <div class="row">
-                        <div class="col-6 float-md-end mb-3 ms-md-3">
+                        <div class="col-md-6 float-md-end mb-3 ms-md-3">
                             <table class="table table-borderless">
                                 <tbody>
-                                    <tr>
+                                    <tr >
                                         <td class="row-mb-1">
                                             <label for="txtNome" class="col-form-label">Nome:</label>
                                         </td>

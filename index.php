@@ -42,6 +42,10 @@ if($_GET)
             $direciona = new Controller();
             $direciona->abrirEsqSenha();
         break;
+        case "recuperar-senha":
+            $direciona = new Controller();
+            //$direciona->abrirRecuperaSenha();     
+        break;
         case "perfil":
             $direciona = new Controller();
             $direciona->abrirPerfil();
