@@ -12,7 +12,6 @@
 <body>
     <!-- CORPO -->
     <?php include_once "menu.php";?>
-    <?php echo var_dump($url[0]);?>
     <div class="container-fluid">
         <div class="container-fluid bg-primary">
             <div class="row p-3">
