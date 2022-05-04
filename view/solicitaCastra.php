@@ -22,8 +22,26 @@
                 </div>
                 <div class="container bg-white">
                     <!-- Componentes aqui -->
-
-                    
+                    <form action="<?php echo URL.'perfil'; ?>">
+                        <div class="row align-items-center justify-content-center my-3 ">
+                            <div class="col-md-5">
+                                <select name="selectAni" id="selectAni" class="form-select">
+                                    <option selected> ... SELECIONE O ANIMAL ... </option>
+                                    <option value="<?php ?>">ex 1</option>
+                                    <option value="<?php ?>">ex 2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-center mb-4">
+                            <div class="col-md-5">
+                                <label class="form-label">Observação:</label>
+                                <textarea name="obsCastracao" id="obhsCastracao" rows="5" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="row align-items-center justify-content-end my-3 me-3">
+                                <input type="submit" value="Solicitar castração" class="btn btn-success col-auto" name="solicitaCastra">
+                        </div>
+                    </form>              
                 </div>
             </div>
         </div>
