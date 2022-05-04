@@ -112,6 +112,14 @@ if($_GET)
             $adm = new Controller();
             $adm->abrirConsultaCastracao();
         break;
+        case "alterar-senha":
+            $usuario = new Controller();
+            $usuario->abrirAlterarSenha();
+        break;
+        case "lista-solicitacao":
+            // Colocar na Navbar ADM - feito para vizualizar - Mylena
+            include "view/listaSolicitacao.php";    
+        break;
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
             $pagina = new Controller();
