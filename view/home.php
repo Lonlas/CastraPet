@@ -15,6 +15,10 @@
 <body>
     <!-- CORPO -->
     <?php include_once "menu.php";?>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     <div class="container-fluid">
         <div class="container-fluid bg-primary">
             <div class="row p-3">
