@@ -10,7 +10,7 @@
         <a class="nav-link"  href="<?php echo URL; ?>">Inicío <span class="sr-only">(página atual)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'cadastraanimal'; ?>">Cadastrar Animal</a>
+        <a class="nav-link"  href="<?php echo URL.'cadastro-animal'; ?>">Cadastrar Animal</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link"  href="<?php echo URL.'sobre'; ?>">Sobre</a>
