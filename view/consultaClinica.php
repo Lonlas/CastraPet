@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <div class="bg-danger">
             <div class="container mx-auto row p-3">
-                <form action="" class="container bg-dark text-light font-weight-bold p-3">
+                <form action="" class="container bg-dark text-light font-weight-bold p-3 mb-0">
                     <div>
                         <label for="buscaClinica">Consultar Clínica</label>
                         <input type="number" name="buscaClinica" id="buscaClinica">
