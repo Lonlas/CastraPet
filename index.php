@@ -1,10 +1,11 @@
 <?php
 
-//Importando arquivos da pasta Controller
-include "controller/Controller.php";
-include "controller/UsuarioController.php";
-include "controller/AnimalController.php";
-include "controller/RacaController.php";
+include_once "controller/Controller.php";
+include_once "controller/UsuarioController.php";
+include_once "controller/AnimalController.php";
+include_once "controller/RacaController.php";
+include_once "controller/LoginController.php";
+include_once "controller/ClinicaController.php";
 
 //Definindo uma constante para a URL do site
 define("URL","http://localhost/CastraPet/");
@@ -25,53 +26,116 @@ if($_GET)
             $direciona = new UsuarioController();
             $direciona->abrirCadastro();
         break;
-        case "cadastrar-tutor";
-            $direciona = new UsuarioController();
-            $direciona->cadastrarUsuario();
-        break;
-        case "login":
+        case "login": 
             $direciona = new UsuarioController();
             $direciona->abrirLogin();
         break;
-        case "esqueci-a-senha":
+        case "logar": 
+            $usuario = new LoginController();
+            $usuario->logar();
+        break;
+        case "esqueci-a-senha": 
             $direciona = new Controller();
             $direciona->abrirEsqSenha();
+        break;    
+        case "cadastra-tutor":
+            $usu = new UsuarioController();
+            $usu->abrirCadastro();
+        break;
+        case "cadastrar-tutor":
+            $usu = new UsuarioController();
+            $usu->cadastrarUsuario();
+        break;
+        case "cadastra-tutor":
+            $usu = new UsuarioController();
+            $usu->abrirCadastro();
+        break;
+        case "cadastrar-tutor":
+            $usu = new UsuarioController();
+            $usu->cadastrarUsuario();
         break;
         case "perfil":
             $direciona = new Controller();
             $direciona->abrirPerfil();
-            break;
+        break;
         case "meus-animais":
-            $direciona = new AnimalController();
-            $direciona->abrirMeusAnimais();
-            break;
-        case "cadastro-animal":
-            $direciona = new AnimalController();
-            $direciona->abrirCadAnimal();
-            break;
+            $Animal = new AnimalController();
+            $Animal->abrirMeusAnimais();
+        break;
+        case "cadastra-animal":
+            $Animal = new AnimalController();
+            $Animal->abrirCadAnimal();
+        break;
         case "cadastrar-animal":
-            $direciona = new AnimalController();
-            $direciona->cadastrarAnimal();
-            break;
-        case "info-animal":
-            $direciona = new AnimalController();
-            $direciona->abrirInfoAnimal();
-            break;
-        case "cadastro-raca":
+            $Animal = new AnimalController();
+            $Animal->cadastrarAnimal();
+        break;
+        case "cadastra-raca":
             $raca = new RacaController();
             $raca->abrirCadRaca();
-            break;
+        break;
         case "cadastrar-raca":
             $raca = new RacaController();
             $raca->cadastrarRaca();
-            break;
+        break;
+        case "cadastra-clinica":
+            $clinica = new ClinicaController();  
+            $clinica->abrirCadClinica();
+        break;
+        case "cadastrar-clinica":
+            $clinica = new ClinicaController();  
+            $clinica->cadastrarClinica();
+        break;
+        case "solicita-castracao":
+            $usuario = new UsuarioController();
+            $usuario->abrirSolicitacao();
+        break;
         case "teste":
-            $direciona = new UsuarioController();
-            $direciona->teste();
-            break;
+            $teste = new UsuarioController();
+            $teste->teste();
+        break;
+        case "home-adm":
+            $adm = new LoginController();
+            $adm->abrirHomeAdm();
+        break;
+        case "home-clinica":
+            $clinica = new LoginController();
+            $clinica->abrirHomeClinica();
+        break;
+        case "home-usuario":
+            $usuario = new LoginController();
+            $usuario->abrirHomeUsuario();
+        break;
+        case "sobre":
+            $teste = new Controller();
+            $teste->abrirSobre();
+        break;
+
+        // Telas consulta
+        case "consulta-usuario":
+            $adm = new Controller();
+            $adm->abrirConsultaUsuario();
+        break;
+        case "consulta-clinica":
+            $adm = new Controller();
+            $adm->abrirConsultaClinica();
+        break;
+        case "consulta-castracao":
+            $adm = new Controller();
+            $adm->abrirConsultaCastracao();
+        break;
+        case "alterar-senha":
+            $usuario = new Controller();
+            $usuario->abrirAlterarSenha();
+        break;
+        case "lista-solicitacao":
+            // Colocar na Navbar ADM - feito para vizualizar - Mylena
+            include "view/listaSolicitacao.php";    
+        break;
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
-            echo "Página não encontrada";
+            $pagina = new Controller();
+            $pagina->paginaNaoEncontrada();
     }
 }
 else
@@ -80,7 +144,4 @@ else
     $direciona = new Controller();
     $direciona->abrirInicio();
 }
-
-
-
 ?>

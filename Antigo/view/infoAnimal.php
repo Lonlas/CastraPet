@@ -55,7 +55,7 @@
                 </tbody>
             </table>
             <div id="button-box">
-                <a href="<?php echo URL.'meusanimais'?>" id="btnVoltar">Voltar</a>
+                <a href="<?php echo URL.'meus-animais'?>" id="btnVoltar">Voltar</a>
             </div>
         </div>
     </body>

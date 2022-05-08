@@ -20,29 +20,38 @@
         <div class="container-fluid bg-primary">
             <div class="container mx-auto row p-3">
                 <div class="container bg-dark text-light font-weight-bold p-3">
-                    Meus Animais
+                    Solicitar Castração
                 </div>
                 <div class="container bg-white">
                     <!-- Componentes aqui -->
-                    <div class="row">
-                        <div class="col-md-12 mb-4 ms-md-3 text-right">
-                            <hr>
-                            <a href="<?php echo URL.'solicita-castracao'; ?>" class="btn btn-success my-2 my-sm-0 col-2">Solicitar castração</a>
+                    <form action="<?php echo URL.'perfil'; ?>">
+                        <div class="row align-items-center justify-content-center my-3 ">
+                            <div class="col-md-5">
+                                <select name="selectAni" id="selectAni" class="form-select">
+                                    <option selected> ... SELECIONE O ANIMAL ... </option>
+                                    <option value="<?php ?>">ex 1</option>
+                                    <option value="<?php ?>">ex 2</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-4 ms-md-3 text-right">
-                            <hr>
-                            <a href="<?php echo URL.'cadastra-animal'; ?>" class="btn btn-success my-2 my-sm-0 col-2">Cadastrar Animal</a>
+                        <div class="row align-items-center justify-content-center mb-4">
+                            <div class="col-md-5">
+                                <label class="form-label">Observação:</label>
+                                <textarea name="obsCastracao" id="obhsCastracao" rows="5" class="form-control"></textarea>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row align-items-center justify-content-end my-3 me-3">
+                                <input type="submit" value="Solicitar castração" class="btn btn-success col-auto" name="solicitaCastra">
+                        </div>
+                    </form>              
                 </div>
             </div>
         </div>
         <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
-            <a href="<?php echo URL.'perfil'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
+            <a href="<?php echo URL.'meus-animais'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
         </footer>
     </div>
+
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->

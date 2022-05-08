@@ -12,13 +12,13 @@
             <div id="pets">
                 <h1>Meus Animais</h1>
                 <div id="tabela">
-                    <div class="obj a"><a class="link" href="<?php echo URL.'infoanimal'?>">Loki</a></div>
+                    <div class="obj a"><a class="link" href="<?php echo URL.'info-animal'?>">Loki</a></div>
                             
-                    <div class="obj b"><a class="link" href="<?php echo URL.'infoanimal'?>">Thor</a></div>
+                    <div class="obj b"><a class="link" href="<?php echo URL.'info-animal'?>">Thor</a></div>
                     <div class="separador"></div>
-                    <div class="obj c"><a class="link" href="<?php echo URL.'infoanimal'?>">Odin</a></div>
+                    <div class="obj c"><a class="link" href="<?php echo URL.'info-animal'?>">Odin</a></div>
 
-                    <div class="obj d"><a class="link" href="<?php echo URL.'infoanimal'?>">Valquíria</a></div>
+                    <div class="obj d"><a class="link" href="<?php echo URL.'info-animal'?>">Valquíria</a></div>
                 </div>
             </div>
             <div id="boxbtn">
@@ -26,7 +26,7 @@
                     <a href="<?php echo URL.'perfil';?>" class="btn esc">Voltar</a>
                 </div>
                 <div id="boxdir">
-                    <a href="<?php echo URL.'cadastraanimal';?>" class="btn dir">Cadastrar Animal</a>
+                    <a href="<?php echo URL.'cadastra-animal';?>" class="btn dir">Cadastrar Animal</a>
                 </div>
             </div>
         </div>

@@ -35,8 +35,9 @@
 
             //Preparar comando SQL para cadastrar
             $cmd = $con->prepare("INSERT INTO login (nome, email, senha, nivelacesso) VALUES (:nome, :email, :senha, :nivelacesso)");
-                
+            
             //Parâmetros SQL
+            $this->nivelacesso = 0;
             $cmd->bindParam(":nome", $this->nome);
             $cmd->bindParam(":email", $this->email);
             $cmd->bindParam(":senha", $this->senha);

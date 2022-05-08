@@ -14,32 +14,21 @@
 </head>
 <body>
     <!-- CORPO -->
-    <?php include_once "menu.php";?>
+        <?php include_once "menu.php";?>
 
-    <div class="container-fluid">
+        <div class="container-fluid">
         <div class="bg-primary">
             <div class="container mx-auto row p-3">
                 <div class="container bg-dark text-light font-weight-bold p-3">
-                    Entrar na minha conta 
+                    Sobre a castração em Franco da Rocha
                 </div>
-                <div class="container bg-white">
-                    <form action="logar" class="p-5" method="POST">
-                        <div class="form-group">
-                            <label for="email">E-mail:</label>
-                            <input type="text" id="email" name="txtEmail" class="form-control" placeholder="" required>
-                        </div>
-                        <div class="form-group my-4">
-                            <label for="senha">Senha:</label>
-                            <input type="password" id="senha" name="txtSenha" class="form-control" placeholder="" required>
-                        </div>
-                        <div class="text-center ">
-                            <input type="submit" class="btn btn-success align-middle" value="Entrar">
-                        </div>
-                    </form>
-                    <div class="row mb-4">
-                        <a href="<?php echo URL.'cadastra-tutor';?>" class="col-6 text-center">Cadastrar-se</a>
-                        <a href="<?php echo URL.'esqueci-a-senha';?>" class="col-6 text-center">Esqueci minha senha</a>
-                    </div>
+                <div class="container bg-white p-3 pb-0" style="min-height:500px;">
+                    <h3>
+                        Título
+                    </h3>
+                    <p>
+                        Texto
+                    </p>
                 </div>
             </div>
         </div>
@@ -47,7 +36,7 @@
             <a href="<?php echo URL.'inicio'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
         </footer>
     </div>
-    
+
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->

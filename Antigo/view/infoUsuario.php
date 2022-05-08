@@ -64,7 +64,7 @@
                 </tbody>
             </table>
             <div id="button-box">
-                <a href="<?php echo URL.'meusanimais'?>" class="btnAnimais">Animais<br/>cadastrados</a>
+                <a href="<?php echo URL.'meus-animais'?>" class="btnAnimais">Animais<br/>cadastrados</a>
             </div>
         </div>
     </body>

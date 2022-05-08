@@ -4,131 +4,123 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <?php include_once "favicon.php"?>
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
     <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
 
 </head>
 <body>
     <!-- CORPO -->
-    <div class="container">
-        <form method="post" action="<?php echo URL. 'cadastrar-tutor'; ?>">
-            <h1>CADASTRAR</h1>
-            <table>
-                <tbody>
-                    <tr colspan="2">
-                        <td>
-                            <label for="txtNome">Nome:</label>
-                            <input type="text" name="txtNome" id="txtNome" maxlength="70" required>
-                        </td>
-                    </tr>
-                    <tr colspan="2">
-                        <td>
-                            <label for="txtEmail">E-mail:</label>
-                            <input type="email" name="txtEmail" id="txtEmail" maxlength="100" required>
-                        </td>
-                    </tr> 
-                    <tr>
-                        <td>
-                            <label for="txtCPF">CPF:</label>
-                            <input type="text" name="txtCPF" id="txtCPF" required>
-                        </td>
-                        <td>
-                            <label for="txtTel">Telefone:</label>
-                            <input type="text" name="txtTel" id="txtTel" maxlength="15">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="txtRG">RG:</label>
-                            <input type="text" name="txtRG" id="txtRG" maxlength="12" required>
-                        </td>
-                        <td>
-                            <label for="txtCelular">Celular:</label>
-                            <input type="text" name="txtCelular" id="txtCelular" maxlength="15" required>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table>
-                <thead>
-                    <tr>
-                        <th><h2>Endereço</h2></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <label for="txtCEP">CEP:</label>
-                            <input type="text" name="txtCEP" id="txtCEP" maxlength="9" required> 
-                        </td>
-                        <td>
-                            <label for="txtNumero">Número</label>
-                            <input type="text" name="txtNumero" id="txtNumero" maxlength="5" required>
-                        </td>
-                    </tr>
-                    <tr colspan="2">
-                        <td>
-                            <label for="txtBairro">Bairro:</label>
-                            <input type="text" name="txtBairro" id="txtBairro" maxlength="50" required>
-                        </td>
-                    </tr>
-                    <tr colspan="2">
-                        <td>
-                            <label for="txtRua">Rua:</label>
-                            <input type="text" name="txtRua" id="txtRua" maxlength="50" required>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <label for="txtSenha">Crie uma senha:</label>
-                            <input type="password" name="txtSenha" id="txtSenha" maxlength="40" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="txtConfirmaSenha">Confirme sua senha:</label>
-                            <input type="password" name="txtConfirmaSenha" id="txtConfirmaSenha" maxlength="40" required>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <input type="checkbox" name="chkProtetor" id="chkProtetor" value="1">
-                            <label for="chkProtetor">Sou protetor de animais</label>
-                            &nbsp;
-                            <input type="button" value="Fazer upload" name="btnProtetorUpload" id="btnProtetor" disabled>
-                        </td>
-                        <td>
-                            <input type="checkbox" name="chkNIS" id="chkNIS" value="2">
-                            <label for="chkNIS">Tenho o benefício do NIS</label>
-                            <input type="text" name="txtNIS" id="txtNIS" disabled>
-                        </td>
-                        <td>
-                            <input type="submit" value="Cadastrar">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-        <div>
-            <a href="#">Voltar</a>
+    <?php include_once "menu.php";?>
+
+    <div class="container-fluid">
+        <div class="container-fluid bg-primary">
+            <div class="container mx-auto row p-3">
+                <div class="container bg-dark text-light font-weight-bold p-3">
+                    CADASTRAR
+                </div>
+                <div class="container bg-white">
+                    <form method="post" action="cadastrar-tutor">
+                    <div class="row m-0 align-items-center">
+                        <div class="col-md-6 mb-4 align-self-center">
+                            <div class="form-group row-6 mb-3">
+                                <label for="txtNome" class="col-form-label">Nome:</label>
+                                <input  class="form-control" type="text" name="txtNome" id="txtNome" maxlength="70" required>
+                            </div>
+                            <div class="form-group row-6 mb-3">
+                                <label for="txtEmail">Email:</label>
+                                <input class="form-control" type="email" name="txtEmail" id="txtEmail" maxlength="100" required>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="form-group col-6">
+                                    <label for="txtCPF">CPF:</label>
+                                    <input class="form-control" type="text" name="txtCPF" id="txtCPF" maxlength="14" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="txtTel">Telefone:</label>
+                                    <input class="form-control" type="text" name="txtTel" id="txtTel" maxlength="15">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="form-group col-6">
+                                    <label for="txtRG">RG:</label>
+                                    <input class="form-control" type="text" name="txtRG" id="txtRG" maxlength="12" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="txtCelular">Celular:</label>
+                                    <input class="form-control" type="text" name="txtCelular" id="txtCelular" maxlength="15">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="form-group col-6">
+                                    <input type="checkbox" name="chkNIS" id="chkNIS" value="2">
+                                    <label for="chkNIS">Tenho o benefício do NIS</label>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <input class="form-control" type="text" name="txtNIS" id="txtNIS">
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <input type="checkbox" name="chkProtetor" id="chkProtetor" value="1">
+                                <label for="chkProtetor">Sou protetor de animais</label>
+                                &nbsp;
+                                <input class="btn btn-success" type="button" value="Fazer upload" name="btnProtetorUpload">
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4 align-self-center justify-content-evenly">
+                            <div class="row mb-3">
+                                <div class="form-group col-6">
+                                    <label for="txtCEP">CEP:</label>
+                                    <input class="form-control" type="text" name="txtCEP" id="txtCEP" maxlength="9" required> 
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="txtNumero">Número:</label>
+                                    <input class="form-control" type="text" name="txtNumero" id="txtNumero" maxlength="5" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="txtBairro">Bairro:</label>
+                                <input class="form-control" type="text" name="txtBairro" id="txtBairro" maxlength="50" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="txtRua">Rua:</label>
+                                <input class="form-control" type="text" name="txtRua" id="txtRua" maxlength="50" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="txtSenha">Crie uma senha:</label>
+                                <input class="form-control" type="password" name="txtSenha" id="txtSenha" maxlength="40" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="txtConfirmaSenha">Confirme sua senha:</label>
+                                <input class="form-control" type="password" name="txtConfirmaSenha" id="txtConfirmaSenha" maxlength="40" required>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-9"></div>
+                                <div class=" form-group col-3">
+                                    <input type="submit" class="btn btn-success" value="Cadastrar">
+                                </div>        
+                            </div>
+                        </div>     
+                    </div>
+                    </form>
+                </div>
+            </div>
         </div>
+        <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
+            <a href="<?php echo URL.'login'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
+        </footer>
     </div>
+    
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
+    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado -->
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
-
+    
     <script>
         //NIS
         $('#chkNIS').change(function() {
@@ -150,5 +142,6 @@
         }
         });
     </script>
+    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
