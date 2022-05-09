@@ -22,18 +22,59 @@
                 <div class="container bg-dark text-light font-weight-bold p-3">
                     Meus Animais
                 </div>
-                <div class="container bg-white">
+                <div class="container bg-white p-3">
                     <!-- Componentes aqui -->
-                    <div class="row">
-                        <div class="col-md-12 mb-4 ms-md-3 text-right">
-                            <hr>
-                            <a href="<?php echo URL.'solicita-castracao'; ?>" class="btn btn-success my-2 my-sm-0 col-2">Solicitar castração</a>
+                    <div class="row px-3">
+                        <div class="col-md-3">
+                            <div style="align-items:center !important;">
+                                <img src="<?php echo URL.'recursos/img/cachorro.jpg'?>" alt="Imagem" width="100%">
+                            </div>
                         </div>
-                    </div>
+                        <div class="col-md-7">
+                            <div class="row">
+                                <p>
+                                    Nome:
+                                    <?php echo"Alfredo";?>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    Espécie:
+                                    <?php echo"Canina";?>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    Sexo:
+                                    <?php echo"Macho";?>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    Pelagem:
+                                    <?php echo"Média";?>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    Porte:
+                                    <?php echo"Grande";?>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    Animal Comunitário:
+                                    <?php echo"Não";?>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="<?php echo URL.'solicita-castracao'; ?>" class="btn btn-success">Solicitar castração</a>
+                        </div>
+                    </div><hr class="mx-auto my-3" style="width:98%;">
                     <div class="row">
-                        <div class="col-md-12 mb-4 ms-md-3 text-right">
-                            <hr>
-                            <a href="<?php echo URL.'cadastra-animal'; ?>" class="btn btn-success my-2 my-sm-0 col-2">Cadastrar Animal</a>
+                        <div class="col">
+                            <a href="<?php echo URL.'cadastra-animal'; ?>" class="btn btn-success mb-3">Cadastrar Animal</a>
                         </div>
                     </div>
                 </div>

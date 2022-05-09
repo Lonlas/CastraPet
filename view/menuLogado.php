@@ -6,10 +6,10 @@
 <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
     <ul class="navbar-nav mr-auto">
     <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'home-usuario'; ?>">Inicío <span class="sr-only">(página atual)</span></a>
+        <a class="nav-link"  href="<?php echo URL.'home-usuario'; ?>">Início</a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'cadastra-animal'; ?>">Cadastrar Animal</a>
+        <a class="nav-link"  href="<?php echo URL.'meus-animais'; ?>">Meus Animais</a>
     </li>
     <li class="nav-item active">
         <a class="nav-link"  href="<?php echo URL.'sobre'; ?>">Sobre</a>
