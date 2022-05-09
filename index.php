@@ -22,6 +22,10 @@ if($_GET)
            $direciona = new Controller();
            $direciona->abrirInicio();
         break;
+        case "cadastro-tutor";
+            $direciona = new UsuarioController();
+            $direciona->abrirCadastro();
+        break;
         case "login": 
             $direciona = new UsuarioController();
             $direciona->abrirLogin();
@@ -34,6 +38,14 @@ if($_GET)
             $direciona = new Controller();
             $direciona->abrirEsqSenha();
         break;    
+        case "cadastra-tutor":
+            $usu = new UsuarioController();
+            $usu->abrirCadastro();
+        break;
+        case "cadastrar-tutor":
+            $usu = new UsuarioController();
+            $usu->cadastrarUsuario();
+        break;
         case "cadastra-tutor":
             $usu = new UsuarioController();
             $usu->abrirCadastro();
@@ -111,6 +123,14 @@ if($_GET)
         case "consulta-castracao":
             $adm = new Controller();
             $adm->abrirConsultaCastracao();
+        break;
+        case "alterar-senha":
+            $usuario = new Controller();
+            $usuario->abrirAlterarSenha();
+        break;
+        case "lista-solicitacao":
+            // Colocar na Navbar ADM - feito para vizualizar - Mylena
+            include "view/listaSolicitacao.php";    
         break;
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida

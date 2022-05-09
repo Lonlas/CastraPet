@@ -37,7 +37,7 @@
                         </div>
                     </form>
                     <div class="row mb-4">
-                        <a href="<?php echo URL.'cadastra-tutor';?>" class="col-6 text-center">Não possuo cadastro</a>
+                        <a href="<?php echo URL.'cadastra-tutor';?>" class="col-6 text-center">Cadastrar-se</a>
                         <a href="<?php echo URL.'esqueci-a-senha';?>" class="col-6 text-center">Esqueci minha senha</a>
                     </div>
                 </div>

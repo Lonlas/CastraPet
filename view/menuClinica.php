@@ -9,7 +9,7 @@
         <a class="nav-link"  href="<?php echo URL; ?>">Inicío <span class="sr-only">(página atual)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo '#'; ?>">Consultar castrações</a>
+        <a class="nav-link"  href="<?php echo URL.'#'; ?>">Consultar castrações</a>
       </li>
     </ul>
     <form class="form-inline ms-auto my-2 my-lg-0">

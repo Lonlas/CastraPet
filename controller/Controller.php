@@ -28,5 +28,8 @@ class Controller
     function abrirConsultaCastracao(){
         include "view/consultaCastracao.php";
     }
+    function abrirAlterarSenha(){
+        include "view/alterarSenha.php";
+    }
 }
 ?>
