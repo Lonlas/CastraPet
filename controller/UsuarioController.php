@@ -20,6 +20,7 @@ class UsuarioController
         $login->nome = $_POST["txtNome"];
         $login->email = $_POST["txtEmail"];
         $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
+        $login->nivelacesso = 0;
 
         //Cadastro do Usuário
         $cadastra = new Usuario();
@@ -44,6 +45,10 @@ class UsuarioController
         if(empty($_POST["txtNIS"]))
         {
             $cadastra->nis = "";
+        }
+        else
+        {
+            $cadastra->nis = $_POST["txtNIS"];
         }
         
         $cadastra->cadastrar();

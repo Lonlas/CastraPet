@@ -101,8 +101,8 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE usuario SET idlogin = :idlogin, rg = :rg, cpf = :cpf, beneficio = :beneficio, telefone = :telefone, celular = :celular, punicao = :punicao, usurua = :usurua, usubairro = :usubairro, usunumero = :usunumero, usucep = :usucep WHERE idusuario = :idusuario");
-            
+            $cmd = $con->prepare("UPDATE usuario SET idlogin = :idlogin, rg = :rg, cpf = :cpf, beneficio = :beneficio, telefone = NULLIF(:telefone,''), celular = :celular, punicao = :punicao, usurua = :usurua, usubairro = :usubairro, usunumero = :usunumero, usucep = :usucep, nis = NULLIF(:nis,'') WHERE idusuario = :idusuario");
+                
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);
             $cmd->bindParam(":rg", $this->rg);
@@ -115,6 +115,7 @@
             $cmd->bindParam(":usubairro", $this->usubairro);
             $cmd->bindParam(":usunumero", $this->usunumero);
             $cmd->bindParam(":usucep", $this->usucep);
+            $cmd->bindParam(":nis", $this->nis);
             $cmd->bindParam(":idusuario", $this->idusuario);
 
             //Executando o comando SQL

@@ -2,7 +2,7 @@
     class Raca
     {
         //Atributos
-        private $idRaca;
+        private $idraca;
         private $raca;
 
         function __get($atributo)
@@ -23,6 +23,7 @@
             include_once "Conexao.php";
         }
 
+        //Método Cadastrar
         function cadastrar()
         {
             $con = Conexao::conectar();
@@ -37,6 +38,7 @@
             $cmd->execute();
         }
 
+        //Método Consultar
         function consultar()
         {
             //Conectar
@@ -50,6 +52,57 @@
             
             //Retorna os usuários em forma de objeto de dentro de uma matriz
             return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        //Método Excluir
+        function excluir()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para deletar
+            $cmd = $con->prepare("DELETE FROM raca WHERE idraca = :idraca");
+
+            //Parâmetros SQL
+            $cmd->bindParam(":idraca", $this->idraca);
+            
+            //Executando o comando SQL
+            $cmd->execute();
+        }
+        
+        //Método Atualizar
+        function atualizar()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar o comando SQL para atualizar
+            $cmd = $con->prepare("UPDATE raca SET raca = :raca WHERE idraca = :idraca");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":raca", $this->raca);
+            $cmd->bindParam(":idraca", $this->idraca);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
+
+        //Método Retornar
+        function retornar()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("SELECT * FROM raca WHERE idraca = :idraca");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":idraca", $this->idraca);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetch(PDO::FETCH_OBJ);
         }
     }
 ?>

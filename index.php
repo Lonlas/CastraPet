@@ -124,6 +124,10 @@ if($_GET)
             // Colocar na Navbar ADM - feito para vizualizar - Mylena
             include "view/listaSolicitacao.php";    
         break;
+        case "agendamento":
+            $adm = new Controller();
+            $adm->abrirAgendamento();
+        break;
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
             $pagina = new Controller();
