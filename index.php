@@ -1,10 +1,11 @@
 <?php
 
+session_start();
+
 include_once "controller/Controller.php";
 include_once "controller/UsuarioController.php";
 include_once "controller/AnimalController.php";
-include_once "controller/RacaController.php";
-include_once "controller/LoginController.php";
+include_once "controller/UsuarioController.php";
 include_once "controller/ClinicaController.php";
 
 //Definindo uma constante para a URL do site
@@ -19,8 +20,8 @@ if($_GET)
     switch($url[0])
     {   
         case "inicio":
-           $direciona = new Controller();
-           $direciona->abrirInicio();
+            $direciona = new Controller();
+            $direciona->abrirInicio();
         break;
         case "cadastro-tutor";
             $direciona = new UsuarioController();
@@ -31,7 +32,7 @@ if($_GET)
             $direciona->abrirLogin();
         break;
         case "logar": 
-            $usuario = new LoginController();
+            $usuario = new UsuarioController();
             $usuario->logar();
         break;
         case "esqueci-a-senha": 
@@ -59,23 +60,23 @@ if($_GET)
             $direciona->abrirPerfil();
         break;
         case "meus-animais":
-            $Animal = new AnimalController();
-            $Animal->abrirMeusAnimais();
+            $animal = new AnimalController();
+            $animal->abrirMeusAnimais();
         break;
         case "cadastra-animal":
-            $Animal = new AnimalController();
-            $Animal->abrirCadAnimal();
+            $animal = new AnimalController();
+            $animal->abrirCadAnimal();
         break;
         case "cadastrar-animal":
-            $Animal = new AnimalController();
-            $Animal->cadastrarAnimal();
+            $animal = new AnimalController();
+            $animal->cadastrarAnimal();
         break;
         case "cadastra-raca":
-            $raca = new RacaController();
+            $raca = new AnimalController();
             $raca->abrirCadRaca();
         break;
         case "cadastrar-raca":
-            $raca = new RacaController();
+            $raca = new AnimalController();
             $raca->cadastrarRaca();
         break;
         case "cadastra-clinica":
@@ -90,20 +91,16 @@ if($_GET)
             $usuario = new UsuarioController();
             $usuario->abrirSolicitacao();
         break;
-        case "teste":
-            $teste = new UsuarioController();
-            $teste->teste();
-        break;
         case "home-adm":
-            $adm = new LoginController();
+            $adm = new UsuarioController();
             $adm->abrirHomeAdm();
         break;
         case "home-clinica":
-            $clinica = new LoginController();
+            $clinica = new UsuarioController();
             $clinica->abrirHomeClinica();
         break;
         case "home-usuario":
-            $usuario = new LoginController();
+            $usuario = new UsuarioController();
             $usuario->abrirHomeUsuario();
         break;
         case "sobre":

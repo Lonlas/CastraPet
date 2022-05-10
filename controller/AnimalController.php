@@ -43,6 +43,18 @@ class AnimalController
         echo "<script>alert('Animal cadastrado com sucesso!'); window.location='".URL."meusanimais';</script>";
     }
 
+    function abrirCadRaca()
+    {
+        include"view/cadRaca.php";
+    }
+    
+    function cadastrarRaca()
+    {
+        $cadastra = new Raca();
+        $cadastra->raca = $_POST["txtRaca"];
+        $cadastra->cadastrar();
+    }
+
 
 
 }
