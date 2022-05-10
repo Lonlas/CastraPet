@@ -19,26 +19,21 @@ class UsuarioController
         $login = new Login();
         $login->nome = $_POST["txtNome"];
         $login->email = $_POST["txtEmail"];
-        $login->senha = $_POST["txtSenha"];
+        $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
 
         //Cadastro do Usuário
         $cadastra = new Usuario();
         $cadastra->idlogin = $login->cadastrar();
         $cadastra->rg = $_POST["txtRG"];
         $cadastra->cpf = $_POST["txtCPF"];
+
         if($_POST["chkProtetor"] == 1)
-        {
             $cadastra->beneficio = $_POST["chkProtetor"];
-        }
         else if($_POST["chkNIS"] == 2)
-        {
             $cadastra->beneficio = $_POST["chkNIS"];
-        }
         else
-        {
             $cadastra->beneficio = 0;
-        }
-        
+
         $cadastra->telefone = $_POST["txtTel"];
         $cadastra->celular = $_POST["txtCelular"];
         $cadastra->punicao = 0;
@@ -52,115 +47,50 @@ class UsuarioController
         }
         
         $cadastra->cadastrar();
+
+        header("Location:".URL);
     }
-    function teste()
+    function logar()
     {
-        echo 
-        "<table border=1>
-            <tr>
-                <th>
-                    <h1>tbLogin</h1>
-                </th>
-            </tr>
-            <tr>
-                <td> Nome: ";
-                    if(strlen($_POST["txtNome"]) <= 10 && !empty($_POST["txtNome"]))
-                    {
-                        echo $_POST["txtNome"];
-                    }
-                    else
-                    {
-                        echo "<script>
-                                alert('Ocorreu um erro, tente cadastrar novamente!');
-                                window.location='" . URL . "cadastro-usuario';
-                            </script>";
-                    }
-                echo "</td>
-            </tr>
-            <tr>
-                <td>
-                    Email: ". $_POST["txtEmail"] ."
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Senha: ". $_POST["txtSenha"] ."
-                </td>
-            </tr>
-        </table>";
+        $logar = new Login();
+        $logar->email = $_POST["txtEmail"];
+        $dadosUsuario = $logar->logar();
+        
+        if($dadosUsuario && password_verify($_POST["txtSenha"], $dadosUsuario->senha))
+        {
+            $_SESSION["dadosUsu"] = $dadosUsuario;
+            
+            switch($dadosUsuario->nivelacesso)
+            {
+                case '0':
+                    echo"<script>alert('Usuário Logado'); window.location='".URL."home-usuario'; </script>";
+                break;
+                case '1':
+                    echo"<script>alert('Usuário Clínica Logado'); window.location='".URL."home-clinica'; </script>";
+                break;
+                case '2':
+                    echo"<script>alert('Usuário Administrador Logado'); window.location='".URL."home-adm'; </script>";
+                break;
+                default:
+                    echo"<script>alert('Email ou senha estão errados'); window.location='".URL."login'; </script>";
+            }
+        }
+        else
+        {
+            echo"<script>alert('Email ou senha estão errados'); window.location='".URL."login'; </script>";
+        }
 
-        echo "<br/>";
-
-        echo 
-        "<table border=1>
-            <tr>
-                <th>
-                    <h1>tbUsuario</h1>
-                </th>
-            </tr>
-            <tr>
-                <td>
-                idLogin: 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                RG: ". $_POST["txtRG"] ."
-                </td>
-            </tr>
-            <tr>
-                <td>
-                CPF: ". $_POST["txtCPF"] ."
-                </td>
-            </tr>
-            <tr>
-                <td>
-                Benefício: ";
-                if($_POST["chkProtetor"] == 1)
-                {
-                    echo "Protetor";
-                }
-                else if($_POST["chkNIS" == 2])
-                {
-                    echo $_POST["chkNIS"];
-                }
-                else
-                {
-                    echo 0;
-                }
-                echo "</td>
-            </tr>
-            <tr>
-                <td>
-                    Telefone: ". $_POST["txtTel"] ."
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Celular: ". $_POST["txtCelular"] ."
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Punicao: 0
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Rua: ". $_POST["txtRua"] ."
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Bairro : ". $_POST["txtBairro"] ."
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    CEP: ". $_POST["txtCEP"] ."
-                </td>
-            </tr>
-        </table>";
+    }
+    function abrirHomeClinica()
+    {
+        include "view/homeClinica.php";
+    }
+    function abrirHomeAdm()
+    {
+        include "view/homeAdm.php";
+    }
+    function abrirHomeUsuario(){
+        include "view/homeUsuario.php";
     }
 }
 ?>

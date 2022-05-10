@@ -32,7 +32,7 @@
                             <label for="senha">Senha:</label>
                             <input type="password" id="senha" name="txtSenha" class="form-control" placeholder="" required>
                         </div>
-                        <div class="text-center ">
+                        <div class="text-center">
                             <input type="submit" class="btn btn-success align-middle" value="Entrar">
                         </div>
                     </form>

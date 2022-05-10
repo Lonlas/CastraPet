@@ -3,7 +3,6 @@
 session_start();
 
 include_once "controller/Controller.php";
-include_once "controller/UsuarioController.php";
 include_once "controller/AnimalController.php";
 include_once "controller/UsuarioController.php";
 include_once "controller/ClinicaController.php";
@@ -42,10 +41,6 @@ if($_GET)
         case "cadastra-tutor":
             $usu = new UsuarioController();
             $usu->abrirCadastro();
-        break;
-        case "cadastrar-tutor":
-            $usu = new UsuarioController();
-            $usu->cadastrarUsuario();
         break;
         case "cadastra-tutor":
             $usu = new UsuarioController();

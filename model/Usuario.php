@@ -42,7 +42,8 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO usuario (idlogin, rg, cpf, beneficio, telefone, celular, punicao, usurua, usubairro, usunumero, usucep, nis) VALUES (:idlogin, :rg, :cpf, :beneficio, :telefone, :celular, :punicao, :usurua, :usubairro, :usunumero, :usucep, NULLIF(:nis,''))");
+            $cmd = $con->prepare("INSERT INTO usuario (idlogin, rg, cpf, beneficio, telefone, celular, punicao, usurua, usubairro, usunumero, usucep, nis) 
+            VALUES (:idlogin, :rg, :cpf, :beneficio, NULLIF(:telefone,''), :celular, :punicao, :usurua, :usubairro, :usunumero, :usucep, NULLIF(:nis,''))");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);
