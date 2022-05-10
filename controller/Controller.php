@@ -31,5 +31,8 @@ class Controller
     function abrirAlterarSenha(){
         include "view/alterarSenha.php";
     }
+    function abrirAgendamento(){
+        include "view/confirmaSolicitacao.php";
+    }
 }
 ?>

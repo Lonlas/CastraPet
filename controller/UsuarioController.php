@@ -20,6 +20,7 @@ class UsuarioController
         $login->nome = $_POST["txtNome"];
         $login->email = $_POST["txtEmail"];
         $login->senha = $_POST["txtSenha"];
+        $login->nivelacesso = 0;
 
         //Cadastro do Usuário
         $cadastra = new Usuario();
@@ -50,8 +51,14 @@ class UsuarioController
         {
             $cadastra->nis = "";
         }
+        else
+        {
+            $cadastra->nis = $_POST["txtNIS"];
+        }
         
         $cadastra->cadastrar();
+        
+        echo "window.location='" . URL . "cadastro-usuario';";
     }
     function teste()
     {
@@ -64,7 +71,7 @@ class UsuarioController
             </tr>
             <tr>
                 <td> Nome: ";
-                    if(strlen($_POST["txtNome"]) <= 10 && !empty($_POST["txtNome"]))
+                    if(strlen($_POST["txtNome"]) <= 70 && !empty($_POST["txtNome"]))
                     {
                         echo $_POST["txtNome"];
                     }

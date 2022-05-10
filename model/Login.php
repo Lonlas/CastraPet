@@ -87,12 +87,13 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE login SET nome = :nome, email = :email, senha = :senha WHERE idlogin = :idlogin");
+            $cmd = $con->prepare("UPDATE login SET nome = :nome, email = :email, senha = :senha, nivelacesso = :nivelacesso WHERE idlogin = :idlogin");
             
             //Parâmetros SQL
             $cmd->bindParam(":nome", $this->nome);
             $cmd->bindParam(":email", $this->email);
             $cmd->bindParam(":senha", $this->senha);
+            $cmd->bindParam(":nivelacesso", $this->nivelacesso);
             $cmd->bindParam(":idlogin", $this->idlogin);
 
             //Executando o comando SQL

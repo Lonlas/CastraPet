@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <?php include_once "favicon.php"?>
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
     <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
 
 </head>
 <body>
@@ -21,19 +22,87 @@
                     Meus Animais
                 </div>
                 <div class="container bg-white">
-                    <!-- Componentes aqui -->
-                    <div class="row">
-                        <div class="col-md-12 mb-4 ms-md-3 text-right">
-                            <hr>
-                            <a href="<?php echo URL.'solicita-castracao'; ?>" class="btn btn-success my-2 my-sm-0 col-2">Solicitar castração</a>
+                <!-- Componentes aqui -->
+                    <!-- Começo de um animal -->
+                    <div class="row mt-3">
+                        <div class="col-md-3 d-flex align-items-center">
+                            <img src="<?php echo URL.'recursos/img/imagem_cachorro.jpg';?>" alt="Imagem" class="mw-100">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <p>
+                                            Nome:
+                                            <?php echo"Alfredo";?>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <p>
+                                            Espécie:
+                                            <?php echo"Canina";?>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <p>
+                                            Sexo:
+                                            <?php echo"Macho";?>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <p>
+                                            Pelagem:
+                                            <?php echo"Média";?>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <p>
+                                            Porte:
+                                            <?php echo"Grande";?>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="mb-md-0">
+                                            Animal Comunitário:
+                                            <?php echo"Não";?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <p>
+                                            Idade:
+                                            <?php echo"8 anos";?>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <p>
+                                            Cor:
+                                            <?php echo"Amarelado";?>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="mb-0">
+                                            Raça:
+                                            <?php echo"SRD";?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="col-md-2">  
+                            <a href="<?php echo URL.'solicita-castracao';?>" class="btn btn-success float-end">Solicitar castração</a>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-4 ms-md-3 text-right">
-                            <hr>
-                            <a href="<?php echo URL.'cadastra-animal'; ?>" class="btn btn-success my-2 my-sm-0 col-2">Cadastrar Animal</a>
+                    <hr>
+                    <!-- Fim de um animal -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <a href="<?php echo URL.'cadastra-animal';?>" class="btn btn-success float-end">Cadastrar Animal</a>
                         </div>
                     </div>
+                <!-- Fim dos componentes -->
                 </div>
             </div>
         </div>
@@ -43,9 +112,9 @@
     </div>
     <!-- /CORPO -->
 
-    <!-- EXTENSÃO BOOTSTRAP -->
+    <!-- EXTENSÃO BOOTSTRAP -->    
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado -->
+    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado-->
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 </body>

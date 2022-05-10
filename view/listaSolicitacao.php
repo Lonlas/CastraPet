@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- CORPO -->
-    <?php include_once "menuLogado.php";?>
+    <?php include_once "menuADM.php";?>
 
     <div class="container-fluid">
         <div class="container-fluid bg-danger">

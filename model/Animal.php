@@ -49,6 +49,7 @@
             $cmd->bindParam(":especie", $this->especie);
             $cmd->bindParam(":sexo", $this->sexo);
             $cmd->bindParam(":cor", $this->cor);
+            $cmd->bindParam(":porte", $this->porte);
             $cmd->bindParam(":pelagem", $this->pelagem);
             $cmd->bindParam(":porte", $this->porte);
             $cmd->bindParam(":idade", $this->idade);
@@ -105,6 +106,7 @@
             $cmd->bindParam(":especie", $this->especie);
             $cmd->bindParam(":sexo", $this->sexo);
             $cmd->bindParam(":cor", $this->cor);
+            $cmd->bindParam(":porte", $this->porte);
             $cmd->bindParam(":pelagem", $this->pelagem);
             $cmd->bindParam(":porte", $this->porte);
             $cmd->bindParam(":idade", $this->idade);
