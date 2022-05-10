@@ -1,6 +1,7 @@
 <?php
 include_once "model/Animal.php";
 include_once "model/Raca.php";
+include_once "model/Castracao.php";
 
 class AnimalController
 {
@@ -39,6 +40,13 @@ class AnimalController
         $animal->idade = $_POST["numIdade"];
         $animal->comunitario = $_POST["rdbComunitario"];
         $animal->foto = $_POST["imgAnimal"];
+    }
+
+    function abrirConsultaCastracao()
+    {
+        $direciona = new Castracao();
+        $dadosCastracao = $direciona->consultar();
+        include_once "view/consultaCastracao.php";
     }
 }
 ?>

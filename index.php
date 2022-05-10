@@ -121,7 +121,7 @@ if($_GET)
             $adm->abrirConsultaClinica();
         break;
         case "consulta-castracao":
-            $adm = new Controller();
+            $adm = new AnimalController();
             $adm->abrirConsultaCastracao();
         break;
         case "alterar-senha":
