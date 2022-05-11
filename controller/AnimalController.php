@@ -5,6 +5,10 @@ include_once "model/Raca.php";
 class AnimalController
 {
     function abrirMeusAnimais(){
+        $animal = new Animal();
+        $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+        $dadosAnimais = $animal->retornarAnimais();
+
         include "view/meusAnimais.php";
     }
     function abrirCadAnimal(){
@@ -28,17 +32,20 @@ class AnimalController
             }
         }
         $animal = new Animal();
-        $animal->idusuario = $_POST["idUsuario"];
+        $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+        //$animal->idusuario = $_POST["idUsuario"];
         $animal->idraca = $raca;
         $animal->aninome = $_POST["txtNome"];
-        $animal->especie = $_POST["rdbEspecie"];
-        $animal->sexo = $_POST["rdbSexo"];
-        $animal->sexo = $_POST["rdbPorte"];
+        $animal->especie = $_POST["slcEspecie"];
+        $animal->sexo = $_POST["slcSexo"];
+        $animal->porte = $_POST["slcPorte"];
         $animal->cor = $_POST["txtCor"];
-        $animal->pelagem = $_POST["rdbPelagem"];
+        $animal->pelagem = $_POST["slcPelagem"];
         $animal->idade = $_POST["numIdade"];
-        $animal->comunitario = $_POST["rdbComunitario"];
+        $animal->comunitario = $_POST["slcComunitario"];
         $animal->foto = $_POST["imgAnimal"];
+
+        $animal->cadastrar();
     }
 
     function abrirCadRaca()

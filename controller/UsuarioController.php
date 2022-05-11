@@ -2,6 +2,7 @@
 
 include_once "model/Usuario.php";
 include_once "model/Login.php";
+include_once "model/Animal.php";
 
 class UsuarioController
 {
@@ -73,7 +74,12 @@ class UsuarioController
                     $usuario->idlogin = $dadosLogin->idlogin;
                     $dadosUsuario = $usuario->retornaUsuario();
 
+                    $animal = new Animal();
+                    $animal->idusuario = $dadosUsuario->idusuario;
+                    $dadosAnimais = $animal->retornarAnimais();
+
                     $_SESSION["dadosUsuario"] = $dadosUsuario;
+                    $_SESSION["dadosAnimais"] = $dadosAnimais;
                     echo"<script>alert('Usuário Logado'); window.location='".URL."home-usuario'; </script>";
                 break;
                 //caso seja clínica

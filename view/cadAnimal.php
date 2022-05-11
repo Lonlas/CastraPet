@@ -96,8 +96,7 @@
                     <h1 class="h5 m-1">CADASTRAR ANIMAL</h1>
                 </div>
                 <div class="container shadow-lg bg-white p-4">
-                    <form method="post" action="<?php echo URL.'cadastrar-animal';?>">                       
-                        <input type="hidden" name="idUsuario" value="#">
+                    <form method="post" action="<?php echo URL.'cadastrar-animal';?>">
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="row">
