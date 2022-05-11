@@ -90,18 +90,30 @@
                                 </div>
                                 <div class="row">
                                     <p>
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" checked disabled>
-                                        Tenho benefício NIS: <?php echo $_SESSION["dadosUsuario"]->nis;?>
+                                        <?php 
+                                            if($_SESSION["dadosUsuario"]->nis != null)
+                                                echo "<input type='checkbox' checked disabled>";  
+                                            else
+                                                echo "<input type='checkbox' disabled>";
+                                            echo " Tenho benefício NIS: ".$_SESSION["dadosUsuario"]->nis;
+                                        ?>
                                     </p>
                                 </div>
                                 
                                 <div class="row">
                                     <p>
-                                        <?php?>
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" checked disabled>
-                                        Sou protetor de animais
-                                        &nbsp;
-                                        <input class="btn btn-success col-auto" type="button" value="Visualizar documento" name="btnProtetorDoc"> 
+                                        <?php 
+                                            if($_SESSION["dadosUsuario"]->beneficio == '2'){
+                                                echo "<input type='checkbox' checked disabled>";  
+                                                echo " Sou protetor de animais ";
+                                                echo "<input class='btn btn-success col-auto' type='button' value='Visualizar documento' name='btnProtetorDoc'>";
+                                            }
+                                            else{
+                                                echo "<input type='checkbox' disabled>";
+                                                echo " Sou protetor de animais &nbsp";
+                                                echo "<input class='btn btn-success col-auto' type='button' value='Visualizar documento' name='btnProtetorDoc' disabled>";
+                                            }
+                                        ?>
                                     </p>
                                 </div>
                                 
