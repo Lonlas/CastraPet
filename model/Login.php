@@ -123,10 +123,42 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT * FROM login join usuario on usuario.idlogin = login.idlogin WHERE email = :email");
+            $cmd = $con->prepare("SELECT * FROM login WHERE email = :email");
             
             //Parâmetros SQL
             $cmd->bindParam(":email", $this->email);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetch(PDO::FETCH_OBJ);
+        }
+        function retornaUsuario()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("SELECT * FROM usuario join login on usuario.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":idlogin", $this->idlogin);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetch(PDO::FETCH_OBJ);
+        }
+        function retornaClinica()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("SELECT * FROM clinica join login on usuario.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":idlogin", $this->idlogin);
 
             //Executando o comando SQL
             $cmd->execute();

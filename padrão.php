@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
-    <?php include_once "favicon.php"?>
+    <?php
+    
+    include_once "favicon.php"?>
 
     <title>CastraPet</title>
     <!-- EXTENSÃO BOOTSTRAP -->
@@ -16,6 +18,29 @@
 <body>
     <!-- CORPO -->
 
+    <?php //CONTROLE DE MENU
+        if($_SESSION) //caso esteja logado
+            {
+                switch($_SESSION["dadosLogin"]->nivelacesso)
+                {
+                    //caso tenha nível de acesso de usuário
+                    case '0':
+                        include_once "menuLogado.php";
+                    break;
+                    //caso tenha nível de acesso de clínica
+                    case '1':
+                        include_once "menuClinica.php";
+                    break;
+                    //caso tenha nível de acesso de Administrador
+                    case '0':
+                        include_once "menuADM";
+                    break;
+                }
+            }
+        else{
+            include_once "menu.php";
+        }
+    ?>
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->

@@ -128,6 +128,15 @@ if($_GET)
             $adm = new Controller();
             $adm->abrirAgendamento();
         break;
+        case "encerrarSessao":
+            $login = new UsuarioController();
+            $login->sair();
+        break;
+        case "vazio":
+            $teste = new Controller();
+            $teste->abrirTeste();
+        break;
+        
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
             $pagina = new Controller();

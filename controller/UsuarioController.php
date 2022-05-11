@@ -59,20 +59,28 @@ class UsuarioController
     {
         $logar = new Login();
         $logar->email = $_POST["txtEmail"];
-        $dadosUsuario = $logar->logar();
+        $dadosLogin = $logar->logar();
         
-        if($dadosUsuario && password_verify($_POST["txtSenha"], $dadosUsuario->senha))
+        if($dadosLogin && password_verify($_POST["txtSenha"], $dadosLogin->senha))
         {
-            $_SESSION["dadosUsu"] = $dadosUsuario;
+            $_SESSION["dadosLogin"] = $dadosLogin;
             
-            switch($dadosUsuario->nivelacesso)
+            switch($dadosLogin->nivelacesso)
             {
+                //caso seja usuário
                 case '0':
+                    $usuario = new Login();
+                    $usuario->idlogin = $dadosLogin->idlogin;
+                    $dadosUsuario = $usuario->retornaUsuario();
+
+                    $_SESSION["dadosUsuario"] = $dadosUsuario;
                     echo"<script>alert('Usuário Logado'); window.location='".URL."home-usuario'; </script>";
                 break;
+                //caso seja clínica
                 case '1':
                     echo"<script>alert('Usuário Clínica Logado'); window.location='".URL."home-clinica'; </script>";
                 break;
+                //caso seja adm
                 case '2':
                     echo"<script>alert('Usuário Administrador Logado'); window.location='".URL."home-adm'; </script>";
                 break;
@@ -82,9 +90,14 @@ class UsuarioController
         }
         else
         {
-            echo"<script>alert('Email ou senha estão errados'); window.location='".URL."login'; </script>";
+            echo"<script>alert('Email ou senha estão erradosaaaaaaaaaaa'); window.location='".URL."login'; </script>";
         }
-
+    }
+    function sair()
+    {
+        $_SESSION[] = null;
+        session_destroy();
+        header("Location:".URL);
     }
     function abrirHomeClinica()
     {

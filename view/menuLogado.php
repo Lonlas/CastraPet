@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-transparent p-4 m-2">
-<a class="navbar-brand" href="<?php echo URL.'inicio';?>">Início</a>
+<a class="navbar-brand" href="<?php echo URL.'inicio';?>"><img src="<?php echo URL.'recursos/img/Logo-Fav3.png'?>" style="height:80px;"></a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
     <span class="navbar-toggler-icon"></span>
 </button>
@@ -22,7 +22,7 @@
         <a class="pe-auto text-decoration-none" href="<?php echo URL.'perfil'?>">
             <img src="recursos/img/Logo-Castra-Pet.svg" alt="Perfil" width="50" class="me-3">
         </a>
-        <a href="<?php echo URL.'login';?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
+        <a href="<?php echo URL.'encerrarSessao';?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
     </form>
 </div>
 </nav>
