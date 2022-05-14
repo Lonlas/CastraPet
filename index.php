@@ -42,10 +42,6 @@ if($_GET)
             $usu = new UsuarioController();
             $usu->abrirCadastro();
         break;
-        case "cadastra-tutor":
-            $usu = new UsuarioController();
-            $usu->abrirCadastro();
-        break;
         case "cadastrar-tutor":
             $usu = new UsuarioController();
             $usu->cadastrarUsuario();
