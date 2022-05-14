@@ -4,6 +4,7 @@
         //Atributos
         private $idraca;
         private $raca;
+        private $tipoespecie;
 
         function __get($atributo)
         {
@@ -29,10 +30,11 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO raca (raca) VALUES (:raca)");
+            $cmd = $con->prepare("INSERT INTO raca (raca, tipoespecie) VALUES (:raca, :tipoespecie)");
             
             //Parâmetros SQL
             $cmd->bindParam(":raca", $this->raca);
+            $cmd->bindParam(":tipoespecie", $this->tipoespecie);
 
             //executa o comando SQL
             $cmd->execute();
@@ -77,11 +79,12 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE raca SET raca = :raca WHERE idraca = :idraca");
+            $cmd = $con->prepare("UPDATE raca SET raca = :raca, tipoespecie = :tipoespecie WHERE idraca = :idraca");
             
             //Parâmetros SQL
-            $cmd->bindParam(":raca", $this->raca);
             $cmd->bindParam(":idraca", $this->idraca);
+            $cmd->bindParam(":raca", $this->raca);
+            $cmd->bindParam(":tipoespecie", $this->tipoespecie);
 
             //Executando o comando SQL
             $cmd->execute();

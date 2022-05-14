@@ -49,6 +49,30 @@
                     <?php
                     foreach ($dadosAnimais as $values)
                     {
+                        //Reescrevendo a espécie
+                        $values->especie = str_replace("0","Canina", $values->especie);
+                        $values->especie = str_replace("1","Felina", $values->especie);
+
+                        //Reescrevendo o sexo
+                        $values->sexo = str_replace("0","Fêmea", $values->sexo);
+                        $values->sexo = str_replace("1","Macho", $values->sexo);
+
+                        //Reescrevendo a pelagem
+                        $values->pelagem = str_replace("1","Curta", $values->pelagem);
+                        $values->pelagem = str_replace("2","Média", $values->pelagem);
+                        $values->pelagem = str_replace("3","Alta", $values->pelagem);
+                        
+                        //Reescrevendo o porte
+                        $values->porte = str_replace("1","Pequeno", $values->porte);
+                        $values->porte = str_replace("2","Médio", $values->porte);
+                        $values->porte = str_replace("3","Grande", $values->porte);
+
+                        //Reescrevendo o Comunitário
+                        $values->comunitario = str_replace("0","Não", $values->comunitario);
+                        $values->comunitario = str_replace("1","Sim", $values->comunitario);
+
+
+
                         echo 
                         "
                         <!-- Começo de um animal -->
@@ -119,9 +143,12 @@
                                     </div>
                                     <div class='col'></div>
                                 </div>
-                                <div class='col-md-2'>  
-                                    <a href='".URL."solicita-castracao' class='btn btn-success float-end'>Solicitar castração</a>
+                                <div class='col-md-2 mt-2 mt-md-0'>  
+                                    <a href='".URL."solicita-castracao' class='btn btn-success float-end w-100 mb-2'>Solicitar castração</a>
+                                    <a href='"."#' class='btn btn-warning float-end w-100 mb-2'>Editar animal</a>
+                                    <a href='"."#' class='btn btn-danger float-end w-100'>Excluir animal</a>
                                 </div>
+                                
                             </div>
                             <hr>
                         <!-- Fim de um animal -->

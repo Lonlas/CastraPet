@@ -6,10 +6,10 @@
   <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL; ?>">Área da Clínica</a>
+        <a class="nav-link"  href="<?php echo URL.'home-clinica'; ?>">Área da Clínica</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'#'; ?>">Consultar castrações</a>
+        <a class="nav-link"  href="<?php echo URL.'consulta-castracao'; ?>">Consultar castrações</a>
       </li>
     </ul>
     <form class="form-inline ms-auto my-2 my-lg-0">

@@ -45,7 +45,7 @@
                     Cadastrar Clínica
                 </div>
                 <div class="container bg-white p-0">
-                    <form action="cadastrar-clinica" class="p-sm-2 py-sm-3 p-md-3 p-lg-4 py-3" method="POST">
+                    <form action="cadastrar-clinica" class="p-sm-2 py-sm-3 p-md-3 p-lg-4 py-3 " method="POST">
                         <div class="row m-0">
                             <div class="col-md-6">
                                 <div class="form-group row-3">

@@ -46,6 +46,8 @@ class AnimalController
         $animal->foto = $_POST["imgAnimal"];
 
         $animal->cadastrar();
+
+        header("Location:".URL."meus-animais");
     }
 
     function abrirCadRaca()
@@ -57,7 +59,10 @@ class AnimalController
     {
         $cadastra = new Raca();
         $cadastra->raca = $_POST["txtRaca"];
+        $cadastra->tipoespecie = $_POST["tipoEspecie"];
         $cadastra->cadastrar();
+
+        echo"<script>alert('Email ou senha estão errados'); window.location='".URL."cadastra-raca'; </script>";
     }
 
 }
