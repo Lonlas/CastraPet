@@ -32,15 +32,27 @@
         #imgAnimal
         {
             height: 250px;
-            width: 375px;
+            width: 399px;
         }
-        
+
+        @media screen and (max-width: 1199px)
+        {
+            #inputImgAnimal + label
+            {
+                width: 355px;
+            }
+        }
+
         @media screen and (max-width: 992px)
         {
-            #inputImgAnimal + label, #imgAnimal
+            #inputImgAnimal + label
             {
                 height: 200px;
-                width: 275px;
+                width: 255px;
+            }
+            #imgAnimal
+            {
+                height: 200px;
             }
         }
 
@@ -50,14 +62,23 @@
             {
                 padding: 0;
             }
+            #imgAnimal
+            {
+                width: 275px;
+            }
         }
         
         @media screen and (max-width: 336px)
         {
-            #inputImgAnimal + label, #imgAnimal
+            #inputImgAnimal + label
             {
                 height: 175px;
                 width: 200px;
+            }
+            #imgAnimal
+            {
+                height: 175px;
+                width: 220px;
             }
         }
     </style>
