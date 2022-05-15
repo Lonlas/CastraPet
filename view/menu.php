@@ -10,7 +10,7 @@
   }
   ?>
 <nav class="navbar navbar-expand-md navbar-light bg-transparent px-4 py-0 mx-2">
-  <a class="navbar-brand" href="<?php echo URL.'inicio';?>"><img src="<?php echo URL.'recursos/img/Logo-Nav (2).png'?>" style="height:80px;"></a>
+  <a class="navbar-brand" href="<?php echo URL.'inicio';?>"><img src="<?php echo URL.'recursos/img/Logo-Fav3.png'?>" style="height:80px;"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
     <span class="navbar-toggler-icon"></span>
   </button>

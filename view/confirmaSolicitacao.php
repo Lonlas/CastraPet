@@ -39,75 +39,42 @@
     <div class="container-fluid">
         <div class="bg-danger">
             <div class="container mx-auto row p-3">
-                <div class="container bg-white p-0">
-                <form action="busca-usuario">    
+                <div class="container bg-white p-0">  
                     <div class="container bg-dark text-light font-weight-bold p-3">
-                        <label>Consultar Usuário:</label>
-                        <input type="number" name="buscaUsuario" id="buscaUsuario">
+                        <label>Solicitação</label>
                     </div>
-                </form>
-                    <form action="consulta-usuario">
+                    <form action="confirmar-agendamento">
                         <div class="row align-items-center justify-content-center">
-                            <div class="col-sm-5 mb-3 form-group ps-4">
+                            <div class="col-sm-6 mb-3 form-group ps-4">
                                 <div class="row">
-                                    <p>Nome:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
+                                    <p>Número da solicitação:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxx";?></p>
                                 </div>
                                 <div class="row">
-                                    <p>E-mail:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
+                                    <p>Nome do animal:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
-                                        <p>CPF:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p>Telefone:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>    
+                                    <p>CPF do responsável:<?php echo" xxxxxxxxxxx";?></p>  
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
-                                        <p>RG:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p>Celular:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>    
-                                </div>
-                                <div class="row">
-                                    <p>
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" checked disabled>
-                                        Tenho benefício NIS: <?php echo" xxxxxxxx"?>
-                                    </p>
-                                </div>
-                                
-                                <div class="row ">
-                                    <p>
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" checked disabled>
-                                        Sou protetor de animais
-                                        &nbsp;
-                                        <input class="btn btn-success col-auto" type="button" value="Visualizar documento" name="btnProtetorDoc"> 
-                                    </p>
+                                    <p>Observações:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>  
                                 </div>
                             </div>
-                            <div class="col-sm-7 mb-3 form-group ps-4">
+                            <div class="col-sm-6 mb-3 form-group ps-4">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <p>CEP:<?php echo" xxxxxxxxx";?></p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p>Número:<?php echo" xxxxx";?></p>
-                                    </div>    
+                                   <div class="form-group">
+                                       <label for="dataHora" class="form-label">Data e Hora:</label>
+                                       <input type="datetime" name="dataHora" id="dataHora" class="form-control">
+                                   </div>    
                                 </div>
                                 <div class="row">
-                                    <p>Bairro:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
-                                </div>
-                                <div class="row mb-5">
-                                    <p>Rua:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
+                                    <select name="selectAni" id="selectAni" class="form-select">
+                                        <option selected> ... SELECIONE A CLÍNICA ... </option>
+                                        <option value="<?php ?>">Clínica 1</option>
+                                        <option value="<?php ?>">Clínica 2</option>
+                                    </select>
                                 </div>
                                 
                                 <div class="row justify-content-between align-items-center">
-                                    <div class="col-6">
-                                            <!-- Acessar animais cadastrados do usuário -->
-                                            <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">Animais Cadastrados</a>
-                                    </div>
                                     <div class="col-6 justify-content-end">
                                         <!-- Botão editar usuário -->
                                         <button class="btn btn-success" onclick="mostrarModal();">

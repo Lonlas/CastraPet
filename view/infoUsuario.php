@@ -14,7 +14,30 @@
 </head>
 <body>
     <!-- CORPO -->
-    <?php include_once "menuLogado.php";?>
+    <?php //CONTROLE DE MENU
+        if($_SESSION) //caso esteja logado e exista uma sessão
+            {
+                switch($_SESSION["dadosLogin"]->nivelacesso)
+                {
+                    //caso tenha nível de acesso de usuário
+                    case '0':
+                        include_once "menuLogado.php";
+                    break;
+                    //caso tenha nível de acesso de clínica
+                    case '1':
+                        include_once "menuClinica.php";
+                    break;
+                    //caso tenha nível de acesso de Administrador
+                    case '2':
+                        include_once "menuADM.php";
+                    break;
+                    
+                }
+            }
+        else{
+            include_once "menu.php";
+        }
+    ?>
 
     <div class="container-fluid">
         <div class="container-fluid bg-primary">
@@ -27,25 +50,25 @@
                         <div class="row align-items-center justify-content-center mb-2">
                             <div class="col-sm-5 mb-3 form-group ps-4">
                                 <div class="row">
-                                    <p>Nome:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
+                                    <p>Nome: <?php echo $_SESSION["dadosUsuario"]->nome;?></p>
                                 </div>
                                 <div class="row">
-                                    <p>E-mail:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
+                                    <p>E-mail: <?php echo $_SESSION["dadosUsuario"]->email;?></p>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <p>CPF:<?php echo" xxxxxxxxxxx";?></p>
+                                        <p>CPF: <?php echo $_SESSION["dadosUsuario"]->cpf;?></p>
                                     </div>
                                     <div class="col-6">
-                                        <p>Telefone:<?php echo" xxxxxxxxxxx";?></p>
+                                        <p>Telefone: <?php echo $_SESSION["dadosUsuario"]->telefone;?></p>
                                     </div>    
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <p>RG:<?php echo" xxxxxxxxxxx";?></p>
+                                        <p>RG: <?php echo $_SESSION["dadosUsuario"]->rg;?></p>
                                     </div>
                                     <div class="col-6">
-                                        <p>Celular:<?php echo" xxxxxxxxxxx";?></p>
+                                        <p>Celular: <?php echo $_SESSION["dadosUsuario"]->celular;?></p>
                                     </div>    
                                 </div>
                                 
@@ -53,31 +76,44 @@
                             <div class="col-sm-7 mb-2 form-group ps-4">
                                 <div class="row">
                                     <div class="col-6">
-                                        <p>CEP:<?php echo" xxxxxxxxx";?></p>
+                                        <p>CEP: <?php echo $_SESSION["dadosUsuario"]->usucep;?></p>
                                     </div>
                                     <div class="col-6">
-                                        <p>Número:<?php echo" xxxxx";?></p>
+                                        <p>Número: <?php echo $_SESSION["dadosUsuario"]->usunumero;?></p>
                                     </div>    
                                 </div>
                                 <div class="row">
-                                    <p>Bairro:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
+                                    <p>Bairro: <?php echo $_SESSION["dadosUsuario"]->usubairro;?></p>
                                 </div>
                                 <div class="row">
-                                    <p>Rua:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
+                                    <p>Rua: <?php echo $_SESSION["dadosUsuario"]->usurua;?></p>
                                 </div>
                                 <div class="row">
                                     <p>
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" checked disabled>
-                                        Tenho benefício NIS: <?php echo" xxxxxxxx"?>
+                                        <?php 
+                                            if($_SESSION["dadosUsuario"]->nis != null)
+                                                echo "<input type='checkbox' checked disabled>";  
+                                            else
+                                                echo "<input type='checkbox' disabled>";
+                                            echo " Tenho benefício NIS: ".$_SESSION["dadosUsuario"]->nis;
+                                        ?>
                                     </p>
                                 </div>
                                 
-                                <div class="row ">
+                                <div class="row">
                                     <p>
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" checked disabled>
-                                        Sou protetor de animais
-                                        &nbsp;
-                                        <input class="btn btn-success col-auto" type="button" value="Visualizar documento" name="btnProtetorDoc"> 
+                                        <?php 
+                                            if($_SESSION["dadosUsuario"]->beneficio == '2'){
+                                                echo "<input type='checkbox' checked disabled>";  
+                                                echo " Sou protetor de animais ";
+                                                echo "<input class='btn btn-success col-auto' type='button' value='Visualizar documento' name='btnProtetorDoc'>";
+                                            }
+                                            else{
+                                                echo "<input type='checkbox' disabled>";
+                                                echo " Sou protetor de animais &nbsp";
+                                                echo "<input class='btn btn-success col-auto' type='button' value='Visualizar documento' name='btnProtetorDoc' disabled>";
+                                            }
+                                        ?>
                                     </p>
                                 </div>
                                 
