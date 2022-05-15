@@ -23,40 +23,42 @@
                     <h1 class="h4 text-white ms-3">Consultar Castrações</h1>
                 </div>
                 <div class="bg-white p-3">
-                    <table id="tbCastracao" class="table table-">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Animal</th>
-                                <th>CPF do Responsável</th>
-                                <th>Clínica</th>
-                                <th>Data</th>
-                                <th>Hora</th>
-                                <th>Status</th>
-                                <th>Observação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach($dadosCastracao as $value)
-                            {
-                                echo 
-                                "
+                    <div class="table-responsive">
+                        <table id="tbCastracao" class="table table-hover">
+                            <thead>
                                 <tr>
-                                    <td>$value->idcastracao</td>
-                                    <td>$value->aninome</td>
-                                    <td>$value->cpf</td>
-                                    <td>$value->nomeclinica</td>
-                                    <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
-                                    <td>". date('H:i',strtotime($value->horario)) ."</td>
-                                    <td>$value->status</td>
-                                    <td>$value->observacao</td>
+                                    <th>#</th>
+                                    <th>Animal</th>
+                                    <th>CPF do Responsável</th>
+                                    <th>Clínica</th>
+                                    <th>Data</th>
+                                    <th>Hora</th>
+                                    <th>Status</th>
+                                    <th>Observação</th>
                                 </tr>
-                                ";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach($dadosCastracao as $value)
+                                {
+                                    echo 
+                                    "
+                                    <tr>
+                                        <td>$value->idcastracao</td>
+                                        <td>$value->aninome</td>
+                                        <td>$value->cpf</td>
+                                        <td>$value->nomeclinica</td>
+                                        <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
+                                        <td>". date('H:i',strtotime($value->horario)) ."</td>
+                                        <td>$value->status</td>
+                                        <td>$value->observacao</td>
+                                    </tr>
+                                    ";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">
