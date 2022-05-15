@@ -64,12 +64,20 @@ class AnimalController
     
     function cadastrarRaca()
     {
-        $cadastra = new Raca();
-        $cadastra->raca = $_POST["txtRaca"];
-        $cadastra->tipoespecie = $_POST["tipoEspecie"];
-        $cadastra->cadastrar();
+        try
+        {
+            $cadastra = new Raca();
+            $cadastra->raca = $_POST["txtRaca"];
+            $cadastra->tipoespecie = $_POST["tipoEspecie"];
+            $cadastra->cadastrar();
 
-        echo"<script>alert('Email ou senha estão errados'); window.location='".URL."cadastra-raca'; </script>";
+            echo"<script>alert('Raça cadastrada com sucesso'); window.location='".URL."cadastra-raca'; </script>";
+        }
+        catch(Exception $e)
+        {
+            echo"<script>alert('Erro: $e'); window.location='".URL."cadastra-raca'; </script>";
+        }
+
     }
 }
 ?>
