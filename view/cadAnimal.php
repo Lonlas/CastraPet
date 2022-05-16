@@ -32,15 +32,27 @@
         #imgAnimal
         {
             height: 250px;
-            width: 375px;
+            width: 399px;
         }
-        
+
+        @media screen and (max-width: 1199px)
+        {
+            #inputImgAnimal + label
+            {
+                width: 355px;
+            }
+        }
+
         @media screen and (max-width: 992px)
         {
-            #inputImgAnimal + label, #imgAnimal
+            #inputImgAnimal + label
             {
                 height: 200px;
-                width: 275px;
+                width: 255px;
+            }
+            #imgAnimal
+            {
+                height: 200px;
             }
         }
 
@@ -50,21 +62,53 @@
             {
                 padding: 0;
             }
+            #imgAnimal
+            {
+                width: 275px;
+            }
         }
         
         @media screen and (max-width: 336px)
         {
-            #inputImgAnimal + label, #imgAnimal
+            #inputImgAnimal + label
             {
                 height: 175px;
                 width: 200px;
+            }
+            #imgAnimal
+            {
+                height: 175px;
+                width: 220px;
             }
         }
     </style>
 </head>
 <body>
     <!-- CORPO -->
-    <?php include_once "menuLogado.php";?>
+    <?php //CONTROLE DE MENU
+        if($_SESSION) //caso esteja logado e exista uma sessão
+            {
+                switch($_SESSION["dadosLogin"]->nivelacesso)
+                {
+                    //caso tenha nível de acesso de usuário
+                    case '0':
+                        include_once "menuLogado.php";
+                    break;
+                    //caso tenha nível de acesso de clínica
+                    case '1':
+                        include_once "menuClinica.php";
+                    break;
+                    //caso tenha nível de acesso de Administrador
+                    case '2':
+                        include_once "menuADM.php";
+                    break;
+                    
+                }
+            }
+        else{
+            include_once "menu.php";
+        }
+    ?>
 
     <div class="container-fluid container-principal">
         <div class="bg-primary">
@@ -73,8 +117,7 @@
                     <h1 class="h5 m-1">CADASTRAR ANIMAL</h1>
                 </div>
                 <div class="container shadow-lg bg-white p-4">
-                    <form method="post" action="<?php echo URL.'cadastrar-animal';?>">                       
-                        <input type="hidden" name="idUsuario" value="#">
+                    <form method="post" action="<?php echo URL.'cadastrar-animal';?>">
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="row">

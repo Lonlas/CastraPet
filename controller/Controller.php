@@ -8,6 +8,7 @@ class Controller
         include "view/esqSenha.php";
     }
     function abrirPerfil(){
+        
         include "view/infoUsuario.php";
     }
     function abrirADM(){
@@ -36,6 +37,9 @@ class Controller
     }
     function abrirAgendamento(){
         include "view/confirmaSolicitacao.php";
+    }
+    function abrirTeste(){
+        include "view/Teste.php";
     }
 }
 ?>

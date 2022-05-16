@@ -134,5 +134,21 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+        function retornarAnimais()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("SELECT * FROM animal join raca on animal.idraca = raca.idraca WHERE idusuario = :idusuario");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":idusuario", $this->idusuario);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
     }
 ?>
