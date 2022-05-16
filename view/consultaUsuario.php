@@ -24,7 +24,7 @@
                     </div>
                     <form action="consulta-usuario">
                         <div class="table-responsive-md">
-                            <table class="table table-sm table-hover ps-3" id="dadosUsuario">
+                            <table class="table table-sm table-hover ps-3 mb-3 me-5" id="dadosUsuario">
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -46,9 +46,9 @@
                                             <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center"></a>
                                         </td>
                                         <td>
-                                            <a href="" class="btn btn-warning btn-md">Editar</a>
+                                            <button class="btn btn-warning btn-md" id="btnEditar" data-target="#mostrarModal" data-toggle="modal">Editar</button>
                                             
-                                            <a href="" class="btn btn-danger btn-md">Excluir</a>
+                                            <button class="btn btn-danger btn-md">Excluir</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -73,7 +73,8 @@
                                         <td>11987546321</td>
                                         <td>
                                             <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">
-                                            <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center"></a>
+                                                <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center">
+                                            </a>
                                         </td>
                                         <td>
                                             <a href="" class="btn btn-warning btn-md">Editar</a>
@@ -93,8 +94,9 @@
                                                     <td>$value->cpf</td>
                                                     <td>$value->telefone</td>
                                                     <td>
-                                                        <a href='<?php echo URL.'consulta-animais';?>' class='btn btn-success col-auto'>
-                                                        <img src='recursos/img/Logo Castra Pet1.svg' alt='Animais cadastrados' width="10" class="me-3"></a>
+                                                        <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">
+                                                            <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center">
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <a href='".URL."editar-usuario/$value->idUsuario' class='btn btn-warning btn-sm'>Editar</a>
@@ -213,21 +215,43 @@
 
     <!-- Abrir modal -->
     <script>
+        
         function mostrarModal(){
-            /*let el = document.getElementById('modalEditar');
-            let minhaModal = new bootstrap.Modal(el);
-            minhaModal.show();*/
-
-            let minhaModal = new bootstrap.Modal(document.getElementById('modalEditar')).show();
+            let minhaModal = new bootstrap.Modal(document.getElementById('#modalEditar')).show();
         }
+            
+            $("#btnEditar").click(function(){
+                $("#modalEditar").modal();
+            });
 
     </script>
-    <!-- JS DataTable-->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>    
+
+    <!-- JS DataTables--> 
+    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/jquery.dataTables.js"></script>
+    <!-- JS DataTables Buttons--> 
+    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/dataTables.buttons.min.js"></script>
+    <!-- JS DataTables Zip--> 
+    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/jszip.min.js"></script>
+    <!-- JS DataTables PDF MAKE--> 
+    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/pdfmake.min.js"></script>
+    <!-- JS DataTables PDF FONT--> 
+    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/vfs_fonts.js"></script>
+    <!-- JS DataTables PDF HTML5--> 
+    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/buttons.html5.min.js"></script>
+    <!-- JS DataTables PDF BUTTONS PRINT--> 
+    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/buttons.print.min.js"></script>
+
     <script>
-    $(document).ready( function () {
-        $('#dadosUsuario').DataTable();
-    } );
-</script>
+        $(document).ready(function() {
+            $('#dadosUsuario').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]        
+            }
+            );
+        } );
+    </script>
+
 </body>
 </html>
