@@ -32,7 +32,7 @@
                         include_once "menuClinica.php";
                     break;
                     //caso tenha nível de acesso de Administrador
-                    case '0':
+                    case '2':
                         include_once "menuADM";
                     break;
                 }
