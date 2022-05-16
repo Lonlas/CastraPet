@@ -132,7 +132,7 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
-        function retornaUsuario()
+        function retornarUsuario()
         {
             //Conectando ao banco de dados
             $con = Conexao::conectar();
@@ -148,7 +148,7 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
-        function retornaClinica()
+        function retornarClinica()
         {
             //Conectando ao banco de dados
             $con = Conexao::conectar();
