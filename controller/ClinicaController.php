@@ -10,8 +10,14 @@ class ClinicaController
     }
     function cadastrarClinica()
     {
+        $login = new Login();
+        $login->nome = $_POST["txtNome"];
+        $login->email = $_POST["txtEmail"];
+        $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
+        $login->nivelacesso = 1;
+
         $clinica = new Clinica();
-        $clinica->idlogin = $_POST["#"];
+        $clinica->idlogin = $login->cadastrar();
         $clinica->cnpj = $_POST["txtCNPJ"];
         $clinica->clitelefone = $_POST["txtTelefone"];
         $clinica->vagas = $_POST["txtVagas"];

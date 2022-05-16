@@ -14,8 +14,30 @@
 </head>
 <body>
     <!-- CORPO -->
-    <?php include_once "menuADM.php";?>
-
+    <?php //CONTROLE DE MENU
+        if($_SESSION) //caso esteja logado e exista uma sessão
+            {
+                switch($_SESSION["dadosLogin"]->nivelacesso)
+                {
+                    //caso tenha nível de acesso de usuário
+                    case '0':
+                        include_once "menuLogado.php";
+                    break;
+                    //caso tenha nível de acesso de clínica
+                    case '1':
+                        include_once "menuClinica.php";
+                    break;
+                    //caso tenha nível de acesso de Administrador
+                    case '2':
+                        include_once "menuADM.php";
+                    break;
+                    
+                }
+            }
+        else{
+            include_once "menu.php";
+        }
+    ?>
     <div class="container-fluid">
         <div class="bg-danger">
             <div class="container mx-auto p-3">
@@ -23,40 +45,42 @@
                     <h1 class="h4 text-white ms-3">Consultar Castrações</h1>
                 </div>
                 <div class="bg-white p-3">
-                    <table id="tbCastracao" class="table table-">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Animal</th>
-                                <th>CPF do Responsável</th>
-                                <th>Clínica</th>
-                                <th>Data</th>
-                                <th>Hora</th>
-                                <th>Status</th>
-                                <th>Observação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach($dadosCastracao as $value)
-                            {
-                                echo 
-                                "
+                    <div class="table-responsive">
+                        <table id="tbCastracao" class="table table-hover">
+                            <thead>
                                 <tr>
-                                    <td>$value->idcastracao</td>
-                                    <td>$value->aninome</td>
-                                    <td>$value->cpf</td>
-                                    <td>$value->nomeclinica</td>
-                                    <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
-                                    <td>". date('H:i',strtotime($value->horario)) ."</td>
-                                    <td>$value->status</td>
-                                    <td>$value->observacao</td>
+                                    <th>#</th>
+                                    <th>Animal</th>
+                                    <th>CPF do Responsável</th>
+                                    <th>Clínica</th>
+                                    <th>Data</th>
+                                    <th>Hora</th>
+                                    <th>Status</th>
+                                    <th>Observação</th>
                                 </tr>
-                                ";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach($dadosCastracao as $value)
+                                {
+                                    echo 
+                                    "
+                                    <tr>
+                                        <td>$value->idcastracao</td>
+                                        <td>$value->aninome</td>
+                                        <td>$value->cpf</td>
+                                        <td>$value->nomeclinica</td>
+                                        <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
+                                        <td>". date('H:i',strtotime($value->horario)) ."</td>
+                                        <td>$value->status</td>
+                                        <td>$value->observacao</td>
+                                    </tr>
+                                    ";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">

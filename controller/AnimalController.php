@@ -6,6 +6,10 @@ include_once "model/Castracao.php";
 class AnimalController
 {
     function abrirMeusAnimais(){
+        $animal = new Animal();
+        $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+        $dadosAnimais = $animal->retornarAnimais();
+
         include "view/meusAnimais.php";
     }
     function abrirCadAnimal(){
@@ -29,17 +33,22 @@ class AnimalController
             }
         }
         $animal = new Animal();
-        $animal->idusuario = $_POST["idUsuario"];
+        $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+        //$animal->idusuario = $_POST["idUsuario"];
         $animal->idraca = $raca;
         $animal->aninome = $_POST["txtNome"];
-        $animal->especie = $_POST["rdbEspecie"];
-        $animal->sexo = $_POST["rdbSexo"];
-        $animal->sexo = $_POST["rdbPorte"];
+        $animal->especie = $_POST["slcEspecie"];
+        $animal->sexo = $_POST["slcSexo"];
+        $animal->porte = $_POST["slcPorte"];
         $animal->cor = $_POST["txtCor"];
-        $animal->pelagem = $_POST["rdbPelagem"];
+        $animal->pelagem = $_POST["slcPelagem"];
         $animal->idade = $_POST["numIdade"];
-        $animal->comunitario = $_POST["rdbComunitario"];
+        $animal->comunitario = $_POST["slcComunitario"];
         $animal->foto = $_POST["imgAnimal"];
+
+        $animal->cadastrar();
+
+        header("Location:".URL."meus-animais");
     }
 
     function abrirConsultaCastracao()
@@ -47,6 +56,28 @@ class AnimalController
         $direciona = new Castracao();
         $dadosCastracao = $direciona->consultar();
         include_once "view/consultaCastracao.php";
+    }
+    function abrirCadRaca()
+    {
+        include"view/cadRaca.php";
+    }
+    
+    function cadastrarRaca()
+    {
+        try
+        {
+            $cadastra = new Raca();
+            $cadastra->raca = $_POST["txtRaca"];
+            $cadastra->tipoespecie = $_POST["tipoEspecie"];
+            $cadastra->cadastrar();
+
+            echo"<script>alert('Raça cadastrada com sucesso'); window.location='".URL."cadastra-raca'; </script>";
+        }
+        catch(Exception $e)
+        {
+            echo"<script>alert('Erro: $e'); window.location='".URL."cadastra-raca'; </script>";
+        }
+
     }
 }
 ?>
