@@ -49,7 +49,7 @@
                     <form action="logar" class="p-5" method="POST">
                         <div class="form-group">
                             <label for="email">E-mail:</label>
-                            <input type="text" id="email" name="txtEmail" class="form-control" placeholder="" required>
+                            <input type="email" id="email" name="txtEmail" class="form-control" placeholder="" required>
                         </div>
                         <div class="form-group my-4">
                             <label for="senha">Senha:</label>
