@@ -116,6 +116,10 @@ if($_GET)
             $adm = new Controller();
             $adm->abrirConsultaCastracao();
         break;
+        case "consulta-animais":
+            $adm = new Controller();
+            $adm->abrirConsultaAnimais();    
+        break;
         case "alterar-senha":
             $usuario = new Controller();
             $usuario->abrirAlterarSenha();
