@@ -43,7 +43,8 @@
                                         <td>11987546321</td>
                                         <td>
                                             <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">
-                                            <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center"></a>
+                                                <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center">
+                                            </a>
                                         </td>
                                         <td>
                                             <button class="btn btn-warning btn-md" id="btnEditar" data-target="#mostrarModal" data-toggle="modal">Editar</button>
@@ -82,8 +83,6 @@
                                             <a href="" class="btn btn-danger btn-md">Excluir</a>
                                         </td>
                                     </tr>
-                                    
-    
     
                                     <!--<?php
                                         /*foreach ($dadosUsuario as $value)
@@ -179,9 +178,9 @@
                                             Editar
                                         </button>
                                          Botão excluir usuário 
-                                        <?php echo"
+                                        <?php /*echo"
                                             <a href='".URL."excluir-usuario' class='btn btn-danger ' 
-                                            onclick='return confirm(\"Deseja realmente excluir esse usuário?\")'>Excluir</a>"
+                                            onclick='return confirm(\"Deseja realmente excluir esse usuário?\")'>Excluir</a>"*/
                                         ?>
                                     </div>
                                 </div>
@@ -200,7 +199,17 @@
     <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                Conseguiu!!!
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nomeUsuario">@usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Alterar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>
