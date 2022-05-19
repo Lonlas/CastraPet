@@ -16,3 +16,9 @@
     --borda-branca: 1px solid white;
     --fontecorpo: 'Josefin Sans';
 }
+.bg-primary{
+    color: rgb(2, 129, 198) !important;
+}
+.btn-success{
+    color: #00b48c !important;
+}

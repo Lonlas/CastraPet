@@ -37,14 +37,6 @@ if($_GET)
         case "esqueci-a-senha": 
             $direciona = new Controller();
             $direciona->abrirEsqSenha();
-        break;    
-        case "cadastra-tutor":
-            $usu = new UsuarioController();
-            $usu->abrirCadastro();
-        break;
-        case "cadastrar-tutor":
-            $usu = new UsuarioController();
-            $usu->cadastrarUsuario();
         break;
         case "perfil":
             $direciona = new Controller();
@@ -111,6 +103,10 @@ if($_GET)
         case "consulta-castracao":
             $adm = new AnimalController();
             $adm->abrirConsultaCastracao();
+        break;
+        case "consulta-animais":
+            $adm = new Controller();
+            $adm->abrirConsultaAnimais();    
         break;
         case "alterar-senha":
             $usuario = new Controller();

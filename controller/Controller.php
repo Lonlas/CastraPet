@@ -29,6 +29,9 @@ class Controller
     function abrirConsultaCastracao(){
         include "view/consultaCastracao.php";
     }
+    function abrirConsultaAnimais(){
+        include "view/consultaAnimais.php";
+    }
     function abrirAlterarSenha(){
         include "view/alterarSenha.php";
     }

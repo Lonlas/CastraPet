@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 11-Maio-2022 às 02:33
+-- Generation Time: 15-Maio-2022 às 21:46
 -- Versão do servidor: 5.6.34
 -- PHP Version: 7.1.11
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `bdcastrapet`
 --
-CREATE DATABASE IF NOT EXISTS `bdcastrapet` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `bdcastrapet`;
 
 -- --------------------------------------------------------
 
@@ -36,12 +34,12 @@ CREATE TABLE `animal` (
   `idraca` int(11) NOT NULL,
   `aninome` varchar(50) NOT NULL,
   `especie` tinyint(4) NOT NULL,
-  `sexo` tinyint(4) NOT NULL,
+  `sexo` tinyint(4) NOT NULL COMMENT '0 para Fêmea; 1 para Macho',
   `cor` varchar(30) NOT NULL,
-  `pelagem` tinyint(4) NOT NULL,
-  `porte` tinyint(4) NOT NULL,
+  `pelagem` tinyint(4) NOT NULL COMMENT '1 pra curta; 2 média; 3 pra alta;',
+  `porte` tinyint(4) NOT NULL COMMENT '1 pra pequeno; 2 pra médio; 3 pra grande;',
   `idade` tinyint(4) NOT NULL,
-  `comunitario` tinyint(4) NOT NULL,
+  `comunitario` tinyint(4) NOT NULL COMMENT '0 pra não; 1 pra sim;',
   `foto` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -50,9 +48,11 @@ CREATE TABLE `animal` (
 --
 
 INSERT INTO `animal` (`idanimal`, `idusuario`, `idraca`, `aninome`, `especie`, `sexo`, `cor`, `pelagem`, `porte`, `idade`, `comunitario`, `foto`) VALUES
-(1, 18, 3, '22', 22, 2, '2', 2, 2, 2, 2, '2'),
-(2, 18, 1, '123', 123, 123, '123', 123, 123, 123, 123, '123'),
-(3, 18, 4, 'Pitica', 2, 2, 'Castanho e beige', 1, 1, 8, 0, NULL);
+(1, 18, 3, '1', 2, 2, '2', 2, 2, 2, 2, '2'),
+(2, 18, 1, '1', 1, 1, '123', 123, 123, 123, 123, '123'),
+(3, 18, 4, 'Pitica', 1, 0, 'Castanho e beige', 1, 1, 8, 0, NULL),
+(4, 18, 4, 'Kika', 1, 0, 'Branca', 1, 1, 14, 0, NULL),
+(5, 18, 6, 'Joaquim', 1, 1, 'braco', 1, 2, 10, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -87,6 +87,13 @@ CREATE TABLE `clinica` (
   `clicep` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `clinica`
+--
+
+INSERT INTO `clinica` (`idclinica`, `idlogin`, `cnpj`, `clitelefone`, `vagas`, `clirua`, `clibairro`, `clinumero`, `clicep`) VALUES
+(1, 26, '1234567891', '123', 123, 'do SabÃ£o', 'das calÃ§adas', '123', '12345678');
+
 -- --------------------------------------------------------
 
 --
@@ -98,7 +105,7 @@ CREATE TABLE `login` (
   `nome` varchar(70) NOT NULL,
   `email` varchar(100) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `nivelacesso` tinyint(4) NOT NULL
+  `nivelacesso` tinyint(4) NOT NULL COMMENT '0 pra Usuário; 1 pra clínica; 2 pra adm;'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -106,8 +113,9 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`idlogin`, `nome`, `email`, `senha`, `nivelacesso`) VALUES
-(24, 'Testando da silva', 'usuario@user.com', '$2y$10$QoMViCRPRIpvHCZbftfGzejE7IPTN6xWeAEzBWX0voCsSjwYsybfS', 0),
-(25, 'Testando Adm', 'adm@adm.com', '$2y$10$h8Sde8BNocqPM4Oo4/MWtuI2Zjmx7H7oAetg8Q5kAnQj3pQAJMl0W', 2);
+(24, 'Testando da silva', 'user@user.com', '$2y$10$QoMViCRPRIpvHCZbftfGzejE7IPTN6xWeAEzBWX0voCsSjwYsybfS', 0),
+(25, 'Testando Adm', 'adm@adm.com', '$2y$10$h8Sde8BNocqPM4Oo4/MWtuI2Zjmx7H7oAetg8Q5kAnQj3pQAJMl0W', 2),
+(26, 'Clinica teste', 'clinica@clinica.com', '$2y$10$yDObtSkSV5134sutoNv/3ecEk//F6NkLRPV0JE2sAmGTQDwT0wn/W', 1);
 
 -- --------------------------------------------------------
 
@@ -129,7 +137,9 @@ INSERT INTO `raca` (`idraca`, `raca`, `tipoespecie`) VALUES
 (1, 'Pastor Alemão', 0),
 (2, 'Buldogue Francês', 0),
 (3, 'Dog Qualquers', 0),
-(4, 'SiamÃªs', 0);
+(4, 'SiamÃªs', 0),
+(5, 'Persa', 1),
+(6, 'Sphynx', 1);
 
 -- --------------------------------------------------------
 
@@ -219,7 +229,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `animal`
 --
 ALTER TABLE `animal`
-  MODIFY `idanimal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idanimal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `castracao`
@@ -231,19 +241,19 @@ ALTER TABLE `castracao`
 -- AUTO_INCREMENT for table `clinica`
 --
 ALTER TABLE `clinica`
-  MODIFY `idclinica` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idclinica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `idlogin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idlogin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `raca`
 --
 ALTER TABLE `raca`
-  MODIFY `idraca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idraca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `usuario`
