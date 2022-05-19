@@ -15,27 +15,25 @@
     <!-- CORPO -->
     <?php //CONTROLE DE MENU
         if($_SESSION) //caso esteja logado e exista uma sessão
+        {
+            switch($_SESSION["dadosLogin"]->nivelacesso)
             {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case '0':
-                        include_once "menuLogado.php";
-                    break;
-                    //caso tenha nível de acesso de clínica
-                    case '1':
-                        include_once "menuClinica.php";
-                    break;
-                    //caso tenha nível de acesso de Administrador
-                    case '2':
-                        include_once "menuADM.php";
-                    break;
-                    
-                }
+                //caso tenha nível de acesso de usuário
+                case 0:
+                    include_once "menuLogado.php";
+                break;
+                //caso tenha nível de acesso de clínica
+                case 1:
+                    include_once "menuClinica.php";
+                break;
+                //caso tenha nível de acesso de Administrador
+                case 2:
+                    include_once "menuADM.php";
+                break;
+                
             }
-        else{
-            include_once "menu.php";
         }
+        else{ include_once "menu.php"; }
     ?>
 
     <div class="container-fluid">
@@ -70,45 +68,14 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <button class="btn btn-warning btn-md" id="btnEditar" data-target="#mostrarModal" data-toggle="modal">Editar</button>
+                                            <button class="btn btn-warning btn-md" id="btnEditar" data-target="#mostrarModal" data-toggle="modal" ><i class='fa fa-edit'></i>Editar</button>
                                             
                                             <button class="btn btn-danger btn-md">Excluir</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>Fulano</td>
-                                        <td>Fulano7777@gamil.com</td>
-                                        <td>12345678910</td>
-                                        <td>11987546321</td>
-                                        <td>
-                                            <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">
-                                            <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center"></a>
-                                        </td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-md">Editar</a>
-                                            
-                                            <a href="" class="btn btn-danger btn-md">Excluir</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fulano</td>
-                                        <td>Fulano7777@gamil.com</td>
-                                        <td>12345678910</td>
-                                        <td>11987546321</td>
-                                        <td>
-                                            <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">
-                                                <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="" class="btn btn-warning btn-md">Editar</a>
-                                            
-                                            <a href="" class="btn btn-danger btn-md">Excluir</a>
-                                        </td>
-                                    </tr>
     
-                                    <!--<?php
-                                        /*foreach ($dadosUsuario as $value)
+                                    <?php
+                                        foreach ($dadosUsuario as $value)
                                         {
                                             echo"<tr>
                                                     <td>$value->nome</td>
@@ -116,99 +83,22 @@
                                                     <td>$value->cpf</td>
                                                     <td>$value->telefone</td>
                                                     <td>
-                                                        <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">
-                                                            <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center">
+                                                        <a href='<?php echo URL.'consulta-animais';?>' class='btn btn-success col-auto'>
+                                                            <img src='recursos/img/Logo Castra Pet1.png' alt='Animais cadastrados' width='30' class='aling-itens-center justify-content-center'>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a href='".URL."editar-usuario/$value->idUsuario' class='btn btn-warning btn-sm'>Editar</a>
+                                                        <a href='".URL."editar-usuario/$value->idusuario' class='btn btn-warning btn-md' id='btnEditar' data-bs-target='#mostrarModal' data-bs-toggle='modal'><i class='fa fa-edit'></i>Editar</a>
                                                         
-                                                        <a href='".URL."excluir-usuario/$value->idUsuario' class='btn btn-danger btn-sm' 
+                                                        <a href='".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-sm' 
                                                         onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir</a>
                                                     </td>
                                                 </tr>";
-                                        }*/
-                                    ?>-->   
+                                        }
+                                    ?>   
                                 </tbody>
                             </table>
                         </div>
-
-
-                        <!-- <div class="row align-items-center justify-content-center">
-                            <div class="col-sm-5 mb-3 form-group ps-4">
-                                <div class="row">
-                                    <p>Nome:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
-                                </div>
-                                <div class="row">
-                                    <p>E-mail:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>CPF:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p>Telefone:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>    
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>RG:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p>Celular:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>    
-                                </div>
-                                <div class="row">
-                                    <p>
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" checked disabled>
-                                        Tenho benefício NIS: <?php echo" xxxxxxxx"?>
-                                    </p>
-                                </div>
-                                
-                                <div class="row ">
-                                    <p>
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" checked disabled>
-                                        Sou protetor de animais
-                                        &nbsp;
-                                        <input class="btn btn-success col-auto" type="button" value="Visualizar documento" name="btnProtetorDoc"> 
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-sm-7 mb-3 form-group ps-4">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>CEP:<?php echo" xxxxxxxxx";?></p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p>Número:<?php echo" xxxxx";?></p>
-                                    </div>    
-                                </div>
-                                <div class="row">
-                                    <p>Bairro:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
-                                </div>
-                                <div class="row mb-5">
-                                    <p>Rua:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
-                                </div>
-                                
-                                <div class="row justify-content-between align-items-center">
-                                    <div class="col-6">
-                                             Acessar animais cadastrados do usuário 
-                                            <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">Animais Cadastrados</a>
-                                    </div>
-                                    <div class="col-6 justify-content-end">
-                                         Botão editar usuário 
-                                        <button class="btn btn-success" onclick="mostrarModal();">
-                                            Editar
-                                        </button>
-                                         Botão excluir usuário 
-                                        <?php /*echo"
-                                            <a href='".URL."excluir-usuario' class='btn btn-danger ' 
-                                            onclick='return confirm(\"Deseja realmente excluir esse usuário?\")'>Excluir</a>"*/
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                     </form>                    
                 </div>
             </div>
@@ -220,14 +110,85 @@
 
     <!-- MODAL: editar usuário -->
     <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="nomeUsuario">@usuário</h5>
+                    <h5 class="modal-title">Atualizar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <form action="<?php echo URL . 'atualizar-usuario'; ?>" method="post">
+                        <input type="hidden" name="idusuario" value="<?php echo $dadosusuario->idusuario;?>">
+                        
+                        <div class="row">
 
+                            <div class="col-sm-6 mb-4 align-self-center">
+                                <div class="form-group row-6 mb-3">
+                                    <label for="txtNome" class="col-form-label">Nome:</label>
+                                    <input  class="form-control" type="text" name="txtNome" id="txtNome"  maxlength="70" required>
+                                </div>
+                                <div class="form-group row-6 mb-3">
+                                    <label for="txtEmail">Email:</label>
+                                    <input class="form-control" type="email" name="txtEmail" id="txtEmail" maxlength="100" required>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="form-group col-6">
+                                        <label for="txtCPF">CPF:</label>
+                                        <input class="form-control" type="text" name="txtCPF" id="txtCPF"  maxlength="14" required>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="txtTel">Telefone:</label>
+                                        <input class="form-control" type="text" name="txtTel" id="txtTel"  maxlength="15">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="form-group col-6">
+                                        <label for="txtRG">RG:</label>
+                                        <input class="form-control" type="text" name="txtRG" id="txtRG"  maxlength="12" required>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="txtCelular">Celular:</label>
+                                        <input class="form-control" type="text" name="txtCelular" id="txtCelular"  maxlength="15">
+                                    </div>
+                                </div>   
+                            </div>
+                            <div class="col-sm-6 mb-4 align-self-center justify-content-evenly">
+                                <div class="row mb-3">
+                                    <div class="form-group col-6">
+                                        <label for="txtCEP">CEP:</label>
+                                        <input class="form-control" type="text" name="txtCEP" id="txtCEP" maxlength="9" required> 
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="txtNumero">Número:</label>
+                                        <input class="form-control" type="text" name="txtNumero" id="txtNumero"  maxlength="5" required>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="txtBairro">Bairro:</label>
+                                    <input class="form-control" type="text" name="txtBairro" id="txtBairro" maxlength="50" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="txtRua">Rua:</label>
+                                    <input class="form-control" type="text" name="txtRua" id="txtRua" maxlength="50" required>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="form-group col-6">
+                                        <input type="checkbox" name="chkNIS" id="chkNIS" value="2">
+                                        <label for="chkNIS">Tenho o benefício do NIS</label>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <input class="form-control" type="text" name="txtNIS" id="txtNIS" >
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <input type="checkbox" name="chkProtetor" id="chkProtetor" value="1">
+                                    <label for="chkProtetor">Sou protetor de animais</label>
+                                    &nbsp;
+                                    <input class="btn btn-success" type="button" value="Fazer upload" name="btnProtetorUpload">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success">Alterar</button>
@@ -249,13 +210,18 @@
     <script>
         
         function mostrarModal(){
-            let minhaModal = new bootstrap.Modal(document.getElementById('#modalEditar')).show();
+            let minhaModal = new bootstrap.Modal(document.getElementById('modalEditar')).show();
         }
             
-            $("#btnEditar").click(function(){
-                $("#modalEditar").modal();
-            });
+        $("#btnEditar").click(function(){
+            $("#modalEditar").modal();
+        });
 
+        /*$("#btnEditar").click(function mostrarModal(){
+            let minhaModal = new bootstrap.Modal(document.getElementById('modalEditar')).show();
+        });*/
+
+        mostrarModal();
     </script>
 
     <!-- JS DataTables--> 
