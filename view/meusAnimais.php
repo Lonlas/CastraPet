@@ -19,6 +19,29 @@
 
 </head>
 <body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="<?php echo URL.'cadastrar-castracao'?>" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="form-label" for="obhsCastracao">Observação: (opcional)</label>
+                        <textarea name="obsCastracao" id="obhsCastracao" rows="5" class="form-control"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Enviar Solicitação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        <!-- /Modal -->
     <div class="container-fluid d-grid min-vh-100 corpo">
 
         <!-- CORPO -->
@@ -152,9 +175,11 @@
                                         <div class='col'></div>
                                     </div>
                                     <div class='col-md-2 mt-2 mt-md-0'>  
-                                        <a href='".URL."solicita-castracao' class='btn btn-success float-end w-100 mb-2'>Solicitar castração</a>
-                                        <a href='"."#' class='btn btn-warning float-end w-100 mb-2'>Editar animal</a>
-                                        <a href='"."#' class='btn btn-danger float-end w-100'>Excluir animal</a>
+                                        <button type='button' class='btn btn-success w-100 mb-2' onClick() data-bs-toggle='modal' data-bs-target='#modal'>
+                                            Solicitar castração
+                                        </button>
+                                        <a href='"."#' class='btn btn-warning w-100 mb-2'>Editar animal</a>
+                                        <a href='"."#' class='btn btn-danger w-100'>Excluir animal</a>
                                     </div>
                                     
                                 </div>

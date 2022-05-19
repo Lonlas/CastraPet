@@ -95,6 +95,9 @@ if($_GET)
             $teste->abrirSobre();
         break;
 
+        case "cadastrar-castracao":
+        
+        break;
         // Telas consulta
         case "consulta-usuario":
             $adm = new Controller();
