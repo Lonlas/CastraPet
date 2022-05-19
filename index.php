@@ -17,7 +17,7 @@ if($_GET)
 
     //Definindo os nomes das telas que vão aparecer na URL
     switch($url[0])
-    {
+    {   
         case "inicio":
             $direciona = new Controller();
             $direciona->abrirInicio();
@@ -127,7 +127,7 @@ if($_GET)
         case "vazio":
             $teste = new Controller();
             $teste->abrirTeste();
-        break;  
+        break;   
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
             $pagina = new Controller();
