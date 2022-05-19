@@ -22,9 +22,13 @@ if($_GET)
             $direciona = new Controller();
             $direciona->abrirInicio();
         break;
-        case "cadastro-tutor";
+        case "cadastra-tutor";
             $direciona = new UsuarioController();
             $direciona->abrirCadastro();
+        break;
+        case "cadastrar-tutor";
+            $direciona = new UsuarioController();
+            $direciona->cadastrarUsuario();
         break;
         case "login": 
             $direciona = new UsuarioController();
