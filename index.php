@@ -13,7 +13,7 @@ if($_GET)
 {
     //Pegando a URL e apagando a "/" no final dela.
     $url = $_GET["url"];
-    $url = explode("/",$url);
+    $url = explode("/",$url);a
 
     //Definindo os nomes das telas que vão aparecer na URL
     switch($url[0])
