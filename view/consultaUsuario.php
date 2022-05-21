@@ -36,7 +36,7 @@
                     <h1 class="h4 text-white ms-3">Consultar Usuários</h1>
                 </div>
                 <div class="bg-white p-3">
-                    <div class="table-responsive">
+                   <div class="table-responsive">
                         <table id="tbUsuario" class="table table-hover">
                             <thead>
                                 <th>#</th>
@@ -83,7 +83,7 @@
                                             <td>$value->punicao</td>
                                             <td>
                                                 <a href='". URL. "consulta-animais' class='btn btn-success col-auto'>
-                                                    <img src='recursos/img/Logo Castra Pet1.png' alt='Animais cadastrados' width='30' class='aling-itens-center justify-content-center'>
+                                                    <img src='". URL ."recursos/img/Logo Castra Pet1.png' alt='Animais cadastrados' width='30' class='aling-itens-center justify-content-center'>
                                                 </a>
                                             </td>
                                             <td>
@@ -93,10 +93,17 @@
                                         </tr>
                                         ";
                                     }
-                                ?>
+                                    ?>
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+            <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">
+                <a href="<?php echo URL.'home-adm'; ?>" class="btn-lg btn-success" role="button" style="border-radius: 0; text-decoration: 0; padding: 12px 35px 12px 35px; margin-left: 40px;">Voltar</a>
+            </div>
+        </div>
+    </div>
         <!--
         <div class="bg-danger" >
             <div class="container mx-auto row p-3">
@@ -159,14 +166,7 @@
                             </table>
                         </div>
                     </form>                    
-                </div>
-            </div>
-            <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">
-                <a href="<?php echo URL.'home-adm'; ?>" class="btn-lg btn-success" role="button" style="border-radius: 0; text-decoration: 0; padding: 12px 35px 12px 35px; margin-left: 40px;">Voltar</a>
-            </div>
-        </div>
-    </div>
-    -->:
+        -->
     <!-- MODAL:EDITAR USUÁRIO -->
     <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -255,7 +255,7 @@
             </div>
         </div>
     </div>
-    MODAL -->
+    <!-- MODAL -->
 
     <!-- /CORPO -->
 
@@ -294,7 +294,7 @@
     <!-- JS DataTables PDF BUTTONS PRINT--> 
     <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/buttons.print.min.js"></script>
 
-    <!-- DataTables
+    <!-- DataTables -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -303,7 +303,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
-    -->
+    
 
     <script>
         $(document).ready(function() {
