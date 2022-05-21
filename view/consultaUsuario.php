@@ -8,6 +8,8 @@
     <!-- EXTENSÃO BOOTSTRAP -->
     <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 </head>
 <body>
     <!-- CORPO -->
@@ -38,100 +40,74 @@
 
     <div class="container-fluid">
         <div class="bg-danger">
-            <div class="container mx-auto row p-3">
-                <div class="container bg-white p-0">
-                <form action="busca-usuario">    
-                    <div class="container bg-dark text-light font-weight-bold p-3">
-                        <label>Consultar Usuário:</label>
-                        <input type="number" name="buscaUsuario" id="buscaUsuario">
+            <div class="container mx-auto py-3">
+                <div class="container bg-dark p-2">
+                    <h1 class="h4 text-white ms-3">Consultar Usuários</h1>
+                </div>
+                <div class="bg-white p-3">
+                    <div class="table-responsive">
+                        <table id="tbUsuario" class="table table-hover">
+                            <thead>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Benefício</th>
+                                <th>NIS</th>
+                                <th>E-mail</th>
+                                <th>Telefone</th>
+                                <th>Celular</th>
+                                <th>Punição</th>
+                                <th>Animais</th>
+                                <th>Ações</th>
+                            </thead>
+                            <tbody>
+                                <?php
+    
+                                    foreach($dadosUsuario as $value)
+                                    {
+                                        $value->beneficio = str_replace("0", "-", $value->beneficio);
+                                        $value->beneficio = str_replace("1", "Benefício Social", $value->beneficio);
+                                        $value->beneficio = str_replace("2", "Protetor de Animais", $value->beneficio);
+                                        
+                                        $value->telefone = preg_replace("/^$/", "-", $value->telefone);
+                                        $value->nis = preg_replace("/^$/", "-", $value->nis);
+
+                                        $value->punicao = str_replace("0", "-", $value->punicao);
+                                        $value->punicao = str_replace("1", "<span class='badge bg-danger'>Punido</span>", $value->punicao);
+
+                                        //Testar depois:
+                                        //$number="(".substr($number,0,2).") ".substr($number,2,-4)." - ".substr($number,-4);
+
+                                        echo
+                                        "
+                                        <tr>
+                                            <td>$value->idusuario</td>
+                                            <td>$value->nome</td>
+                                            <td>$value->cpf</td>
+                                            <td>$value->beneficio</td>
+                                            <td>$value->nis</td>
+                                            <td>$value->email</td>
+                                            <td>$value->telefone</td>
+                                            <td>$value->celular</td>
+                                            <td>$value->punicao</td>
+                                            <td>Animais</td>
+                                            <td>Editar Excluir</td>
+                                        </tr>
+                                        ";
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
-                </form>
-                    <form action="consulta-usuario">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-sm-5 mb-3 form-group ps-4">
-                                <div class="row">
-                                    <p>Nome:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
-                                </div>
-                                <div class="row">
-                                    <p>E-mail:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>CPF:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p>Telefone:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>    
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>RG:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p>Celular:<?php echo" xxxxxxxxxxx";?></p>
-                                    </div>    
-                                </div>
-                                <div class="row">
-                                    <p>
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" checked disabled>
-                                        Tenho benefício NIS: <?php echo" xxxxxxxx"?>
-                                    </p>
-                                </div>
-                                
-                                <div class="row ">
-                                    <p>
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" checked disabled>
-                                        Sou protetor de animais
-                                        &nbsp;
-                                        <input class="btn btn-success col-auto" type="button" value="Visualizar documento" name="btnProtetorDoc"> 
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-sm-7 mb-3 form-group ps-4">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>CEP:<?php echo" xxxxxxxxx";?></p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p>Número:<?php echo" xxxxx";?></p>
-                                    </div>    
-                                </div>
-                                <div class="row">
-                                    <p>Bairro:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
-                                </div>
-                                <div class="row mb-5">
-                                    <p>Rua:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
-                                </div>
-                                
-                                <div class="row justify-content-between align-items-center">
-                                    <div class="col-6">
-                                            <!-- Acessar animais cadastrados do usuário -->
-                                            <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">Animais Cadastrados</a>
-                                    </div>
-                                    <div class="col-6 justify-content-end">
-                                        <!-- Botão editar usuário -->
-                                        <button class="btn btn-success" onclick="mostrarModal();">
-                                            Editar
-                                        </button>
-                                        <!-- Botão excluir usuário -->
-                                        <?php echo"
-                                            <a href='".URL."excluir-usuario' class='btn btn-danger ' 
-                                            onclick='return confirm(\"Deseja realmente excluir esse usuário?\")'>Excluir</a>"
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>                    
                 </div>
             </div>
+            <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">
+                <a href="<?php echo URL.'home-adm'; ?>" class="btn-lg btn-success" role="button" style="border-radius: 0; text-decoration: 0; padding: 12px 35px 12px 35px; margin-left: 40px;">Voltar</a>
+            </div>
         </div>
-        <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
-            <a href="<?php echo URL.'home-adm'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
-        </footer>
     </div>
 
-    <!-- MODAL: editar usuário -->
+    <!-- MODAL: editar usuário
     <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -139,7 +115,7 @@
             </div>
         </div>
     </div>
-    <!--/MODAL -->
+    MODAL -->
 
     <!-- /CORPO -->
 
@@ -148,7 +124,7 @@
     <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
 
-    <!-- Abrir modal -->
+    <!-- Abrir modal
     <script>
         function mostrarModal(){
             /*let el = document.getElementById('modalEditar');
@@ -159,6 +135,33 @@
         }
 
     </script>    
-    
+     -->
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#tbUsuario').DataTable( {
+                dom: 'Bfrtip',
+                responsive: true,
+                buttons: [
+                    'csv', 'excel', 'print'
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
+                },
+                "search": {
+                    "search": "<?php echo "$cpf";?>"
+                }
+            } );
+        } );
+    </script>
 </body>
 </html>
