@@ -29,9 +29,9 @@ class UsuarioController
         $cadastra->rg = $_POST["txtRG"];
         $cadastra->cpf = $_POST["txtCPF"];
 
-        if($_POST["chkProtetor"] == 1)
+        if($_POST["chkProtetor"] == 2)
             $cadastra->beneficio = $_POST["chkProtetor"];
-        else if($_POST["chkNIS"] == 2)
+        else if($_POST["chkNIS"] == 1)
             $cadastra->beneficio = $_POST["chkNIS"];
         else
             $cadastra->beneficio = 0;

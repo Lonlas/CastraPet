@@ -79,15 +79,15 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="form-group col-6">
-                                    <input type="checkbox" name="chkNIS" id="chkNIS" value="2">
+                                    <input type="checkbox" name="chkNIS" id="chkNIS" value="1">
                                     <label for="chkNIS">Tenho o benefício do NIS</label>
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <input class="form-control" type="text" name="txtNIS" id="txtNIS">
+                                    <input class="form-control" type="text" name="txtNIS" id="txtNIS" disabled>
                                 </div>
                             </div>
                             <div class="form-group mb-4">
-                                <input type="checkbox" name="chkProtetor" id="chkProtetor" value="1">
+                                <input type="checkbox" name="chkProtetor" id="chkProtetor" value="2">
                                 <label for="chkProtetor">Sou protetor de animais</label>
                                 &nbsp;
                                 <input class="btn btn-success" type="button" value="Fazer upload" name="btnProtetorUpload">
