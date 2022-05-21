@@ -19,18 +19,11 @@
             switch($_SESSION["dadosLogin"]->nivelacesso)
             {
                 //caso tenha nível de acesso de usuário
-                case 0:
-                    include_once "menuLogado.php";
-                break;
+                case 0: include_once "menuLogado.php"; break;
                 //caso tenha nível de acesso de clínica
-                case 1:
-                    include_once "menuClinica.php";
-                break;
+                case 1: include_once "menuClinica.php"; break;
                 //caso tenha nível de acesso de Administrador
-                case 2:
-                    include_once "menuADM.php";
-                break;
-                
+                case 2: include_once "menuADM.php"; break;   
             }
         }
         else{ include_once "menu.php"; }
@@ -68,14 +61,12 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <button class="btn btn-warning btn-md" id="btnEditar" data-target="#mostrarModal" data-toggle="modal" ><i class='fa fa-edit'></i>Editar</button>
-                                            
+                                            <button class="btn btn-warning btn-md" id="btnEditar" type="button" data-bs-target="#modalEditar" data-bs-toggle="modal" ><i class='fa fa-edit'></i>Editar</button>
                                             <button class="btn btn-danger btn-md">Excluir</button>
-                                        </td>
                                     </tr>
     
                                     <?php
-                                        foreach ($dadosUsuario as $value)
+                                        /*foreach ($dadosUsuario as $value)
                                         {
                                             echo"<tr>
                                                     <td>$value->nome</td>
@@ -83,18 +74,18 @@
                                                     <td>$value->cpf</td>
                                                     <td>$value->telefone</td>
                                                     <td>
-                                                        <a href='<?php echo URL.'consulta-animais';?>' class='btn btn-success col-auto'>
+                                                        <a href=".URL."consulta-animais' class='btn btn-success col-auto'>
                                                             <img src='recursos/img/Logo Castra Pet1.png' alt='Animais cadastrados' width='30' class='aling-itens-center justify-content-center'>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a href='".URL."editar-usuario/$value->idusuario' class='btn btn-warning btn-md' id='btnEditar' data-bs-target='#mostrarModal' data-bs-toggle='modal'><i class='fa fa-edit'></i>Editar</a>
-                                                        
-                                                        <a href='".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-sm' 
+                                                        <button class='btn btn-warning btn-md' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal'>
+                                                            <i class='fa fa-edit'></i>Editar</button>
+                                                        <a href=".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-md' 
                                                         onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir</a>
                                                     </td>
                                                 </tr>";
-                                        }
+                                        }*/
                                     ?>   
                                 </tbody>
                             </table>
@@ -107,21 +98,19 @@
             <a href="<?php echo URL.'home-adm'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
         </footer>
     </div>
-
-    <!-- MODAL: editar usuário -->
-    <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
+    <!-- MODAL:EDITAR USUÁRIO -->
+    <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Atualizar</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="<?php echo URL . 'atualizar-usuario'; ?>" method="post">
-                        <input type="hidden" name="idusuario" value="<?php echo $dadosusuario->idusuario;?>">
+                <form action="<?php echo URL . 'atualizar-usuario'; ?>" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Atualizar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                    </div>
+                    <div class="modal-body">
+                        <!--<input type="hidden" name="idusuario" value="<?php echo $dadosusuario->idusuario;?>">-->
                         
                         <div class="row">
-
                             <div class="col-sm-6 mb-4 align-self-center">
                                 <div class="form-group row-6 mb-3">
                                     <label for="txtNome" class="col-form-label">Nome:</label>
@@ -188,12 +177,12 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Alterar</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Alterar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -201,27 +190,23 @@
 
     <!-- /CORPO -->
 
-    <!-- EXTENSÃO BOOTSTRAP -->
+    <!-- EXTENSÃO BOOTSTRAP -->    
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
+    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado-->
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 
     <!-- Abrir modal -->
     <script>
         
-        function mostrarModal(){
+        /*function mostrarModal(){
             let minhaModal = new bootstrap.Modal(document.getElementById('modalEditar')).show();
         }
             
         $("#btnEditar").click(function(){
             $("#modalEditar").modal();
-        });
-
-        /*$("#btnEditar").click(function mostrarModal(){
-            let minhaModal = new bootstrap.Modal(document.getElementById('modalEditar')).show();
         });*/
 
-        mostrarModal();
     </script>
 
     <!-- JS DataTables--> 
