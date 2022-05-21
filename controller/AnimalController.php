@@ -1,7 +1,6 @@
 <?php
 include_once "model/Animal.php";
 include_once "model/Raca.php";
-include_once "model/Castracao.php";
 
 class AnimalController
 {
@@ -49,17 +48,6 @@ class AnimalController
         $animal->cadastrar();
 
         header("Location:".URL."meus-animais");
-    }
-
-    function abrirConsultaCastracao()
-    {
-        $direciona = new Castracao();
-        $dadosCastracao = $direciona->consultar();
-        include_once "view/consultaCastracao.php";
-    }
-    function abrirCadRaca()
-    {
-        include"view/cadRaca.php";
     }
     
     function cadastrarRaca()
