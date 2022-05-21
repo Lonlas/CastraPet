@@ -63,7 +63,7 @@ if($_GET)
             $animal->cadastrarAnimal();
         break;
         case "cadastra-raca":
-            $raca = new AnimalController();
+            $raca = new Controller();
             $raca->abrirCadRaca();
         break;
         case "cadastrar-raca":
@@ -102,14 +102,14 @@ if($_GET)
         // Telas consulta
         case "consulta-usuario":
             $adm = new Controller();
-            $adm->abrirConsultaUsuario();
+            $adm->abrirConsultaUsuario($url[1]);
         break;
         case "consulta-clinica":
             $adm = new Controller();
-            $adm->abrirConsultaClinica();
+            $adm->abrirConsultaClinica($url[1]);
         break;
         case "consulta-castracao":
-            $adm = new AnimalController();
+            $adm = new Controller();
             $adm->abrirConsultaCastracao();
         break;
         case "alterar-senha":
