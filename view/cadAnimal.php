@@ -212,7 +212,7 @@
                 </div>
             </div>
             <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">
-                <a href="#" class="btn-lg btn-success" role="button" style="border-radius: 0; text-decoration: 0; padding: 12px 35px 12px 35px; margin-left: 40px;">Voltar</a>
+                <a href="<?php echo URL.'meus-animais';?>" class="btn-lg btn-success" role="button" style="border-radius: 0; text-decoration: 0; padding: 12px 35px 12px 35px; margin-left: 40px;">Voltar</a>
             </div>
         </div>
     </div>
