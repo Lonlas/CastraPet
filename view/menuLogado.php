@@ -20,7 +20,7 @@
     </ul>
     <form class="form-inline ms-auto my-2 my-lg-0"> 
         <a class="pe-auto text-decoration-none" href="<?php echo URL.'perfil'?>">
-            <img src="recursos/img/Logo-Castra-Pet.svg" alt="Perfil" width="50" class="me-3">
+            <img src="<?php echo URL.'recursos/img/Logo-Castra-Pet.svg' ?>" alt="Perfil" width="50" class="me-3">
         </a>
         <a href="<?php echo URL.'encerrarSessao';?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
     </form>
