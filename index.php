@@ -22,7 +22,7 @@ if($_GET)
             $direciona = new Controller();
             $direciona->abrirInicio();
         break;
-        case "cadastro-tutor";
+        case "cadastra-tutor";
             $direciona = new UsuarioController();
             $direciona->abrirCadastro();
         break;
@@ -128,7 +128,7 @@ if($_GET)
             $teste = new Controller();
             $teste->abrirTeste();
         break;
-        
+
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
             $pagina = new Controller();
