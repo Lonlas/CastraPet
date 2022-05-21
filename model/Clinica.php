@@ -61,7 +61,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT * FROM clinica");
+            $cmd = $con->prepare("SELECT idclinica, nome, email, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep FROM clinica JOIN login ON clinica.idlogin = login.idlogin");
             
             //Executando o comando SQL
             $cmd->execute();
