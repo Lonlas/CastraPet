@@ -17,27 +17,18 @@
     <!-- CORPO -->
     <?php //CONTROLE DE MENU
         if($_SESSION) //caso esteja logado e exista uma sessão
+        {
+            switch($_SESSION["dadosLogin"]->nivelacesso)
             {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case '0':
-                        include_once "menuLogado.php";
-                    break;
-                    //caso tenha nível de acesso de clínica
-                    case '1':
-                        include_once "menuClinica.php";
-                    break;
-                    //caso tenha nível de acesso de Administrador
-                    case '2':
-                        include_once "menuADM.php";
-                    break;
-                    
-                }
+                //caso tenha nível de acesso de usuário
+                case 0: include_once "menuLogado.php"; break;
+                //caso tenha nível de acesso de clínica
+                case 1: include_once "menuClinica.php"; break;
+                //caso tenha nível de acesso de Administrador
+                case 2: include_once "menuADM.php"; break;   
             }
-        else{
-            include_once "menu.php";
         }
+        else{ include_once "menu.php"; }
     ?>
 
 <div class="container-fluid">
@@ -179,16 +170,13 @@
                         </div>
                     </div>
                     <div class="row p-4">
-                        <form action="#" class="ms-auto mb-0" method="post">
-                            <div class="float-end">
-                                <a href="#" class="btn btn-success">
-                                    Editar
-                                </a>
-                                <a href="#" class="btn btn-danger">
-                                    Excluir
-                                </a>
-                            </div>
-                        </form>
+                        <div class="float-end">
+                            <button class="btn btn-warning btn-md" id="btnEditar" type="button" data-bs-target="#modalEditar" data-bs-toggle="modal" ><i class='fa fa-edit'></i>Editar</button>
+
+                            <a href="#" class="btn btn-danger">
+                                Excluir
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

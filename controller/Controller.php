@@ -45,6 +45,9 @@ class Controller
     {
         include"view/cadRaca.php";
     }
+    function abrirConsultaAnimais(){
+        include "view/consultaAnimais.php";
+    }
     function abrirAlterarSenha(){
         include "view/alterarSenha.php";
     }
