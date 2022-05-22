@@ -138,7 +138,7 @@ if($_GET)
             $pagina = new Controller();
             $pagina->paginaNaoEncontrada();
     }
-}a
+}
 else
 {
     //Abrindo página inicial do site 
