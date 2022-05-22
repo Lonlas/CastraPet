@@ -1,7 +1,6 @@
 <?php
 include_once "model/Animal.php";
 include_once "model/Raca.php";
-include_once "model/Castracao.php";
 
 class AnimalController
 {
@@ -44,22 +43,26 @@ class AnimalController
         $animal->pelagem = $_POST["slcPelagem"];
         $animal->idade = $_POST["numIdade"];
         $animal->comunitario = $_POST["slcComunitario"];
-        $animal->foto = $_POST["imgAnimal"];
+
+        //Tratar o envio da imagem
+        $nomeArquivo = $_FILES["imgAnimal"]["name"];       //Nome do arquivo
+        $nomeTemp = $_FILES["imgAnimal"]["tmp_name"];      //nome temporário
+        
+        //pegar a extensão do arquivo
+        $info = new SplFileInfo($nomeArquivo);
+        $extensao = $info->getExtension();
+        
+        //gerar novo nome
+        $novoNome = md5(microtime()) . ".$extensao";
+        
+        $pastaDestino = "recursos/img/Animais/$novoNome";    //pasta destino
+        move_uploaded_file($nomeTemp, $pastaDestino);       //mover o arquivo 
+        
+        $animal->foto = $novoNome; //Nome do arquivo para o banco de dados
 
         $animal->cadastrar();
 
         header("Location:".URL."meus-animais");
-    }
-
-    function abrirConsultaCastracao()
-    {
-        $direciona = new Castracao();
-        $dadosCastracao = $direciona->consultar();
-        include_once "view/consultaCastracao.php";
-    }
-    function abrirCadRaca()
-    {
-        include"view/cadRaca.php";
     }
     
     function cadastrarRaca()

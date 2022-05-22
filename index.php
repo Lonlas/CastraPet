@@ -22,9 +22,13 @@ if($_GET)
             $direciona = new Controller();
             $direciona->abrirInicio();
         break;
-        case "cadastro-tutor";
+        case "cadastra-tutor";
             $direciona = new UsuarioController();
             $direciona->abrirCadastro();
+        break;
+        case "cadastrar-tutor";
+            $direciona = new UsuarioController();
+            $direciona->cadastrarUsuario();
         break;
         case "login": 
             $direciona = new UsuarioController();
@@ -37,14 +41,6 @@ if($_GET)
         case "esqueci-a-senha": 
             $direciona = new Controller();
             $direciona->abrirEsqSenha();
-        break;    
-        case "cadastra-tutor":
-            $usu = new UsuarioController();
-            $usu->abrirCadastro();
-        break;
-        case "cadastrar-tutor":
-            $usu = new UsuarioController();
-            $usu->cadastrarUsuario();
         break;
         case "perfil":
             $direciona = new Controller();
@@ -63,7 +59,7 @@ if($_GET)
             $animal->cadastrarAnimal();
         break;
         case "cadastra-raca":
-            $raca = new AnimalController();
+            $raca = new Controller();
             $raca->abrirCadRaca();
         break;
         case "cadastrar-raca":
@@ -99,18 +95,25 @@ if($_GET)
             $teste->abrirSobre();
         break;
 
+        case "cadastrar-castracao":
+        
+        break;
         // Telas consulta
         case "consulta-usuario":
             $adm = new Controller();
-            $adm->abrirConsultaUsuario();
+            $adm->abrirConsultaUsuario($url[1]);
         break;
         case "consulta-clinica":
             $adm = new Controller();
-            $adm->abrirConsultaClinica();
+            $adm->abrirConsultaClinica($url[1]);
         break;
         case "consulta-castracao":
-            $adm = new AnimalController();
+            $adm = new Controller();
             $adm->abrirConsultaCastracao();
+        break;
+        case "consulta-animais":
+            $adm = new Controller();
+            $adm->abrirConsultaAnimais();    
         break;
         case "alterar-senha":
             $usuario = new Controller();
@@ -132,7 +135,7 @@ if($_GET)
             $teste = new Controller();
             $teste->abrirTeste();
         break;
-        
+
         default:
             //Mostrando um aviso de erro para caso entre em uma URL inválida
             $pagina = new Controller();

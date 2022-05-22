@@ -1,4 +1,9 @@
 <?php
+
+include_once "model/Castracao.php";
+include_once "model/Usuario.php";
+include_once "model/Clinica.php";
+
 class Controller
 {
     function abrirInicio(){
@@ -20,14 +25,28 @@ class Controller
     function abrirSobre(){
         include "view/sobre.php";
     }
-    function abrirConsultaUsuario(){
-        include "view/consultaUsuario.php";
+    function abrirConsultaUsuario($cpf){
+        $direciona = new Usuario();
+        $dadosUsuario = $direciona->consultar();
+        include_once "view/consultaUsuario.php";
     }
-    function abrirConsultaClinica(){
-        include "view/consultaClinica.php";
+    function abrirConsultaClinica($cnpj){
+        $direciona = new Clinica();
+        $dadosClinica = $direciona->consultar();
+        include_once "view/consultaClinica.php";
     }
-    function abrirConsultaCastracao(){
-        include "view/consultaCastracao.php";
+    function abrirConsultaCastracao()
+    {
+        $direciona = new Castracao();
+        $dadosCastracao = $direciona->consultar();
+        include_once "view/consultaCastracao.php";
+    }
+    function abrirCadRaca()
+    {
+        include"view/cadRaca.php";
+    }
+    function abrirConsultaAnimais(){
+        include "view/consultaAnimais.php";
     }
     function abrirAlterarSenha(){
         include "view/alterarSenha.php";

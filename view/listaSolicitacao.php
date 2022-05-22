@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CastraPet</title>
-    <!-- EXTENSÃO BOOTSTRAP -->
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
-
+<?php include_once"head.php";?>
 </head>
 <body>
     <!-- CORPO -->
@@ -41,9 +34,9 @@
         <div class="container-fluid bg-danger">
             <div class="container mx-auto row p-3">
                 <table class="table table-hover bg-white align-items-center">
-                    <thead class="table-dark mb-3">
+                    <thead class="table-dark mb-0 mt-4 my-4">
                         <tr>
-                            <th><h5>Solicitações</h5></th>    
+                            <td>Solicitações</td>    
                         </tr>
                     </thead>
                     <tbody>

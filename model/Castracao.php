@@ -56,7 +56,7 @@
 
             //Preparar comando SQL para consultar
             //$cmd = $con->prepare("SELECT * FROM castracao");
-            $cmd = $con->prepare("SELECT idcastracao, aninome, horario, status, observacao, cpf, nome as 'nomeclinica' FROM castracao join animal on castracao.idanimal = animal.idanimal join usuario on animal.idusuario = usuario.idusuario join clinica on castracao.idclinica = clinica.idclinica join login on login.idlogin = clinica.idlogin");
+            $cmd = $con->prepare("SELECT idcastracao, aninome, horario, status, observacao, cpf, cnpj, nome as 'nomeclinica' FROM castracao join animal on castracao.idanimal = animal.idanimal join usuario on animal.idusuario = usuario.idusuario join clinica on castracao.idclinica = clinica.idclinica join login on login.idlogin = clinica.idlogin");
             
             //Executando o comando SQL
             $cmd->execute();
