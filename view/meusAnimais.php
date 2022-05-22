@@ -1,43 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-    <?php include_once "favicon.php"?>
-    <title>CastraPet</title>
-    <!-- EXTENSÃO BOOTSTRAP -->
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
+<?php include_once"head.php";?>
+    <style rel="stylesheet" type="text/css">
+        .corpo{
+            grid-template-areas: 'header''corpo''footer';
+            grid-template-rows: max-content auto 100px;
+        }
+    </style>
 
 </head>
 <body>
-    <!-- CORPO -->
-    <?php //CONTROLE DE MENU
-        if($_SESSION) //caso esteja logado e exista uma sessão
-        {
-            switch($_SESSION["dadosLogin"]->nivelacesso)
-            {
-                //caso tenha nível de acesso de usuário
-                case 0: include_once "menuLogado.php"; break;
-                //caso tenha nível de acesso de clínica
-                case 1: include_once "menuClinica.php"; break;
-                //caso tenha nível de acesso de Administrador
-                case 2: include_once "menuADM.php"; break;   
-            }
-        }
-        else{ include_once "menu.php"; }
-    ?>
 
-    <div class="container-fluid">
-        <div class="container-fluid bg-primary">
-            <div class="container mx-auto row p-3">
-                <div class="container bg-dark text-light font-weight-bold p-3">
-                    Meus Animais
-                </div>
-                <div class="container bg-white">
-                <!-- Componentes aqui -->
-                    <?php
+    <!-- Modal -->
+    <div class="modal fade" id="modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="<?php echo URL.'cadastrar-castracao'?>" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="form-label" for="obhsCastracao">Observação: (opcional)</label>
+                        <textarea name="obsCastracao" id="obhsCastracao" rows="5" class="form-control"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Enviar Solicitação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        <!-- /Modal -->
+    <div class="container-fluid d-grid min-vh-100 corpo">
+
+        <!-- CORPO -->
+        <?php //CONTROLE DE MENU
+            if($_SESSION) //caso esteja logado e exista uma sessão
+                {
+                    switch($_SESSION["dadosLogin"]->nivelacesso)
+                    {
+                        //caso tenha nível de acesso de usuário
+                        case '0':
+                            include_once "menuLogado.php";
+                        break;
+                        //caso tenha nível de acesso de clínica
+                        case '1':
+                            include_once "menuClinica.php";
+                        break;
+                        //caso tenha nível de acesso de Administrador
+                        case '2':
+                            include_once "menuADM.php";
+                        break;
+                        
+                    }
+                }
+            else{
+                include_once "menu.php";
+            }
+        ?>
+        <div class="container-fluid">
+            <div class="bg-primary h-100 row align-items-center">
+                <div class="container mx-auto p-3" style="grid-area:corpo;">
+                    <div class="container bg-dark text-light font-weight-bold p-3">
+                        Meus Animais
+                    </div>
+                    <div class="container bg-white">
+                    <!-- Componentes aqui -->
+                        <?php
                         foreach ($dadosAnimais as $values)
                         {
                             //Reescrevendo a espécie
@@ -135,30 +167,38 @@
                                         <div class='col'></div>
                                     </div>
                                     <div class='col-md-2 mt-2 mt-md-0'>  
-                                        <a href='".URL."solicita-castracao' class='btn btn-success float-end w-100 mb-2'>Solicitar castração</a>
-                                        <a href='"."#' class='btn btn-warning float-end w-100 mb-2'>Editar animal</a>
-                                        <a href='"."#' class='btn btn-danger float-end w-100'>Excluir animal</a>
+                                        <button type='button' class='btn btn-success w-100 mb-2' onClick() data-bs-toggle='modal' data-bs-target='#modal'>
+                                            Solicitar castração
+                                        </button>
+                                        <a href='"."#' class='btn btn-warning w-100 mb-2'>Editar animal</a>
+                                        <a href='"."#' class='btn btn-danger w-100'>Excluir animal</a>
                                     </div>
                                     
                                 </div>
                                 <hr>
-                            <!-- Fim de um animal -->";
+                            <!-- Fim de um animal -->
+                            ";
                         }
-                    ?>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <a href="<?php echo URL.'cadastra-animal';?>" class="btn btn-success float-end">Cadastrar Animal</a>
+                        ?>
+                        <div class="row align-items-center p-3">
+                            <div class="col">
+                                <a href="<?php echo URL.'cadastra-animal';?>" class="btn btn-success float-end">Cadastrar Animal</a>
+                            </div>
                         </div>
+                    <!-- Fim dos componentes -->
                     </div>
-                <!-- Fim dos componentes -->
                 </div>
             </div>
         </div>
-        <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
-            <a href="<?php echo URL.'perfil'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
-        </footer>
+        <div class="container-fluid bg-dark" style="grid-area:footer;">
+            <div class="row h-100 align-items-center">
+                <div class="px-5">
+                    <a href="<?php echo URL.'perfil'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
+                </div>
+            </div>
+        </div>
+        <!-- /CORPO -->
     </div>
-    <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->    
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>

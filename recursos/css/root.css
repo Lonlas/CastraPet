@@ -1,6 +1,7 @@
 :root{
-    --azul: #0281c6;
-    --azulclaro: #00aff0;
+    --azul-bonito1: #1e90ff;
+    --azul: #1e90ff;
+    --azul-atual: #00aff0;
     --azulmaisclaro: #42c0ee;
     --verde: #00b48c;
     --verdeclaro: #5edabf;
@@ -17,8 +18,15 @@
     --fontecorpo: 'Josefin Sans';
 }
 .bg-primary{
-    color: rgb(2, 129, 198) !important;
+    background-color: var(--azul)!important;
+}
+.bg-danger{
+    background-color: var(--vermelho)!important;
+}
+.bg-warning{
+    background-color: var(--amarelo)!important;
 }
 .btn-success{
-    color: #00b48c !important;
+    background-color: var(--verde) !important;
+    border-color: none !important;
 }

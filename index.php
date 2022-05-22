@@ -26,6 +26,10 @@ if($_GET)
             $direciona = new UsuarioController();
             $direciona->abrirCadastro();
         break;
+        case "cadastrar-tutor";
+            $direciona = new UsuarioController();
+            $direciona->cadastrarUsuario();
+        break;
         case "login": 
             $direciona = new UsuarioController();
             $direciona->abrirLogin();
@@ -91,6 +95,9 @@ if($_GET)
             $teste->abrirSobre();
         break;
 
+        case "cadastrar-castracao":
+        
+        break;
         // Telas consulta
         case "consulta-usuario":
             $adm = new Controller();
