@@ -7,7 +7,7 @@
     <!-- /Favicon-->
 
     <title>CastraPet</title>
-    <!-- EXTENSÃO BOOTSTRAP -->
+    <!-- EXTENSÃO CSS -->
     <link rel="stylesheet" href="<?php echo URL;?>recursos/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo URL;?>recursos/css/root.css">
-    <!-- /EXTENSÃO BOOTSTRAP -->
+    <!-- /EXTENSÃO CSS -->

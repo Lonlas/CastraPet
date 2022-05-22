@@ -154,7 +154,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT * FROM clinica join login on usuario.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
+            $cmd = $con->prepare("SELECT * FROM clinica join login on clinica.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);

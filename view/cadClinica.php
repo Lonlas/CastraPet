@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-    <?php include_once "favicon.php"?>
-    <title>CastraPet</title>
-    <!-- EXTENSÃO BOOTSTRAP -->
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
-
+    <?php include_once"head.php";?>
 </head>
 <body>
     <!-- CORPO -->
@@ -110,7 +102,7 @@
                         </div>
                         <div class="row m-0">
                             <div class="col">
-                                <input type="submit" class="btn btn-success float-right" value="Cadastrar">
+                                <input type="submit" class="btn btn-success float-end mt-4" value="Cadastrar">
                             </div>
                         </div>
                     </form>
