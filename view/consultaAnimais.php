@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<?php include_once"head.php";?>
+    <?php include_once "head.php";?>
 </head>
 <body>
     <!-- CORPO -->
@@ -117,7 +117,7 @@
         </footer>
     </div>
 
-    <!-- MODAL: editar usuário -->
+    <!-- MODAL: editar animal-->
     <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
