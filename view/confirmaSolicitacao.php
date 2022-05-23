@@ -1,35 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<?php include_once"head.php";?>
+    <?php include_once "head.php";?>
 </head>
 <body>
     <!-- CORPO -->
     <?php //CONTROLE DE MENU
         if($_SESSION) //caso esteja logado e exista uma sessão
+        {
+            switch($_SESSION["dadosLogin"]->nivelacesso)
             {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case '0':
-                        include_once "menuLogado.php";
-                    break;
-                    //caso tenha nível de acesso de clínica
-                    case '1':
-                        include_once "menuClinica.php";
-                    break;
-                    //caso tenha nível de acesso de Administrador
-                    case '2':
-                        include_once "menuADM.php";
-                    break;
-                    
-                }
+                //caso tenha nível de acesso de usuário
+                case 0: include_once "menuLogado.php"; break;
+                //caso tenha nível de acesso de clínica
+                case 1: include_once "menuClinica.php"; break;
+                //caso tenha nível de acesso de Administrador
+                case 2: include_once "menuADM.php"; break;   
             }
-        else{
-            include_once "menu.php";
         }
+        else{ include_once "menu.php"; }
     ?>
-
     <div class="container-fluid">
         <div class="bg-danger">
             <div class="container mx-auto row p-3">
@@ -88,35 +78,12 @@
             <a href="<?php echo URL.'home-adm'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
         </footer>
     </div>
-
-    <!-- MODAL: editar usuário -->
-    <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                Consegui!!!
-            </div>
-        </div>
-    </div>
-    <!--/MODAL -->
-
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
-
-    <!-- Abrir modal -->
-    <script>
-        function mostrarModal(){
-            /*let el = document.getElementById('modalEditar');
-            let minhaModal = new bootstrap.Modal(el);
-            minhaModal.show();*/
-
-            let minhaModal = new bootstrap.Modal(document.getElementById('modalEditar')).show();
-        }
-
-    </script>    
-    
+       
 </body>
 </html>
