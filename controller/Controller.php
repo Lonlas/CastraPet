@@ -1,30 +1,77 @@
 <?php
+/* USADO PARA ABRIR TODAS AS PÁGINAS */
 
+include_once "model/Animal.php";
 include_once "model/Castracao.php";
-include_once "model/Usuario.php";
 include_once "model/Clinica.php";
+include_once "model/Login.php";
+include_once "model/Raca.php";
+include_once "model/Usuario.php";
 
 class Controller
 {
+    // PÁGINA INCIAL
     function abrirInicio(){
-        include "view/home.php";
+        include_once "view/home.php";
     }
-    function abrirEsqSenha(){
-        include "view/esqSenha.php";
-    }
-    function abrirPerfil(){
-        
-        include "view/infoUsuario.php";
-    }
-    function abrirADM(){
-        include "view/homeAdm.php";
+
+    // PÁGINAS IMPORTANTES
+    function abrirSobre(){
+        include_once "view/sobre.php";
     }
     function paginaNaoEncontrada(){
-        include "view/paginaNaoEncontrada.php";
+        include_once "view/paginaNaoEncontrada.php";
     }
-    function abrirSobre(){
-        include "view/sobre.php";
+
+    // LOGIN
+    function abrirLogin(){
+        include_once "view/login.php";
     }
+    function abrirEsqSenha(){
+        include_once "view/esqSenha.php";
+    }
+    
+    // USUÁRIO
+    function abrirHomeUsuario(){
+        include_once "view/homeUsuario.php";
+    }
+    function abrirCadastro(){
+        include_once "view/cadastro.php";
+    }
+    function abrirPerfil(){   
+        include_once "view/infoUsuario.php";
+    }
+    function abrirAlterarSenha(){
+        include_once "view/alterarSenha.php";
+    }
+    function abrirCadAnimal(){
+        $raca = new Raca();
+        $dadosRaca = $raca->consultar();
+        include_once "view/cadAnimal.php";
+    }
+    function abrirMeusAnimais(){
+        $animal = new Animal();
+        $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+        $dadosAnimais = $animal->retornarAnimais();
+        
+        include_once "view/meusAnimais.php";
+    }
+    function abrirSolicitacao(){
+        include_once "view/solicitaCastra.php";
+    }
+    
+    // ADMINISTRADOR
+    function abrirHomeAdm(){
+        include_once "view/homeAdm.php";
+    }
+    #CADASTROS
+    function abrirCadRaca(){
+        include_once "view/cadRaca.php";
+    }
+    function abrirCadClinica(){
+        include_once "view/cadClinica.php";
+    }    
+    #CONSULTAS
     function abrirConsultaUsuario($cpf){
         $direciona = new Usuario();
         $dadosUsuario = $direciona->consultar();
@@ -35,27 +82,30 @@ class Controller
         $dadosClinica = $direciona->consultar();
         include_once "view/consultaClinica.php";
     }
-    function abrirConsultaCastracao()
-    {
+    function abrirConsultaCastracao(){
         $direciona = new Castracao();
         $dadosCastracao = $direciona->consultar();
         include_once "view/consultaCastracao.php";
     }
-    function abrirCadRaca()
-    {
-        include"view/cadRaca.php";
-    }
     function abrirConsultaAnimais(){
-        include "view/consultaAnimais.php";
+        include_once "view/consultaAnimais.php";
     }
-    function abrirAlterarSenha(){
-        include "view/alterarSenha.php";
+    #AGENDAMENTO
+    function abrirListaSolicitacao(){
+        include_once "view/listaSolicitacao.php";
     }
     function abrirAgendamento(){
-        include "view/confirmaSolicitacao.php";
+        include_once "view/confirmaSolicitacao.php";
     }
+    
+    // CLÍNICA
+    function abrirHomeClinica(){
+        include_once "view/homeClinica.php";
+    }
+    
+    // TESTE
     function abrirTeste(){
-        include "view/Teste.php";
+        include_once "view/Teste.php";
     }
 }
 ?>
