@@ -6,13 +6,16 @@
   <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-      <a class="nav-link"  href="<?php echo URL.'home-adm'; ?>">Área do Administrador</a>
+        <a class="nav-link"  href="<?php echo URL.'home-adm'; ?>">Área do Administrador</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'cadastra-raca'; ?>">Cadastrar Raça</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'cadastra-clinica'; ?>">Cadastrar Clínica</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Cadastrar
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="<?php echo URL.'cadastra-clinica'; ?>">Clínicas</a></li>
+          <li><a class="dropdown-item" href="<?php echo URL.'cadastra-raca'; ?>">Raças</a></li>
+        </ul>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,7 +32,7 @@
       </li>
     </ul>
     <form class="form-inline ms-auto my-2 my-lg-0">
-      <a href="<?php echo URL.'encerrarSessao'; ?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
+      <a href="<?php echo URL.'encerrar-sessao'; ?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
     </form>
   </div>
 </nav>

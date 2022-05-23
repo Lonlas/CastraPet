@@ -13,7 +13,7 @@
       </li>
     </ul>
     <form class="form-inline ms-auto my-2 my-lg-0">
-      <a href="<?php echo URL.'encerrarSessao'; ?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
+      <a href="<?php echo URL.'encerrar-sessao'; ?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
     </form>
   </div>
 </nav>

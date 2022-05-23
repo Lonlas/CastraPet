@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<?php include_once"head.php";?>
+    <?php include_once "head.php";?>
     <!-- CSS DataTables-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 </head>
@@ -27,7 +27,7 @@
         <div class="bg-danger">
             <div class="container mx-auto py-3">
                 <div class="container bg-dark p-2">
-                    <h1 class="h4 text-white ms-3">Consultar Usuários</h1>
+                    <h5 class="h5 text-white ms-3">Consultar Usuários</h5>
                 </div>
                 <div class="bg-white p-3">
                    <div class="table-responsive">
@@ -161,7 +161,7 @@
                         </div>
                     </form>                    
         -->
-    <!-- MODAL:EDITAR USUÁRIO -->
+    <!-- MODAL: editar usuário -->
     <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -258,35 +258,6 @@
     <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado-->
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Abrir modal
-    <script>
-        
-        /*function mostrarModal(){
-            let minhaModal = new bootstrap.Modal(document.getElementById('modalEditar')).show();
-        }
-            
-        $("#btnEditar").click(function(){
-            $("#modalEditar").modal();
-        });*/
-
-    </script>
-    -->
-
-    <!-- JS DataTables--> 
-    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/jquery.dataTables.js"></script>
-    <!-- JS DataTables Buttons--> 
-    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/dataTables.buttons.min.js"></script>
-    <!-- JS DataTables Zip--> 
-    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/jszip.min.js"></script>
-    <!-- JS DataTables PDF MAKE--> 
-    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/pdfmake.min.js"></script>
-    <!-- JS DataTables PDF FONT--> 
-    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/vfs_fonts.js"></script>
-    <!-- JS DataTables PDF HTML5--> 
-    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/buttons.html5.min.js"></script>
-    <!-- JS DataTables PDF BUTTONS PRINT--> 
-    <script type="text/javascript" charset="utf8" src="<?php echo URL;?>recursos/js/buttons.print.min.js"></script>
 
     <!-- DataTables -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>

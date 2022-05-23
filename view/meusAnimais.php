@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<?php include_once"head.php";?>
+    <?php include_once "head.php";?>
     <style rel="stylesheet" type="text/css">
         .corpo{
             grid-template-areas: 'header''corpo''footer';
@@ -10,56 +10,23 @@
     </style>
 
 </head>
-<body>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form action="<?php echo URL.'cadastrar-castracao'?>" method="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <label class="form-label" for="obhsCastracao">Observação: (opcional)</label>
-                        <textarea name="obsCastracao" id="obhsCastracao" rows="5" class="form-control"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Enviar Solicitação</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-        <!-- /Modal -->
+<body>      
+    <!-- CORPO -->
     <div class="container-fluid d-grid min-vh-100 corpo">
-
-        <!-- CORPO -->
         <?php //CONTROLE DE MENU
             if($_SESSION) //caso esteja logado e exista uma sessão
+            {
+                switch($_SESSION["dadosLogin"]->nivelacesso)
                 {
-                    switch($_SESSION["dadosLogin"]->nivelacesso)
-                    {
-                        //caso tenha nível de acesso de usuário
-                        case '0':
-                            include_once "menuLogado.php";
-                        break;
-                        //caso tenha nível de acesso de clínica
-                        case '1':
-                            include_once "menuClinica.php";
-                        break;
-                        //caso tenha nível de acesso de Administrador
-                        case '2':
-                            include_once "menuADM.php";
-                        break;
-                        
-                    }
+                    //caso tenha nível de acesso de usuário
+                    case 0: include_once "menuLogado.php"; break;
+                    //caso tenha nível de acesso de clínica
+                    case 1: include_once "menuClinica.php"; break;
+                    //caso tenha nível de acesso de Administrador
+                    case 2: include_once "menuADM.php"; break;   
                 }
-            else{
-                include_once "menu.php";
             }
+            else{ include_once "menu.php"; }
         ?>
         <div class="container-fluid">
             <div class="bg-primary h-100 row align-items-center">
@@ -197,6 +164,30 @@
                 </div>
             </div>
         </div>
+
+        <!-- MODAL -->
+        <div class="modal fade" id="modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form action="<?php echo URL.'cadastrar-castracao'?>" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Solicitar castração</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label class="form-label" for="obhsCastracao">Observação: (opcional)</label>
+                            <textarea name="obsCastracao" id="obhsCastracao" rows="5" class="form-control"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Enviar Solicitação</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /MODAL -->
+
         <!-- /CORPO -->
     </div>
 

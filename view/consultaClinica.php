@@ -1,7 +1,7 @@
 
 <html lang="pt-br">
 <head>
-    <?php include_once"head.php";?>
+    <?php include_once "head.php";?>
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
@@ -24,11 +24,11 @@
         else{ include_once "menu.php"; }
     ?>
 
-<div class="container-fluid">
+    <div class="container-fluid">
         <div class="bg-danger">
             <div class="container mx-auto py-3">
                 <div class="container bg-dark p-2">
-                    <h1 class="h4 text-white ms-3">Consultar Clínicas</h1>
+                    <h5 class="h5 text-white ms-3">Consultar Clínicas</h5>
                 </div>
                 <div class="bg-white p-3">
                     <div class="table-responsive">

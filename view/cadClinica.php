@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <?php include_once"head.php";?>
+    <?php include_once "head.php";?>
 </head>
 <body>
     <!-- CORPO -->
@@ -25,7 +25,7 @@
         <div class="bg-danger">
             <div class="container mx-auto row p-3">
                 <div class="container bg-dark text-light font-weight-bold p-3">
-                    Cadastrar Clínica
+                    <h5>Cadastrar Clínica</h5>
                 </div>
                 <div class="container bg-white p-0">
                     <form action="cadastrar-clinica" class="p-sm-2 py-sm-3 p-md-3 p-lg-4 py-3 " method="POST">

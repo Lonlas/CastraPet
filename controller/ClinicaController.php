@@ -4,10 +4,7 @@ include_once "model/Clinica.php";
 
 class ClinicaController
 {
-    function abrirCadClinica()
-    {
-        include_once "view/cadClinica.php";
-    }
+
     function cadastrarClinica()
     {
         $login = new Login();
