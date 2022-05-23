@@ -34,7 +34,7 @@
                     <div class="container bg-dark text-light font-weight-bold p-3">
                         Meus Animais
                     </div>
-                    <div class="container bg-white">
+                    <div class="container bg-white pt-3">
                     <!-- Componentes aqui -->
                         <?php
                         foreach ($dadosAnimais as $values)
@@ -66,9 +66,9 @@
                             echo 
                             "
                             <!-- Começo de um animal -->
-                                <div class='row mt-3'>
+                                <div class='row'>
                                     <div class='col-md-3 d-flex align-items-center'>
-                                        <img src='".URL."recursos/img/imagem_cachorro.jpg' alt='Imagem' class='mw-100'>
+                                        <img src='".URL."recursos/img/Animais/$values->foto' alt='Imagem' class='mw-100'>
                                     </div>
                                     <div class='col-md-7'>
                                         <div class='row'>
@@ -134,16 +134,40 @@
                                         <div class='col'></div>
                                     </div>
                                     <div class='col-md-2 mt-2 mt-md-0'>  
-                                        <button type='button' class='btn btn-success w-100 mb-2' onClick() data-bs-toggle='modal' data-bs-target='#modal'>
+                                        <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modal-$values->idanimal'>
                                             Solicitar castração
                                         </button>
                                         <a href='"."#' class='btn btn-warning w-100 mb-2'>Editar animal</a>
                                         <a href='"."#' class='btn btn-danger w-100'>Excluir animal</a>
+                                        <span class='badge badge-secondary'>$values->status</span>
                                     </div>
                                     
                                 </div>
                                 <hr>
                             <!-- Fim de um animal -->
+                            <!-- MODAL -->
+                                <div class='modal fade' id='modal-$values->idanimal' data-bs-keyboard='true' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+                                    <div class='modal-dialog modal-dialog-centered'>
+                                        <div class='modal-content'>
+                                            <form action='".URL."solicitar-castracao' method='post'>
+                                                <input type='hidden' id='idanimal' name='idAnimal' value='$values->idanimal'>
+                                                <div class='modal-header'>
+                                                    <h5 class='modal-title' id='staticBackdropLabel'>Solicitar castração</h5>
+                                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                </div>
+                                                <div class='modal-body'>
+                                                    <label class='form-label' for='obhsCastracao'>Observação: (opcional)</label>
+                                                    <textarea name='obsCastracao' id='obhsCastracao' rows='5' class='form-control'></textarea>
+                                                </div>
+                                                <div class='modal-footer'>
+                                                    <button type='submit' class='btn btn-primary'>Enviar Solicitação</button>
+                                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- /MODAL -->
                             ";
                         }
                         ?>
@@ -165,28 +189,7 @@
             </div>
         </div>
 
-        <!-- MODAL -->
-        <div class="modal fade" id="modal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <form action="<?php echo URL.'cadastrar-castracao'?>" method="post">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Solicitar castração</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <label class="form-label" for="obhsCastracao">Observação: (opcional)</label>
-                            <textarea name="obsCastracao" id="obhsCastracao" rows="5" class="form-control"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Enviar Solicitação</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- /MODAL -->
+        
 
         <!-- /CORPO -->
     </div>

@@ -56,9 +56,6 @@ class Controller
         
         include_once "view/meusAnimais.php";
     }
-    function abrirSolicitacao(){
-        include_once "view/solicitaCastra.php";
-    }
     
     // ADMINISTRADOR
     function abrirHomeAdm(){

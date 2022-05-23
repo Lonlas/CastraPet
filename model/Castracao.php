@@ -35,7 +35,8 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO castracao (idanimal, idclinica, horario, status, observacao) VALUES (:idanimal, :idclinica, :horario, :status, :observacao)");
+            $cmd = $con->prepare("INSERT INTO castracao (idanimal, idclinica, horario, status, observacao) 
+            VALUES (:idanimal, :idclinica, NULLIF(:horario,''), :status, :observacao)");
             
             //Parâmetros SQL
             $cmd->bindParam(":idanimal", $this->idanimal);
@@ -55,7 +56,6 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            //$cmd = $con->prepare("SELECT * FROM castracao");
             $cmd = $con->prepare("SELECT idcastracao, aninome, horario, status, observacao, cpf, cnpj, nome as 'nomeclinica' FROM castracao join animal on castracao.idanimal = animal.idanimal join usuario on animal.idusuario = usuario.idusuario join clinica on castracao.idclinica = clinica.idclinica join login on login.idlogin = clinica.idlogin");
             
             //Executando o comando SQL

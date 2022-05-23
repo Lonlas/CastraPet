@@ -79,9 +79,9 @@ if($_GET)
             $usuario = new Controller();
             $usuario->abrirMeusAnimais();
         break;
-        case "solicita-castracao":
-            $usuario = new Controller();
-            $usuario->abrirSolicitacao();
+        case "solicitar-castracao":
+            $usuario = new UsuarioController();
+            $usuario->solicitarCastracao();
         break;
 
         // ADM
