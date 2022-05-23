@@ -56,6 +56,8 @@ class UsuarioController
         $castracao->status = 0;
 
         $castracao->cadastrar();
+
+        echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
     }
     function logar()
     {
