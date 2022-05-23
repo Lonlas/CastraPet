@@ -6,15 +6,6 @@ include_once "model/Animal.php";
 
 class UsuarioController
 {
-    function abrirCadastro(){
-        include "view/cadastro.php";
-    }
-    function abrirLogin(){
-        include "view/login.php";
-    }
-    function abrirSolicitacao(){
-        include "view/solicitaCastra.php";
-    }
     function cadastrarUsuario(){
         //Cadastro do Login
         $login = new Login();
@@ -69,7 +60,7 @@ class UsuarioController
             switch($dadosLogin->nivelacesso)
             {
                 //caso seja usuário
-                case '0':
+                case 0:
 
                     $usuario = new Login();
                     $usuario->idlogin = $dadosLogin->idlogin;
@@ -86,7 +77,7 @@ class UsuarioController
                 break;
 
                 //caso seja clínica
-                case '1':
+                case 1:
                     //Buscando as informações da clínica
                     $clinica = new Login();
                     $clinica->idlogin = $dadosLogin->idlogin;
@@ -99,7 +90,7 @@ class UsuarioController
                 break;
 
                 //caso seja adm
-                case '2':
+                case 2:
                     echo"<script>alert('Usuário Administrador Logado'); window.location='".URL."home-adm'; </script>";
                 break;
                 default:
@@ -116,17 +107,6 @@ class UsuarioController
         $_SESSION[] = null;
         session_destroy();
         header("Location:".URL);
-    }
-    function abrirHomeClinica()
-    {
-        include "view/homeClinica.php";
-    }
-    function abrirHomeAdm()
-    {
-        include "view/homeAdm.php";
-    }
-    function abrirHomeUsuario(){
-        include "view/homeUsuario.php";
     }
 }
 ?>
