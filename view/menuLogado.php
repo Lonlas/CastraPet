@@ -22,7 +22,7 @@
         <a class="pe-auto text-decoration-none" href="<?php echo URL.'perfil'?>">
             <img src="<?php echo URL.'recursos/img/Logo-Castra-Pet.svg' ?>" alt="Perfil" width="50" class="me-3">
         </a>
-        <a href="<?php echo URL.'encerrarSessao';?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
+        <a href="<?php echo URL.'encerrar-sessao';?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
     </form>
 </div>
 </nav>
