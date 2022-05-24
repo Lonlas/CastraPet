@@ -79,6 +79,14 @@ if($_GET)
             $usuario = new Controller();
             $usuario->abrirMeusAnimais();
         break;
+        case "atualizar-animal":
+            $usuario = new Controller();
+            $usuario->abrirAtualizaAnimal($url[1]);
+        break;
+        case "excluir-animal":
+            $usuario = new AnimalController();
+            $usuario->excluirAnimal($url[1]);
+        break;
         case "solicitar-castracao":
             $usuario = new UsuarioController();
             $usuario->solicitarCastracao();
