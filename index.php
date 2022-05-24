@@ -83,6 +83,10 @@ if($_GET)
             $usuario = new Controller();
             $usuario->abrirAtualizaAnimal($url[1]);
         break;
+        case "editar-animal":
+            $usuario = new AnimalController();
+            $usuario->EditarAnimal();
+        break;
         case "excluir-animal":
             $usuario = new AnimalController();
             $usuario->excluirAnimal($url[1]);

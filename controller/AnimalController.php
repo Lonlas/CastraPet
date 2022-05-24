@@ -49,7 +49,7 @@ class AnimalController
         header("Location:".URL."meus-animais");
     }
 
-    function EditarAnimal($id)
+    function EditarAnimal()
     {
         
     }

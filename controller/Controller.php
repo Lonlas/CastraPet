@@ -60,6 +60,9 @@ class Controller
         $animal = new Animal();
         $animal->idanimal = $id;
         $dadosAnimal = $animal->retornar();
+
+        $raca = new Raca();
+        $dadosRaca = $raca->consultar();
         include_once "view/editaAnimal.php";
     }
     
