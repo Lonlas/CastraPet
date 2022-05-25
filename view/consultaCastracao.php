@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <?php include_once"head.php";?>
+    <?php include_once "head.php";?>
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
@@ -14,18 +14,11 @@
             switch($_SESSION["dadosLogin"]->nivelacesso)
             {
                 //caso tenha nível de acesso de usuário
-                case 0:
-                    include_once "menuLogado.php";
-                break;
+                case 0: include_once "menuLogado.php"; break;
                 //caso tenha nível de acesso de clínica
-                case 1:
-                    include_once "menuClinica.php";
-                break;
+                case 1: include_once "menuClinica.php"; break;
                 //caso tenha nível de acesso de Administrador
-                case 2:
-                    include_once "menuADM.php";
-                break;
-                
+                case 2: include_once "menuADM.php"; break;   
             }
         }
         else{ include_once "menu.php"; }
@@ -34,7 +27,7 @@
         <div class="bg-danger">
             <div class="container mx-auto p-3">
                 <div class="container bg-dark p-2">
-                    <h1 class="h4 text-white ms-3">Consultar Castrações</h1>
+                    <h5 class="h5 text-white ms-3">Consultar Castrações</h5>
                 </div>
                 <div class="bg-white p-3">
                     <div class="table-responsive">

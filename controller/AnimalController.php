@@ -4,21 +4,6 @@ include_once "model/Raca.php";
 
 class AnimalController
 {
-    function abrirMeusAnimais(){
-        $animal = new Animal();
-        $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
-        $dadosAnimais = $animal->retornarAnimais();
-
-        include "view/meusAnimais.php";
-    }
-    function abrirCadAnimal(){
-        $raca = new Raca();
-        $dadosRaca = $raca->consultar();
-        include "view/cadAnimal.php";
-    }
-    function abrirInfoAnimal(){
-        include "view/infoAnimal.php";
-    }
     function cadastrarAnimal()
     {
         $direciona = new Raca();
