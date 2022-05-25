@@ -40,8 +40,8 @@
                         foreach ($dadosAnimais as $values)
                         {
                             //Reescrevendo a espécie
-                            $values->especie = str_replace("0","Canina", $values->especie);
-                            $values->especie = str_replace("1","Felina", $values->especie);
+                            $values->especie = str_replace("1","Canina", $values->especie);
+                            $values->especie = str_replace("2","Felina", $values->especie);
 
                             //Reescrevendo o sexo
                             $values->sexo = str_replace("0","Fêmea", $values->sexo);
@@ -69,7 +69,7 @@
                             $values->status = str_replace("4","Não compareceu", $values->status);
 
 
-                            echo var_dump($values->idanimal).
+                            echo
                             "
                             <!-- Começo de um animal -->
                                 <div class='row align-items-center'>
@@ -144,9 +144,10 @@
                                         <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$values->idanimal'>
                                             Solicitar castração
                                         </button>
-                                        <a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2'>Editar animal</a>
+                                        
+                                        <a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2' >Editar animal</a>
                                         <a href='".URL."excluir-animal/$values->idanimal' class='btn btn-danger w-100'>Excluir animal</a>
-                                        <span class='badge bg-primary w-100 my-3'>$values->status</span>
+                                        <span class='badge bg-warning w-100 my-3'>$values->status</span>
                                     </div>
                                 </div>
                                 <hr>

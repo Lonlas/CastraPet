@@ -184,11 +184,11 @@
                                     <div class="row justify-content-center mb-3">
                                         <input type="file" name="imgAnimal" id="inputImgAnimal" accept="image/*" hidden>
                                         <label id="labelImgAnimal" for="inputImgAnimal" style="background-color: 0;"></label>
-                                        <img src="recursos/img/imagem_exemplo.jpg" alt="Foto do Animal" id="imgAnimal" for="inputImgAnimal">
+                                        <img src="<?php echo URL.'recursos/img/Animais/'.$dadosAnimal->foto;?>" alt="Foto do Animal" id="imgAnimal" for="inputImgAnimal">
                                     </div>
                                     <div class="row">
                                         <div class="col-12 text-center mt-3 mb-2">
-                                            <input type="submit" value="Cadastrar" class="btn btn-lg btn-success shadow" style="border-radius: 0; border: 0; padding: 12px 30px 12px 30px;">
+                                            <input type="submit" value="Atualizar" class="btn btn-lg btn-success shadow" style="border-radius: 0; border: 0; padding: 12px 30px 12px 30px;">
                                         </div>
                                     </div>
                                 </div>
