@@ -64,6 +64,23 @@
             return $cmd->fetchAll(PDO::FETCH_OBJ);
         }
 
+        function consultarPraClinica()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para consultar
+            //$cmd = $con->prepare("SELECT * FROM castracao");
+            $cmd = $con->prepare("SELECT idcastracao, aninome, horario, status, observacao, cpf FROM castracao JOIN animal ON castracao.idanimal = animal.idanimal JOIN usuario ON animal.idusuario = usuario.idusuario JOIN clinica ON castracao.idclinica = clinica.idclinica WHERE clinica.idclinica = :idclinica ORDER BY horario DESC");
+            
+            $cmd->bindParam(":idclinica", $this->idclinica);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
+
         //Método excluir
         function excluir()
         {

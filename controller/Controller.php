@@ -73,18 +73,23 @@ class Controller
     }    
     #CONSULTAS
     function abrirConsultaUsuario($cpf){
-        $direciona = new Usuario();
-        $dadosUsuario = $direciona->consultar();
+        $usuario = new Usuario();
+        $dadosUsuario = $usuario->consultar();
         include_once "view/consultaUsuario.php";
     }
     function abrirConsultaClinica($cnpj){
-        $direciona = new Clinica();
-        $dadosClinica = $direciona->consultar();
+        $clinica = new Clinica();
+        $dadosClinica = $clinica->consultar();
         include_once "view/consultaClinica.php";
     }
     function abrirConsultaCastracao(){
-        $direciona = new Castracao();
-        $dadosCastracao = $direciona->consultar();
+        $castracao = new Castracao();
+        if($_SESSION["dadosLogin"]->nivelacesso == 2){
+            $dadosCastracao = $castracao->consultar();
+        } else {
+            $castracao->idclinica = $_SESSION["dadosClinica"]->idclinica;
+            $dadosCastracaoClinica = $castracao->consultarPraClinica();
+        }
         include_once "view/consultaCastracao.php";
     }
     function abrirConsultaAnimais(){
