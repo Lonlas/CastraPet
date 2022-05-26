@@ -13,7 +13,7 @@ if($_GET)
 {
     //Pegando a URL e apagando a "/" no final dela.
     $url = $_GET["url"];
-    $url = explode("/",$url);a
+    $url = explode("/",$url);
 
     //Definindo os nomes das telas que vão aparecer na URL
     switch($url[0])
@@ -174,6 +174,7 @@ if($_GET)
 }
 else
 {
+    //testee
     //ABRIR PÁGINA INICIAL
     $direciona = new Controller();
     $direciona->abrirInicio();
