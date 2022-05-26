@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-transparent px-4 py-0 mx-2">
-<a class="navbar-brand" href="<?php echo URL.'inicio';?>"><img src="<?php echo URL.'recursos/img/Logo-Fav3.png'?>" style="height:80px;"></a>
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent mx-4 my-0" style="grid-area: header;">
+<a class="navbar-brand" href="<?php echo URL.'inicio';?>"><img src="<?php echo URL.'recursos/img/LogoCP (2).png';?>" style="height:80px;"></a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
     <span class="navbar-toggler-icon"></span>
 </button>
@@ -19,10 +19,11 @@
     </li>
     </ul>
     <form class="form-inline ms-auto my-2 my-lg-0"> 
-        <a class="pe-auto text-decoration-none" href="<?php echo URL.'perfil'?>">
-            <img src="recursos/img/Logo-Castra-Pet.svg" alt="Perfil" width="50" class="me-3">
+        <a class="text-decoration-none alert" href="<?php echo URL.'perfil'?>">
+            <img src="<?php echo URL.'recursos/img/Logo-Castra-Pet.svg';?>" alt="Perfil" width="50">
         </a>
-        <a href="<?php echo URL.'encerrarSessao';?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
+        <span class="mx-3"></span>
+        <a href="<?php echo URL.'encerrar-sessao';?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
     </form>
 </div>
 </nav>

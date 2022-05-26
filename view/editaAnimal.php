@@ -101,39 +101,40 @@
                         <h1 class="h5 m-1">CADASTRAR ANIMAL</h1>
                     </div>
                     <div class="container shadow-lg bg-white p-4">
-                        <form method="post" action="<?php echo URL.'cadastrar-animal';?>" enctype="multipart/form-data">
+                        <form method="post" action="<?php echo URL.'editar-animal';?>" enctype="multipart/form-data">
+                        <input type="hidden" name="" value="<?php echo $dadosAnimal->idanimal;?>">
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="row">
                                         <div class="col-12 mb-2">
                                             <label for="txtNome" class="form-label">Nome do Animal:</label>
-                                            <input type="text" class="form-control" id="txtNome" name="txtNome" maxlength="50" required>
+                                            <input type="text" class="form-control" id="txtNome" name="txtNome" maxlength="50" required value="<?php echo $dadosAnimal->aninome;?>">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="slcEspecie" class="form-label">Espécie:</label>
-                                            <select id="slcEspecie" name="slcEspecie" class="form-select" required>
+                                            <select id="slcEspecie" name="slcEspecie" class="form-select" required value="<?php echo $dadosAnimal->especie;?>">
                                                 <option value="1">Canina</option>
                                                 <option value="2">Felina</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="numIdade" class="form-label">Idade:</label>
-                                            <input type="number" class="form-control" id="numIdade" name="numIdade" min="0" max="100" required>
+                                            <input type="number" class="form-control" id="numIdade" name="numIdade" min="0" max="100" required value="<?php echo $dadosAnimal->idade;?>">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="slcSexo" class="form-label">Sexo:</label>
-                                            <select id="slcSexo" name="slcSexo" class="form-select" required>
+                                            <select id="slcSexo" name="slcSexo" class="form-select" required value="<?php echo $dadosAnimal->sexo;?>">
                                                 <option value="1">Macho</option>
                                                 <option value="2">Fêmea</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="slcPelagem" class="form-label">Pelagem:</label>
-                                            <select id="slcPelagem" name="slcPelagem" class="form-select" required>
+                                            <select id="slcPelagem" name="slcPelagem" class="form-select" required value="<?php echo $dadosAnimal->pelagem;?>">
                                                 <option value="1">Curta</option>
                                                 <option value="2">Média</option>
                                                 <option value="3">Alta</option>
@@ -143,11 +144,11 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="txtCor" class="form-label">Cor:</label>
-                                            <input type="text" class="form-control" id="txtCor" name="txtCor" maxlength="30" required>
+                                            <input type="text" class="form-control" id="txtCor" name="txtCor" maxlength="30" required value="<?php echo $dadosAnimal->cor;?>">
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="slcPorte" class="form-label">Porte:</label>
-                                            <select id="slcPorte" name="slcPorte" class="form-select" required>
+                                            <select id="slcPorte" name="slcPorte" class="form-select" required value="<?php echo $dadosAnimal->porte;?>">
                                                 <option value="1">Pequeno</option>
                                                 <option value="2">Médio</option>
                                                 <option value="3">Grande</option>
@@ -162,7 +163,7 @@
                                                 <?php
                                                     foreach($dadosRaca as $value)
                                                     {
-                                                        echo "<option value='$value->raca'>";
+                                                        echo "<option value='$value->raca'></option>";
                                                     }
                                                 ?>
                                             </datalist>
@@ -183,11 +184,11 @@
                                     <div class="row justify-content-center mb-3">
                                         <input type="file" name="imgAnimal" id="inputImgAnimal" accept="image/*" hidden>
                                         <label id="labelImgAnimal" for="inputImgAnimal" style="background-color: 0;"></label>
-                                        <img src="recursos/img/imagem_exemplo.jpg" alt="Foto do Animal" id="imgAnimal" for="inputImgAnimal">
+                                        <img src="<?php echo URL.'recursos/img/Animais/'.$dadosAnimal->foto;?>" alt="Foto do Animal" id="imgAnimal" for="inputImgAnimal">
                                     </div>
                                     <div class="row">
                                         <div class="col-12 text-center mt-3 mb-2">
-                                            <input type="submit" value="Cadastrar" class="btn btn-lg btn-success shadow" style="border-radius: 0; border: 0; padding: 12px 30px 12px 30px;">
+                                            <input type="submit" value="Atualizar" class="btn btn-lg btn-success shadow" style="border-radius: 0; border: 0; padding: 12px 30px 12px 30px;">
                                         </div>
                                     </div>
                                 </div>

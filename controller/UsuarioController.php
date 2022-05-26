@@ -6,15 +6,6 @@ include_once "model/Animal.php";
 
 class UsuarioController
 {
-    function abrirCadastro(){
-        include "view/cadastro.php";
-    }
-    function abrirLogin(){
-        include "view/login.php";
-    }
-    function abrirSolicitacao(){
-        include "view/solicitaCastra.php";
-    }
     function cadastrarUsuario(){
         //Cadastro do Login
         $login = new Login();
@@ -29,9 +20,9 @@ class UsuarioController
         $cadastra->rg = $_POST["txtRG"];
         $cadastra->cpf = $_POST["txtCPF"];
 
-        if($_POST["chkProtetor"] == 1)
+        if($_POST["chkProtetor"] == 2)
             $cadastra->beneficio = $_POST["chkProtetor"];
-        else if($_POST["chkNIS"] == 2)
+        else if($_POST["chkNIS"] == 1)
             $cadastra->beneficio = $_POST["chkNIS"];
         else
             $cadastra->beneficio = 0;
@@ -56,6 +47,18 @@ class UsuarioController
 
         header("Location:".URL);
     }
+
+    function solicitarCastracao()
+    {
+        $castracao = new Castracao();
+        $castracao->idanimal = $_POST["idAnimal"];
+        $castracao->observacao = $_POST["obsCastracao"];
+        $castracao->status = 0;
+
+        $castracao->cadastrar();
+
+        echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
+    }
     function logar()
     {
         $logar = new Login();
@@ -69,10 +72,11 @@ class UsuarioController
             switch($dadosLogin->nivelacesso)
             {
                 //caso seja usuário
-                case '0':
+                case 0:
+
                     $usuario = new Login();
                     $usuario->idlogin = $dadosLogin->idlogin;
-                    $dadosUsuario = $usuario->retornaUsuario();
+                    $dadosUsuario = $usuario->retornarUsuario();
 
                     $animal = new Animal();
                     $animal->idusuario = $dadosUsuario->idusuario;
@@ -80,23 +84,34 @@ class UsuarioController
 
                     $_SESSION["dadosUsuario"] = $dadosUsuario;
                     $_SESSION["dadosAnimais"] = $dadosAnimais;
+
                     echo"<script>alert('Usuário Logado'); window.location='".URL."home-usuario'; </script>";
                 break;
+
                 //caso seja clínica
-                case '1':
+                case 1:
+                    //Buscando as informações da clínica
+                    $clinica = new Login();
+                    $clinica->idlogin = $dadosLogin->idlogin;
+                    $dadosClinica = $clinica->retornarClinica();
+
+                    //Colocando em uma Sessão
+                    $_SESSION["dadosClinica"] = $dadosClinica;
+
                     echo"<script>alert('Usuário Clínica Logado'); window.location='".URL."home-clinica'; </script>";
                 break;
+
                 //caso seja adm
-                case '2':
+                case 2:
                     echo"<script>alert('Usuário Administrador Logado'); window.location='".URL."home-adm'; </script>";
                 break;
                 default:
-                    echo"<script>alert('Email ou senha estão errados'); window.location='".URL."login'; </script>";
+                    header("location:".URL."login");
             }
         }
         else
         {
-            echo"<script>alert('Email ou senha estão erradosaaaaaaaaaaa'); window.location='".URL."login'; </script>";
+            echo"<script>alert('Email ou senha estão errados'); window.location='".URL."login'; </script>";
         }
     }
     function sair()
@@ -104,17 +119,6 @@ class UsuarioController
         $_SESSION[] = null;
         session_destroy();
         header("Location:".URL);
-    }
-    function abrirHomeClinica()
-    {
-        include "view/homeClinica.php";
-    }
-    function abrirHomeAdm()
-    {
-        include "view/homeAdm.php";
-    }
-    function abrirHomeUsuario(){
-        include "view/homeUsuario.php";
     }
 }
 ?>

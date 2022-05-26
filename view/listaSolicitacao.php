@@ -1,40 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CastraPet</title>
-    <!-- EXTENSÃO BOOTSTRAP -->
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
-
+    <?php include_once "head.php";?>
 </head>
 <body>
     <!-- CORPO -->
     <?php //CONTROLE DE MENU
         if($_SESSION) //caso esteja logado e exista uma sessão
+        {
+            switch($_SESSION["dadosLogin"]->nivelacesso)
             {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case '0':
-                        include_once "menuLogado.php";
-                    break;
-                    //caso tenha nível de acesso de clínica
-                    case '1':
-                        include_once "menuClinica.php";
-                    break;
-                    //caso tenha nível de acesso de Administrador
-                    case '2':
-                        include_once "menuADM.php";
-                    break;
-                    
-                }
+                //caso tenha nível de acesso de usuário
+                case 0: include_once "menuLogado.php"; break;
+                //caso tenha nível de acesso de clínica
+                case 1: include_once "menuClinica.php"; break;
+                //caso tenha nível de acesso de Administrador
+                case 2: include_once "menuADM.php"; break;   
             }
-        else{
-            include_once "menu.php";
         }
+        else{ include_once "menu.php"; }
     ?>
 
     <div class="container-fluid">
@@ -43,7 +27,7 @@
                 <table class="table table-hover bg-white align-items-center">
                     <thead class="table-dark mb-0 mt-4 my-4">
                         <tr>
-                            <td>Solicitações</td>    
+                            <td><h5>Solicitações</h5></td>    
                         </tr>
                     </thead>
                     <tbody>
@@ -67,7 +51,7 @@
                             {
                                 echo"<tr>
                                         <td>
-                                            <a href='".URL."agendamento' class='link-dark text-decoration-none'>$value->solicitacao</a>
+                                            <a href='".URL."agendamento' class='link-dark text-decoration-none'>Solicitação $value->idcastracao</a>
                                         </td>
                                     </tr>";
                             }

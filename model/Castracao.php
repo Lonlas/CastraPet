@@ -35,7 +35,8 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO castracao (idanimal, idclinica, horario, status, observacao) VALUES (:idanimal, :idclinica, :horario, :status, :observacao)");
+            $cmd = $con->prepare("INSERT INTO castracao (idanimal, idclinica, horario, status, observacao) 
+            VALUES (:idanimal, :idclinica, NULLIF(:horario,''), :status, :observacao)");
             
             //Parâmetros SQL
             $cmd->bindParam(":idanimal", $this->idanimal);
@@ -55,9 +56,25 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            //$cmd = $con->prepare("SELECT * FROM castracao");
-            $cmd = $con->prepare("SELECT idcastracao, aninome, horario, status, observacao, cpf, nome as 'nomeclinica' FROM castracao join animal on castracao.idanimal = animal.idanimal join usuario on animal.idusuario = usuario.idusuario join clinica on castracao.idclinica = clinica.idclinica join login on login.idlogin = clinica.idlogin");
+            $cmd = $con->prepare("SELECT idcastracao, aninome, horario, status, observacao, cpf, cnpj, nome as 'nomeclinica' FROM castracao join animal on castracao.idanimal = animal.idanimal join usuario on animal.idusuario = usuario.idusuario join clinica on castracao.idclinica = clinica.idclinica join login on login.idlogin = clinica.idlogin");
             
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        function consultarPraClinica()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para consultar
+            //$cmd = $con->prepare("SELECT * FROM castracao");
+            $cmd = $con->prepare("SELECT idcastracao, aninome, horario, status, observacao, cpf FROM castracao JOIN animal ON castracao.idanimal = animal.idanimal JOIN usuario ON animal.idusuario = usuario.idusuario JOIN clinica ON castracao.idclinica = clinica.idclinica WHERE clinica.idclinica = :idclinica ORDER BY horario DESC");
+            
+            $cmd->bindParam(":idclinica", $this->idclinica);
+
             //Executando o comando SQL
             $cmd->execute();
 

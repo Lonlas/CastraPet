@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CastraPet</title>
-    <!-- EXTENSÃO BOOTSTRAP -->
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo URL; ?>recursos/css/root.css">
+    <?php include_once "head.php";?>
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
@@ -16,66 +10,122 @@
     <!-- CORPO -->
     <?php //CONTROLE DE MENU
         if($_SESSION) //caso esteja logado e exista uma sessão
+        {
+            switch($_SESSION["dadosLogin"]->nivelacesso)
             {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case '0':
-                        include_once "menuLogado.php";
-                    break;
-                    //caso tenha nível de acesso de clínica
-                    case '1':
-                        include_once "menuClinica.php";
-                    break;
-                    //caso tenha nível de acesso de Administrador
-                    case '2':
-                        include_once "menuADM.php";
-                    break;
-                    
-                }
+                //caso tenha nível de acesso de clínica
+                case 1: include_once "menuClinica.php"; break;
+                //caso tenha nível de acesso de Administrador
+                case 2: include_once "menuADM.php"; break;   
             }
-        else{
-            include_once "menu.php";
         }
+        else{ include_once "menu.php"; }
     ?>
     <div class="container-fluid">
-        <div class="bg-danger">
+        <?php
+            if($_SESSION["dadosLogin"]->nivelacesso == 1)
+            {
+                echo "<div class='bg-warning'>";
+            } 
+            else 
+            {
+                echo "<div class='bg-danger'>";
+            }
+        ?>
             <div class="container mx-auto p-3">
                 <div class="container bg-dark p-2">
-                    <h1 class="h4 text-white ms-3">Consultar Castrações</h1>
+                    <h5 class="h5 text-white ms-3">Consultar Castrações</h5>
                 </div>
                 <div class="bg-white p-3">
                     <div class="table-responsive">
                         <table id="tbCastracao" class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Animal</th>
-                                    <th>CPF do Responsável</th>
-                                    <th>Clínica</th>
-                                    <th>Data</th>
-                                    <th>Hora</th>
-                                    <th>Status</th>
-                                    <th>Observação</th>
-                                </tr>
-                            </thead>
-                            <tbody>
                                 <?php
-                                foreach($dadosCastracao as $value)
+                                if($_SESSION["dadosLogin"]->nivelacesso == 2)
                                 {
-                                    echo 
-                                    "
-                                    <tr>
-                                        <td>$value->idcastracao</td>
-                                        <td>$value->aninome</td>
-                                        <td>$value->cpf</td>
-                                        <td>$value->nomeclinica</td>
-                                        <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
-                                        <td>". date('H:i',strtotime($value->horario)) ."</td>
-                                        <td>$value->status</td>
-                                        <td>$value->observacao</td>
-                                    </tr>
-                                    ";
+                                    echo"
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Animal</th>
+                                                <th>CPF do Responsável</th>
+                                                <th>Clínica</th>
+                                                <th>Data</th>
+                                                <th>Hora</th>
+                                                <th>Status</th>
+                                                <th>Observação</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        ";
+                                    foreach($dadosCastracao as $value)
+                                    {
+                                        $value->status = str_replace("0", "Em análise", $value->status);
+                                        $value->status = str_replace("1", "Aprovado", $value->status);
+                                        $value->status = str_replace("2", "Castrado", $value->status);
+                                        $value->status = str_replace("3", "Reprovado", $value->status);
+                                        $value->status = str_replace("4", "Não compareceu", $value->status);
+
+                                        $value->observacao = preg_replace("/^$/", "-", $value->observacao);
+                                        
+                                        echo
+                                        "
+                                        <tr>
+                                            <td>$value->idcastracao</td>
+                                            <td>$value->aninome</td>
+                                            <td><a href=". URL . "consulta-usuario/$value->cpf" .">$value->cpf</a></td>
+                                            <td><a href=". URL . "consulta-clinica/$value->cnpj" . ">$value->nomeclinica</a></td>
+                                            <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
+                                            <td>". date('H:i',strtotime($value->horario)) ."</td>
+                                            <td>$value->status</td>
+                                            <td>$value->observacao</td>
+                                            <td>Editar Excluir</td>
+                                        </tr>
+                                        ";
+                                    }
+                                }
+                                else if ($_SESSION["dadosLogin"]->nivelacesso == 1)
+                                {
+                                    echo"
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Animal</th>
+                                                <th>CPF do Responsável</th>
+                                                <th>Data</th>
+                                                <th>Hora</th>
+                                                <th>Status</th>
+                                                <th>Observação</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        ";
+
+                                    foreach($dadosCastracaoClinica as $value)
+                                    {
+                                        $value->status = str_replace("0", "Em análise", $value->status);
+                                        $value->status = str_replace("1", "Aprovado", $value->status);
+                                        $value->status = str_replace("2", "Castrado", $value->status);
+                                        $value->status = str_replace("3", "Reprovado", $value->status);
+                                        $value->status = str_replace("4", "Não compareceu", $value->status);
+                                        
+                                        $value->observacao = preg_replace("/^$/", "-", $value->observacao);
+                                        
+                                        echo
+                                        "
+                                        <tr>
+                                            <td>$value->idcastracao</td>
+                                            <td>$value->aninome</td>
+                                            <td>$value->cpf</td>
+                                            <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
+                                            <td>". date('H:i',strtotime($value->horario)) ."</td>
+                                            <td>$value->status</td>
+                                            <td>$value->observacao</td>
+                                            <td>Editar</td>
+                                        </tr>
+                                        ";
+                                    }
                                 }
                                 ?>
                             </tbody>
@@ -85,9 +135,6 @@
             </div>
             <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">
                 <a href="#" class="btn-lg btn-success" role="button" style="border-radius: 0; text-decoration: 0; padding: 12px 35px 12px 35px; margin-left: 40px;">Voltar</a>
-            </div>
-            <div class="container">
-                
             </div>
         </div>
     </div>
@@ -121,7 +168,6 @@
             } );
         } );
         </script>
-    <!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"></script>-->
 
 </body>
 </html>
