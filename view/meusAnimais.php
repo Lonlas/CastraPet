@@ -68,7 +68,7 @@
                             <!-- Começo de um animal -->
                                 <div class='row mt-3'>
                                     <div class='col-md-3 d-flex align-items-center'>
-                                        <img src='".URL."recursos/img/imagem_cachorro.jpg' alt='Imagem' class='mw-100'>
+                                        <img src='".URL."recursos/img/Animais/$values->foto' alt='Imagem' class='mw-100'>
                                     </div>
                                     <div class='col-md-7'>
                                         <div class='row'>
