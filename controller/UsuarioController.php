@@ -47,6 +47,18 @@ class UsuarioController
 
         header("Location:".URL);
     }
+
+    function solicitarCastracao()
+    {
+        $castracao = new Castracao();
+        $castracao->idanimal = $_POST["idAnimal"];
+        $castracao->observacao = $_POST["obsCastracao"];
+        $castracao->status = 0;
+
+        $castracao->cadastrar();
+
+        echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
+    }
     function logar()
     {
         $logar = new Login();

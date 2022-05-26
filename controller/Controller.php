@@ -53,11 +53,17 @@ class Controller
         $animal = new Animal();
         $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
         $dadosAnimais = $animal->retornarAnimais();
-        
+
         include_once "view/meusAnimais.php";
     }
-    function abrirSolicitacao(){
-        include_once "view/solicitaCastra.php";
+    function abrirAtualizaAnimal($id){
+        $animal = new Animal();
+        $animal->idanimal = $id;
+        $dadosAnimal = $animal->retornar();
+
+        $raca = new Raca();
+        $dadosRaca = $raca->consultar();
+        include_once "view/editaAnimal.php";
     }
     
     // ADMINISTRADOR
