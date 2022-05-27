@@ -142,10 +142,11 @@ if($_GET)
         break;
         case "agendamento":
             $adm = new Controller();
-            $adm->abrirAgendamento();
+            $adm->abrirAgendamento($url[1]);
         break;
         case "agendar":
-        
+            $castracao = new UsuarioController();
+            $castracao->agendarCastracao();
         break;
 
         // CLÍNICA
