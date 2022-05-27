@@ -28,9 +28,8 @@
                     CADASTRAR
                 </div>
                 <div class="container bg-white">
-                    <form method="post" action="cadastrar-tutor">
-                    <div class="row m-0 align-items-center">
-                        <div class="col-lg-6 mb-4 align-self-center">
+                    <form method="post" class="row m-0 py-3" action="cadastrar-tutor">
+                        <div class="col-lg-6 mb-4">
                             <div class="form-group row-6 mb-3">
                                 <label for="txtNome" class="form-label">Nome:</label>
                                 <input  class="form-control" type="text" name="txtNome" id="txtNome" maxlength="70" required>
@@ -78,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 mb-4 align-self-center">
+                        <div class="col-lg-6 mb-4">
                             <div class="row mb-3">
                                 <div class="form-group col-6">
                                     <label for="txtCEP" class="form-label">CEP:</label>
@@ -112,7 +111,6 @@
                                 </div>        
                             </div>
                         </div>     
-                    </div>
                     </form>
                 </div>
             </div>
@@ -158,7 +156,7 @@
         });
     </script>
     <script>
-        function confirmasenha()
+       /* function confirmasenha()
         {
 
             var confirmaSenha = document.getElementById("txtConfirmaSenha");
@@ -172,7 +170,7 @@
                 erro.style = "display:inline;";
                 event.preventDefault();
             }
-        }
+        }*/
     </script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 </body>

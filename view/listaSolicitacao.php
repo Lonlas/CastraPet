@@ -30,32 +30,19 @@
                             <td><h5>Solicitações</h5></td>    
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="<?php echo URL.'agendamento';?>" class="link-dark text-decoration-none">Solicitação 1</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="<?php echo URL.'agendamento';?>" class="link-dark text-decoration-none">Solicitação 2</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="<?php echo URL.'agendamento';?>" class="link-dark text-decoration-none">Solicitação 3</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="<?php echo URL.'agendamento';?>" class="link-dark text-decoration-none">Solicitação 4</a></td>
-                        </tr>
+                    <tbody>                        
                         
-                        
-                        <!--
-                            <?php
+                        <?php
                             foreach ($dadosSolicitacao as $value)
                             {
                                 echo"<tr>
                                         <td>
-                                            <a href='".URL."agendamento' class='link-dark text-decoration-none'>Solicitação $value->idcastracao</a>
+                                            <a href='".URL."agendamento/$value->idcastracao' class='link-dark text-decoration-none'>Solicitação $value->idcastracao</a>
                                         </td>
-                                    </tr>";
+                                    </tr>
+                                ";
                             }
-                        ?>-->
+                        ?>
                     </tbody>
                 </table>
             </div>

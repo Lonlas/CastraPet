@@ -24,6 +24,8 @@ class ClinicaController
         $clinica->clicep = $_POST["txtCEP"];
 
         $clinica->cadastrar();
+
+        header("Location:".URL."cadastra-clinica");
     }
 }
 

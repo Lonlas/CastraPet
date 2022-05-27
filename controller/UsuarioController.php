@@ -3,6 +3,7 @@
 include_once "model/Usuario.php";
 include_once "model/Login.php";
 include_once "model/Animal.php";
+include_once "model/Castracao.php";
 
 class UsuarioController
 {
@@ -59,6 +60,30 @@ class UsuarioController
 
         echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
     }
+
+    function agendarCastracao()
+    {   
+
+        $idcastracao = $_POST["idcastracao"];
+        if($_POST["dataHora"] != "" && $_POST["selectClinica"] != 0)
+        {
+            $castracao = new Castracao();
+
+            $castracao->idclinica = $_POST["selectClinica"];
+            $castracao->status = 1;
+            $castracao->horario = $_POST["dataHora"];
+            $castracao->idcastracao = $idcastracao;
+
+            $castracao->aprovarCastracao();
+
+            header("Location:".URL."lista-solicitacao");
+        }
+        else
+        {
+            echo "<script>alert('Selecione a clínica e/ou a data'); window.location='".URL."agendamento/$idcastracao'; </script>";
+        }
+    }
+    
     function logar()
     {
         $logar = new Login();
