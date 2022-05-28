@@ -131,7 +131,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT idcastracao, aninome, cpf, observacao, status from castracao join animal on animal.idanimal = castracao.idanimal join usuario on usuario.idusuario = animal.idusuario WHERE castracao.idcastracao = :idcastracao");
+            $cmd = $con->prepare("SELECT idcastracao, aninome, cpf, observacao, status, email, nome from castracao join animal on animal.idanimal = castracao.idanimal join usuario on usuario.idusuario = animal.idusuario join login on usuario.idlogin = login.idlogin WHERE castracao.idcastracao = :idcastracao");
             
             //Parâmetros SQL
             $cmd->bindParam(":idcastracao", $this->idcastracao);

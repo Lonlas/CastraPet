@@ -4,6 +4,8 @@ include_once "model/Usuario.php";
 include_once "model/Login.php";
 include_once "model/Animal.php";
 include_once "model/Castracao.php";
+include_once "model/Email.php";
+include_once "model/Clinica.php";
 
 class UsuarioController
 {
@@ -63,7 +65,6 @@ class UsuarioController
 
     function agendarCastracao()
     {   
-
         $idcastracao = $_POST["idcastracao"];
         if($_POST["dataHora"] != "" && $_POST["selectClinica"] != 0)
         {
@@ -75,6 +76,22 @@ class UsuarioController
             $castracao->idcastracao = $idcastracao;
 
             $castracao->aprovarCastracao();
+            
+            $clinica = new Clinica();
+            $clinica->idclinica = $_POST["selectClinica"];
+            $dadosClinica = $clinica->retornar();
+
+            //enviar o email
+            $email = new Email();
+            $email->data = $_POST["dataHora"];
+            $email->nomeClinica = $dadosClinica->nome;
+            $email->ruaClinica = $dadosClinica->clirua;
+            $email->bairroClinica = $dadosClinica->clibairro;
+            $email->numeroClinica = $dadosClinica->clinumero;
+            $email->emailDestinatario = $_POST["emailDestinatario"];
+            $email->nomeDestinatario = $_POST["nomeDestinatairio"];
+            $email->nomeAnimal = $_POST["aninome"];
+            $email->enviarConfirmacao();
 
             header("Location:".URL."lista-solicitacao");
         }

@@ -29,6 +29,8 @@
                     </div>
                     <div>
                         <form action="<?php echo URL.'agendar';?>" method="POST" class="container row mx-0 py-3 px-0">
+                            <input type="hidden" name="emailDestinatario" id="emailDestinatairio" value="<?php echo $dadosCastracao->email;?>">
+                            <input type="hidden" name="nomeDestinatairio" id="nomeDestinatairio" value="<?php echo $dadosCastracao->nome;?>">
                             <div class="col-sm-6 px-3">
                                 <div class="row container-fluid p-0 m-0 form-group mb-2">
                                     <label for="" class="form-label">Número da solicitação:</label>

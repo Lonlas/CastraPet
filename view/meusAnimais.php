@@ -179,7 +179,7 @@
             <div class='modal-dialog modal-dialog-centered'>
                 <div class='modal-content'>
                     <form action="<?php echo URL.'solicitar-castracao';?>" method='post'>
-                        <input type='text' id='idAnimal' name='idAnimal'>
+                        <input type='hidden' id='idAnimal' name='idAnimal'>
                         <div class='modal-header'>
                             <h5 class='modal-title' id='staticBackdropLabel'>Solicitar castração</h5>
                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
