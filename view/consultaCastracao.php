@@ -13,8 +13,6 @@
         {
             switch($_SESSION["dadosLogin"]->nivelacesso)
             {
-                //caso tenha nível de acesso de usuário
-                case 0: include_once "menuLogado.php"; break;
                 //caso tenha nível de acesso de clínica
                 case 1: include_once "menuClinica.php"; break;
                 //caso tenha nível de acesso de Administrador
@@ -24,7 +22,16 @@
         else{ include_once "menu.php"; }
     ?>
     <div class="container-fluid">
-        <div class="bg-danger">
+        <?php
+            if($_SESSION["dadosLogin"]->nivelacesso == 1)
+            {
+                echo "<div class='bg-warning'>";
+            } 
+            else 
+            {
+                echo "<div class='bg-danger'>";
+            }
+        ?>
             <div class="container mx-auto p-3">
                 <div class="container bg-dark p-2">
                     <h5 class="h5 text-white ms-3">Consultar Castrações</h5>
@@ -32,43 +39,93 @@
                 <div class="bg-white p-3">
                     <div class="table-responsive">
                         <table id="tbCastracao" class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Animal</th>
-                                    <th>CPF do Responsável</th>
-                                    <th>Clínica</th>
-                                    <th>Data</th>
-                                    <th>Hora</th>
-                                    <th>Status</th>
-                                    <th>Observação</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
                                 <?php
-                                foreach($dadosCastracao as $value)
+                                if($_SESSION["dadosLogin"]->nivelacesso == 2)
                                 {
-                                    $value->status = str_replace("0", "Em análise", $value->status);
-                                    $value->status = str_replace("1", "Aprovado", $value->status);
-                                    $value->status = str_replace("2", "Castrado", $value->status);
-                                    $value->status = str_replace("3", "Reprovado", $value->status);
-                                    $value->status = str_replace("4", "Não compareceu", $value->status);
+                                    echo"
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Animal</th>
+                                                <th>CPF do Responsável</th>
+                                                <th>Clínica</th>
+                                                <th>Data</th>
+                                                <th>Hora</th>
+                                                <th>Status</th>
+                                                <th>Observação</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        ";
+                                    foreach($dadosCastracao as $value)
+                                    {
+                                        $value->status = str_replace("0", "Em análise", $value->status);
+                                        $value->status = str_replace("1", "Aprovado", $value->status);
+                                        $value->status = str_replace("2", "Castrado", $value->status);
+                                        $value->status = str_replace("3", "Reprovado", $value->status);
+                                        $value->status = str_replace("4", "Não compareceu", $value->status);
 
-                                    echo 
-                                    "
-                                    <tr>
-                                        <td>$value->idcastracao</td>
-                                        <td>$value->aninome</td>
-                                        <td><a href=". URL . "consulta-usuario/$value->cpf" .">$value->cpf</a></td>
-                                        <td><a href=". URL . "consulta-clinica/$value->cnpj" . ">$value->nomeclinica</a></td>
-                                        <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
-                                        <td>". date('H:i',strtotime($value->horario)) ."</td>
-                                        <td>$value->status</td>
-                                        <td>$value->observacao</td>
-                                        <td>Editar Excluir</td>
-                                    </tr>
-                                    ";
+                                        $value->observacao = preg_replace("/^$/", "-", $value->observacao);
+                                        
+                                        echo
+                                        "
+                                        <tr>
+                                            <td>$value->idcastracao</td>
+                                            <td>$value->aninome</td>
+                                            <td><a href=". URL . "consulta-usuario/$value->cpf" .">$value->cpf</a></td>
+                                            <td><a href=". URL . "consulta-clinica/$value->cnpj" . ">$value->nomeclinica</a></td>
+                                            <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
+                                            <td>". date('H:i',strtotime($value->horario)) ."</td>
+                                            <td>$value->status</td>
+                                            <td>$value->observacao</td>
+                                            <td>Editar Excluir</td>
+                                        </tr>
+                                        ";
+                                    }
+                                }
+                                else if ($_SESSION["dadosLogin"]->nivelacesso == 1)
+                                {
+                                    echo"
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Animal</th>
+                                                <th>CPF do Responsável</th>
+                                                <th>Data</th>
+                                                <th>Hora</th>
+                                                <th>Status</th>
+                                                <th>Observação</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        ";
+
+                                    foreach($dadosCastracaoClinica as $value)
+                                    {
+                                        $value->status = str_replace("0", "Em análise", $value->status);
+                                        $value->status = str_replace("1", "Aprovado", $value->status);
+                                        $value->status = str_replace("2", "Castrado", $value->status);
+                                        $value->status = str_replace("3", "Reprovado", $value->status);
+                                        $value->status = str_replace("4", "Não compareceu", $value->status);
+                                        
+                                        $value->observacao = preg_replace("/^$/", "-", $value->observacao);
+                                        
+                                        echo
+                                        "
+                                        <tr>
+                                            <td>$value->idcastracao</td>
+                                            <td>$value->aninome</td>
+                                            <td>$value->cpf</td>
+                                            <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
+                                            <td>". date('H:i',strtotime($value->horario)) ."</td>
+                                            <td>$value->status</td>
+                                            <td>$value->observacao</td>
+                                            <td>Editar</td>
+                                        </tr>
+                                        ";
+                                    }
                                 }
                                 ?>
                             </tbody>
@@ -111,7 +168,6 @@
             } );
         } );
         </script>
-    <!--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"></script>-->
 
 </body>
 </html>
