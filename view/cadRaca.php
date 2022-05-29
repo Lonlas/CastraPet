@@ -32,7 +32,7 @@
             <div class="row h-100 align-items-center">
                 <div class="p-3">
                     <div class="container bg-dark text-light font-weight-bold p-3">
-                        <h5>Cadastrar Raça</h5>
+                        <h5 class="m-0">Cadastrar Raça</h5>
                     </div>
                     <div class="container bg-white">
                         <form action="cadastrar-raca" class="p-sm-2 py-sm-3 p-md-3 p-lg-4 py-3" method="POST">
