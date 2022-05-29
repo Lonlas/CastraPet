@@ -69,7 +69,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="txtNumero">Número:</label>
-                                            <input type="number" id="txtNumero" name="txtNumero" class="form-control" placeholder="" required>
+                                            <input type="text" id="txtNumero" name="txtNumero" class="form-control" placeholder="" required>
                                         </div>
                                     </div>
                                 </div> 
