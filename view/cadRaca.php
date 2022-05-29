@@ -34,8 +34,8 @@
                     <div class="container bg-dark text-light font-weight-bold p-3">
                         <h5 class="m-0">Cadastrar Raça</h5>
                     </div>
-                    <div class="container bg-white">
-                        <form action="cadastrar-raca" class="p-sm-2 py-sm-3 p-md-3 p-lg-4 py-3" method="POST">
+                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 bg-white">
+                        <form action="cadastrar-raca" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0" method="POST">
                             <label for="Especie">Espécie:</label>
                             <select name="tipoEspecie" id="Especie" class="form-select">
                                 <option value="1">Felina</option>
