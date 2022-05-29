@@ -35,8 +35,8 @@
                         <h5 class="m-0">CADASTRAR</h5>
                     </div>
                     <div class="container p-sm-3 p-md-3 p-lg-4 p-3 bg-white">
-                        <form method="post" class="row p-sm-3 p-md-3 p-lg-4 p-3" action="cadastrar-tutor">
-                            <div class="col-lg-6 mb-lg-0 mb-5">
+                        <form method="post" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0" action="cadastrar-tutor">
+                            <div class="col-md-6 mb-lg-0 mb-5 p-0 pe-md-3">
                                 <div class="form-group row-6 mb-3">
                                     <label for="txtNome" class="form-label">Nome:</label>
                                     <input  class="form-control" type="text" name="txtNome" id="txtNome" maxlength="70" required>
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-md-6 p-0 ps-md-3">
                                 <div class="row mb-3">
                                     <div class="form-group col-6">
                                         <label for="txtCEP" class="form-label">CEP:</label>
