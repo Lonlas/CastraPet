@@ -79,13 +79,13 @@ if($_GET)
             $usuario = new Controller();
             $usuario->abrirMeusAnimais();
         break;
-        case "atualizar-animal":
+        /*case "atualizar-animal":
             $usuario = new Controller();
             $usuario->abrirAtualizaAnimal($url[1]);
-        break;
-        case "editar-animal":
+        break;*/
+        case "atualizar-animal":
             $usuario = new AnimalController();
-            $usuario->EditarAnimal();
+            $usuario->atualizarAnimal($url[1]);
         break;
         case "excluir-animal":
             $usuario = new AnimalController();
