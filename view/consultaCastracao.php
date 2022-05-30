@@ -31,7 +31,16 @@
             }
             else{ include_once "menu.php"; }
         ?>
-        <div class="bg-danger container-fluid" style="grid-area: corpo;">
+        <?php
+            if($_SESSION["dadosLogin"]->nivelacesso == 1)
+            {
+                echo "<div class='bg-warning container-fluid' style='grid-area: corpo;'>";
+            } 
+            else 
+            {
+                echo "<div class='bg-danger container-fluid' style='grid-area: corpo;'>";
+            }
+        ?>
             <div class="row h-100 align-items-center">
                 <div class="p-3">
                     <div class="container bg-dark text-light font-weight-bold p-3">
@@ -79,7 +88,7 @@
                                             <td>". date('H:i',strtotime($value->horario)) ."</td>
                                             <td>$value->status</td>
                                             <td>$value->observacao</td>
-                                            <td>Editar Excluir</td>
+                                            <td><a href='".URL."' class='btn btn-warning'>Atualizar</a><a href='".URL."' class='btn btn-danger'>Excluir</a></td>
                                         </tr>
                                         ";
                                     }
@@ -122,7 +131,7 @@
                                             <td>". date('H:i',strtotime($value->horario)) ."</td>
                                             <td>$value->status</td>
                                             <td>$value->observacao</td>
-                                            <td>Editar</td>
+                                            <td><a href='".URL."' class='btn btn-warning'>Atualizar</a></td>
                                         </tr>
                                         ";
                                     }
