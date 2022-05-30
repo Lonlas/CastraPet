@@ -114,8 +114,9 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="slcEspecie" class="form-label">Espécie:</label>
                                             <select id="slcEspecie" name="slcEspecie" class="form-select" required>
-                                                <option value="1">Canina</option>
-                                                <option value="2">Felina</option>
+                                                <label>SELECIONE</label>
+                                                <option id="especie" value="1">Canina</option>
+                                                <option id="especie" value="2">Felina</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
@@ -157,15 +158,30 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="listRaca" class="form-label">Raça:</label>
-                                            <input list="racas" name="listRaca" id="listRaca" class="form-control" maxlength="30" required>
-                                            <datalist id="racas">
+                                            <select name="racas" id="racas" class="form-select">
                                                 <?php
-                                                    foreach($dadosRaca as $value)
+                                                    $slcEspecie = $_POST["slcEspecie"];
+                                                    $especie = $_POST["especie"];
+
+                                                    if($especie == 1)
                                                     {
-                                                        echo "<option value='$value->raca'>";
+                                                        foreach($dadosRacaCanino as $value)
+                                                        {
+                                                            echo "<option value='$value->idraca'>$value->raca</option>";
+                                                        }
+                                                    }
+                                                    else if($especie == 2)
+                                                    {
+                                                        foreach($dadosRacaFelino as $value)
+                                                        {
+                                                            echo "<option value='$value->idraca'>$value->raca</option>";
+                                                        }
+                                                    }else{
+                                                       echo "<label>... SELECIONE A ESPÉCIE ...</label>";
                                                     }
                                                 ?>
-                                            </datalist>
+                                            </select>
+                                            
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="slcComunitario" class="form-label">Animal Comunitário:</label>
