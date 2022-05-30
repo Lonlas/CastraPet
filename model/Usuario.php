@@ -5,7 +5,6 @@
         private $idlogin;
         private $rg;
         private $cpf;
-        private $nis;
         private $beneficio;
         private $telefone;
         private $celular;
@@ -14,6 +13,7 @@
         private $usubairro;
         private $usunumero;
         private $usucep;
+        private $nis;
 
         //Método get
         function __get($atributo)
@@ -46,18 +46,18 @@
             VALUES (:idlogin, :rg, :cpf, :beneficio, NULLIF(:telefone,''), :celular, :punicao, :usurua, :usubairro, :usunumero, :usucep, NULLIF(:nis,''))");
             
             //Parâmetros SQL
-            $cmd->bindParam(":idlogin", $this->idlogin);
-            $cmd->bindParam(":rg", $this->rg);
-            $cmd->bindParam(":cpf", $this->cpf);
+            $cmd->bindParam(":idlogin",   $this->idlogin);
+            $cmd->bindParam(":rg",        $this->rg);
+            $cmd->bindParam(":cpf",       $this->cpf);
             $cmd->bindParam(":beneficio", $this->beneficio);
-            $cmd->bindParam(":telefone", $this->telefone);
-            $cmd->bindParam(":celular", $this->celular);
-            $cmd->bindParam(":punicao", $this->punicao);
-            $cmd->bindParam(":usurua", $this->usurua);
+            $cmd->bindParam(":telefone",  $this->telefone);
+            $cmd->bindParam(":celular",   $this->celular);
+            $cmd->bindParam(":punicao",   $this->punicao);
+            $cmd->bindParam(":usurua",    $this->usurua);
             $cmd->bindParam(":usubairro", $this->usubairro);
             $cmd->bindParam(":usunumero", $this->usunumero);
-            $cmd->bindParam(":usucep", $this->usucep);
-            $cmd->bindParam(":nis", $this->nis);
+            $cmd->bindParam(":usucep",    $this->usucep);
+            $cmd->bindParam(":nis",       $this->nis);
 
             //Executando o comando SQL
             $cmd->execute();
@@ -70,7 +70,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idusuario, nome, email, cpf, beneficio, nis, telefone, celular, usucep, usubairro, usurua, usunumero, punicao FROM usuario JOIN login on usuario.idlogin = login.idlogin");
+            $cmd = $con->prepare("SELECT idusuario, nome, email, cpf, beneficio, nis, telefone, celular, usucep, usubairro, usurua, usunumero, punicao FROM usuario JOIN login ON usuario.idlogin = login.idlogin");
             
             //Executando o comando SQL
             $cmd->execute();
@@ -101,21 +101,22 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE usuario SET idlogin = :idlogin, rg = :rg, cpf = :cpf, beneficio = :beneficio, telefone = NULLIF(:telefone,''), celular = :celular, punicao = :punicao, usurua = :usurua, usubairro = :usubairro, usunumero = :usunumero, usucep = :usucep, nis = NULLIF(:nis,'') WHERE idusuario = :idusuario");
+            $cmd = $con->prepare("UPDATE usuario SET idlogin = :idlogin, rg = :rg, cpf = :cpf, beneficio = :beneficio, telefone = NULLIF(:telefone,''), celular = :celular, punicao = :punicao,
+                                         usurua = :usurua, usubairro = :usubairro, usunumero = :usunumero, usucep = :usucep, nis = NULLIF(:nis,'') WHERE idusuario = :idusuario");
                 
             //Parâmetros SQL
-            $cmd->bindParam(":idlogin", $this->idlogin);
-            $cmd->bindParam(":rg", $this->rg);
-            $cmd->bindParam(":cpf", $this->cpf);
+            $cmd->bindParam(":idlogin",   $this->idlogin);
+            $cmd->bindParam(":rg",        $this->rg);
+            $cmd->bindParam(":cpf",       $this->cpf);
             $cmd->bindParam(":beneficio", $this->beneficio);
-            $cmd->bindParam(":telefone", $this->telefone);
-            $cmd->bindParam(":celular", $this->celular);
-            $cmd->bindParam(":punicao", $this->punicao);
-            $cmd->bindParam(":usurua", $this->usurua);
+            $cmd->bindParam(":telefone",  $this->telefone);
+            $cmd->bindParam(":celular",   $this->celular);
+            $cmd->bindParam(":punicao",   $this->punicao);
+            $cmd->bindParam(":usurua",    $this->usurua);
             $cmd->bindParam(":usubairro", $this->usubairro);
             $cmd->bindParam(":usunumero", $this->usunumero);
-            $cmd->bindParam(":usucep", $this->usucep);
-            $cmd->bindParam(":nis", $this->nis);
+            $cmd->bindParam(":usucep",    $this->usucep);
+            $cmd->bindParam(":nis",       $this->nis);
             $cmd->bindParam(":idusuario", $this->idusuario);
 
             //Executando o comando SQL

@@ -41,13 +41,28 @@
         }
 
         //Método Consultar
-        function consultar()
+        function consultarCanino()
         {
             //Conectar
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para cadastrar
-            $cmd = $con->prepare("SELECT * FROM raca");
+            $cmd = $con->prepare("SELECT * FROM raca WHERE tipoespecie = 0");
+
+            //Executando o comando SQL
+            $cmd->execute();
+            
+            //Retorna os usuários em forma de objeto de dentro de uma matriz
+            return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        function consultarFelino()
+        {
+            //Conectar
+            $con = Conexao::conectar();
+
+            //Preparar o comando SQL para cadastrar
+            $cmd = $con->prepare("SELECT * FROM raca WHERE tipoespecie = 1");
 
             //Executando o comando SQL
             $cmd->execute();
