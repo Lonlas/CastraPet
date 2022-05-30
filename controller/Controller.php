@@ -46,7 +46,8 @@ class Controller
     }
     function abrirCadAnimal(){
         $raca = new Raca();
-        $dadosRaca = $raca->consultar();
+        $dadosRacaCanino = $raca->consultarCanino();
+        $dadosRacaFelino = $raca->consultarFelino();
         include_once "view/cadAnimal.php";
     }
     function abrirMeusAnimais(){
@@ -56,15 +57,18 @@ class Controller
 
         include_once "view/meusAnimais.php";
     }
-    function abrirAtualizaAnimal($id){
+
+    /*function abrirAtualizaAnimal($id){
         $animal = new Animal();
         $animal->idanimal = $id;
         $dadosAnimal = $animal->retornar();
 
         $raca = new Raca();
-        $dadosRaca = $raca->consultar();
+        $dadosRacaCanino = $raca->consultarCanino();
+        $dadosRacaFelino = $raca->consultarFelino();
+        
         include_once "view/editaAnimal.php";
-    }
+    }*/
     
     // ADMINISTRADOR
     function abrirHomeAdm(){
@@ -99,6 +103,9 @@ class Controller
         include_once "view/consultaCastracao.php";
     }
     function abrirConsultaAnimais(){
+        $raca = new Raca();
+        $dadosRacaCanino = $raca->consultarCanino();
+        $dadosRacaFelino = $raca->consultarFelino();
         include_once "view/consultaAnimais.php";
     }
     #AGENDAMENTO
