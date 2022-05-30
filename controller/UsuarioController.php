@@ -71,19 +71,17 @@ class UsuarioController
         {
             if($_POST["dataHora"] != "" && $_POST["selectClinica"] != 0)
             {
-                return;
                 $castracao = new Castracao();
     
                 $castracao->idclinica = $_POST["selectClinica"];
                 $castracao->status = 1;
                 $castracao->horario = $_POST["dataHora"];
                 $castracao->idcastracao = $idcastracao;
-    
-                $castracao->aprovarCastracao();
                 
                 $clinica = new Clinica();
                 $clinica->idclinica = $_POST["selectClinica"];
                 $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas - 1;
                 
                 //enviar o email
                 $email = new Email();
@@ -95,6 +93,9 @@ class UsuarioController
                 $email->emailDestinatario = $_POST["emailDestinatario"];
                 $email->nomeDestinatario = $_POST["nomeDestinatairio"];
                 $email->nomeAnimal = $_POST["aninome"];
+
+                $clinica->subtrairVagas();
+                $castracao->aprovarCastracao();
                 $email->enviarConfirmacao();
     
                 header("Location:".URL."lista-solicitacao");

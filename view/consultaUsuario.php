@@ -84,11 +84,11 @@
                                             <td>$value->punicao</td>
                                             <td>
                                                 <a href='". URL. "consulta-animais' class='btn btn-success col-auto'>
-                                                    <img src='". URL ."recursos/img/Logo Castra Pet1.png' alt='Animais cadastrados' width='30' class='aling-itens-center justify-content-center'>
+                                                    <img src='". URL ."recursos/img/Logo-Castra-Pet.svg' alt='Animais cadastrados' width='30' class='aling-itens-center white justify-content-center'>
                                                 </a>
                                             </td>
                                             <td>
-                                                <button class='btn btn-warning btn-md' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' ><i class='fa fa-edit'></i>Editar</button>
+                                                <button class='btn btn-warning btn-md text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' ><i class='fa fa-edit'></i>Editar</button>
                                                 <button class='btn btn-danger btn-md'>Excluir</button>
                                             </td>
                                         </tr>

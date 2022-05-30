@@ -114,7 +114,7 @@ class Controller
         $dadosCastracao = $agendamento->retornar();
 
         $clinica = new Clinica();
-        $dadosClinicas = $clinica->consultar();
+        $dadosClinicas = $clinica->consultarComVagas();
 
         include_once "view/confirmaSolicitacao.php";
     }

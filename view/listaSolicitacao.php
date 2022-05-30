@@ -57,7 +57,7 @@
                                                 <td>Solicitação $value->idcastracao</td>
                                                 <td>$value->aninome</td>
                                                 <td>$value->nome</td>
-                                                <td><a href='".URL."agendamento/$value->idcastracao' class='btn btn-info'>Analizar</a></td>
+                                                <td><a href='".URL."agendamento/$value->idcastracao' class='btn btn-info'>Analisar</a></td>
                                             </tr>
                                         ";
                                     }

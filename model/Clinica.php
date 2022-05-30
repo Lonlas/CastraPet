@@ -68,6 +68,19 @@
 
             return $cmd->fetchAll(PDO::FETCH_OBJ);
         }
+        function consultarComVagas()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para consultar
+            $cmd = $con->prepare("SELECT idclinica, nome, email, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep FROM clinica JOIN login ON clinica.idlogin = login.idlogin WHERE clinica.vagas > 0");
+            
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
 
         //Método excluir
         function excluir()
@@ -125,6 +138,21 @@
             $cmd->execute();
 
             return $cmd->fetch(PDO::FETCH_OBJ);
+        }
+        function subtrairVagas()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("UPDATE clinica SET vagas = :vagas WHERE idclinica = :idclinica");
+            $cmd->bindParam(":vagas", $this->vagas);
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":idclinica", $this->idclinica);
+
+            //Executando o comando SQL
+            $cmd->execute();
         }
     }
 ?>
