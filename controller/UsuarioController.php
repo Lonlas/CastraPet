@@ -66,39 +66,56 @@ class UsuarioController
     function agendarCastracao()
     {   
         $idcastracao = $_POST["idcastracao"];
-        if($_POST["dataHora"] != "" && $_POST["selectClinica"] != 0)
+
+        if(!isset($_POST["btnRecusa"]))
+        {
+            if($_POST["dataHora"] != "" && $_POST["selectClinica"] != 0)
+            {
+                return;
+                $castracao = new Castracao();
+    
+                $castracao->idclinica = $_POST["selectClinica"];
+                $castracao->status = 1;
+                $castracao->horario = $_POST["dataHora"];
+                $castracao->idcastracao = $idcastracao;
+    
+                $castracao->aprovarCastracao();
+                
+                $clinica = new Clinica();
+                $clinica->idclinica = $_POST["selectClinica"];
+                $dadosClinica = $clinica->retornar();
+                
+                //enviar o email
+                $email = new Email();
+                $email->data = $_POST["dataHora"];
+                $email->nomeClinica = $dadosClinica->nome;
+                $email->ruaClinica = $dadosClinica->clirua;
+                $email->bairroClinica = $dadosClinica->clibairro;
+                $email->numeroClinica = $dadosClinica->clinumero;
+                $email->emailDestinatario = $_POST["emailDestinatario"];
+                $email->nomeDestinatario = $_POST["nomeDestinatairio"];
+                $email->nomeAnimal = $_POST["aninome"];
+                $email->enviarConfirmacao();
+    
+                header("Location:".URL."lista-solicitacao");
+            }
+            else
+            {
+                echo "<script>alert('Selecione a clínica e/ou a data'); window.location='".URL."agendamento/$idcastracao'; </script>";
+            }
+        }
+        else if($_POST["btnRecusa"] == "Recusar")
         {
             $castracao = new Castracao();
 
-            $castracao->idclinica = $_POST["selectClinica"];
-            $castracao->status = 1;
-            $castracao->horario = $_POST["dataHora"];
             $castracao->idcastracao = $idcastracao;
+            $castracao->status = 3;
 
-            $castracao->aprovarCastracao();
-            
-            $clinica = new Clinica();
-            $clinica->idclinica = $_POST["selectClinica"];
-            $dadosClinica = $clinica->retornar();
-
-            //enviar o email
-            $email = new Email();
-            $email->data = $_POST["dataHora"];
-            $email->nomeClinica = $dadosClinica->nome;
-            $email->ruaClinica = $dadosClinica->clirua;
-            $email->bairroClinica = $dadosClinica->clibairro;
-            $email->numeroClinica = $dadosClinica->clinumero;
-            $email->emailDestinatario = $_POST["emailDestinatario"];
-            $email->nomeDestinatario = $_POST["nomeDestinatairio"];
-            $email->nomeAnimal = $_POST["aninome"];
-            $email->enviarConfirmacao();
+            $castracao->recusarCastracao();
 
             header("Location:".URL."lista-solicitacao");
         }
-        else
-        {
-            echo "<script>alert('Selecione a clínica e/ou a data'); window.location='".URL."agendamento/$idcastracao'; </script>";
-        }
+
     }
     
     function logar()

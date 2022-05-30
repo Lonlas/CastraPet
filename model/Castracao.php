@@ -52,7 +52,7 @@
         {
             $con = Conexao::conectar();
 
-            $cmd = $con->prepare("SELECT * FROM castracao WHERE status = 'null' ");
+            $cmd = $con->prepare("SELECT idcastracao, aninome, nome FROM castracao join animal on animal.idanimal = castracao.idanimal join usuario on usuario.idusuario = animal.idusuario join login on login.idlogin = usuario.idlogin WHERE status = 'null' ");
         
             $cmd->execute();
 
@@ -67,6 +67,18 @@
 
             $cmd->bindParam(":idclinica", $this->idclinica);
             $cmd->bindParam(":horario", $this->horario);
+            $cmd->bindParam(":status", $this->status);
+            $cmd->bindParam(":idcastracao", $this->idcastracao);
+
+            $cmd->execute();
+        }
+
+        function recusarCastracao()
+        {
+            $con = Conexao::conectar();
+
+            $cmd = $con->prepare("UPDATE castracao SET status = :status WHERE idcastracao = :idcastracao");
+
             $cmd->bindParam(":status", $this->status);
             $cmd->bindParam(":idcastracao", $this->idcastracao);
 
