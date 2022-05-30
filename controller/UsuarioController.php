@@ -49,6 +49,75 @@ class UsuarioController
         header("Location:".URL);
     }
 
+    
+    function atualizarUsuario($id)
+    {
+        $login = new Login();
+        $login->idlogin = $id; 
+        $login->nome = $_POST["txtNome"];
+        $login->email = $_POST["txtEmail"];
+        $login->atualizarLogin();
+
+        $usu = new Usuario();
+        $usu->idlogin = $id;  
+        $usu->rg = $_POST["rg"];
+        $usu->cpf = $_POST["cpf"];
+        $usu->beneficio = $_POST["beneficio"];
+
+            // Que tipo de benefício tem
+            if ($_POST["chkProtetor"] == 2) {
+                $usu->beneficio = $_POST["chkProtetor"];
+            }
+            else if($_POST["chkNIS"] == 1){
+                $usu->beneficio = $_POST["chkNIS"];
+            }
+            else{ $usu->beneficio = 0; }
+
+        $usu->telefone = $_POST["telefone"];
+        $usu->celular = $_POST["celular"];
+        $usu->usurua = $_POST["usurua"];
+        $usu->usubairro = $_POST["usubairro"];
+        $usu->usunumero = $_POST["usunumero"];
+        $usu->usucep = $_POST["usucep"];
+        
+            // NIS
+            if(empty($_POST["txtNIS"])){
+                $usu->nis = "";
+            }
+            else{ $usu->nis = $_POST["txtNIS"];}
+
+        $usu->punicao = $_POST["punicao"];
+        $usu->idusuario = $_POST["idusuario"];
+        $usu->atualizar();
+
+        echo "<script>
+                alert('Dados gravados com sucesso!');
+                window.location='".URL."consultar-usuario';
+              </script>";
+    }
+
+    function excluirUsuario($id)
+    {
+        $login = new Login();
+        $login->idlogin = $id;
+        $login->excluir();
+        $usu = new Usuario(); 
+        $usu->idusuario = $id;
+        $usu->excluir();
+
+        //direcionar novamente para a tela de consulta
+        header("Location:".URL."consulta-usuario");
+    }
+    
+    function alterarSenha()
+    {
+        $alterar = new Login();
+        $alterar->senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
+        $alterar->alterarSenha();
+
+        header("Location:".URL."perfil");
+    }
+
     function solicitarCastracao()
     {
         $castracao = new Castracao();
