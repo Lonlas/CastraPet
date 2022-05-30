@@ -6,7 +6,7 @@ class AnimalController
 {
     function cadastrarAnimal()
     {
-        $direciona = new Raca();
+        /*$direciona = new Raca();
         $dadosRaca = $direciona->consultar();
         //Gambiarra para pegar o ID da raça - Melhorar o código depois
         foreach($dadosRaca as $value)
@@ -15,10 +15,10 @@ class AnimalController
             {
                 $raca = $value->idraca;
             }
-        }
+        }*/
         $animal = new Animal();
         $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
-        $animal->idraca = $raca;
+        $animal->idraca = $_POST["idraca"];
         $animal->aninome = $_POST["txtNome"];
         $animal->especie = $_POST["slcEspecie"];
         $animal->sexo = $_POST["slcSexo"];
@@ -28,30 +28,84 @@ class AnimalController
         $animal->idade = $_POST["numIdade"];
         $animal->comunitario = $_POST["slcComunitario"];
 
-        //Tratar o envio da imagem
-        $nomeArquivo = $_FILES["imgAnimal"]["name"];       //Nome do arquivo
-        $nomeTemp = $_FILES["imgAnimal"]["tmp_name"];      //nome temporário
-        
-        //pegar a extensão do arquivo
-        $info = new SplFileInfo($nomeArquivo);
-        $extensao = $info->getExtension();
-        
-        //gerar novo nome
-        $novoNome = md5(microtime()) . ".$extensao";
-        
-        $pastaDestino = "recursos/img/Animais/$novoNome";    //pasta destino
-        move_uploaded_file($nomeTemp, $pastaDestino);       //mover o arquivo 
-        
-        $animal->foto = $novoNome; //Nome do arquivo para o banco de dados
+        /* UPLOAD IMAGEM */
+        if($_FILES["foto"]["error"] == 0)
+        {
+            $nomeArquivo = $_FILES["imgAnimal"]["name"];    //Nome do arquivo
+            $nomeTemp = $_FILES["imgAnimal"]["tmp_name"];   //nome temporário
+            
+            //pegar a extensão do arquivo
+            $info = new SplFileInfo($nomeArquivo);
+            $extensao = $info->getExtension();
+            
+            //gerar novo nome
+            $novoNome = md5(microtime()) . ".$extensao";
+            
+            $pastaDestino = "recursos/img/Animais/$novoNome";   //pasta destino
+            move_uploaded_file($nomeTemp, $pastaDestino);       //mover o arquivo 
+            
+            //enviando para o banco de dados
+            $animal->foto = $novoNome;
+        }
 
         $animal->cadastrar();
 
         header("Location:".URL."meus-animais");
     }
 
-    function EditarAnimal()
+    function atualizarAnimal($id)
     {
-        
+        /*$direciona = new Raca();
+        $dadosRaca = $direciona->consultar();
+        //Gambiarra para pegar o ID da raça - Melhorar o código depois
+
+        foreach($dadosRaca as $value)
+        {
+            if($_POST["listRaca"] == $value->raca)
+            {
+                $raca = $value->idraca;
+            }
+        }*/
+        $animal = new Animal();
+        $animal->idanimal = $id;
+        $animal->idraca = $_POST["idraca"];
+        $animal->aninome = $_POST["txtNome"];
+        $animal->especie = $_POST["slcEspecie"];
+        $animal->sexo = $_POST["slcSexo"];
+        $animal->porte = $_POST["slcPorte"];
+        $animal->cor = $_POST["txtCor"];
+        $animal->pelagem = $_POST["slcPelagem"];
+        $animal->idade = $_POST["numIdade"];
+        $animal->comunitario = $_POST["slcComunitario"];
+
+        /* UPLOAD IMAGEM */
+        if($_FILES["foto"]["error"] == 0 && $animal->foto != "")
+        {
+            $nomeTemp    = $_FILES["foto"]["tmp_name"];
+            $pastaDestino = "recursos/img/Animal/".$animal->foto;
+            move_uploaded_file($nomeTemp, $pastaDestino);
+        }
+        else {
+            $nomeArquivo = $_FILES["imgAnimal"]["name"];       //Nome do arquivo
+            $nomeTemp = $_FILES["imgAnimal"]["tmp_name"];      //nome temporário
+            
+            //pegar a extensão do arquivo
+            $info = new SplFileInfo($nomeArquivo);
+            $extensao = $info->getExtension();
+            
+            //gerar novo nome
+            $novoNome = md5(microtime()) . ".$extensao";
+            
+            $pastaDestino = "recursos/img/Animais/$novoNome";    //pasta destino
+            move_uploaded_file($nomeTemp, $pastaDestino);       //mover o arquivo 
+            
+            //enviando para o banco
+            $animal->foto = $novoNome;
+        }   
+
+        $animal->atualizar();
+
+        header("Location:".URL."meus-animais");
     }
 
     function excluirAnimal($id)
