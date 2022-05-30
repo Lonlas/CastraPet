@@ -2,35 +2,42 @@
 <html lang="pt-br">
 <head>
     <?php include_once "head.php";?>
+    <style rel="stylesheet" type="text/css">
+        .corpo{
+            grid-template-areas: 'header''corpo''footer';
+            grid-template-rows: max-content auto 100px;
+        }
+    </style>
     <!-- CSS DataTables-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    
 </head>
 <body>
     <!-- CORPO -->
-    <?php //CONTROLE DE MENU
-        if($_SESSION) //caso esteja logado e exista uma sessão
-        {
-            switch($_SESSION["dadosLogin"]->nivelacesso)
+    <div class="container-fluid d-grid min-vh-100 corpo">
+        <?php //CONTROLE DE MENU
+            if($_SESSION) //caso esteja logado e exista uma sessão
             {
-                //caso tenha nível de acesso de usuário
-                case 0: include_once "menuLogado.php"; break;
-                //caso tenha nível de acesso de clínica
-                case 1: include_once "menuClinica.php"; break;
-                //caso tenha nível de acesso de Administrador
-                case 2: include_once "menuADM.php"; break;   
+                switch($_SESSION["dadosLogin"]->nivelacesso)
+                {
+                    //caso tenha nível de acesso de usuário
+                    case 0: include_once "menuLogado.php"; break;
+                    //caso tenha nível de acesso de clínica
+                    case 1: include_once "menuClinica.php"; break;
+                    //caso tenha nível de acesso de Administrador
+                    case 2: include_once "menuADM.php"; break;   
+                }
             }
-        }
-        else{ include_once "menu.php"; }
-    ?>
-
-    <div class="container-fluid">
-        <div class="bg-danger">
-            <div class="container mx-auto py-3">
-                <div class="container bg-dark p-2">
-                    <h5 class="h5 text-white ms-3">Consultar Usuários</h5>
-                </div>
-                <div class="bg-white p-3">
-                   <div class="table-responsive">
+            else{ include_once "menu.php"; }
+        ?>
+        <div class="bg-danger container-fluid" style="grid-area: corpo;">
+            <div class="row h-100 align-items-center">
+                <div class="p-3">
+                    <div class="container bg-dark text-light font-weight-bold p-3">
+                        <h5 class="m-0">Consultar Usuários</h5>
+                    </div>
+                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
                         <table id="tbUsuario" class="table table-hover">
                             <thead>
                                 <th>#</th>
@@ -93,74 +100,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">
-                <a href="<?php echo URL.'home-adm'; ?>" class="btn-lg btn-success" role="button" style="border-radius: 0; text-decoration: 0; padding: 12px 35px 12px 35px; margin-left: 40px;">Voltar</a>
-            </div>
+        </div>
+        <div class="container-fluid bg-dark" style="grid-area: footer;">
+            <div class="row h-100 align-items-center">
+                <div class="px-5">
+                    <a href="<?php echo URL.'home-adm';?>" class="btn btn-success">Voltar</a>
+                </div>
+            </div> 
         </div>
     </div>
-        <!--
-        <div class="bg-danger" >
-            <div class="container mx-auto row p-3">
-                <div class="container bg-white p-0">   
-                    <div class="container bg-dark text-light font-weight-bold p-3">
-                        Consultar Usuário
-                    </div>
-                    <form action="consulta-usuario">
-                        <div class="table-responsive-md">
-                            <table class="table table-sm table-hover ps-3 mb-3 me-5" id="dadosUsuario">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>E-mail</th>
-                                        <th>CPF</th>
-                                        <th>Telefone</th>
-                                        <th>Animais</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Fulano Fulano Fulano Fulano</td>
-                                        <td>Fulano7777@gamil.com</td>
-                                        <td>12345678910</td>
-                                        <td>11987546321</td>
-                                        <td>
-                                            <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">
-                                                <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-warning btn-md" id="btnEditar" type="button" data-bs-target="#modalEditar" data-bs-toggle="modal" ><i class='fa fa-edit'></i>Editar</button>
-                                            <button class="btn btn-danger btn-md">Excluir</button>
-                                    </tr>
-    
-                                    <?php
-                                        /*foreach ($dadosUsuario as $value)
-                                        {
-                                            echo"<tr>
-                                                    <td>$value->nome</td>
-                                                    <td>$value->email</td>
-                                                    <td>$value->cpf</td>
-                                                    <td>$value->telefone</td>
-                                                    <td>
-                                                        <a href=".URL."consulta-animais' class='btn btn-success col-auto'>
-                                                            <img src='recursos/img/Logo Castra Pet1.png' alt='Animais cadastrados' width='30' class='aling-itens-center justify-content-center'>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <button class='btn btn-warning btn-md' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal'>
-                                                            <i class='fa fa-edit'></i>Editar</button>
-                                                        <a href=".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-md' 
-                                                        onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir</a>
-                                                    </td>
-                                                </tr>";
-                                        }*/
-                                    ?>   
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>                    
-        -->
+
     <!-- MODAL: editar usuário -->
     <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -268,7 +217,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
-    
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
         $(document).ready(function() {
