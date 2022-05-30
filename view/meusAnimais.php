@@ -62,11 +62,11 @@
                             $values->comunitario = str_replace("1","Sim", $values->comunitario);
 
                             //Reescrevendo o Status
-                            $values->status = str_replace("0","Em análise", $values->status);
-                            $values->status = str_replace("1","Aprovado", $values->status);
-                            $values->status = str_replace("2","Castrado", $values->status);
-                            $values->status = str_replace("3","Reprovado", $values->status);
-                            $values->status = str_replace("4","Não compareceu", $values->status);
+                            $values->status = str_replace("0","<span class='badge bg-warning'>Em análise</span>", $values->status);
+                            $values->status = str_replace("1","<span class='badge bg-success'>Aprovado</span>", $values->status);
+                            $values->status = str_replace("2","<span> class='badge bg-success'>Castrado</span>", $values->status);
+                            $values->status = str_replace("3","<span class='badge bg-danger'>Reprovado</span>", $values->status);
+                            $values->status = str_replace("4","<span class='badge bg-danger'>Não compareceu</span>", $values->status);
 
 
                             echo
@@ -140,14 +140,25 @@
                                         <div class='col'></div>
                                     </div>
                                     <div class='col-md-2 mt-2 mt-md-0'>
-                                    
+                                    ";
+                                    if(Empty($values->status))
+                                    {
+                                        echo "
                                         <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$values->idanimal'>
                                             Solicitar castração
                                         </button>
-                                        
-                                        <a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2' >Editar animal</a>
+                                        <a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2 text-white' >Editar animal</a>
                                         <a href='".URL."excluir-animal/$values->idanimal' class='btn btn-danger w-100'>Excluir animal</a>
-                                        <span class='badge bg-warning w-100 my-3'>$values->status</span>
+                                        ";
+                                    }
+                                    else
+                                    {
+                                        echo 
+                                        "
+                                            $values->status
+                                        ";  
+                                    }
+                                    echo "
                                     </div>
                                 </div>
                                 <hr>
