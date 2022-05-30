@@ -25,7 +25,7 @@ class ClinicaController
 
         $clinica->cadastrar();
 
-        header("Location:".URL."cadastra-clinica");
+        echo "<script>alert('Clínica cadastrada com sucesso!'); window.location='".URL."cadastra-clinica';</script>";
     }
 }
 
