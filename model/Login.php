@@ -80,22 +80,32 @@
         }
         
         //Método Atualizar
-        function atualizar()
+        function atualizarLogin()
         {
             //Conectando ao banco de dados
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE login SET nome = :nome, email = :email, senha = :senha, nivelacesso = :nivelacesso WHERE idlogin = :idlogin");
+            $cmd = $con->prepare("UPDATE login SET nome = :nome, email = :email WHERE idlogin = :idlogin");
             
             //Parâmetros SQL
             $cmd->bindParam(":nome", $this->nome);
             $cmd->bindParam(":email", $this->email);
-            $cmd->bindParam(":senha", $this->senha);
-            $cmd->bindParam(":nivelacesso", $this->nivelacesso);
             $cmd->bindParam(":idlogin", $this->idlogin);
 
             //Executando o comando SQL
+            $cmd->execute();
+        }
+        
+        function alterarSenha()
+        {
+            $con = Conexao::conectar();
+
+            $cmd = $con->prepare("UPDATE login SET senha = :senha WHERE idlogin = :idlogin");
+
+            $cmd->bindParam(":senha", $this->senha);
+            $cmd->bindParam(":idlogin", $this->idlogin);
+
             $cmd->execute();
         }
 
