@@ -139,6 +139,42 @@
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado -->
     
+    
+    <script>
+        //Consultar CEP
+            const $campoCEP = document.getElementById("txtCEP");
+            const $campoBairro = document.getElementById("txtBairro");
+            const $campoRua = document.getElementById("txtRua");
+
+            $campoCEP.addEventListener("blur", infosDoEvento => {
+                const cep = infosDoEvento.target.value;
+                if($campoCEP.value != '')
+                {
+                    fetch('https://viacep.com.br/ws/'+cep+'/json/')
+                    .then((aaa) => {
+                        return aaa.json();
+                    })
+                    .then((bbb) => {
+                        if(bbb.erro == 'true')
+                        {
+                            $campoBairro.value = '';
+                            $campoRua.value = '';
+                        }else
+                        {
+                            //07868150
+                        console.log(bbb);
+                        $campoBairro.value = bbb.bairro;
+                        $campoRua.value = bbb.logradouro;
+                        }
+                    })
+                }
+                else
+                {
+                    $campoBairro.value = '';
+                    $campoRua.value = '';
+                }
+            });
+    </script>
     <script>
         //NIS
         $('#chkNIS').change(function() {
@@ -168,7 +204,7 @@
         });
     </script>
     <script>
-       /* function confirmasenha()
+       function confirmasenha()
         {
 
             var confirmaSenha = document.getElementById("txtConfirmaSenha");
@@ -182,7 +218,7 @@
                 erro.style = "display:inline;";
                 event.preventDefault();
             }
-        }*/
+        }
     </script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 </body>
