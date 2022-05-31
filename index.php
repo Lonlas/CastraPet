@@ -71,6 +71,10 @@ if($_GET)
             $animal = new Controller();
             $animal->abrirCadAnimal();
         break;
+        case "carregar-raca":
+            $raca = new AnimalController();
+            $raca->carregarRaca($url[1]);    
+        break;
         case "cadastrar-animal":
             $animal = new AnimalController();
             $animal->cadastrarAnimal();
@@ -79,10 +83,6 @@ if($_GET)
             $usuario = new Controller();
             $usuario->abrirMeusAnimais();
         break;
-        /*case "atualizar-animal":
-            $usuario = new Controller();
-            $usuario->abrirAtualizaAnimal($url[1]);
-        break;*/
         case "atualizar-animal":
             $usuario = new AnimalController();
             $usuario->atualizarAnimal($url[1]);
