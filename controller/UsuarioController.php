@@ -122,12 +122,22 @@ class UsuarioController
     {
         $castracao = new Castracao();
         $castracao->idcastracao = $_POST["idCastracao"];
-        if($_POST["status"] == "Castrado")
+        if($_POST["statusAtualizado"] == "Castrado")
         {
             $castracao->status = 2;
             $castracao->atualizar();
+
+            if($_POST["status"] == "Não compareceu")
+            {
+                //Liberar a vaga de castração para a clínica
+                $clinica = new Clinica();
+                $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas - 1;
+                $clinica->subtrairVagas();
+            }
         }
-        else if($_POST["status"] == "nCompareceu")
+        else if($_POST["statusAtualizado"] == "nCompareceu")
         {
             //Adicionar o status de que o animal não compareceu à castração
             $castracao->status = 4;
@@ -137,14 +147,7 @@ class UsuarioController
             $usuario = new Usuario();
             $usuario->idusuario = $_POST["idTutor"];
             $usuario->punicao = 1;
-            $usuario->aplicarPunicao();
-
-            //Liberar a vaga de castração para a clínica
-            $clinica = new Clinica();
-            $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-            $dadosClinica = $clinica->retornar();
-            $clinica->vagas = $dadosClinica->vagas + 1;
-            $clinica->adicionarVagas();
+            $usuario->aplicarPunicao();    
             
             //Enviar aviso ao usuário dizendo que não compareceu à castração
             $email = new Email();
@@ -152,19 +155,32 @@ class UsuarioController
             $email->nomeDestinatario = $_POST["nomeTutor"];
             $email->nomeAnimal = $_POST["nomeAnimal"];
             $email->enviarAviso();
+
+            if($_POST["status"] != "Não compareceu")
+            {
+                //Liberar a vaga de castração para a clínica
+                $clinica = new Clinica();
+                $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas + 1;
+                $clinica->adicionarVagas();
+            }
         }
-        else if($_POST["status"] == "emAnalise")
+        else if($_POST["statusAtualizado"] == "emAnalise")
         {
             //Adicionar o status de que o animal retornou para a análise da castração
             $castracao->status = 0;
             $castracao->atualizarEmAnalise();
 
-            //Liberar a vaga de castração para a clínica
-            $clinica = new Clinica();
-            $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-            $dadosClinica = $clinica->retornar();
-            $clinica->vagas = $dadosClinica->vagas + 1;
-            $clinica->adicionarVagas();
+            if($_POST["status"] != "Não compareceu")
+            {
+                //Liberar a vaga de castração para a clínica
+                $clinica = new Clinica();
+                $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas + 1;
+                $clinica->adicionarVagas();
+            }
         }
         else {echo"<script>alert('Insira um valor válido'); window.location='".URL."consulta-castracao'; </script>"; return;}
 
