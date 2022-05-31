@@ -37,7 +37,7 @@
                     <div class="container bg-dark text-light font-weight-bold p-3">
                         <h5 class="m-0">Consultar Usuários</h5>
                     </div>
-                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
+                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white table-responsive">
                         <table id="tbUsuario" class="table table-hover">
                             <thead>
                                 <th>#</th>
