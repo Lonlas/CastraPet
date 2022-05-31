@@ -18,7 +18,6 @@ require "recursos/PHPMailer/SMTP.php";
         private $emailDestinatario;                         //email a ser enviado
         private $nomeDestinatario;                          //nome do destinatário
         private $nomeAnimal;                                //nome do Animal
-
         private $data;
         private $nomeClinica;
         private $ruaClinica;
@@ -113,6 +112,63 @@ require "recursos/PHPMailer/SMTP.php";
 
                 //Corpo do e-mail
                 $email->Subject = "✨ Informações da castração do(a) $this->nomeAnimal ✨";     //Assunto / Título
+                
+                //conteúdo
+                $email->Body = $Conteudo;
+
+                $email->AltBody = 'Para conseguir ver esse e-mail corretamente,
+                use um visualizador de e-mail com suporte a HTML';
+                    
+                //envia
+                $email->send();
+
+                echo "Mensagem enviada com sucesso";
+            }
+            catch(Exception $e)
+            {
+                echo 'Houve um erro: ' . $e;
+            }
+        }
+        function enviarAviso()
+        {
+
+            //Conteúdo da mensagem enviada
+            $Conteudo = 
+            "
+            <h2>Olá $this->nomeDestinatario, Foi observado que você não compareceu à castração de(a) $this->nomeAnimal</h2>
+
+            <h2>Por esse ocorrido, foi dado a você uma penalidade que o impede de solicitar mais castrações por um determinado período de tempo.<br/>
+            Caso haja um motivo plausível para esse ocorrido, entre em contato o mais breve possível para retirarmos essa punição.
+            </h2>
+            ";
+
+            $email = new PHPMailer(true);
+
+            try{
+                
+                //Configurações
+                $email->isSMTP();
+                $email->Host = $this->host;
+                $email->SMTPAuth = true;
+                $email->Username = $this->emailRemetente;
+                $email->Password = $this->senhaRemetente;
+                $email->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           //criptografia do email
+                $email->Port = $this->porta;
+                $email->CharSet = 'UTF-8';
+
+                //Informações de quem enviou
+                $email->setFrom($this->emailRemetente, $this->nomeRemetente); 
+                $email->addReplyTo($this->emailRemetente);
+
+                //endereço para qual será enviado o email
+
+                $email->addAddress($this->emailDestinatario);
+
+                //define se é html
+                $email->isHTML(true);
+
+                //Corpo do e-mail
+                $email->Subject = "AVISO DE AUSÊNCIA DA CASTRAÇÃO DE $this->nomeAnimal";     //Assunto / Título
                 
                 //conteúdo
                 $email->Body = $Conteudo;

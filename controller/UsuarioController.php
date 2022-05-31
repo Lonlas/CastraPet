@@ -118,6 +118,58 @@ class UsuarioController
         }
 
     }
+    function atualizarCastracao()
+    {
+        $castracao = new Castracao();
+        $castracao->idcastracao = $_POST["idCastracao"];
+        if($_POST["status"] == "Castrado")
+        {
+            $castracao->status = 2;
+            $castracao->atualizar();
+        }
+        else if($_POST["status"] == "nCompareceu")
+        {
+            //Adicionar o status de que o animal não compareceu à castração
+            $castracao->status = 4;
+            $castracao->atualizar();
+
+            //Aplicar uma punição ao tutor que não compareceu à castração
+            $usuario = new Usuario();
+            $usuario->idusuario = $_POST["idTutor"];
+            $usuario->punicao = 1;
+            $usuario->aplicarPunicao();
+
+            //Liberar a vaga de castração para a clínica
+            $clinica = new Clinica();
+            $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+            $dadosClinica = $clinica->retornar();
+            $clinica->vagas = $dadosClinica->vagas + 1;
+            $clinica->adicionarVagas();
+            
+            //Enviar aviso ao usuário dizendo que não compareceu à castração
+            $email = new Email();
+            $email->emailDestinatario = $_POST["emailTutor"];
+            $email->nomeDestinatario = $_POST["nomeTutor"];
+            $email->nomeAnimal = $_POST["nomeAnimal"];
+            $email->enviarAviso();
+        }
+        else if($_POST["status"] == "emAnalise")
+        {
+            //Adicionar o status de que o animal retornou para a análise da castração
+            $castracao->status = 0;
+            $castracao->atualizarEmAnalise();
+
+            //Liberar a vaga de castração para a clínica
+            $clinica = new Clinica();
+            $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+            $dadosClinica = $clinica->retornar();
+            $clinica->vagas = $dadosClinica->vagas + 1;
+            $clinica->adicionarVagas();
+        }
+        else {echo"<script>alert('Insira um valor válido'); window.location='".URL."consulta-castracao'; </script>"; return;}
+
+        header("Location:".URL."consulta-castracao");
+    }
     
     function logar()
     {
@@ -133,7 +185,7 @@ class UsuarioController
             {
                 //caso seja usuário
                 case 0:
-
+                    
                     $usuario = new Login();
                     $usuario->idlogin = $dadosLogin->idlogin;
                     $dadosUsuario = $usuario->retornarUsuario();

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <?php include_once "head.php";?>
     <style rel="stylesheet" type="text/css">
         .corpo{
             grid-template-areas: 'header''corpo''footer';
             grid-template-rows: max-content auto 100px;
         }
-    </style>
+        </style>
     <!-- CSS DataTables-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <?php include_once "head.php";?>
     
 </head>
 <body>

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <?php include_once "head.php";?>
     <style rel="stylesheet" type="text/css">
         .corpo{
             grid-template-areas: 'header''corpo''footer';
             grid-template-rows: max-content auto 100px;
         }
-    </style>
+        </style>
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-
+    
+    <?php include_once "head.php";?>
 </head>
 <body>
     <!-- CORPO -->
@@ -88,7 +88,11 @@
                                             <td>". date('H:i',strtotime($value->horario)) ."</td>
                                             <td>$value->status</td>
                                             <td>$value->observacao</td>
-                                            <td><a href='".URL."' class='btn btn-warning'>Atualizar</a><a href='".URL."' class='btn btn-danger'>Excluir</a></td>
+                                            <td>
+                                            <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao'>Atualizar</button>
+                                            <a href='".URL."' class='btn btn-danger'>Excluir</a>
+                                            </td>
+                                            
                                         </tr>
                                         ";
                                     }
@@ -131,7 +135,9 @@
                                             <td>". date('H:i',strtotime($value->horario)) ."</td>
                                             <td>$value->status</td>
                                             <td>$value->observacao</td>
-                                            <td><a href='".URL."' class='btn btn-warning'>Atualizar</a></td>
+                                            <td>
+                                                <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' data-nomeTutor='$value->nome' data-nomeAnimal='$value->aninome'>Atualizar</button>
+                                            </td>
                                         </tr>
                                         ";
                                     }
@@ -146,18 +152,85 @@
         <div class="container-fluid bg-dark" style="grid-area: footer;">
             <div class="row h-100 align-items-center">
                 <div class="px-5">
-                    <a href="<?php echo URL.'home-adm';?>" class="btn btn-success">Voltar</a>
+                    <?php if($_SESSION["dadosLogin"]->nivelacesso == 1){echo "<a href='".URL."home-clinica' class='btn btn-success'>Voltar</a>";}?>
+                    <?php if($_SESSION["dadosLogin"]->nivelacesso == 2){echo "<a href='".URL."home-adm' class='btn btn-success'>Voltar</a>";}?>
                 </div>
             </div> 
         </div>
+        <?php
+        //MODAL DA CLÍNICA
+            if($_SESSION["dadosLogin"]->nivelacesso == 1){
+                echo"
+                <div class='modal fade' id='modalAtualizar' data-bs-keyboard='true' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <form action='".URL."atualizar-castracao' method='post'>
+                                <input type='hidden' id='idCastracao' name='idCastracao'>
+                                <input type='hidden' id='idTutor' name='idTutor'>
+                                <input type='hidden' id='emailTutor' name='emailTutor'>
+                                <input type='hidden' id='nomeAnimal' name='nomeAnimal'>
+                                <input type='hidden' id='nomeTutor' name='nomeTutor'>
+                                <div class='modal-header'>
+                                    <h5 class='modal-title' id='staticBackdropLabel'>Atualizar castração</h5>
+                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                </div>
+                                <div class='modal-body'>
+                                    <div class='form-group'>
+                                        <label for='status' class='label-form'>Status da castração</label>
+                                        <select name='status' id='status' class='form-select'>
+                                            <option value=''>-- Atualize o status --</option>
+                                            <option value='Castrado'>Castrado</option>
+                                            <option value='nCompareceu'>Não compareceu</option>
+                                            <option value='emAnalise'>Em Análise</option>
+                                        </select>
+                                        <small class='form-text text-muted'>Coloque em \"Em Análise\" apenas em caso da clínica não poder castrar o animal</small>
+                                    </div>
+                                </div>
+                                <div class='modal-footer'>
+                                    <button type='submit' class='btn btn-primary'>Atualizar Castração</button>
+                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>";
+            }
+        //MODAL DO ADM
+            else if($_SESSION["dadosLogin"]->nivelacesso == 2){
+                echo"
+                <div class='modal fade' id='modalAtualizar' data-bs-keyboard='true' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <form action='".URL."atualizar-castracao' method='post'>
+                                <input type='hidden' id='idCastracao' name='idCastracao'>
+                                <div class='modal-header'>
+                                    <h5 class='modal-title' id='staticBackdropLabel'>Atualizar castração</h5>
+                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                </div>
+                                <div class='modal-body'>
+                                    <label class='form-label' for='obhsCastracao'>Observação: (opcional)</label>
+                                    <textarea name='obsCastracao' id='obsCastr' rows='5' class='form-control'></textarea>
+                                </div>
+                                <div class='modal-footer'>
+                                    <button type='submit' class='btn btn-primary'>Atualizar Castração</button>
+                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>";
+            }
+        ?>
+        <!-- MODAL -->
+            <!-- /MODAL -->
+            <!-- /CORPO -->
     </div>
-    
-    <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 
     <!-- DataTables -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
@@ -182,6 +255,25 @@
                 }
             } );
         } );
+    </script>
+    <script>
+        var exampleModal = document.getElementById('modalAtualizar')
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        var idCastracao = button.getAttribute('data-idcastracao')
+        var emailTutor = button.getAttribute('data-emailTutor')
+        var idTutor = button.getAttribute('data-idTutor')
+        var nomeAnimal = button.getAttribute('data-nomeAnimal')
+        var nomeTutor = button.getAttribute('data-nomeTutor')
+
+        $("#idCastracao").val(idCastracao);
+        $("#emailTutor").val(emailTutor);
+        $("#idTutor").val(idTutor);
+        $("#nomeAnimal").val(nomeAnimal);
+        $("#nomeTutor").val(nomeTutor);
+        })
     </script>
 
 </body>

@@ -146,9 +146,24 @@
 
             //Preparar comando SQL para retornar
             $cmd = $con->prepare("UPDATE clinica SET vagas = :vagas WHERE idclinica = :idclinica");
-            $cmd->bindParam(":vagas", $this->vagas);
             
             //Parâmetros SQL
+            $cmd->bindParam(":vagas", $this->vagas);
+            $cmd->bindParam(":idclinica", $this->idclinica);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
+        function adicionarVagas()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("UPDATE clinica SET vagas = :vagas WHERE idclinica = :idclinica");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":vagas", $this->vagas);
             $cmd->bindParam(":idclinica", $this->idclinica);
 
             //Executando o comando SQL
