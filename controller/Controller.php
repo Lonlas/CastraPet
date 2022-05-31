@@ -104,9 +104,19 @@ class Controller
     }
     #AGENDAMENTO
     function abrirListaSolicitacao(){
+        $castracao = new Castracao();
+        $dadosSolicitacao = $castracao->consultarSolicitacao();
+
         include_once "view/listaSolicitacao.php";
     }
-    function abrirAgendamento(){
+    function abrirAgendamento($id){
+        $agendamento = new Castracao();
+        $agendamento->idcastracao = $id;
+        $dadosCastracao = $agendamento->retornar();
+
+        $clinica = new Clinica();
+        $dadosClinicas = $clinica->consultarComVagas();
+
         include_once "view/confirmaSolicitacao.php";
     }
     

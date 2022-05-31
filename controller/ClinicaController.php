@@ -24,6 +24,8 @@ class ClinicaController
         $clinica->clicep = $_POST["txtCEP"];
 
         $clinica->cadastrar();
+
+        echo "<script>alert('Clínica cadastrada com sucesso!'); window.location='".URL."cadastra-clinica';</script>";
     }
 }
 

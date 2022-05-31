@@ -201,31 +201,30 @@
                 </div>
             </div>
         </div>
-
         
         <!-- MODAL -->
-        <div class='modal fade' id='modalSolicitar' data-bs-keyboard='true' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
-            <div class='modal-dialog modal-dialog-centered'>
-                <div class='modal-content'>
-                    <form action="<?php echo URL.'solicitar-castracao';?>" method='post'>
-                        <input type='text' id='idAnimal' name='idAnimal'>
-                        <div class='modal-header'>
-                            <h5 class='modal-title' id='staticBackdropLabel'>Solicitar castração</h5>
-                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                        </div>
-                        <div class='modal-body'>
-                            <label class='form-label' for='obhsCastracao'>Observação: (opcional)</label>
-                            <textarea name='obsCastracao' id='obsCastr' rows='5' class='form-control'></textarea>
-                        </div>
-                        <div class='modal-footer'>
-                            <button type='submit' class='btn btn-primary'>Enviar Solicitação</button>
-                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                        </div>
-                    </form>
+            <div class='modal fade' id='modalSolicitar' data-bs-keyboard='true' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered'>
+                    <div class='modal-content'>
+                        <form action="<?php echo URL.'solicitar-castracao';?>" method='post'>
+                            <input type='hidden' id='idAnimal' name='idAnimal'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='staticBackdropLabel'>Solicitar castração</h5>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                            </div>
+                            <div class='modal-body'>
+                                <label class='form-label' for='obhsCastracao'>Observação: (opcional)</label>
+                                <textarea name='obsCastracao' id='obsCastr' rows='5' class='form-control'></textarea>
+                            </div>
+                            <div class='modal-footer'>
+                                <button type='submit' class='btn btn-primary'>Enviar Solicitação</button>
+                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    <!-- /MODAL -->
+        <!-- /MODAL -->
         <!-- /CORPO -->
     </div>
 
