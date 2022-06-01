@@ -11,6 +11,14 @@ class UsuarioController
 {
     function cadastrarUsuario(){
         //Cadastro do Login
+
+        $filtros = array(".", "-", "(", ")", " ");
+        $cpf = str_replace($filtros,'',$_POST["txtCPF"]);
+        $cep = str_replace($filtros,'',$_POST["txtCEP"]);
+        $rg = str_replace($filtros,'',$_POST["txtRG"]);
+        $tel = str_replace($filtros,'',$_POST["txtTel"]);
+        $celular = str_replace($filtros,'',$_POST["txtCelular"]);
+
         $login = new Login();
         $login->nome = $_POST["txtNome"];
         $login->email = $_POST["txtEmail"];
@@ -20,8 +28,8 @@ class UsuarioController
         //Cadastro do Usuário
         $cadastra = new Usuario();
         $cadastra->idlogin = $login->cadastrar();
-        $cadastra->rg = $_POST["txtRG"];
-        $cadastra->cpf = $_POST["txtCPF"];
+        $cadastra->rg = $rg;
+        $cadastra->cpf = $cpf;
 
         if($_POST["chkProtetor"] == 2)
             $cadastra->beneficio = $_POST["chkProtetor"];
@@ -30,13 +38,13 @@ class UsuarioController
         else
             $cadastra->beneficio = 0;
 
-        $cadastra->telefone = $_POST["txtTel"];
-        $cadastra->celular = $_POST["txtCelular"];
+        $cadastra->telefone = $tel;
+        $cadastra->celular = $celular;
         $cadastra->punicao = 0;
         $cadastra->usurua = $_POST["txtRua"];
         $cadastra->usubairro = $_POST["txtBairro"];
         $cadastra->usunumero = $_POST["txtNumero"];
-        $cadastra->usucep = $_POST["txtCEP"];
+        $cadastra->usucep = $cep;
         if(empty($_POST["txtNIS"]))
         {
             $cadastra->nis = "";

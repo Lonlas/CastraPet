@@ -7,6 +7,11 @@ class ClinicaController
 
     function cadastrarClinica()
     {
+        $filtros = array(".", "-", "(", ")", "/", " ");
+        $cnpj = str_replace($filtros,'',$_POST["txtCNPJ"]);
+        $cep = str_replace($filtros,'',$_POST["txtCEP"]);
+        $tel = str_replace($filtros,'',$_POST["txtTelefone"]);
+
         $login = new Login();
         $login->nome = $_POST["txtNome"];
         $login->email = $_POST["txtEmail"];
@@ -15,13 +20,13 @@ class ClinicaController
 
         $clinica = new Clinica();
         $clinica->idlogin = $login->cadastrar();
-        $clinica->cnpj = $_POST["txtCNPJ"];
-        $clinica->clitelefone = $_POST["txtTelefone"];
+        $clinica->cnpj = $cnpj;
+        $clinica->clitelefone = $tel;
         $clinica->vagas = $_POST["txtVagas"];
         $clinica->clirua = $_POST["txtRua"];
         $clinica->clibairro = $_POST["txtBairro"];
         $clinica->clinumero = $_POST["txtNumero"];
-        $clinica->clicep = $_POST["txtCEP"];
+        $clinica->clicep = $cep;
 
         $clinica->cadastrar();
 
