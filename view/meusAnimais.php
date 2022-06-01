@@ -40,22 +40,22 @@
                         foreach ($dadosAnimais as $values)
                         {
                             //Reescrevendo a espécie
-                            $values->especie = str_replace("1","Canina", $values->especie);
-                            $values->especie = str_replace("2","Felina", $values->especie);
+                            $values->especie = str_replace("0","Canina", $values->especie);
+                            $values->especie = str_replace("1","Felina", $values->especie);
 
                             //Reescrevendo o sexo
                             $values->sexo = str_replace("0","Fêmea", $values->sexo);
                             $values->sexo = str_replace("1","Macho", $values->sexo);
 
                             //Reescrevendo a pelagem
-                            $values->pelagem = str_replace("1","Curta", $values->pelagem);
-                            $values->pelagem = str_replace("2","Média", $values->pelagem);
-                            $values->pelagem = str_replace("3","Alta", $values->pelagem);
+                            $values->pelagem = str_replace("0","Curta", $values->pelagem);
+                            $values->pelagem = str_replace("1","Média", $values->pelagem);
+                            $values->pelagem = str_replace("2","Alta", $values->pelagem);
                             
                             //Reescrevendo o porte
-                            $values->porte = str_replace("1","Pequeno", $values->porte);
-                            $values->porte = str_replace("2","Médio", $values->porte);
-                            $values->porte = str_replace("3","Grande", $values->porte);
+                            $values->porte = str_replace("0","Pequeno", $values->porte);
+                            $values->porte = str_replace("1","Médio", $values->porte);
+                            $values->porte = str_replace("2","Grande", $values->porte);
 
                             //Reescrevendo o Comunitário
                             $values->comunitario = str_replace("0","Não", $values->comunitario);
@@ -135,17 +135,30 @@
                                     ";
                                     if(!isset($values->status))
                                     {
-                                        $beneficio = str_replace(0,1,$_SESSION["dadosUsuario"]->beneficio);
-                                        $beneficio = str_replace(1,2,$_SESSION["dadosUsuario"]->beneficio);
-                                        $beneficio = str_replace(2,5,$_SESSION["dadosUsuario"]->beneficio);
+                                        switch($_SESSION["dadosUsuario"]->beneficio)
+                                        {
+                                            case 0:
+                                                $beneficio = 1;
+                                            break;
+                                            case 1:
+                                                $beneficio = 2;
+                                            break;
+                                            case 2;
+                                                $beneficio = 5;
+                                            break;
+                                        }
 
-                                        if($quantidadeCastracoes < $beneficio)
+                                        if($quantidadeCastracoes < $beneficio && $_SESSION["dadosUsuario"]->punicao == 0)
                                         {
                                             echo "
                                             <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$values->idanimal'>
                                                 Solicitar castração
                                             </button>
                                             ";
+                                        }
+                                        if($_SESSION["dadosUsuario"]->punicao == 1)
+                                        {
+                                            echo "<span class='btn bg-danger w-100 mb-2 text-white' style='cursor: default;'>Solicitação Bloqueada</span>";
                                         }
                                         echo "
                                         <a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2 text-white' >Editar animal</a>

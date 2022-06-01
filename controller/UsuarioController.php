@@ -47,7 +47,7 @@ class UsuarioController
         }
         
         $cadastra->cadastrar();
-
+        $this->logar();
         header("Location:".URL);
     }
 
