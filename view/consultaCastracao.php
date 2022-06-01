@@ -136,7 +136,7 @@
                                             <td>$value->status</td>
                                             <td>$value->observacao</td>
                                             <td>
-                                                <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' data-nomeTutor='$value->nome' data-nomeAnimal='$value->aninome'>Atualizar</button>
+                                                <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' data-nomeTutor='$value->nome' data-nomeAnimal='$value->aninome' data-status='$value->status'>Atualizar</button>
                                             </td>
                                         </tr>
                                         ";
@@ -166,6 +166,7 @@
                         <div class='modal-content'>
                             <form action='".URL."atualizar-castracao' method='post'>
                                 <input type='hidden' id='idCastracao' name='idCastracao'>
+                                <input type='hidden' id='status' name='status'>
                                 <input type='hidden' id='idTutor' name='idTutor'>
                                 <input type='hidden' id='emailTutor' name='emailTutor'>
                                 <input type='hidden' id='nomeAnimal' name='nomeAnimal'>
@@ -177,7 +178,7 @@
                                 <div class='modal-body'>
                                     <div class='form-group'>
                                         <label for='status' class='label-form'>Status da castração</label>
-                                        <select name='status' id='status' class='form-select'>
+                                        <select name='statusAtualizado' id='status' class='form-select'>
                                             <option value=''>-- Atualize o status --</option>
                                             <option value='Castrado'>Castrado</option>
                                             <option value='nCompareceu'>Não compareceu</option>
@@ -267,12 +268,14 @@
         var idTutor = button.getAttribute('data-idTutor')
         var nomeAnimal = button.getAttribute('data-nomeAnimal')
         var nomeTutor = button.getAttribute('data-nomeTutor')
+        var status = button.getAttribute('data-status')
 
         $("#idCastracao").val(idCastracao);
         $("#emailTutor").val(emailTutor);
         $("#idTutor").val(idTutor);
         $("#nomeAnimal").val(nomeAnimal);
         $("#nomeTutor").val(nomeTutor);
+        $("#status").val(status);
         })
     </script>
 

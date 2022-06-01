@@ -11,6 +11,14 @@ class UsuarioController
 {
     function cadastrarUsuario(){
         //Cadastro do Login
+
+        $filtros = array(".", "-", "(", ")", " ");
+        $cpf = str_replace($filtros,'',$_POST["txtCPF"]);
+        $cep = str_replace($filtros,'',$_POST["txtCEP"]);
+        $rg = str_replace($filtros,'',$_POST["txtRG"]);
+        $tel = str_replace($filtros,'',$_POST["txtTel"]);
+        $celular = str_replace($filtros,'',$_POST["txtCelular"]);
+
         $login = new Login();
         $login->nome = $_POST["txtNome"];
         $login->email = $_POST["txtEmail"];
@@ -20,8 +28,8 @@ class UsuarioController
         //Cadastro do Usuário
         $cadastra = new Usuario();
         $cadastra->idlogin = $login->cadastrar();
-        $cadastra->rg = $_POST["txtRG"];
-        $cadastra->cpf = $_POST["txtCPF"];
+        $cadastra->rg = $rg;
+        $cadastra->cpf = $cpf;
 
         if($_POST["chkProtetor"] == 2)
             $cadastra->beneficio = $_POST["chkProtetor"];
@@ -30,13 +38,13 @@ class UsuarioController
         else
             $cadastra->beneficio = 0;
 
-        $cadastra->telefone = $_POST["txtTel"];
-        $cadastra->celular = $_POST["txtCelular"];
+        $cadastra->telefone = $tel;
+        $cadastra->celular = $celular;
         $cadastra->punicao = 0;
         $cadastra->usurua = $_POST["txtRua"];
         $cadastra->usubairro = $_POST["txtBairro"];
         $cadastra->usunumero = $_POST["txtNumero"];
-        $cadastra->usucep = $_POST["txtCEP"];
+        $cadastra->usucep = $cep;
         if(empty($_POST["txtNIS"]))
         {
             $cadastra->nis = "";
@@ -122,12 +130,22 @@ class UsuarioController
     {
         $castracao = new Castracao();
         $castracao->idcastracao = $_POST["idCastracao"];
-        if($_POST["status"] == "Castrado")
+        if($_POST["statusAtualizado"] == "Castrado")
         {
             $castracao->status = 2;
             $castracao->atualizar();
+
+            if($_POST["status"] == "Não compareceu")
+            {
+                //Liberar a vaga de castração para a clínica
+                $clinica = new Clinica();
+                $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas - 1;
+                $clinica->subtrairVagas();
+            }
         }
-        else if($_POST["status"] == "nCompareceu")
+        else if($_POST["statusAtualizado"] == "nCompareceu")
         {
             //Adicionar o status de que o animal não compareceu à castração
             $castracao->status = 4;
@@ -137,14 +155,7 @@ class UsuarioController
             $usuario = new Usuario();
             $usuario->idusuario = $_POST["idTutor"];
             $usuario->punicao = 1;
-            $usuario->aplicarPunicao();
-
-            //Liberar a vaga de castração para a clínica
-            $clinica = new Clinica();
-            $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-            $dadosClinica = $clinica->retornar();
-            $clinica->vagas = $dadosClinica->vagas + 1;
-            $clinica->adicionarVagas();
+            $usuario->aplicarPunicao();    
             
             //Enviar aviso ao usuário dizendo que não compareceu à castração
             $email = new Email();
@@ -152,19 +163,32 @@ class UsuarioController
             $email->nomeDestinatario = $_POST["nomeTutor"];
             $email->nomeAnimal = $_POST["nomeAnimal"];
             $email->enviarAviso();
+
+            if($_POST["status"] != "Não compareceu")
+            {
+                //Liberar a vaga de castração para a clínica
+                $clinica = new Clinica();
+                $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas + 1;
+                $clinica->adicionarVagas();
+            }
         }
-        else if($_POST["status"] == "emAnalise")
+        else if($_POST["statusAtualizado"] == "emAnalise")
         {
             //Adicionar o status de que o animal retornou para a análise da castração
             $castracao->status = 0;
             $castracao->atualizarEmAnalise();
 
-            //Liberar a vaga de castração para a clínica
-            $clinica = new Clinica();
-            $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-            $dadosClinica = $clinica->retornar();
-            $clinica->vagas = $dadosClinica->vagas + 1;
-            $clinica->adicionarVagas();
+            if($_POST["status"] != "Não compareceu")
+            {
+                //Liberar a vaga de castração para a clínica
+                $clinica = new Clinica();
+                $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas + 1;
+                $clinica->adicionarVagas();
+            }
         }
         else {echo"<script>alert('Insira um valor válido'); window.location='".URL."consulta-castracao'; </script>"; return;}
 
