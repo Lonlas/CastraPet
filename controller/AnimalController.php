@@ -18,7 +18,6 @@ class AnimalController
         }
         $animal = new Animal();
         $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
-        //$animal->idusuario = $_POST["idUsuario"];
         $animal->idraca = $raca;
         $animal->aninome = $_POST["txtNome"];
         $animal->especie = $_POST["slcEspecie"];
@@ -49,6 +48,25 @@ class AnimalController
 
         header("Location:".URL."meus-animais");
     }
+
+    function EditarAnimal()
+    {
+        
+    }
+
+    function excluirAnimal($id)
+    {
+        try{
+            $animal = new Animal();
+            $animal->idanimal = $id;
+            $animal->excluir();
+    
+            header("Location:".URL."meus-animais");
+        }
+        catch(Exception $e){
+            header("Location:".URL."meus-animais");
+        }
+    }
     
     function cadastrarRaca()
     {
@@ -65,7 +83,6 @@ class AnimalController
         {
             echo"<script>alert('Erro: $e'); window.location='".URL."cadastra-raca'; </script>";
         }
-
     }
 }
 ?>

@@ -6,7 +6,7 @@
     <?php include_once "favicon.php"?>
     <!-- /Favicon-->
 
-    <title>CastraPet</title>
+    <title>PetCastra</title>
     <!-- EXTENSÃO CSS -->
     <link rel="stylesheet" href="<?php echo URL;?>recursos/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo URL;?>recursos/css/root.css">

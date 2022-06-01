@@ -79,9 +79,21 @@ if($_GET)
             $usuario = new Controller();
             $usuario->abrirMeusAnimais();
         break;
-        case "solicita-castracao":
+        case "atualizar-animal":
             $usuario = new Controller();
-            $usuario->abrirSolicitacao();
+            $usuario->abrirAtualizaAnimal($url[1]);
+        break;
+        case "editar-animal":
+            $usuario = new AnimalController();
+            $usuario->EditarAnimal();
+        break;
+        case "excluir-animal":
+            $usuario = new AnimalController();
+            $usuario->excluirAnimal($url[1]);
+        break;
+        case "solicitar-castracao":
+            $usuario = new UsuarioController();
+            $usuario->solicitarCastracao();
         break;
 
         // ADM
@@ -123,17 +135,22 @@ if($_GET)
             $adm = new Controller();
             $adm->abrirConsultaAnimais();    
         break;
-        #CASTRAÇÃO - vizualização e confirmação 
+        #CASTRAÇÃO - vizualização, confirmação e atualização
         case "lista-solicitacao":
             $adm = new Controller();
             $adm->abrirListaSolicitacao();   
         break;
         case "agendamento":
             $adm = new Controller();
-            $adm->abrirAgendamento();
+            $adm->abrirAgendamento($url[1]);
         break;
         case "agendar":
-        
+            $castracao = new UsuarioController();
+            $castracao->agendarCastracao();
+        break;
+        case "atualizar-castracao":
+            $castracao = new UsuarioController();
+            $castracao->atualizarCastracao();
         break;
 
         // CLÍNICA

@@ -17,6 +17,9 @@
     --borda-branca: 1px solid white;
     --fontecorpo: 'Josefin Sans';
 }
+.btn-warning{
+    color: white !important;
+}
 .bg-primary{
     background-color: var(--azul)!important;
 }

@@ -53,11 +53,18 @@ class Controller
         $animal = new Animal();
         $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
         $dadosAnimais = $animal->retornarAnimais();
-        
+        $quantidadeCastracoes = $animal->quantidadeCastracoes();
+
         include_once "view/meusAnimais.php";
     }
-    function abrirSolicitacao(){
-        include_once "view/solicitaCastra.php";
+    function abrirAtualizaAnimal($id){
+        $animal = new Animal();
+        $animal->idanimal = $id;
+        $dadosAnimal = $animal->retornar();
+
+        $raca = new Raca();
+        $dadosRaca = $raca->consultar();
+        include_once "view/editaAnimal.php";
     }
     
     // ADMINISTRADOR
@@ -73,18 +80,23 @@ class Controller
     }    
     #CONSULTAS
     function abrirConsultaUsuario($cpf){
-        $direciona = new Usuario();
-        $dadosUsuario = $direciona->consultar();
+        $usuario = new Usuario();
+        $dadosUsuario = $usuario->consultar();
         include_once "view/consultaUsuario.php";
     }
     function abrirConsultaClinica($cnpj){
-        $direciona = new Clinica();
-        $dadosClinica = $direciona->consultar();
+        $clinica = new Clinica();
+        $dadosClinica = $clinica->consultar();
         include_once "view/consultaClinica.php";
     }
     function abrirConsultaCastracao(){
-        $direciona = new Castracao();
-        $dadosCastracao = $direciona->consultar();
+        $castracao = new Castracao();
+        if($_SESSION["dadosLogin"]->nivelacesso == 2){
+            $dadosCastracao = $castracao->consultar();
+        } else {
+            $castracao->idclinica = $_SESSION["dadosClinica"]->idclinica;
+            $dadosCastracaoClinica = $castracao->consultarPraClinica();
+        }
         include_once "view/consultaCastracao.php";
     }
     function abrirConsultaAnimais(){
@@ -92,9 +104,19 @@ class Controller
     }
     #AGENDAMENTO
     function abrirListaSolicitacao(){
+        $castracao = new Castracao();
+        $dadosSolicitacao = $castracao->consultarSolicitacao();
+
         include_once "view/listaSolicitacao.php";
     }
-    function abrirAgendamento(){
+    function abrirAgendamento($id){
+        $agendamento = new Castracao();
+        $agendamento->idcastracao = $id;
+        $dadosCastracao = $agendamento->retornar();
+
+        $clinica = new Clinica();
+        $dadosClinicas = $clinica->consultarComVagas();
+
         include_once "view/confirmaSolicitacao.php";
     }
     

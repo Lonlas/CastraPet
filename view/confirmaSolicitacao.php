@@ -2,82 +2,103 @@
 <html lang="pt-br">
 <head>
     <?php include_once "head.php";?>
+    <style rel="stylesheet" type="text/css">
+        .corpo{
+            grid-template-areas: 'header''corpo''footer';
+            grid-template-rows: max-content auto 100px;
+        }
+    </style>
 </head>
 <body>
+
     <!-- CORPO -->
-    <?php //CONTROLE DE MENU
-        if($_SESSION) //caso esteja logado e exista uma sessão
-        {
-            switch($_SESSION["dadosLogin"]->nivelacesso)
+    <div class="container-fluid d-grid min-vh-100 corpo">
+        <?php //CONTROLE DE MENU
+            if($_SESSION) //caso esteja logado e exista uma sessão
             {
-                //caso tenha nível de acesso de usuário
-                case 0: include_once "menuLogado.php"; break;
-                //caso tenha nível de acesso de clínica
-                case 1: include_once "menuClinica.php"; break;
-                //caso tenha nível de acesso de Administrador
-                case 2: include_once "menuADM.php"; break;   
+                switch($_SESSION["dadosLogin"]->nivelacesso)
+                {
+                    //caso tenha nível de acesso de usuário
+                    case 0: include_once "menuLogado.php"; break;
+                    //caso tenha nível de acesso de clínica
+                    case 1: include_once "menuClinica.php"; break;
+                    //caso tenha nível de acesso de Administrador
+                    case 2: include_once "menuADM.php"; break;   
+                }
             }
-        }
-        else{ include_once "menu.php"; }
-    ?>
-    <div class="container-fluid">
-        <div class="bg-danger">
-            <div class="container mx-auto row p-3">
-                <div class="container bg-white p-0">  
+            else{ include_once "menu.php"; }
+        ?>
+        <div class="bg-danger container-fluid" style="grid-area: corpo;">
+            <div class="row h-100 align-items-center">
+                <div class="p-3">
                     <div class="container bg-dark text-light font-weight-bold p-3">
-                        Solicitação
+                        <h5 class="m-0">Solicitação</h5>
                     </div>
-                    <form action="confirmar-agendamento">
-                        <div class="row align-items-center justify-content-center me-2">
-                            <div class="col-sm-6 mb-3 ps-4">
-                                <div class="row">
-                                    <p>Número da solicitação:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxx";?></p>
+                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
+                        <form action="<?php echo URL.'agendar';?>" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0" method="post">
+                            <input type="hidden" name="emailDestinatario" id="emailDestinatairio" value="<?php echo $dadosCastracao->email;?>">
+                            <input type="hidden" name="nomeDestinatairio" id="nomeDestinatairio" value="<?php echo $dadosCastracao->nome;?>">
+                            <div class="col-sm-6 px-3">
+                                <div class="row container-fluid p-0 m-0 form-group mb-2">
+                                    <label for="" class="form-label">Número da solicitação:</label>
+                                    <input type="text" name="idcastracao" readonly class="form-control" value="<?php echo $dadosCastracao->idcastracao;?>">
                                 </div>
-                                <div class="row">
-                                    <p>Nome do animal:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>
+                                <div class="row container-fluid p-0 m-0 form-group mb-2">
+                                    <label for="" class="form-label">Nome do animal: </label>
+                                    <input type="text" name="aninome" readonly class="form-control" value="<?php echo $dadosCastracao->aninome;?>">
                                 </div>
-                                <div class="row">
-                                    <p>CPF do responsável:<?php echo" xxxxxxxxxxx";?></p>  
+                                <div class="row container-fluid p-0 m-0 form-group mb-2">
+                                    <label for="" class="form-label">CPF do responsável:</label>
+                                    <input type="text" name="cpf" readonly class="form-control" value="<?php echo $dadosCastracao->cpf;?>"> 
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-9">
-                                        <p>Observações:<?php echo" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";?></p>  
-                                    </div>
+                                <div class="row container-fluid p-0 m-0 form-group">
+                                    <label for="" class="form-label">Observações: </label>
+                                    <textarea class="form-control" name="txtarea" readonly><?php echo $dadosCastracao->observacao;?></textarea>  
                                 </div>
                             </div>
-                            <div class="col-sm-6 mb-3 ps-4">
-                                <div class="row">
-                                   <div class="form-group">
+                            <div  class="col-sm-6 px-3 mt-5 mt-sm-0">
+                                <div class="row w-100 m-0">
+                                    <div class="form-group p-0 mb-2">
                                        <label for="dataHora" class="form-label">Data e Hora:</label>
-                                       <input type="datetime-local" name="dataHora" id="dataHora" class="form-control mb-4" >
-
-                                       <select name="selectClinica" id="selectClinica" class="form-select mb-4">
-                                           <option selected> ... SELECIONE A CLÍNICA ... </option>
-                                           <option value="<?php ?>">Clínica 1</option>
-                                           <option value="<?php ?>">Clínica 2</option>
+                                       <input type="datetime-local" name="dataHora" id="dataHora" class="form-control">
+                                    </div>
+                                    <div class="form-group p-0">
+                                        <label for="selectClinica" class="form-label">Selecione a Clínica</label>
+                                       <select name="selectClinica" id="selectClinica" class="form-select">
+                                           <option value="0" selected>-- SELECIONE UMA CLÍNICA --</option>
+                                            <?php
+                                                foreach($dadosClinicas as $values)
+                                                {
+                                                    echo "<option value='$values->idclinica'>$values->nome - Vagas Disponíveis: $values->vagas</option>";
+                                                }
+                                            ?>
                                        </select>
                                    </div>    
                                 </div>
-                                
-                                <div class="row justify-content-end align-items-end mb-3">
-                                    <div class="col-sm-6 justify-content-end">
+                                <div class="row float-end my-3">
+                                    <div class="">
                                         <!-- Botão recusar solicitação -->
-                                        <input type="submit" value="Recusar" class="btn btn-danger float-end me-3">
+                                        <input type="submit" id="btnrecusa" value="Recusar" name="btnRecusa" class="btn btn-danger float-end me-3">
                                     
                                         <!-- Botão confirmar solicitação -->
                                         <input type="submit" value="Confirmar" class="btn btn-success float-end me-1">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>                    
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
-            <a href="<?php echo URL.'home-adm'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
-        </footer>
+        <div class="container-fluid bg-dark" style="grid-area: footer;">
+            <div class="row h-100 align-items-center">
+                <div class="px-5">
+                    <a href="<?php echo URL.'lista-solicitacao';?>" class="btn btn-success">Voltar</a>
+                </div>
+            </div> 
+        </div>
     </div>
+    
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
