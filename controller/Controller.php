@@ -45,9 +45,9 @@ class Controller
         include_once "view/alterarSenha.php";
     }
     function abrirCadAnimal(){
-        $raca = new Raca();
-        $dadosRacaCanino = $raca->consultarCanino();
-        $dadosRacaFelino = $raca->consultarFelino();
+        $animal = new Raca();
+        $dadosRacaAnimal = $animal->consultarRaca();
+
         include_once "view/cadAnimal.php";
     }
     function abrirMeusAnimais(){
@@ -104,8 +104,7 @@ class Controller
     }
     function abrirConsultaAnimais(){
         $raca = new Raca();
-        $dadosRacaCanino = $raca->consultarCanino();
-        $dadosRacaFelino = $raca->consultarFelino();
+        $dadosRaca = $raca->consultar();
         include_once "view/consultaAnimais.php";
     }
     #AGENDAMENTO
