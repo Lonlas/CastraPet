@@ -8,6 +8,78 @@
             grid-template-rows: max-content auto 100px;
         }
     </style>
+    <style type="text/css">
+        .corpo{
+            grid-template-areas: 'header''corpo''footer';
+            grid-template-rows: max-content auto 100px;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            display: none;
+        }
+        .vazio
+        {
+            width: 100px;
+        }
+        #inputImgAnimal + label
+        {
+            position: absolute;
+            height: 250px; 
+            width: 375px;
+            border: solid;
+            border-color: #198754;
+            cursor: pointer;
+        }
+        #imgAnimal
+        {
+            height: 250px;
+            width: 399px;
+        }
+
+        @media screen and (max-width: 1199px)
+        {
+            #inputImgAnimal + label
+            {
+                width: 355px;
+            }
+        }
+
+        @media screen and (max-width: 992px)
+        {
+            #inputImgAnimal + label
+            {
+                height: 200px;
+                width: 255px;
+            }
+            #imgAnimal
+            {
+                height: 200px;
+            }
+        }
+
+        @media screen and (max-width: 767px)
+        {
+            #imgAnimal
+            {
+                width: 275px;
+            }
+        }
+        
+        @media screen and (max-width: 336px)
+        {
+            #inputImgAnimal + label
+            {
+                height: 175px;
+                width: 200px;
+            }
+            #imgAnimal
+            {
+                height: 175px;
+                width: 220px;
+            }
+        }
+    </style>
 
 </head>
 <body>      
@@ -40,8 +112,8 @@
                         foreach ($dadosAnimais as $values)
                         {
                             //Reescrevendo a espécie
-                            $values->especie = str_replace("1","Canina", $values->especie);
-                            $values->especie = str_replace("2","Felina", $values->especie);
+                            $values->especie = str_replace("0","Canina", $values->especie);
+                            $values->especie = str_replace("1","Felina", $values->especie);
 
                             //Reescrevendo o sexo
                             $values->sexo = str_replace("0","Fêmea", $values->sexo);
@@ -145,8 +217,9 @@
                                             Solicitar castração
                                         </button>
                                         
-                                        <a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2' >Editar animal</a>
-                                        <a href='".URL."excluir-animal/$values->idanimal' class='btn btn-danger w-100'>Excluir animal</a>
+                                        <!-- <a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2'  data-bs-toggle='modal' data-bs-target='#modalEditar' data-idanimal='$values->idanimal'>Editar animal</a>-->
+                                        <button  class='btn btn-warning w-100 mb-2'  data-bs-toggle='modal' data-bs-target='#modalEditar' data-idanimal='$values->idanimal'>Editar animal</button>
+                                        <a href='".URL."excluir-animal/$values->idanimal' class='btn btn-danger w-100' onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir animal</a>
                                         <span class='badge bg-warning w-100 my-3'>$values->status</span>
                                     </div>
                                 </div>
@@ -172,9 +245,118 @@
                 </div>
             </div>
         </div>
-
         
-        <!-- MODAL -->
+        
+        <!-- MODAL: editar animal-->
+        <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <form method="post" action="<?php echo URL.'atualizar-animal';?>">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Atualizar</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <input type="text" name="idusuario" value="<?php echo $dadosAnimal->idanimal;?>">
+
+                            <div class="row">
+                                <div class="col-md">
+                                    <div class="row">
+                                        <div class="col-12 mb-2">
+                                            <label for="txtNome" class="form-label">Nome do Animal:</label>
+                                            <input type="text" class="form-control" id="txtNome" name="txtNome" maxlength="50" value="<?php echo $dadosAnimal->aninome;?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="tipoEspecie" class="form-label">Espécie:</label>
+                                            <select id="tipoEspecie" name="tipoEspecie" class="form-select"  onchange="carregarRaca(this)" value="<?php echo $dadosAnimal->especie;?>" required>
+                                                <option value="">... SELECIONE A ESPÉCIE ...</option>
+                                                <option value="0">Canina</option>
+                                                <option value="1">Felina</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="numIdade" class="form-label">Idade:</label>
+                                            <input type="number" class="form-control" id="numIdade" name="numIdade" min="0" max="100" value="<?php echo $dadosAnimal->idade;?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="slcSexo" class="form-label">Sexo:</label>
+                                            <select id="slcSexo" name="slcSexo" class="form-select" value="<?php echo $dadosAnimal->sexo;?>" required>
+                                                <option value="1">Macho</option>
+                                                <option value="2">Fêmea</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="slcPelagem" class="form-label">Pelagem:</label>
+                                            <select id="slcPelagem" name="slcPelagem" class="form-select" value="<?php echo $dadosAnimal->pelagem;?>" required>
+                                                <option value="1">Curta</option>
+                                                <option value="2">Média</option>
+                                                <option value="3">Alta</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="txtCor" class="form-label">Cor:</label>
+                                            <input type="text" class="form-control" id="txtCor" name="txtCor" maxlength="30" value="<?php echo $dadosAnimal->cor;?>" required>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="slcPorte" class="form-label">Porte:</label>
+                                            <select id="slcPorte" name="slcPorte" class="form-select" value="<?php echo $dadosAnimal->porte;?>" required>
+                                                <option value="1">Pequeno</option>
+                                                <option value="2">Médio</option>
+                                                <option value="3">Grande</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="listRaca" class="form-label">Raça:</label>
+                                            <select name="racas" id="racas" class="form-select" value="<?php echo $dadosAnimal->idraca;?>" required>
+                                                <option value="">... SELECIONE A RAÇA ...</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="slcComunitario" class="form-label">Animal Comunitário:</label>
+                                            <select id="slcComunitario" name="slcComunitario" class="form-select" value="<?php echo $dadosAnimal->comunitario;?>" required>
+                                                <option value="0">Não</option>
+                                                <option value="1">Sim</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center mb-3 aling-content-center">
+                                        <div class="col-md-6 justify-content-center aling-content-center">
+                                            <label>Foto do animal:</label>
+                                            <?php if($dadosAnimal->foto == "") $dadosAnimal->foto = "...img/imagem_exemplo.jpg"; ?>
+                                            <label id="labelImgAnimal" for="inputImgAnimal" style="background-color: 0;"></label>
+                                            <img src="<?php echo URL."recursos/img/$dadosAnimal->foto";?>" alt="Foto do Animal" id="imgAnimal" for="inputImgAnimal">
+                                        </div>
+                                        <div class="col-md-6 justify-content-center aling-content-center">
+                                            <label>Trocar foto:</label>
+                                            <input type="file" role="button" name="imgAnimal" id="inputImgAnimal" class="btn popover-test" accept="image/*" hidden>
+                                            <label id="labelImgAnimal" for="inputImgAnimal" style="background-color: 0;"></label>
+                                            <img src="recursos/img/imagem_exemplo.jpg" alt="Foto do Animal" id="imgAnimal" for="inputImgAnimal">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Alterar</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>    
+        </div>
+        <!--/MODAL -->
+        
+        <!-- MODAL: solicitar castração -->
         <div class='modal fade' id='modalSolicitar' data-bs-keyboard='true' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
             <div class='modal-dialog modal-dialog-centered'>
                 <div class='modal-content'>
@@ -205,7 +387,24 @@
     <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado-->
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
+    <!-- EXTENSÃO JQUERY PARA O AJAX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
 
+    <!-- ABRIR MODAL EDITAR -->
+    <script>
+        var exampleModal = document.getElementById('modalEditar')
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        var idanimal = button.getAttribute('data-idanimal')
+
+        $("#idAnimal").val(idanimal);
+        })
+    </script>
+
+    <!-- ABRIR MODAL SOLICITAR -->
     <script>
         var exampleModal = document.getElementById('modalSolicitar')
         exampleModal.addEventListener('show.bs.modal', function (event) {
@@ -216,6 +415,21 @@
 
         $("#idAnimal").val(idanimal);
         })
-    </script>
+    </script>  
+    
+    <!-- SCRIPT PARA POPULAR SELECT racas -->
+    <script>
+        function carregarRaca($id = document.getElementById("tipoEspecie"))
+        {
+            //limpar todos antes de carregar (pesquisar)
+            $.ajax({
+                url: '<?php echo URL;?>carregar-raca/'+ $id.value,
+                success: function(data) {
+                    $("#racas").append(data)
+                    //$("#teste").html(data);
+                }
+            });
+        }
+    </script>  
 </body>
 </html>
