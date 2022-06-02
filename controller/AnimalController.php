@@ -4,23 +4,25 @@ include_once "model/Raca.php";
 
 class AnimalController
 {
+    function carregarRaca($id){
+        $raca = new Raca();
+        $raca->tipoespecie = $id;
+        $dadosRacaAnimal = $raca->consultarRaca();
+
+        $options = "";
+        foreach ($dadosRacaAnimal as $value){
+            $options .= "<option value='$value->idraca'>$value->raca</option>";
+        }
+        echo $options;
+    }
+
     function cadastrarAnimal()
     {
-        /*$direciona = new Raca();
-        $dadosRaca = $direciona->consultar();
-        //Gambiarra para pegar o ID da raça - Melhorar o código depois
-        foreach($dadosRaca as $value)
-        {
-            if($_POST["listRaca"] == $value->raca)
-            {
-                $raca = $value->idraca;
-            }
-        }*/
         $animal = new Animal();
         $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
-        $animal->idraca = $_POST["idraca"];
+        $animal->especie = $_POST["tipoEspecie"];
+        $animal->idraca = $_POST["racas"];
         $animal->aninome = $_POST["txtNome"];
-        $animal->especie = $_POST["slcEspecie"];
         $animal->sexo = $_POST["slcSexo"];
         $animal->porte = $_POST["slcPorte"];
         $animal->cor = $_POST["txtCor"];
@@ -55,22 +57,11 @@ class AnimalController
 
     function atualizarAnimal($id)
     {
-        /*$direciona = new Raca();
-        $dadosRaca = $direciona->consultar();
-        //Gambiarra para pegar o ID da raça - Melhorar o código depois
-
-        foreach($dadosRaca as $value)
-        {
-            if($_POST["listRaca"] == $value->raca)
-            {
-                $raca = $value->idraca;
-            }
-        }*/
         $animal = new Animal();
         $animal->idanimal = $id;
         $animal->idraca = $_POST["idraca"];
         $animal->aninome = $_POST["txtNome"];
-        $animal->especie = $_POST["slcEspecie"];
+        $animal->especie = $_POST["tipoEspecie"];
         $animal->sexo = $_POST["slcSexo"];
         $animal->porte = $_POST["slcPorte"];
         $animal->cor = $_POST["txtCor"];
