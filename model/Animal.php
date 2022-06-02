@@ -138,6 +138,7 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+
         function retornarAnimais()
         {
             //Conectando ao banco de dados
@@ -155,6 +156,24 @@
             $cmd->execute();
 
             return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        //Método para ver a quantidade de castrações do usuário
+        function quantidadeCastracoes()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("SELECT COUNT(*) FROM `castracao` WHERE idanimal IN (SELECT idanimal FROM animal WHERE idusuario = :idusuario)");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":idusuario", $this->idusuario);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetchColumn();
         }
     }
 ?>

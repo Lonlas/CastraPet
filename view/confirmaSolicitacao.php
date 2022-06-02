@@ -2,33 +2,42 @@
 <html lang="pt-br">
 <head>
     <?php include_once "head.php";?>
+    <style rel="stylesheet" type="text/css">
+        .corpo{
+            grid-template-areas: 'header''corpo''footer';
+            grid-template-rows: max-content auto 100px;
+        }
+    </style>
 </head>
 <body>
+
     <!-- CORPO -->
-    <?php //CONTROLE DE MENU
-        if($_SESSION) //caso esteja logado e exista uma sessão
-        {
-            switch($_SESSION["dadosLogin"]->nivelacesso)
+    <div class="container-fluid d-grid min-vh-100 corpo">
+        <?php //CONTROLE DE MENU
+            if($_SESSION) //caso esteja logado e exista uma sessão
             {
-                //caso tenha nível de acesso de usuário
-                case 0: include_once "menuLogado.php"; break;
-                //caso tenha nível de acesso de clínica
-                case 1: include_once "menuClinica.php"; break;
-                //caso tenha nível de acesso de Administrador
-                case 2: include_once "menuADM.php"; break;   
+                switch($_SESSION["dadosLogin"]->nivelacesso)
+                {
+                    //caso tenha nível de acesso de usuário
+                    case 0: include_once "menuLogado.php"; break;
+                    //caso tenha nível de acesso de clínica
+                    case 1: include_once "menuClinica.php"; break;
+                    //caso tenha nível de acesso de Administrador
+                    case 2: include_once "menuADM.php"; break;   
+                }
             }
-        }
-        else{ include_once "menu.php"; }
-    ?>
-    <div class="container-fluid">
-        <div class="bg-danger">
-            <div class="container mx-auto row p-3">
-                <div class="container bg-white p-0">  
+            else{ include_once "menu.php"; }
+        ?>
+        <div class="bg-danger container-fluid" style="grid-area: corpo;">
+            <div class="row h-100 align-items-center">
+                <div class="p-3">
                     <div class="container bg-dark text-light font-weight-bold p-3">
-                        Solicitação
+                        <h5 class="m-0">Solicitação</h5>
                     </div>
-                    <div>
-                        <form action="<?php echo URL.'agendar';?>" method="POST" class="container row mx-0 py-3 px-0">
+                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
+                        <form action="<?php echo URL.'agendar';?>" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0" method="post">
+                            <input type="hidden" name="emailDestinatario" id="emailDestinatairio" value="<?php echo $dadosCastracao->email;?>">
+                            <input type="hidden" name="nomeDestinatairio" id="nomeDestinatairio" value="<?php echo $dadosCastracao->nome;?>">
                             <div class="col-sm-6 px-3">
                                 <div class="row container-fluid p-0 m-0 form-group mb-2">
                                     <label for="" class="form-label">Número da solicitação:</label>
@@ -69,7 +78,7 @@
                                 <div class="row float-end my-3">
                                     <div class="">
                                         <!-- Botão recusar solicitação -->
-                                        <input type="submit" id="btnrecusa" value="Recusar" class="btn btn-danger float-end me-3">
+                                        <input type="submit" id="btnrecusa" value="Recusar" name="btnRecusa" class="btn btn-danger float-end me-3">
                                     
                                         <!-- Botão confirmar solicitação -->
                                         <input type="submit" value="Confirmar" class="btn btn-success float-end me-1">
@@ -77,16 +86,20 @@
                                 </div>
                             </div>
                         </form>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
-        <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
-            <a href="<?php echo URL.'lista-solicitacao'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
-        </footer>
+        <div class="container-fluid bg-dark" style="grid-area: footer;">
+            <div class="row h-100 align-items-center">
+                <div class="px-5">
+                    <a href="<?php echo URL.'lista-solicitacao';?>" class="btn btn-success">Voltar</a>
+                </div>
+            </div> 
+        </div>
     </div>
+    
     <!-- /CORPO -->
-
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>

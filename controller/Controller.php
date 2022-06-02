@@ -54,6 +54,7 @@ class Controller
         $animal = new Animal();
         $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
         $dadosAnimais = $animal->retornarAnimais();
+        $quantidadeCastracoes = $animal->quantidadeCastracoes();
 
         include_once "view/meusAnimais.php";
     }
@@ -120,7 +121,7 @@ class Controller
         $dadosCastracao = $agendamento->retornar();
 
         $clinica = new Clinica();
-        $dadosClinicas = $clinica->consultar();
+        $dadosClinicas = $clinica->consultarComVagas();
 
         include_once "view/confirmaSolicitacao.php";
     }

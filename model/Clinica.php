@@ -68,6 +68,19 @@
 
             return $cmd->fetchAll(PDO::FETCH_OBJ);
         }
+        function consultarComVagas()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para consultar
+            $cmd = $con->prepare("SELECT idclinica, nome, email, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep FROM clinica JOIN login ON clinica.idlogin = login.idlogin WHERE clinica.vagas > 0");
+            
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
 
         //Método excluir
         function excluir()
@@ -116,7 +129,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT * FROM clinica WHERE idclinica = :idclinica");
+            $cmd = $con->prepare("SELECT clinica.*, nome FROM clinica join login on login.idlogin = clinica.idlogin WHERE idclinica = :idclinica");
             
             //Parâmetros SQL
             $cmd->bindParam(":idclinica", $this->idclinica);
@@ -125,6 +138,36 @@
             $cmd->execute();
 
             return $cmd->fetch(PDO::FETCH_OBJ);
+        }
+        function subtrairVagas()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("UPDATE clinica SET vagas = :vagas WHERE idclinica = :idclinica");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":vagas", $this->vagas);
+            $cmd->bindParam(":idclinica", $this->idclinica);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
+        function adicionarVagas()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("UPDATE clinica SET vagas = :vagas WHERE idclinica = :idclinica");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":vagas", $this->vagas);
+            $cmd->bindParam(":idclinica", $this->idclinica);
+
+            //Executando o comando SQL
+            $cmd->execute();
         }
     }
 ?>

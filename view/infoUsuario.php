@@ -33,7 +33,7 @@
             <div class="bg-primary h-100 row align-items-center">
                 <div class="container mx-auto p-3"style="grid-area:corpo;">
                     <div class="container bg-dark text-light font-weight-bold p-3">
-                        Olá <?php echo $_SESSION["dadosUsuario"]->nome;?> !
+                        Olá <?php echo $_SESSION["dadosLogin"]->nome."!"; ?>
                     </div>
                     <div class="container bg-white ">
                         <form action="<?php echo URL.'perfil'; ?>">

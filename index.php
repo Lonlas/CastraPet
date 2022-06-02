@@ -135,7 +135,7 @@ if($_GET)
             $adm = new Controller();
             $adm->abrirConsultaAnimais();    
         break;
-        #CASTRAÇÃO - vizualização e confirmação 
+        #CASTRAÇÃO - vizualização, confirmação e atualização
         case "lista-solicitacao":
             $adm = new Controller();
             $adm->abrirListaSolicitacao();   
@@ -147,6 +147,10 @@ if($_GET)
         case "agendar":
             $castracao = new UsuarioController();
             $castracao->agendarCastracao();
+        break;
+        case "atualizar-castracao":
+            $castracao = new UsuarioController();
+            $castracao->atualizarCastracao();
         break;
 
         // CLÍNICA

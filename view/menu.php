@@ -9,7 +9,7 @@
     $url[0] = 'inicio';
   }
   ?>
-<nav class="navbar navbar-expand-md navbar-light bg-transparent px-4 py-0 mx-2">
+<nav class="navbar navbar-expand-md navbar-light bg-transparent mx-4 my-0">
   <a class="navbar-brand" href="<?php echo URL.'inicio';?>"><img src="<?php echo URL.'recursos/img/Logo-Fav3.png'?>" style="height:80px;"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
     <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@
         <a class="nav-link <?php $font='fw-bold'; switch($url[0]){case '': echo $font; break; case 'sobre': echo $font; break;}?>"  href="<?php echo URL.'sobre'; ?>">Sobre</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link"  href="<?php echo URL.'#'; ?>">Prefeitura Franco da Rocha</a>
+        <a class="nav-link"  href="https://www.francodarocha.sp.gov.br/">Prefeitura Franco da Rocha</a>
       </li>
     </ul>
     <form class="form-inline ms-auto my-2 my-lg-0">

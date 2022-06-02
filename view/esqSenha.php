@@ -2,61 +2,61 @@
 <html lang="pt-br">
 <head>
     <?php include_once "head.php";?>
+    <style rel="stylesheet" type="text/css">
+        .corpo{
+            grid-template-areas: 'header''corpo''footer';
+            grid-template-rows: max-content auto 100px;
+        }
+    </style>
 </head>
 <body>
+    
     <!-- CORPO -->
-    <?php //CONTROLE DE MENU
-        if($_SESSION) //caso esteja logado e exista uma sessão
-        {
-            switch($_SESSION["dadosLogin"]->nivelacesso)
+    <div class="container-fluid d-grid min-vh-100 corpo">
+        <?php //CONTROLE DE MENU
+            if($_SESSION) //caso esteja logado e exista uma sessão
             {
-                //caso tenha nível de acesso de usuário
-                case 0: include_once "menuLogado.php"; break;
-                //caso tenha nível de acesso de clínica
-                case 1: include_once "menuClinica.php"; break;
-                //caso tenha nível de acesso de Administrador
-                case 2: include_once "menuADM.php"; break;   
+                switch($_SESSION["dadosLogin"]->nivelacesso)
+                {
+                    //caso tenha nível de acesso de usuário
+                    case 0: include_once "menuLogado.php"; break;
+                    //caso tenha nível de acesso de clínica
+                    case 1: include_once "menuClinica.php"; break;
+                    //caso tenha nível de acesso de Administrador
+                    case 2: include_once "menuADM.php"; break;   
+                }
             }
-        }
-        else{ include_once "menu.php"; }
-    ?>
-
-    <div class="container-fluid">
-        <div class="container-fluid bg-primary">
-            <div class="container mx-auto row p-3 ">
-                <div class="container bg-dark text-light font-weight-bold p-3">
-                    Recuperação de senha
-                </div>
-                <div class="container bg-white">
-                    <form method="post" action="recuperar-senha">
-                    <div class="row justify-content-center">
-                        <div class="col-md-7 text-center">
-                            <table class="table table-borderless">
-                                    <tr>
-                                        <td class="row-mb-1">
-                                            <label for="txtEmail">E-mail:</label>
-                                        </td> 
-                                        <td class="row-mb-5"> 
-                                            <input class="form-control" type="email" name="txtEmail" id="txtEmail" maxlength="100" required>
-                                        </td>
-                                    </tr>
-                            </table>
-                        </div>
+            else{ include_once "menu.php"; }
+        ?>
+        <div class="bg-primary container-fluid" style="grid-area: corpo;">
+            <div class="row h-100 align-items-center">
+                <div class="p-3">
+                    <div class="container bg-dark text-light font-weight-bold p-3">
+                        <h5 class="m-0">Recuperar de senha</h5>
                     </div>
-                    <div class="row">
-                        <div class="col mb-4 ms-md-3 text-center">
-                            <input type="submit" class="btn btn-success mx-auto" value="Enviar">
-                        </div>       
-                    </div>  
-                    </form>
+                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 bg-white">
+                        <form method="post" class="container p-sm-3 p-md-3 p-lg-4 p-3" action="recuperar-senha">
+                            <div class="form-group mb-4">
+                                <label for="txtEmail" class="form-label">E-mail:</label>
+                                <input class="form-control" type="email" name="txtEmail" id="txtEmail" maxlength="100" required>
+                            </div>
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-success mx-auto" value="Enviar">
+                            </div>        
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <footer class="container-fluid text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
-            <a href="<?php echo URL.'login'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
-        </footer>
+        <div class="container-fluid bg-dark" style="grid-area: footer;">
+            <div class="row h-100 align-items-center">
+                <div class="px-5">
+                    <a href="<?php echo URL.'login';?>" class="btn btn-success">Voltar</a>
+                </div>
+            </div> 
+        </div>
     </div>
-
+    
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->

@@ -4,6 +4,8 @@ include_once "model/Usuario.php";
 include_once "model/Login.php";
 include_once "model/Animal.php";
 include_once "model/Castracao.php";
+include_once "model/Email.php";
+include_once "model/Clinica.php";
 
 class UsuarioController
 {
@@ -132,25 +134,110 @@ class UsuarioController
 
     function agendarCastracao()
     {   
-
         $idcastracao = $_POST["idcastracao"];
-        if($_POST["dataHora"] != "" && $_POST["selectClinica"] != 0)
+
+        if(!isset($_POST["btnRecusa"]))
+        {
+            if($_POST["dataHora"] != "" && $_POST["selectClinica"] != 0)
+            {
+                $castracao = new Castracao();
+    
+                $castracao->idclinica = $_POST["selectClinica"];
+                $castracao->status = 1;
+                $castracao->horario = $_POST["dataHora"];
+                $castracao->idcastracao = $idcastracao;
+                
+                $clinica = new Clinica();
+                $clinica->idclinica = $_POST["selectClinica"];
+                $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas - 1;
+                
+                //enviar o email
+                $email = new Email();
+                $email->data = $_POST["dataHora"];
+                $email->nomeClinica = $dadosClinica->nome;
+                $email->ruaClinica = $dadosClinica->clirua;
+                $email->bairroClinica = $dadosClinica->clibairro;
+                $email->numeroClinica = $dadosClinica->clinumero;
+                $email->emailDestinatario = $_POST["emailDestinatario"];
+                $email->nomeDestinatario = $_POST["nomeDestinatairio"];
+                $email->nomeAnimal = $_POST["aninome"];
+
+                $clinica->subtrairVagas();
+                $castracao->aprovarCastracao();
+                $email->enviarConfirmacao();
+    
+                header("Location:".URL."lista-solicitacao");
+            }
+            else
+            {
+                echo "<script>alert('Selecione a clínica e/ou a data'); window.location='".URL."agendamento/$idcastracao'; </script>";
+            }
+        }
+        else if($_POST["btnRecusa"] == "Recusar")
         {
             $castracao = new Castracao();
 
-            $castracao->idclinica = $_POST["selectClinica"];
-            $castracao->status = 1;
-            $castracao->horario = $_POST["dataHora"];
             $castracao->idcastracao = $idcastracao;
+            $castracao->status = 3;
 
-            $castracao->aprovarCastracao();
+            $castracao->recusarCastracao();
 
             header("Location:".URL."lista-solicitacao");
         }
-        else
+
+    }
+    function atualizarCastracao()
+    {
+        $castracao = new Castracao();
+        $castracao->idcastracao = $_POST["idCastracao"];
+        if($_POST["status"] == "Castrado")
         {
-            echo "<script>alert('Selecione a clínica e/ou a data'); window.location='".URL."agendamento/$idcastracao'; </script>";
+            $castracao->status = 2;
+            $castracao->atualizar();
         }
+        else if($_POST["status"] == "nCompareceu")
+        {
+            //Adicionar o status de que o animal não compareceu à castração
+            $castracao->status = 4;
+            $castracao->atualizar();
+
+            //Aplicar uma punição ao tutor que não compareceu à castração
+            $usuario = new Usuario();
+            $usuario->idusuario = $_POST["idTutor"];
+            $usuario->punicao = 1;
+            $usuario->aplicarPunicao();
+
+            //Liberar a vaga de castração para a clínica
+            $clinica = new Clinica();
+            $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+            $dadosClinica = $clinica->retornar();
+            $clinica->vagas = $dadosClinica->vagas + 1;
+            $clinica->adicionarVagas();
+            
+            //Enviar aviso ao usuário dizendo que não compareceu à castração
+            $email = new Email();
+            $email->emailDestinatario = $_POST["emailTutor"];
+            $email->nomeDestinatario = $_POST["nomeTutor"];
+            $email->nomeAnimal = $_POST["nomeAnimal"];
+            $email->enviarAviso();
+        }
+        else if($_POST["status"] == "emAnalise")
+        {
+            //Adicionar o status de que o animal retornou para a análise da castração
+            $castracao->status = 0;
+            $castracao->atualizarEmAnalise();
+
+            //Liberar a vaga de castração para a clínica
+            $clinica = new Clinica();
+            $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+            $dadosClinica = $clinica->retornar();
+            $clinica->vagas = $dadosClinica->vagas + 1;
+            $clinica->adicionarVagas();
+        }
+        else {echo"<script>alert('Insira um valor válido'); window.location='".URL."consulta-castracao'; </script>"; return;}
+
+        header("Location:".URL."consulta-castracao");
     }
     
     function logar()
@@ -167,7 +254,7 @@ class UsuarioController
             {
                 //caso seja usuário
                 case 0:
-
+                    
                     $usuario = new Login();
                     $usuario->idlogin = $dadosLogin->idlogin;
                     $dadosUsuario = $usuario->retornarUsuario();

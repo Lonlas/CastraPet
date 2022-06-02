@@ -133,14 +133,6 @@
                             $values->comunitario = str_replace("0","Não", $values->comunitario);
                             $values->comunitario = str_replace("1","Sim", $values->comunitario);
 
-                            //Reescrevendo o Status
-                            $values->status = str_replace("0","Em análise", $values->status);
-                            $values->status = str_replace("1","Aprovado", $values->status);
-                            $values->status = str_replace("2","Castrado", $values->status);
-                            $values->status = str_replace("3","Reprovado", $values->status);
-                            $values->status = str_replace("4","Não compareceu", $values->status);
-
-
                             echo
                             "
                             <!-- Começo de um animal -->
@@ -150,7 +142,7 @@
                                     </div>
                                     <div class='col-md-7'>
                                         <div class='row'>
-                                            <div class='col-md-9'>
+                                            <div class='col-md-7'>
                                                 <div class='row'>
                                                     <p>
                                                         Nome:
@@ -188,7 +180,7 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div class='col-md-3'>
+                                            <div class='col-md-5'>
                                                 <div class='row'>
                                                     <p>
                                                         Idade:
@@ -212,20 +204,58 @@
                                         <div class='col'></div>
                                     </div>
                                     <div class='col-md-2 mt-2 mt-md-0'>
-                                    
-                                        <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$values->idanimal'>
-                                            Solicitar castração
-                                        </button>
                                         
-                                        <!-- <a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2'  data-bs-toggle='modal' data-bs-target='#modalEditar' data-idanimal='$values->idanimal'>Editar animal</a>-->
-                                        <button  class='btn btn-warning w-100 mb-2'  data-bs-toggle='modal' data-bs-target='#modalEditar' data-idanimal='$values->idanimal'>Editar animal</button>
-                                        <a href='".URL."excluir-animal/$values->idanimal' class='btn btn-danger w-100' onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir animal</a>
-                                        <span class='badge bg-warning w-100 my-3'>$values->status</span>
+                                    ";
+                                    if(!isset($values->status))
+                                    {
+                                        $beneficio = str_replace(0,1,$_SESSION["dadosUsuario"]->beneficio);
+                                        $beneficio = str_replace(1,2,$_SESSION["dadosUsuario"]->beneficio);
+                                        $beneficio = str_replace(2,5,$_SESSION["dadosUsuario"]->beneficio);
+
+                                        if($quantidadeCastracoes < $beneficio)
+                                        {
+                                            echo "
+                                            <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$values->idanimal'>
+                                                Solicitar castração
+                                            </button>
+                                            ";
+                                            }
+                                            echo "
+                                            <button  class='btn btn-warning w-100 mb-2 text-white'  data-bs-toggle='modal' data-bs-target='#modalEditar' data-idanimal='$values->idanimal'>Editar animal</button>
+                                            <!--<a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2 text-white' >Editar animal</a>-->
+                                            <a href='".URL."excluir-animal/$values->idanimal' class='btn btn-danger w-100' onclick='return confirm(\'Deseja realmente excluir?\')'>Excluir animal</a>
+                                            ";
+                                        }
+                                    else
+                                    {
+                                        switch($values->status)
+                                        {
+                                            case 0:
+                                                echo "<span class='btn btn-sm bg-warning w-100 my-3 text-white fw-bold' style='cursor: default;'>Solicitação em análise</span>";
+                                            break;
+                                            case 1:
+                                                echo "<span class='btn btn-sm bg-success w-100 my-3 text-white fw-bold' style='cursor: default;'>Solicitação aprovada</span>";
+                                            break;
+                                            case 2:
+                                                echo "<span class='btn btn-sm bg-success w-100 my-3 text-white fw-bold' style='cursor: default;'>Animal Castrado</span>";
+                                            break;
+                                            case 3:
+                                                echo "<span class='btn btn-sm bg-danger w-100 my-3 text-white fw-bold' style='cursor: default;'>Solicitação recusada</span>";
+                                            break;
+                                            case 4:
+                                                echo "<span class='btn btn-sm bg-danger w-100 my-3 text-white fw-bold' style='cursor: default;'>Tutor não compareceu</span>";
+                                            break;
+                                            default:
+                                                echo "<span class='btn btn-sm bg-secondary w-100 my-3 text-white fw-bold' style='cursor: default;'>Ocorreu um erro</span>";
+                                            break;
+                                        }
+                                    }
+                                    echo "
                                     </div>
                                 </div>
                                 <hr>
                             <!-- Fim de um animal -->
-                            ";
+                            ";  
                         }
                         ?>
                         <div class="row align-items-center p-3">
@@ -245,8 +275,7 @@
                 </div>
             </div>
         </div>
-        
-        
+ 
         <!-- MODAL: editar animal-->
         <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -378,7 +407,7 @@
                 </div>
             </div>
         </div>
-    <!-- /MODAL -->
+        <!-- /MODAL -->
         <!-- /CORPO -->
     </div>
 

@@ -140,5 +140,20 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+        function aplicarPunicao()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("UPDATE usuario SET punicao = :punicao WHERE idusuario = :idusuario");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":punicao", $this->punicao);
+            $cmd->bindParam(":idusuario", $this->idusuario);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
     }
 ?>
