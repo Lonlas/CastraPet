@@ -74,6 +74,9 @@
             }
         }
     </style>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>  
     <!-- CORPO -->
@@ -112,11 +115,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
-                                            <label for="slcEspecie" class="form-label">Espécie:</label>
-                                            <select id="slcEspecie" name="slcEspecie" class="form-select" required>
-                                                <label>SELECIONE</label>
-                                                <option id="especie" value="1">Canina</option>
-                                                <option id="especie" value="2">Felina</option>
+                                            <label for="tipoEspecie" class="form-label">Espécie:</label>
+                                            <select id="tipoEspecie" name="tipoEspecie" class="form-select"  onchange="carregarRaca(this)" required>
+                                                <option value="">... SELECIONE A ESPÉCIE ...</option>
+                                                <option value="0">Canina</option>
+                                                <option value="1">Felina</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
@@ -159,29 +162,9 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="listRaca" class="form-label">Raça:</label>
                                             <select name="racas" id="racas" class="form-select">
-                                                <?php
-                                                    $slcEspecie = $_POST["slcEspecie"];
-                                                    $especie = $_POST["especie"];
+                                                <option value="">... SELECIONE A RAÇA ...</option>
 
-                                                    if($especie == 1)
-                                                    {
-                                                        foreach($dadosRacaCanino as $value)
-                                                        {
-                                                            echo "<option value='$value->idraca'>$value->raca</option>";
-                                                        }
-                                                    }
-                                                    else if($especie == 2)
-                                                    {
-                                                        foreach($dadosRacaFelino as $value)
-                                                        {
-                                                            echo "<option value='$value->idraca'>$value->raca</option>";
-                                                        }
-                                                    }else{
-                                                       echo "<label>... SELECIONE A ESPÉCIE ...</label>";
-                                                    }
-                                                ?>
                                             </select>
-                                            
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="slcComunitario" class="form-label">Animal Comunitário:</label>
@@ -225,6 +208,8 @@
         </div>
         <!-- /CORPO -->
     </div>
+    <!-- EXTENSÃO JQUERY PARA O AJAX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     
@@ -237,5 +222,20 @@
             }
         }
     </script>
+     
+    <!-- SCRIPT PARA POPULAR SELECT racas -->
+    <script>
+        function carregarRaca(id)
+        {
+            //limpar todos antes de carregar
+            $("#racas").empty();
+            $.ajax({
+                url: '<?php echo URL;?>carregar-raca/'+ id.value,
+                success: function(data) {
+                    $("#racas").append(data);
+                }
+            });
+        }
+    </script>  
 </body>
 </html>
