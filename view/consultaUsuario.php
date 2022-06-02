@@ -98,80 +98,18 @@
             </div>
         </div>
     </div>
-        <!--
-        <div class="bg-danger" >
-            <div class="container mx-auto row p-3">
-                <div class="container bg-white p-0">   
-                    <div class="container bg-dark text-light font-weight-bold p-3">
-                        Consultar Usuário
-                    </div>
-                    <form action="consulta-usuario">
-                        <div class="table-responsive-md">
-                            <table class="table table-sm table-hover ps-3 mb-3 me-5" id="dadosUsuario">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>E-mail</th>
-                                        <th>CPF</th>
-                                        <th>Telefone</th>
-                                        <th>Animais</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Fulano Fulano Fulano Fulano</td>
-                                        <td>Fulano7777@gamil.com</td>
-                                        <td>12345678910</td>
-                                        <td>11987546321</td>
-                                        <td>
-                                            <a href="<?php echo URL.'consulta-animais';?>" class="btn btn-success col-auto">
-                                                <img src="recursos/img/Logo Castra Pet1.png" alt="Animais cadastrados" width="30" class="aling-itens-center justify-content-center">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-warning btn-md" id="btnEditar" type="button" data-bs-target="#modalEditar" data-bs-toggle="modal" ><i class='fa fa-edit'></i>Editar</button>
-                                            <button class="btn btn-danger btn-md">Excluir</button>
-                                    </tr>
-    
-                                    <?php
-                                        /*foreach ($dadosUsuario as $value)
-                                        {
-                                            echo"<tr>
-                                                    <td>$value->nome</td>
-                                                    <td>$value->email</td>
-                                                    <td>$value->cpf</td>
-                                                    <td>$value->telefone</td>
-                                                    <td>
-                                                        <a href=".URL."consulta-animais' class='btn btn-success col-auto'>
-                                                            <img src='recursos/img/Logo Castra Pet1.png' alt='Animais cadastrados' width='30' class='aling-itens-center justify-content-center'>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <button class='btn btn-warning btn-md' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal'>
-                                                            <i class='fa fa-edit'></i>Editar</button>
-                                                        <a href=".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-md' 
-                                                        onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir</a>
-                                                    </td>
-                                                </tr>";
-                                        }*/
-                                    ?>   
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>                    
-        -->
+        
     <!-- MODAL: editar usuário -->
     <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <form action="<?php echo URL . 'atualizar-usuario'; ?>" method="post">
+                <form action="<?php echo URL.'atualizar-usuario'; ?>" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title">Atualizar</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
                     </div>
                     <div class="modal-body">
-                        <!--<input type="hidden" name="idusuario" value="<?php echo $dadosusuario->idusuario;?>">-->
+                        <!--<input type="hidden" name="idusuario" value="<?php //echo $dadosUsuario->idusuario;?>">-->
                         
                         <div class="row">
                             <div class="col-sm-6 mb-4 align-self-center">
