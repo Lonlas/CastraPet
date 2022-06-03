@@ -137,8 +137,56 @@
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
-    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado -->
+    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
+
+    <!-- EXTENSÃO JQUERY DAS MASCARAS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     
+    <script>
+        //Adicionar Máscaras
+        $(document).ready(function (){
+            $("#txtCPF").mask('000.000.000-00');
+            $("#txtCEP").mask('00000-000');
+            $("#txtRG").mask('00.000.000-0');
+            $("#txtTel").mask('(00) 0000 0000');
+            $("#txtCelular").mask('(00) 00000 0000');
+        });
+    </script>
+    <script>
+        //Consultar CEP
+            const $campoCEP = document.getElementById("txtCEP");
+            const $campoBairro = document.getElementById("txtBairro");
+            const $campoRua = document.getElementById("txtRua");
+
+            $campoCEP.addEventListener("blur", infosDoEvento => {
+                const cep = infosDoEvento.target.value;
+                if($campoCEP.value != '')
+                {
+                    fetch('https://viacep.com.br/ws/'+cep+'/json/')
+                    .then((RetornoDoServidor) => {
+                        return RetornoDoServidor.json();
+                    })
+                    .then((objJS) => {
+                        if(objJS.erro == 'true')
+                        {
+                            $campoBairro.value = '';
+                            $campoRua.value = '';
+                        }else
+                        {
+                            //07868150
+                        console.log(objJS);
+                        $campoBairro.value = objJS.bairro;
+                        $campoRua.value = objJS.logradouro;
+                        }
+                    })
+                }
+                else
+                {
+                    $campoBairro.value = '';
+                    $campoRua.value = '';
+                }
+            });
+    </script>
     <script>
         //NIS
         $('#chkNIS').change(function() {
@@ -168,7 +216,7 @@
         });
     </script>
     <script>
-       /* function confirmasenha()
+       function confirmasenha()
         {
 
             var confirmaSenha = document.getElementById("txtConfirmaSenha");
@@ -182,8 +230,9 @@
                 erro.style = "display:inline;";
                 event.preventDefault();
             }
-        }*/
+        }
     </script>
-    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
+    
+    
 </body>
 </html>

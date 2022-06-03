@@ -38,51 +38,52 @@ require "recursos/PHPMailer/SMTP.php";
 
         function enviarConfirmacao()
         {
-
-            //Conteúdo da mensagem enviada
             $Conteudo = 
             "
-            <h2>Olá $this->nomeDestinatario, aqui está as informações sobre a castração de seu animalzinho</h2>
+                <p><b>Olá, $this->nomeDestinatario!</b><br/>
+                A castração do(a) $this->nomeAnimal foi agendada! Seguem informações:
+                </p>
 
-            <p><b>Data: ".date('d-m-Y',strtotime($this->data))."<br/>
-            Hora: ".date('H:i',strtotime($this->data))."</b></p>
-            <p><b>Favor chegar até 10 minutos antes</b></p>
+                <p><b>Data:</b> ".date('d-m-Y',strtotime($this->data))."<br/>
+                <b>Hora:</b> ".date('H:i',strtotime($this->data))."</p>
 
-            <p><b>Clínica: </b>$this->nomeClinica <br/>
-            <b>Endereço: </b>$this->ruaClinica, $this->numeroClinica - $this->bairroClinica, Franco da Rocha - SP</p>
+                <p><b>Clínica: </b>$this->nomeClinica <br/>
+                <b>Endereço: </b>$this->ruaClinica, $this->numeroClinica - $this->bairroClinica, Franco da Rocha - SP</p>
 
-            <h2>Orientações sobre a castração</h2>
-            <ul>
-                <li>A clínica vetérinária credenciada ficará responsével pelo contato e <u><b>agendamento</b></u> da castração - Será realizada três 
-                    (03) tentativas de contato, caso não atenda, automaticamente perderá a vaga cadastrada.</li> 
+                <p><u>Chegar com 10 minutos de antecedência.</u></p>
 
-                <li>Comparecer no horário agendado pele clínica.</li> 
+                <h3>Orientações sobre a castração:</h3>
+                <ul>
+                    <li>A clínica veterinária credenciada ficará responsável pelo <u><b>contato e agendamento</b></u> da castração. <br/>Seram realizadas três 
+                        (03) tentativas de contato, caso não atenda, automaticamente perderá a vaga cadastrada.</li> 
 
-                <li>O animal em <u><b>JEJUM</b></u>(sólido e líquido) <u><b>08 horas antes da castração</b></u> (Ex: a castração será ás 08hs da manhã, portanto, a última refeição 
-                    deverá ser até as 23hs da noite).</li> 
+                    <li>Comparecer no horário agendado pele clínica.</li> 
 
-                <li>É recomendado o uso de colar de proteção (elisabetano) ou a roupa cirúgica (você encontrará na clínica veterinária ou em petshop) 
-                    procure em lugares mais baratos ou até mesmo empréstimo. </li>
+                    <li>Deixar o animal em <u><b>JEJUM</b></u> (sólido e líquido) <u><b>08 horas antes da castração.</b></u> <br/>(Ex: a castração será ás 08hs da manhã, portanto, a última refeição 
+                        deverá ser até as 23hs da noite).</li> 
 
-                <li>Clínica veterinária já médica os animais, caso considerem necessário, a clínica poderá prescrever medicamentos 
-                com nome genérico (menor custo) que podem ser comprados em farmácia humana.</li> 
+                    <li>É recomendado o uso de colar de proteção (elisabetano) ou a roupa cirúgica (você encontrará na clínica veterinária ou em petshops) 
+                        procure em lugares mais baratos ou até mesmo empréstimo. </li>
 
-                <li>Ter 18 anos ou mais e residir no município.</li>
+                    <li>A clínica veterinária já medica os animais, caso considerem necessário, a clínica poderá prescrever medicamentos 
+                    com nome genérico (menor custo) que podem ser comprados em farmácia humana.</li> 
 
-                <li>Levar cobertor ou um lençol limpo.</li> 
+                    <li>Ter 18 anos ou mais e residir no município.</li>
 
-                <li>Proprietário que não fizer a retirada do animal no horário estipulado pela clínica estará sujeito a aplicção do 
-                Auto de Infração, conforme a Art 29 da Resolução SIMA n° 05/2021 e demais legislações federais, estaduais e municipais.</li> 
+                    <li>Levar cobertor ou um lençol limpo.</li> 
 
-                <li>Em caso de motivo que impeça o animal à cirurgia de castração (fugiu, doença, castrou no particular, óbito e etc) 
-                entrar em contato imediatamente com a clínica veterinária para comunicar o cancelamento da cirurgia.</li> 
+                    <li>O proprietário que não fizer a retirada do animal no horário estipulado pela clínica estará sujeito a aplicação de
+                    Auto de Infração, conforme o Art 29 da Resolução SIMA n° 05/2021 e demais legislações federais, estaduais e municipais.</li> 
 
-                <li><u>Impedem o procedimento cirúgico:</u> Cio, prenhez, amamentação de filhotes com menos  de 45 dias, animais muito idosos 
-                (acima de 08 anos) ou filhotes com menos de 03 meses.</li> 
+                    <li>Em caso de motivo que impeça o animal à cirurgia de castração (fugiu, doença, castrou no particular, óbito e etc), 
+                        entrar em contato imediatamente com a clínica veterinária para comunicar o cancelamento da cirurgia.</li> 
 
-                <li>Todos os animais passarão por uma avaliação clínica pelos médicos veterinários da clínica creddenciada e caso detectado 
-                alguma alteração o procedimento poderá ser cancelado ou remarcado.</li> 
-            </ul>
+                    <li><b>Impedem o procedimento cirúrgico:</b> Cio, prenhez, amamentação de filhotes com menos de 45 dias, animais muito idosos 
+                    (acima de 08 anos) ou filhotes com menos de 03 meses.</li> 
+
+                    <li>Todos os animais passarão por uma avaliação clínica pelos médicos veterinários da clínica credenciada e caso detectado 
+                    alguma alteração o procedimento poderá ser cancelado ou remarcado.</li> 
+                </ul>
             ";
 
             $email = new PHPMailer(true);
@@ -111,7 +112,7 @@ require "recursos/PHPMailer/SMTP.php";
                 $email->isHTML(true);
 
                 //Corpo do e-mail
-                $email->Subject = "✨ Informações da castração do(a) $this->nomeAnimal ✨";     //Assunto / Título
+                $email->Subject = "✨ Confirmação da castração do(a) $this->nomeAnimal ✨";     //Assunto / Título
                 
                 //conteúdo
                 $email->Body = $Conteudo;
@@ -135,11 +136,13 @@ require "recursos/PHPMailer/SMTP.php";
             //Conteúdo da mensagem enviada
             $Conteudo = 
             "
-            <h2>Olá $this->nomeDestinatario, Foi observado que você não compareceu à castração de(a) $this->nomeAnimal</h2>
+            <p><b>Olá, $this->nomeDestinatario.</b><br/>
+            Notamos que você não compareceu a castração de $this->nomeAnimal agendada para ".date('d-m-Y',strtotime($this->data)).", 
+            às ".date('H:i',strtotime($this->data))."</p>
 
-            <h2>Por esse ocorrido, foi dado a você uma penalidade que o impede de solicitar mais castrações por um determinado período de tempo.<br/>
-            Caso haja um motivo plausível para esse ocorrido, entre em contato o mais breve possível para retirarmos essa punição.
-            </h2>
+            <p>Por este motivo, foi dado a você uma penalidade que o impede de solicitar mais castrações por um determinado período de tempo.<br/>
+            Caso haja um motivo plausível para este ocorrido, entre em contato com a clínica o mais breve possível para a punição ser retirada e uma nova data ser definida.
+            </p>
             ";
 
             $email = new PHPMailer(true);
@@ -168,7 +171,7 @@ require "recursos/PHPMailer/SMTP.php";
                 $email->isHTML(true);
 
                 //Corpo do e-mail
-                $email->Subject = "AVISO DE AUSÊNCIA DA CASTRAÇÃO DE $this->nomeAnimal";     //Assunto / Título
+                $email->Subject = "Ausência na castração.";     //Assunto / Título
                 
                 //conteúdo
                 $email->Body = $Conteudo;
