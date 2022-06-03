@@ -127,8 +127,8 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="slcSexo" class="form-label">Sexo:</label>
                                             <select id="slcSexo" name="slcSexo" class="form-select" required>
-                                                <option value="1">Macho</option>
                                                 <option value="0">Fêmea</option>
+                                                <option value="1">Macho</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
