@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 03-Jun-2022 às 03:02
+-- Generation Time: 03-Jun-2022 às 03:12
 -- Versão do servidor: 5.6.34
 -- PHP Version: 7.1.11
 
@@ -50,8 +50,8 @@ CREATE TABLE `animal` (
 INSERT INTO `animal` (`idanimal`, `idusuario`, `idraca`, `aninome`, `especie`, `sexo`, `cor`, `pelagem`, `porte`, `idade`, `comunitario`, `foto`) VALUES
 (3, 18, 4, 'Pitica', 1, 0, 'Castanho e beige', 1, 1, 8, 0, '3c5064982d2774489b6c176a72c750ec.jpg'),
 (4, 18, 4, 'Kika', 1, 0, 'Branca', 1, 1, 14, 0, '6ba827401eabaf5582118d3d668cd18d.jpg'),
-(7, 20, 6, 'Bartolomeu', 2, 2, 'Vermelho', 1, 2, 12, 0, 'dea44929c35ea6d90b3cbd0a57ac18a5.png'),
-(8, 20, 3, 'Hugu', 1, 2, 'Preto', 2, 3, 5, 1, '5f4c9075d01c1e2d8f125597f49de9e2.png'),
+(7, 20, 6, 'Bartolomeu', 1, 1, 'Vermelho', 1, 2, 12, 0, 'dea44929c35ea6d90b3cbd0a57ac18a5.png'),
+(8, 20, 3, 'Hugu', 0, 1, 'Preto', 2, 2, 5, 1, '5f4c9075d01c1e2d8f125597f49de9e2.png'),
 (9, 22, 3, 'Rex', 1, 1, 'Caramelo', 1, 2, 1, 0, 'a3ccbf69d983f3ba65203e8e7aaf9a0d.jpg'),
 (11, 22, 3, 'TotÃ³', 1, 1, 'Caramelo', 1, 1, 2, 0, '08d0316efae2c9870d79270ee1c0791f.jpg'),
 (15, 22, 4, 'Kiara', 1, 1, 'Bege', 1, 1, 5, 0, '895f42ccae3502519b72045fe6104082.jpg'),
