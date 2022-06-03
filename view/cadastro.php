@@ -35,7 +35,7 @@
                         <h5 class="m-0">CADASTRAR</h5>
                     </div>
                     <div class="container p-sm-3 p-md-3 p-lg-4 p-3 bg-white">
-                        <form method="post" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0" action="cadastrar-tutor">
+                        <form method="post" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0" action="cadastrar-tutor" enctype="multipart/form-data">
                             <div class="col-md-6 mb-lg-0 mb-5 p-0 pe-md-3">
                                 <div class="form-group row-6 mb-3">
                                     <label for="txtNome" class="form-label">Nome:</label>
@@ -80,7 +80,8 @@
                                         <label for="chkProtetor" class="form-label">Sou protetor de animais</label>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <input class="btn btn-success" type="button" value="Fazer upload" name="btnProtetorUpload">
+                                        <input class="btn btn-success" type="file" value="Fazer upload" accept="image/*" name="btnProtetorUpload" id="btnProtetorUpload" hidden>
+                                        <label id="labelProtetor" for="btnProtetorUpload" class="btn btn-success" style="background-color: 0;">Fazer upload</label>
                                     </div>
                                 </div>
                             </div>

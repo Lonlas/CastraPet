@@ -19,44 +19,54 @@ class UsuarioController
         $tel = str_replace($filtros,'',$_POST["txtTel"]);
         $celular = str_replace($filtros,'',$_POST["txtCelular"]);
 
-        $login = new Login();
-        $login->nome = $_POST["txtNome"];
-        $login->email = $_POST["txtEmail"];
-        $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
-        $login->nivelacesso = 0;
-
-        //Cadastro do Usuário
-        $cadastra = new Usuario();
-        $cadastra->idlogin = $login->cadastrar();
-        $cadastra->rg = $rg;
-        $cadastra->cpf = $cpf;
-
-        if($_POST["chkProtetor"] == 2)
-            $cadastra->beneficio = $_POST["chkProtetor"];
-        else if($_POST["chkNIS"] == 1)
-            $cadastra->beneficio = $_POST["chkNIS"];
-        else
-            $cadastra->beneficio = 0;
-
-        $cadastra->telefone = $tel;
-        $cadastra->celular = $celular;
-        $cadastra->punicao = 0;
-        $cadastra->usurua = $_POST["txtRua"];
-        $cadastra->usubairro = $_POST["txtBairro"];
-        $cadastra->usunumero = $_POST["txtNumero"];
-        $cadastra->usucep = $cep;
-        if(empty($_POST["txtNIS"]))
+        $consultarEmail = new Login();
+        $consultarEmail->email = $_POST["txtEmail"];
+        $dadosLogin = $consultarEmail->logar();
+        if($dadosLogin->email == null)
         {
-            $cadastra->nis = "";
+            $login = new Login();
+            $login->nome = $_POST["txtNome"];
+            $login->email = $_POST["txtEmail"];
+            $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
+            $login->nivelacesso = 0;
+
+            //Cadastro do Usuário
+            $cadastra = new Usuario();
+            $cadastra->idlogin = $login->cadastrar();
+            $cadastra->rg = $rg;
+            $cadastra->cpf = $cpf;
+
+            if($_POST["chkProtetor"] == 2 && $_FILES["btnProtetorUpload"]["error"] == 0)
+                $cadastra->beneficio = $_POST["chkProtetor"];
+            else if($_POST["chkNIS"] == 1 && strlen($_POST["txtNIS"]) == 1)
+                $cadastra->beneficio = $_POST["chkNIS"];
+            else
+                $cadastra->beneficio = 0;
+
+            $cadastra->telefone = $tel;
+            $cadastra->celular = $celular;
+            $cadastra->punicao = 0;
+            $cadastra->usurua = $_POST["txtRua"];
+            $cadastra->usubairro = $_POST["txtBairro"];
+            $cadastra->usunumero = $_POST["txtNumero"];
+            $cadastra->usucep = $cep;
+            if(empty($_POST["txtNIS"]))
+            {
+                $cadastra->nis = "";
+            }
+            else
+            {
+                $cadastra->nis = $_POST["txtNIS"];
+            }
+            
+            $cadastra->cadastrar();
+            $this->logar();
+            header("Location:".URL);
         }
         else
         {
-            $cadastra->nis = $_POST["txtNIS"];
+            echo"<script>alert('Já existe um perfil com esse e-mail'); window.location='".URL."cadastra-tutor'; </script>";
         }
-        
-        $cadastra->cadastrar();
-        $this->logar();
-        header("Location:".URL);
     }
 
     function solicitarCastracao()
@@ -162,6 +172,7 @@ class UsuarioController
             $email->emailDestinatario = $_POST["emailTutor"];
             $email->nomeDestinatario = $_POST["nomeTutor"];
             $email->nomeAnimal = $_POST["nomeAnimal"];
+            $email->data = $_POST["dataCastracao"];
             $email->enviarAviso();
 
             if($_POST["status"] != "Não compareceu")
@@ -173,6 +184,7 @@ class UsuarioController
                 $clinica->vagas = $dadosClinica->vagas + 1;
                 $clinica->adicionarVagas();
             }
+            
         }
         else if($_POST["statusAtualizado"] == "emAnalise")
         {

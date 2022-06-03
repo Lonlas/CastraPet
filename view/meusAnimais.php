@@ -156,9 +156,9 @@
                                             </button>
                                             ";
                                         }
-                                        if($_SESSION["dadosUsuario"]->punicao == 1)
+                                        else if($_SESSION["dadosUsuario"]->punicao == 1)
                                         {
-                                            echo "<span class='btn bg-danger w-100 mb-2 text-white' style='cursor: default;'>Solicitação Bloqueada</span>";
+                                            echo "<span class='btn bg-danger w-100 mb-2 text-white' style='cursor: default;'>Solicitação Bloqueada</span> ";
                                         }
                                         echo "
                                         <a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2 text-white' >Editar animal</a>

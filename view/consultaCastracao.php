@@ -136,7 +136,7 @@
                                             <td>$value->status</td>
                                             <td>$value->observacao</td>
                                             <td>
-                                                <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' data-nomeTutor='$value->nome' data-nomeAnimal='$value->aninome' data-status='$value->status'>Atualizar</button>
+                                                <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' data-nomeTutor='$value->nome' data-nomeAnimal='$value->aninome' data-status='$value->status' data-dataCastracao='$value->horario'>Atualizar</button>
                                             </td>
                                         </tr>
                                         ";
@@ -171,6 +171,7 @@
                                 <input type='hidden' id='emailTutor' name='emailTutor'>
                                 <input type='hidden' id='nomeAnimal' name='nomeAnimal'>
                                 <input type='hidden' id='nomeTutor' name='nomeTutor'>
+                                <input type='hidden' id='dataCastracao' name='dataCastracao'>
                                 <div class='modal-header'>
                                     <h5 class='modal-title' id='staticBackdropLabel'>Atualizar castração</h5>
                                     <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
@@ -269,6 +270,7 @@
         var nomeAnimal = button.getAttribute('data-nomeAnimal')
         var nomeTutor = button.getAttribute('data-nomeTutor')
         var status = button.getAttribute('data-status')
+        var dataCastracao = button.getAttribute('data-dataCastracao')
 
         $("#idCastracao").val(idCastracao);
         $("#emailTutor").val(emailTutor);
@@ -276,6 +278,7 @@
         $("#nomeAnimal").val(nomeAnimal);
         $("#nomeTutor").val(nomeTutor);
         $("#status").val(status);
+        $("#dataCastracao").val(dataCastracao);
         })
     </script>
 
