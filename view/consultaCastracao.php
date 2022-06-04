@@ -272,13 +272,13 @@
         var status = button.getAttribute('data-status')
         var dataCastracao = button.getAttribute('data-dataCastracao')
 
-        $("#idCastracao").val(idCastracao);
-        $("#emailTutor").val(emailTutor);
-        $("#idTutor").val(idTutor);
-        $("#nomeAnimal").val(nomeAnimal);
-        $("#nomeTutor").val(nomeTutor);
-        $("#status").val(status);
-        $("#dataCastracao").val(dataCastracao);
+        $("#idCastracao").val(idCastracao)
+        $("#emailTutor").val(emailTutor)
+        $("#idTutor").val(idTutor)
+        $("#nomeAnimal").val(nomeAnimal)
+        $("#nomeTutor").val(nomeTutor)
+        $("#status").val(status)
+        $("#dataCastracao").val(dataCastracao)
         })
     </script>
 

@@ -32,6 +32,38 @@ class ClinicaController
 
         echo "<script>alert('Clínica cadastrada com sucesso!'); window.location='".URL."cadastra-clinica';</script>";
     }
+
+    function atualizarClinica()
+    {
+
+        $login = new Login();
+        $login->idlogin = $_POST["idLogin"];
+        $login->nome = $_POST["txtNome"];
+        $login->email = $_POST["txtEmail"];
+        $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
+        $login->nivelacesso = 1;
+        $login->atualizar();
+
+        $clinica = new Clinica();
+        $clinica->idclinica = $_POST["idClinica"];
+        $clinica->cnpj = $_POST["txtCNPJ"];
+        $clinica->clitelefone = $_POST["txtTelefone"];
+        $clinica->vagas = $_POST["txtVagas"];
+        $clinica->clirua = $_POST["txtRua"];
+        $clinica->clibairro = $_POST["txtBairro"];
+        $clinica->clinumero = $_POST["txtNumero"];
+        $clinica->clicep = $_POST["txtCEP"];
+        $clinica->atualizar();
+
+        echo "<script>alert('Clínica Atualizada com sucesso!'); window.location='".URL."consulta-clinica';</script>";
+    }
+
+    function excluirClinica($idClinica)
+    {
+        $clinica = new Clinica();
+        $clinica->idclinica = $idClinica;
+        $clinica->excluir();
+    }
 }
 
 ?>

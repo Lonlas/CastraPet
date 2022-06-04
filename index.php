@@ -158,6 +158,14 @@ if($_GET)
             $clinica = new Controller();
             $clinica->abrirHomeClinica();
         break;
+        case "atualizar-clinica":
+            $clinica = new ClinicaController();
+            $clinica->atualizarClinica();
+        break;
+        case "excluir-clinica":
+            $clinica = new ClinicaController();
+            $clinica->excluirClinica($url[1]);
+        break;
 
         // LOGOUT
         case "encerrar-sessao":
