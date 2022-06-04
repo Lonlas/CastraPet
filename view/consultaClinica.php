@@ -106,7 +106,7 @@
                     <input type="hidden" name="idLogin" id="idLogin">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-sm-6 mb-4 align-self-center">
+                            <div class="col-sm-6 mb-4">
                                 <div class="form-group row-3">
                                     <label for="txtNome">Nome:</label>
                                     <input type="text" id="txtNome" name="txtNome" class="form-control" placeholder="" required>
