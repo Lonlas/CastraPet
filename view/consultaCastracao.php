@@ -105,12 +105,13 @@
                                                 <th>#</th>
                                                 <th>Animal</th>
                                                 <th>CPF do Responsável</th>
+                                                <th>Telefone</th>
                                                 <th>Data</th>
                                                 <th>Hora</th>
                                                 <th>Status</th>
                                                 <th>Observação</th>
                                                 <th>Ações</th>
-                                            </tr>
+                                            </th>
                                         </thead>
                                         <tbody>
                                         ";
@@ -131,6 +132,7 @@
                                             <td>$value->idcastracao</td>
                                             <td>$value->aninome</td>
                                             <td>$value->cpf</td>
+                                            <td>$value->telefone</td>
                                             <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
                                             <td>". date('H:i',strtotime($value->horario)) ."</td>
                                             <td>$value->status</td>
