@@ -74,7 +74,7 @@
                                             <td>$value->vagas</td>
                                             <td>
                                             <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idclinica='$value->idclinica' data-idlogin='$value->idlogin' data-nome='$value->nome' data-email='$value->email' data-cnpj='$value->cnpj' data-telefone='$value->clitelefone' data-vagas='$value->vagas' data-cep='$value->clicep' data-numero='$value->clinumero' data-bairro='$value->clibairro' data-rua='$value->clirua' data->Atualizar</button>
-                                            <a href='".URL."excluir-clinica/$value->idclinica' class='btn btn-danger'>Excluir</a></td>
+                                            <a href='".URL."excluir-clinica/$value->idclinica' onclick='return confirm(\"tem certeza que deseja excluir a clínica $value->nome?\")' class='btn btn-danger'>Excluir</a></td>
                                             </tr>
                                         ";
                                     }
@@ -94,7 +94,7 @@
         </div>
     </div>
     <!-- Modal Atualizar Clinica -->
-    <div class="modal fade" id="modalAtualizar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+    <div class="modal fade" id="modalAtualizar" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <form action="<?php echo URL . 'atualizar-clinica'; ?>" method="post">
@@ -175,7 +175,7 @@
                 </form>
             </div>
         </div>
-    </div>";
+    </div>
     <!-- /Modal -->
     <!-- /CORPO -->
 

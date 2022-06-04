@@ -88,8 +88,8 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <button class='btn btn-warning btn-md text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' ><i class='fa fa-edit'></i>Editar</button>
-                                                <button class='btn btn-danger btn-md'>Excluir</button>
+                                                <button class='btn btn-warning btn-md text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal'><i class='fa fa-edit'></i>Editar</button>
+                                                <button class='btn btn-danger btn-md' onClick='return confirm(\"Tem certeza que deseja excluir o usuário $value->nome?\")'>Excluir</button>
                                             </td>
                                         </tr>
                                         ";
@@ -111,7 +111,7 @@
     </div>
 
     <!-- MODAL: editar usuário -->
-    <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+    <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <form action="<?php echo URL . 'atualizar-usuario'; ?>" method="post">

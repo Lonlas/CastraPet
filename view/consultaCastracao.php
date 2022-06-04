@@ -90,7 +90,7 @@
                                             <td>$value->observacao</td>
                                             <td>
                                             <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao'>Atualizar</button>
-                                            <a href='".URL."' class='btn btn-danger'>Excluir</a>
+                                            <a href='".URL."excluir-catracao/$value->idcastracao' class='btn btn-danger' onClick='return confirm(\"Tem certeza que deseja excluir a castracao do $value->aninome?\")'>Excluir</a>
                                             </td>
                                             
                                         </tr>
@@ -225,9 +225,8 @@
                 </div>";
             }
         ?>
-        <!-- MODAL -->
-            <!-- /MODAL -->
-            <!-- /CORPO -->
+        <!-- /MODAL -->
+        <!-- /CORPO -->
     </div>
 
     <!-- EXTENSÃO BOOTSTRAP -->
