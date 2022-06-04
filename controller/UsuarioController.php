@@ -268,5 +268,17 @@ class UsuarioController
         session_destroy();
         header("Location:".URL);
     }
+    function excluir($idUsuario, $idLogin)
+    {
+        $usuario = new Usuario();
+        $usuario->idusuario = $idUsuario;
+        $usuario->excluir();
+
+        $login = new Login();
+        $login->idlogin = $idLogin;
+        $login->excluir();
+
+        header("location:".URL."consulta-usuario");
+    }
 }
 ?>

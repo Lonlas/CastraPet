@@ -89,7 +89,7 @@
                                             </td>
                                             <td>
                                                 <button class='btn btn-warning btn-md text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal'><i class='fa fa-edit'></i>Editar</button>
-                                                <button class='btn btn-danger btn-md' onClick='return confirm(\"Tem certeza que deseja excluir o usuário $value->nome?\")'>Excluir</button>
+                                                <a href='".URL."excluir-tutor/$value->idusuario/$value->idlogin' class='btn btn-danger btn-md' onClick='return confirm(\"Tem certeza que deseja excluir o usuário $value->nome?\")'>Excluir</a>
                                             </td>
                                         </tr>
                                         ";

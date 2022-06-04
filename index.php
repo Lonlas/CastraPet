@@ -95,6 +95,10 @@ if($_GET)
             $usuario = new UsuarioController();
             $usuario->solicitarCastracao();
         break;
+        case"excluir-tutor":
+            $usuario = new UsuarioController();
+            $usuario->excluir($url["1"],$url["2"]);
+        break;
 
         // ADM
         case "home-adm":
