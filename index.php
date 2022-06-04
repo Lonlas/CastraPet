@@ -164,7 +164,7 @@ if($_GET)
         break;
         case "excluir-clinica":
             $clinica = new ClinicaController();
-            $clinica->excluirClinica($url[1]);
+            $clinica->excluirClinica($url[1], $url[2]);
         break;
 
         // LOGOUT

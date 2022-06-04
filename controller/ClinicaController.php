@@ -1,4 +1,5 @@
 <?php
+use FFI\Exception;
 
 include_once "model/Clinica.php";
 
@@ -55,14 +56,20 @@ class ClinicaController
         $clinica->clicep = $_POST["txtCEP"];
         $clinica->atualizar();
 
-        echo "<script>alert('Clínica Atualizada com sucesso!'); window.location='".URL."consulta-clinica';</script>";
+        header("location:".URL."consulta-clinica");
     }
 
-    function excluirClinica($idClinica)
+    function excluirClinica($idClinica, $idLogin)
     {
         $clinica = new Clinica();
         $clinica->idclinica = $idClinica;
         $clinica->excluir();
+
+        $login = new Login();
+        $login->idlogin = $idLogin;
+        $login->excluir();
+
+        header("Location:".URL."consulta-clinica");
     }
 }
 
