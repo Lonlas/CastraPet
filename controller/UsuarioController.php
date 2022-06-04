@@ -50,6 +50,14 @@ class UsuarioController
             $cadastra->usubairro = $_POST["txtBairro"];
             $cadastra->usunumero = $_POST["txtNumero"];
             $cadastra->usucep = $cep;
+            /*
+            COLOCAR AQUI O POST QUANDO ATUALIZAR A PÁGINA DE CADASTRO DE USUÁRIO
+
+            $cadastra->whatsapp = $_POST["#"];
+            $cadastra->docprotetor = $_POST["#"];
+            $cadastra->doccomprovante = $_POST["#"];
+            $cadastra->quantcastracoes = 1;
+            */
             if(empty($_POST["txtNIS"]))
             {
                 $cadastra->nis = "";

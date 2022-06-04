@@ -27,6 +27,7 @@ class ClinicaController
         $clinica->clibairro = $_POST["txtBairro"];
         $clinica->clinumero = $_POST["txtNumero"];
         $clinica->clicep = $cep;
+        $clinica->ativo = 1;
 
         $clinica->cadastrar();
 
@@ -53,6 +54,7 @@ class ClinicaController
         $clinica->clibairro = $_POST["txtBairro"];
         $clinica->clinumero = $_POST["txtNumero"];
         $clinica->clicep = $_POST["txtCEP"];
+        //$clinica->ativo = $_POST["#"]; COLOCAR AQUI QUANDO ATUALIZAR A TELA DE ATUALIZAÇÃO DE CLINICA
         $clinica->atualizar();
 
         echo "<script>alert('Clínica Atualizada com sucesso!'); window.location='".URL."consulta-clinica';</script>";
