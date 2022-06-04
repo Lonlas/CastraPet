@@ -10,6 +10,7 @@
         private $clibairro;
         private $clinumero;
         private $clicep;
+        private $ativo;
 
         //Método get
         function __get($atributo)
@@ -38,7 +39,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO clinica (idlogin, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep) VALUES (:idlogin, :cnpj, :clitelefone, :vagas, :clirua, :clibairro, :clinumero, :clicep)");
+            $cmd = $con->prepare("INSERT INTO clinica (idlogin, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep, ativo) VALUES (:idlogin, :cnpj, :clitelefone, :vagas, :clirua, :clibairro, :clinumero, :clicep, :ativo");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);
@@ -49,6 +50,7 @@
             $cmd->bindParam(":clibairro", $this->clibairro);
             $cmd->bindParam(":clinumero", $this->clinumero);
             $cmd->bindParam(":clicep", $this->clicep);
+            $cmd->bindParam("ativo", $this->ativo);
 
             //Executando o comando SQL
             $cmd->execute();
@@ -105,7 +107,7 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE clinica SET cnpj = :cnpj, clitelefone = :clitelefone, vagas = :vagas, clirua = :clirua, clibairro = :clibairro, clinumero = :clinumero, clicep = :clicep WHERE idclinica = :idclinica");
+            $cmd = $con->prepare("UPDATE clinica SET cnpj = :cnpj, clitelefone = :clitelefone, vagas = :vagas, clirua = :clirua, clibairro = :clibairro, clinumero = :clinumero, clicep = :clicep, ativo = :ativo WHERE idclinica = :idclinica");
             
             //Parâmetros SQL
             $cmd->bindParam(":cnpj", $this->cnpj);
@@ -116,6 +118,7 @@
             $cmd->bindParam(":clinumero", $this->clinumero);
             $cmd->bindParam(":clicep", $this->clicep);
             $cmd->bindParam(":idclinica", $this->idclinica);
+            $cmd->bindParam(":ativo", $this->ativo);
 
             //Executando o comando SQL
             $cmd->execute();

@@ -13,6 +13,7 @@
         private $idade;
         private $comunitario;
         private $foto;
+        private $codchip;
 
         //Método get
         function __get($atributo)

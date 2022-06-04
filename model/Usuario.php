@@ -14,6 +14,10 @@
         private $usubairro;
         private $usunumero;
         private $usucep;
+        private $whatsapp;
+        private $doccomprovante;
+        private $docprotetor;
+        private $quantcastracoes;
 
         //Método get
         function __get($atributo)
@@ -42,8 +46,8 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO usuario (idlogin, rg, cpf, beneficio, telefone, celular, punicao, usurua, usubairro, usunumero, usucep, nis) 
-            VALUES (:idlogin, :rg, :cpf, :beneficio, NULLIF(:telefone,''), :celular, :punicao, :usurua, :usubairro, :usunumero, :usucep, NULLIF(:nis,''))");
+            $cmd = $con->prepare("INSERT INTO usuario (idlogin, rg, cpf, beneficio, telefone, celular, punicao, usurua, usubairro, usunumero, usucep, nis, whatsapp, doccomprovante, docprotetor, quantcastracoes) 
+            VALUES (:idlogin, :rg, :cpf, :beneficio, NULLIF(:telefone,''), :celular, :punicao, :usurua, :usubairro, :usunumero, :usucep, NULLIF(:nis,''), :whatsapp, :doccomprovante, NULLIF(:docprotetor,''), :quantcastracoes)");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);
@@ -58,6 +62,10 @@
             $cmd->bindParam(":usunumero", $this->usunumero);
             $cmd->bindParam(":usucep", $this->usucep);
             $cmd->bindParam(":nis", $this->nis);
+            $cmd->bindParam(":whatsapp", $this->whatsapp);
+            $cmd->bindParam(":doccomprovante", $this->doccomprovante);
+            $cmd->bindParam(":docprotetor", $this->docprotetor);
+            $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);
 
             //Executando o comando SQL
             $cmd->execute();
@@ -101,7 +109,7 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE usuario SET idlogin = :idlogin, rg = :rg, cpf = :cpf, beneficio = :beneficio, telefone = NULLIF(:telefone,''), celular = :celular, punicao = :punicao, usurua = :usurua, usubairro = :usubairro, usunumero = :usunumero, usucep = :usucep, nis = NULLIF(:nis,'') WHERE idusuario = :idusuario");
+            $cmd = $con->prepare("UPDATE usuario SET idlogin = :idlogin, rg = :rg, cpf = :cpf, beneficio = :beneficio, telefone = NULLIF(:telefone,''), celular = :celular, punicao = :punicao, usurua = :usurua, usubairro = :usubairro, usunumero = :usunumero, usucep = :usucep, nis = NULLIF(:nis,''), whatsapp = :whastapp, doccomprovante = :doccomprovante, docprotetor = NULLIF(:docprotetor,''), quantcastracoes = :quantcastracoes WHERE idusuario = :idusuario");
                 
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);
@@ -116,6 +124,10 @@
             $cmd->bindParam(":usunumero", $this->usunumero);
             $cmd->bindParam(":usucep", $this->usucep);
             $cmd->bindParam(":nis", $this->nis);
+            $cmd->bindParam(":whatsapp", $this->whatsapp);
+            $cmd->bindParam(":doccomprovante", $this->doccomprovante);
+            $cmd->bindParam(":docprotetor", $this->docprotetor);
+            $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);
             $cmd->bindParam(":idusuario", $this->idusuario);
 
             //Executando o comando SQL

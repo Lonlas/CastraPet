@@ -6,6 +6,7 @@
         private $email;
         private $senha;
         private $nivelacesso;
+        private $codsenha;
 
         //Método get
         function __get($atributo)
