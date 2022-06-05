@@ -11,3 +11,12 @@
     <link rel="stylesheet" href="<?php echo URL;?>recursos/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo URL;?>recursos/css/root.css">
     <!-- /EXTENSÃO CSS -->
+
+    <!-- Grid da tela -->
+    <style rel="stylesheet" type="text/css">
+        .corpo{
+            grid-template-areas: 'header''corpo''footer';
+            grid-template-rows: max-content auto 100px;
+        }
+        </style>
+    <!-- /Grid da tela -->
