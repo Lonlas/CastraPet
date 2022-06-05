@@ -38,65 +38,74 @@
                         <h5 class="m-0">Consultar Usuários</h5>
                     </div>
                     <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
-                        <table id="tbUsuario" class="table table-hover">
-                            <thead>
-                                <th>#</th>
-                                <th>Nome</th>
-                                <th>CPF</th>
-                                <th>Benefício</th>
-                                <th>NIS</th>
-                                <th>E-mail</th>
-                                <th>Telefone</th>
-                                <th>Celular</th>
-                                <th>Punição</th>
-                                <th>Animais</th>
-                                <th>Ações</th>
-                            </thead>
-                            <tbody>
-                                <?php
+                        <div class="table-responsive">
+                            <table id="tbUsuario" class="table table-hover">
+                                <thead>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>RG</th>
+                                    <th>Benefício</th>
+                                    <th>NIS</th>
+                                    <th>E-mail</th>
+                                    <th>Telefone</th>
+                                    <th>Celular</th>
+                                    <th>Punição</th>
+                                    <th>Animais</th>
+                                    <th>Ações</th>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        foreach($dadosUsuario as $value)
+                                        {
+                                            $value->beneficio = str_replace("0", "-", $value->beneficio);
+                                            $value->beneficio = str_replace("1", "Benefício Social", $value->beneficio);
+                                            $value->beneficio = str_replace("2", "Protetor de Animais", $value->beneficio);
+                                            
+                                            $value->telefone = preg_replace("/^$/", "-", $value->telefone);
+                                            $value->nis = preg_replace("/^$/", "-", $value->nis);
     
-                                    foreach($dadosUsuario as $value)
-                                    {
-                                        $value->beneficio = str_replace("0", "-", $value->beneficio);
-                                        $value->beneficio = str_replace("1", "Benefício Social", $value->beneficio);
-                                        $value->beneficio = str_replace("2", "Protetor de Animais", $value->beneficio);
-                                        
-                                        $value->telefone = preg_replace("/^$/", "-", $value->telefone);
-                                        $value->nis = preg_replace("/^$/", "-", $value->nis);
+                                            $value->punicao = str_replace("0", "-", $value->punicao);
+                                            $value->punicao = str_replace("1", "<span class='badge bg-danger'>Punido</span>", $value->punicao);
 
-                                        $value->punicao = str_replace("0", "-", $value->punicao);
-                                        $value->punicao = str_replace("1", "<span class='badge bg-danger'>Punido</span>", $value->punicao);
-
-                                        //Testar depois:
-                                        //$number="(".substr($number,0,2).") ".substr($number,2,-4)." - ".substr($number,-4);
-
-                                        echo
-                                        "
-                                        <tr>
-                                            <td>$value->idusuario</td>
-                                            <td>$value->nome</td>
-                                            <td>$value->cpf</td>
-                                            <td>$value->beneficio</td>
-                                            <td>$value->nis</td>
-                                            <td>$value->email</td>
-                                            <td>$value->telefone</td>
-                                            <td>$value->celular</td>
-                                            <td>$value->punicao</td>
-                                            <td>
-                                                <a href='". URL. "consulta-animais' class='btn btn-success col-auto'>
-                                                    <img src='". URL ."recursos/img/Logo-Castra-Pet.svg' alt='Animais cadastrados' width='30' class='aling-itens-center white justify-content-center'>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <button class='btn btn-warning btn-md text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' ><i class='fa fa-edit'></i>Editar</button>
-                                                <button class='btn btn-danger btn-md'>Excluir</button>
-                                            </td>
-                                        </tr>
-                                        ";
-                                    }
-                                ?>
-                            </tbody>
-                        </table>
+    
+                                            //Testar depois:
+                                            //$number="(".substr($number,0,2).") ".substr($number,2,-4)." - ".substr($number,-4);
+    
+                                            echo
+                                            "
+                                            <tr>
+                                                <td>$value->idusuario</td>
+                                                <td>$value->nome</td>
+                                                <td>$value->cpf</td>
+                                                <td>$value->rg</td>
+                                                <td>$value->beneficio</td>
+                                                <td>$value->nis</td>
+                                                <td>$value->email</td>
+                                                <td>$value->telefone</td>
+                                                <td>$value->celular</td>
+                                                <td>$value->punicao</td>
+                                                <td>
+                                                    <a href='". URL. "consulta-animais' class='btn btn-success col-auto'>
+                                                        <img src='". URL ."recursos/img/Logo-Castra-Pet.svg' alt='Animais cadastrados' width='30' class='aling-itens-center white justify-content-center'>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <button class='btn btn-warning btn-md text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
+                                                            data-idusuario='$value->idusuario' data-nome='$value->nome' data-cpf='$value->cpf' data-beneficio='$value->beneficio' data-nis='$value->nis' 
+                                                            data-email='$value->email' data-telefone='$value->telefone' data-celular='$value->celular' data-punicao='$value->punicao' data-rg='$value->rg' 
+                                                            data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$atualizarDadosUsuario->idlogin'>
+                                                        <i class='fa fa-edit'></i>Editar
+                                                    </button>
+                                                    <a href='".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-md' onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir</a>
+                                                </td>
+                                            </tr>
+                                            ";
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,19 +118,19 @@
             </div> 
         </div>
     </div>
-        
-
+    
     <!-- MODAL: editar usuário -->
-    <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+    <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <form action="<?php echo URL.'atualizar-usuario'; ?>" method="post">
+                <form action="<?php echo URL.'atualiza-tutor';?>" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title">Atualizar</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
                     </div>
                     <div class="modal-body">
-                        <!--<input type="hidden" name="idusuario" value="<?php //echo $dadosUsuario->idusuario;?>">-->
+                        
+                        <input type="hidden" name="idusuario" id="idusuario"><input type="hidden" name="idlogin" id="idlogin" value="<?php echo $value->idlogin;?>">
                         
                         <div class="row">
                             <div class="col-sm-6 mb-4 align-self-center">
@@ -150,7 +159,7 @@
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="txtCelular">Celular:</label>
-                                        <input class="form-control" type="text" name="txtCelular" id="txtCelular"  maxlength="15">
+                                        <input class="form-control" type="text" name="txtCelular" id="txtCelular"  maxlength="15" required>
                                     </div>
                                 </div>   
                             </div>
@@ -175,15 +184,15 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-6">
-                                        <input type="checkbox" name="chkNIS" id="chkNIS" value="2">
+                                        <input type="checkbox" name="chkNIS" id="chkNIS" value="1">
                                         <label for="chkNIS">Tenho o benefício do NIS</label>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <input class="form-control" type="text" name="txtNIS" id="txtNIS" >
+                                        <input class="form-control" type="text" name="txtNIS" id="txtNIS">
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
-                                    <input type="checkbox" name="chkProtetor" id="chkProtetor" value="1">
+                                    <input type="checkbox" name="chkProtetor" id="chkProtetor" value="2">
                                     <label for="chkProtetor">Sou protetor de animais</label>
                                     &nbsp;
                                     <input class="btn btn-success" type="button" value="Fazer upload" name="btnProtetorUpload">
@@ -236,6 +245,49 @@
                 }
             } );
         } );
+    </script>
+
+    <!-- ABRIR MODAL editar usuário -->
+    <script>
+        var modalEditar = document.getElementById('modalEditar')
+        modalEditar.addEventListener('show.bs.modal', function (event) {
+
+            var button = event.relatedTarget
+
+            var idusuario = button.getAttribute('data-idusuario')
+            var idlogin = button.getAttribute('data-idlogin')
+            var nome = button.getAttribute('data-nome')
+            var cpf = button.getAttribute('data-cpf')
+            var beneficio = button.getAttribute('data-beneficio')
+            var nis = button.getAttribute('data-nis')
+            var email = button.getAttribute('data-email')
+            var telefone = button.getAttribute('data-telefone')
+            var celular = button.getAttribute('data-celular')
+            var rg = button.getAttribute('data-rg')
+            var cep = button.getAttribute('data-cep')
+            var numero = button.getAttribute('data-numero')
+            var bairro = button.getAttribute('data-bairro')
+            var rua = button.getAttribute('data-rua')
+
+            
+            var modalId = modalEditar.querySelector('.modal-title')
+            modalId.textContent = 'Atualizar ' + idusuario
+
+            $("#idusuario").val(idusuario);
+            $("#idlogin").val(idlogin);
+            $("#txtNome").val(nome);
+            $("#txtCPF").val(cpf);
+            $("#chkProtetor").val(beneficio);
+            $("#txtNIS").val(nis);   
+            $("#txtEmail").val(email);
+            $("#txtTel").val(telefone);   
+            $("#txtCelular").val(celular);  
+            $("#txtRG").val(rg);
+            $("#txtCEP").val(cep);
+            $("#txtNumero").val(numero);
+            $("#txtBairro").val(bairro);
+            $("#txtRua").val(rua);
+        });
     </script>
 </body>
 </html>
