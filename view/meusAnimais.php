@@ -112,8 +112,8 @@
                         foreach ($dadosAnimais as $value)
                         {
                             //Reescrevendo a espécie
-                            $values->especie = str_replace("0","Canina", $values->especie);
-                            $values->especie = str_replace("1","Felina", $values->especie);
+                            $value->especie = str_replace("0","Canina", $value->especie);
+                            $value->especie = str_replace("1","Felina", $value->especie);
 
                             //Reescrevendo o sexo
                             $value->sexo = str_replace("0","Fêmea", $value->sexo);
@@ -299,7 +299,8 @@
                         </div>
                         <div class="modal-body">
                             
-                            <input type="text" name="idusuario" value="<?php echo $dadosAnimal->idanimal;?>">
+                            <input type="hidden" name="idanimal" id="idanimal">
+                            <input type="hidden" name="idusuario" id="idusuario">
 
                             <div class="row">
                                 <div class="col-md">
@@ -327,16 +328,16 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="slcSexo" class="form-label">Sexo:</label>
                                             <select id="slcSexo" name="slcSexo" class="form-select" value="<?php echo $dadosAnimal->sexo;?>" required>
-                                                <option value="1">Macho</option>
-                                                <option value="2">Fêmea</option>
+                                                <option value="0">Macho</option>
+                                                <option value="1">Fêmea</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="slcPelagem" class="form-label">Pelagem:</label>
                                             <select id="slcPelagem" name="slcPelagem" class="form-select" value="<?php echo $dadosAnimal->pelagem;?>" required>
-                                                <option value="1">Curta</option>
-                                                <option value="2">Média</option>
-                                                <option value="3">Alta</option>
+                                                <option value="0">Curta</option>
+                                                <option value="1">Média</option>
+                                                <option value="2">Alta</option>
                                             </select>
                                         </div>
                                     </div>
@@ -348,9 +349,9 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="slcPorte" class="form-label">Porte:</label>
                                             <select id="slcPorte" name="slcPorte" class="form-select" value="<?php echo $dadosAnimal->porte;?>" required>
-                                                <option value="1">Pequeno</option>
-                                                <option value="2">Médio</option>
-                                                <option value="3">Grande</option>
+                                                <option value="0">Pequeno</option>
+                                                <option value="1">Médio</option>
+                                                <option value="2">Grande</option>
                                             </select>
                                         </div>
                                     </div>

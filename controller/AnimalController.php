@@ -59,14 +59,14 @@ class AnimalController
     {
         $animal = new Animal();
         $animal->idanimal =    $id;
-        $animal->idraca =      $_POST["idraca"];
         $animal->aninome =     $_POST["txtNome"];
         $animal->especie =     $_POST["tipoEspecie"];
-        $animal->sexo =        $_POST["slcSexo"];
-        $animal->porte =       $_POST["slcPorte"];
-        $animal->cor =         $_POST["txtCor"];
-        $animal->pelagem =     $_POST["slcPelagem"];
         $animal->idade =       $_POST["numIdade"];
+        $animal->sexo =        $_POST["slcSexo"];
+        $animal->pelagem =     $_POST["slcPelagem"];
+        $animal->cor =         $_POST["txtCor"];
+        $animal->porte =       $_POST["slcPorte"];
+        $animal->idraca =      $_POST["racas"];
         $animal->comunitario = $_POST["slcComunitario"];
 
         /* UPLOAD IMAGEM */

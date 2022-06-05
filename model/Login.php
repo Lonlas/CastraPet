@@ -82,6 +82,22 @@
         }
         
         //Método Atualizar
+        function atualizar(){
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar o comando SQL para atualizar
+            $cmd = $con->prepare("UPDATE login SET nome = :nome, email = :email, senha = :senha WHERE idlogin = :idlogin");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":nome",    $this->nome);
+            $cmd->bindParam(":email",   $this->email);
+            $cmd->bindParam(":senha",   $this->senha);
+            $cmd->bindParam(":idlogin", $this->idlogin);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
         function atualizarLogin()
         {
             //Conectando ao banco de dados

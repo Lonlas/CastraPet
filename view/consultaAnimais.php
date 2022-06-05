@@ -286,8 +286,8 @@
 
     <!-- ABRIR MODAL EDITAR -->
     <script>
-        
         //Definindo os valores nos inputs da modal
+
         var modal = document.getElementById('modalEditar')
         modal.addEventListener('show.bs.modal', function (event) {
             // Button that triggered the modal
