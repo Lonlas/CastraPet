@@ -208,20 +208,8 @@
                                     ";
                                     if(!isset($value->status))
                                     {
-                                        switch($_SESSION["dadosUsuario"]->beneficio)
-                                        {
-                                            case 0:
-                                                $beneficio = 1;
-                                            break;
-                                            case 1:
-                                                $beneficio = 2;
-                                            break;
-                                            case 2;
-                                                $beneficio = 5;
-                                            break;
-                                        }
 
-                                        if($quantidadeCastracoes < $beneficio && $_SESSION["dadosUsuario"]->punicao == 0)
+                                        if($_SESSION["dadosUsuario"]->quantcastracoes > 0 && $_SESSION["dadosUsuario"]->punicao == 0)
                                         {
                                             echo "
                                             <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$value->idanimal'>

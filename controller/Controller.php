@@ -54,7 +54,6 @@ class Controller
         $animal = new Animal();
         $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
         $dadosAnimais = $animal->retornarAnimais();
-        $quantidadeCastracoes = $animal->quantidadeCastracoes();
 
         include_once "view/meusAnimais.php";
     }
