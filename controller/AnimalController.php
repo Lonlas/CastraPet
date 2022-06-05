@@ -19,22 +19,22 @@ class AnimalController
     function cadastrarAnimal()
     {
         $animal = new Animal();
-        $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
-        $animal->especie = $_POST["tipoEspecie"];
-        $animal->idraca = $_POST["racas"];
-        $animal->aninome = $_POST["txtNome"];
-        $animal->sexo = $_POST["slcSexo"];
-        $animal->porte = $_POST["slcPorte"];
-        $animal->cor = $_POST["txtCor"];
-        $animal->pelagem = $_POST["slcPelagem"];
-        $animal->idade = $_POST["numIdade"];
+        $animal->idusuario =   $_SESSION["dadosUsuario"]->idusuario;
+        $animal->especie =     $_POST["tipoEspecie"];
+        $animal->idraca =      $_POST["racas"];
+        $animal->aninome =     $_POST["txtNome"];
+        $animal->sexo =        $_POST["slcSexo"];
+        $animal->porte =       $_POST["slcPorte"];
+        $animal->cor =         $_POST["txtCor"];
+        $animal->pelagem =     $_POST["slcPelagem"];
+        $animal->idade =       $_POST["numIdade"];
         $animal->comunitario = $_POST["slcComunitario"];
 
         /* UPLOAD IMAGEM */
         if($_FILES["foto"]["error"] == 0)
         {
             $nomeArquivo = $_FILES["imgAnimal"]["name"];    //Nome do arquivo
-            $nomeTemp = $_FILES["imgAnimal"]["tmp_name"];   //nome temporário
+            $nomeTemp =    $_FILES["imgAnimal"]["tmp_name"];   //nome temporário
             
             //pegar a extensão do arquivo
             $info = new SplFileInfo($nomeArquivo);
@@ -58,27 +58,27 @@ class AnimalController
     function atualizarAnimal($id)
     {
         $animal = new Animal();
-        $animal->idanimal = $id;
-        $animal->idraca = $_POST["idraca"];
-        $animal->aninome = $_POST["txtNome"];
-        $animal->especie = $_POST["tipoEspecie"];
-        $animal->sexo = $_POST["slcSexo"];
-        $animal->porte = $_POST["slcPorte"];
-        $animal->cor = $_POST["txtCor"];
-        $animal->pelagem = $_POST["slcPelagem"];
-        $animal->idade = $_POST["numIdade"];
+        $animal->idanimal =    $id;
+        $animal->idraca =      $_POST["idraca"];
+        $animal->aninome =     $_POST["txtNome"];
+        $animal->especie =     $_POST["tipoEspecie"];
+        $animal->sexo =        $_POST["slcSexo"];
+        $animal->porte =       $_POST["slcPorte"];
+        $animal->cor =         $_POST["txtCor"];
+        $animal->pelagem =     $_POST["slcPelagem"];
+        $animal->idade =       $_POST["numIdade"];
         $animal->comunitario = $_POST["slcComunitario"];
 
         /* UPLOAD IMAGEM */
         if($_FILES["foto"]["error"] == 0 && $animal->foto != "")
         {
-            $nomeTemp    = $_FILES["foto"]["tmp_name"];
+            $nomeTemp =      $_FILES["foto"]["tmp_name"];
             $pastaDestino = "recursos/img/Animal/".$animal->foto;
             move_uploaded_file($nomeTemp, $pastaDestino);
         }
         else {
             $nomeArquivo = $_FILES["imgAnimal"]["name"];       //Nome do arquivo
-            $nomeTemp = $_FILES["imgAnimal"]["tmp_name"];      //nome temporário
+            $nomeTemp =    $_FILES["imgAnimal"]["tmp_name"];      //nome temporário
             
             //pegar a extensão do arquivo
             $info = new SplFileInfo($nomeArquivo);
@@ -104,6 +104,14 @@ class AnimalController
         try{
             $animal = new Animal();
             $animal->idanimal = $id;
+
+            //removendo imagem
+            $dadosAnimal = $animal->retornar();
+            if(is_file("recursos/img/$dadosAnimal->foto")) //verificar se o arquivo existe
+            {
+                unlink("recursos/img/$dadosAnimal->foto"); //excluir o arquivo
+            }
+            
             $animal->excluir();
     
             header("Location:".URL."meus-animais");

@@ -12,7 +12,7 @@ class UsuarioController
     function cadastrarUsuario(){
         //Cadastro do Login
         $login = new Login();
-        $login->nome = $_POST["txtNome"];
+        $login->nome =  $_POST["txtNome"];
         $login->email = $_POST["txtEmail"];
         $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
         $login->nivelacesso = 0;
@@ -20,8 +20,8 @@ class UsuarioController
         //Cadastro do Usuário
         $cadastra = new Usuario();
         $cadastra->idlogin = $login->cadastrar();
-        $cadastra->rg = $_POST["txtRG"];
-        $cadastra->cpf = $_POST["txtCPF"];
+        $cadastra->rg =      $_POST["txtRG"];
+        $cadastra->cpf =     $_POST["txtCPF"];
 
         if($_POST["chkProtetor"] == 2)
             $cadastra->beneficio = $_POST["chkProtetor"];
@@ -30,13 +30,13 @@ class UsuarioController
         else
             $cadastra->beneficio = 0;
 
-        $cadastra->telefone = $_POST["txtTel"];
-        $cadastra->celular = $_POST["txtCelular"];
+        $cadastra->telefone =  $_POST["txtTel"];
+        $cadastra->celular =   $_POST["txtCelular"];
         $cadastra->punicao = 0;
-        $cadastra->usurua = $_POST["txtRua"];
+        $cadastra->usurua =    $_POST["txtRua"];
         $cadastra->usubairro = $_POST["txtBairro"];
         $cadastra->usunumero = $_POST["txtNumero"];
-        $cadastra->usucep = $_POST["txtCEP"];
+        $cadastra->usucep =    $_POST["txtCEP"];
         if(empty($_POST["txtNIS"]))
         {
             $cadastra->nis = "";
@@ -52,19 +52,17 @@ class UsuarioController
     }
 
     
-    function atualizarUsuario($id)
+    function atualizarUsuario()
     {
         $login = new Login();
-        $login->idlogin = $id; 
-        $login->nome = $_POST["txtNome"];
-        $login->email = $_POST["txtEmail"];
-        $login->atualizarLogin();
-
+        $login->idlogin = $_POST["idlogin"]; 
+        $login->nome =    $_POST["txtNome"];
+        $login->email =   $_POST["txtEmail"];
+        
         $usu = new Usuario();
-        $usu->idlogin = $id;  
-        $usu->rg = $_POST["rg"];
-        $usu->cpf = $_POST["cpf"];
-        $usu->beneficio = $_POST["beneficio"];
+        $login->atualizarLogin();
+        $usu->rg =        $_POST["txtRG"];
+        $usu->cpf =       $_POST["txtCPF"];
 
             // Que tipo de benefício tem
             if ($_POST["chkProtetor"] == 2) {
@@ -75,12 +73,12 @@ class UsuarioController
             }
             else{ $usu->beneficio = 0; }
 
-        $usu->telefone = $_POST["telefone"];
-        $usu->celular = $_POST["celular"];
-        $usu->usurua = $_POST["usurua"];
-        $usu->usubairro = $_POST["usubairro"];
-        $usu->usunumero = $_POST["usunumero"];
-        $usu->usucep = $_POST["usucep"];
+        $usu->telefone =  $_POST["txtTel"];
+        $usu->celular =   $_POST["txtCelular"];
+        $usu->usurua =    $_POST["txtRua"];
+        $usu->usubairro = $_POST["txtBairro"];
+        $usu->usunumero = $_POST["txtNumero"];
+        $usu->usucep =    $_POST["txtCEP"];
         
             // NIS
             if(empty($_POST["txtNIS"])){
@@ -88,12 +86,11 @@ class UsuarioController
             }
             else{ $usu->nis = $_POST["txtNIS"];}
 
-        $usu->punicao = $_POST["punicao"];
         $usu->idusuario = $_POST["idusuario"];
         $usu->atualizar();
 
         echo "<script>
-                alert('Dados gravados com sucesso!');
+                alert('Dados alterados com sucesso!');
                 window.location='".URL."consultar-usuario';
               </script>";
     }
@@ -123,7 +120,7 @@ class UsuarioController
     function solicitarCastracao()
     {
         $castracao = new Castracao();
-        $castracao->idanimal = $_POST["idAnimal"];
+        $castracao->idanimal =   $_POST["idAnimal"];
         $castracao->observacao = $_POST["obsCastracao"];
         $castracao->status = 0;
 
@@ -142,9 +139,9 @@ class UsuarioController
             {
                 $castracao = new Castracao();
     
-                $castracao->idclinica = $_POST["selectClinica"];
+                $castracao->idclinica =   $_POST["selectClinica"];
                 $castracao->status = 1;
-                $castracao->horario = $_POST["dataHora"];
+                $castracao->horario =     $_POST["dataHora"];
                 $castracao->idcastracao = $idcastracao;
                 
                 $clinica = new Clinica();
@@ -154,14 +151,14 @@ class UsuarioController
                 
                 //enviar o email
                 $email = new Email();
-                $email->data = $_POST["dataHora"];
-                $email->nomeClinica = $dadosClinica->nome;
-                $email->ruaClinica = $dadosClinica->clirua;
-                $email->bairroClinica = $dadosClinica->clibairro;
-                $email->numeroClinica = $dadosClinica->clinumero;
+                $email->data =              $_POST["dataHora"];
+                $email->nomeClinica =       $dadosClinica->nome;
+                $email->ruaClinica =        $dadosClinica->clirua;
+                $email->bairroClinica =     $dadosClinica->clibairro;
+                $email->numeroClinica =     $dadosClinica->clinumero;
                 $email->emailDestinatario = $_POST["emailDestinatario"];
-                $email->nomeDestinatario = $_POST["nomeDestinatairio"];
-                $email->nomeAnimal = $_POST["aninome"];
+                $email->nomeDestinatario =  $_POST["nomeDestinatairio"];
+                $email->nomeAnimal =        $_POST["aninome"];
 
                 $clinica->subtrairVagas();
                 $castracao->aprovarCastracao();
@@ -218,8 +215,8 @@ class UsuarioController
             //Enviar aviso ao usuário dizendo que não compareceu à castração
             $email = new Email();
             $email->emailDestinatario = $_POST["emailTutor"];
-            $email->nomeDestinatario = $_POST["nomeTutor"];
-            $email->nomeAnimal = $_POST["nomeAnimal"];
+            $email->nomeDestinatario =  $_POST["nomeTutor"];
+            $email->nomeAnimal =        $_POST["nomeAnimal"];
             $email->enviarAviso();
         }
         else if($_POST["status"] == "emAnalise")
