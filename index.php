@@ -148,9 +148,13 @@ if($_GET)
             $adm = new Controller();
             $adm->abrirAgendamento($url[1]);
         break;
-        case "agendar":
+        case "agendar-clinica":
             $castracao = new UsuarioController();
-            $castracao->agendarCastracao();
+            $castracao->agendarClinicaCastracao();
+        break;
+        case "agendar":
+            $castracao = new ClinicaController();
+            $castracao->agendarDataCastracao();
         break;
         case "atualizar-castracao":
             $castracao = new UsuarioController();

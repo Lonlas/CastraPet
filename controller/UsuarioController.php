@@ -89,40 +89,27 @@ class UsuarioController
         echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
     }
 
-    function agendarCastracao()
+    function agendarClinicaCastracao()
     {   
         $idcastracao = $_POST["idcastracao"];
 
+        //Caso o botão recusado não seja apertado
         if(!isset($_POST["btnRecusa"]))
         {
-            if($_POST["dataHora"] != "" && $_POST["selectClinica"] != 0)
+            if($_POST["selectClinica"] != 0)
             {
                 $castracao = new Castracao();
     
                 $castracao->idclinica = $_POST["selectClinica"];
                 $castracao->status = 1;
-                $castracao->horario = $_POST["dataHora"];
                 $castracao->idcastracao = $idcastracao;
-                
+                $castracao->aprovarCastracao();
+
                 $clinica = new Clinica();
                 $clinica->idclinica = $_POST["selectClinica"];
                 $dadosClinica = $clinica->retornar();
                 $clinica->vagas = $dadosClinica->vagas - 1;
-                
-                //enviar o email
-                $email = new Email();
-                $email->data = $_POST["dataHora"];
-                $email->nomeClinica = $dadosClinica->nome;
-                $email->ruaClinica = $dadosClinica->clirua;
-                $email->bairroClinica = $dadosClinica->clibairro;
-                $email->numeroClinica = $dadosClinica->clinumero;
-                $email->emailDestinatario = $_POST["emailDestinatario"];
-                $email->nomeDestinatario = $_POST["nomeDestinatairio"];
-                $email->nomeAnimal = $_POST["aninome"];
-
                 $clinica->subtrairVagas();
-                $castracao->aprovarCastracao();
-                $email->enviarConfirmacao();
     
                 header("Location:".URL."lista-solicitacao");
             }
@@ -142,8 +129,8 @@ class UsuarioController
 
             header("Location:".URL."lista-solicitacao");
         }
-
     }
+
     function atualizarCastracao()
     {
         $castracao = new Castracao();

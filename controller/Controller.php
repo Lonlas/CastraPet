@@ -113,7 +113,13 @@ class Controller
     #AGENDAMENTO
     function abrirListaSolicitacao(){
         $castracao = new Castracao();
-        $dadosSolicitacao = $castracao->consultarSolicitacao();
+        if($_SESSION["dadosLogin"]->nivelacesso == 2)
+        {
+            $dadosSolicitacao = $castracao->consultarSolicitacao();
+        } else {
+            $castracao->idclinica = $_SESSION["dadosClinica"]->idclinica;
+            $dadosSolicitacao = $castracao->clinicaConsultarSolicitacao();
+        }
 
         include_once "view/listaSolicitacao.php";
     }

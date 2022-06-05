@@ -31,7 +31,10 @@
             }
             else{ include_once "menu.php"; }
         ?>
-        <div class="bg-danger container-fluid" style="grid-area: corpo;">
+        <?php
+            if($_SESSION["dadosLogin"]->nivelacesso == 2){echo"<div class='bg-danger container-fluid' style='grid-area: corpo;''>";}
+            else{echo"<div class='bg-warning container-fluid' style='grid-area: corpo;''>";}
+        ?>
             <div class="row h-100 align-items-center">
                 <div class="p-3">
                     <div class="container bg-dark text-light font-weight-bold p-3">
@@ -47,8 +50,7 @@
                                     <td>Solicitação</td>
                                 </tr>
                             </thead>
-                            <tbody>                        
-                                
+                            <tbody>
                                 <?php
                                     foreach ($dadosSolicitacao as $value)
                                     {

@@ -11,6 +11,9 @@
       <li class="nav-item active">
         <a class="nav-link"  href="<?php echo URL.'consulta-castracao'; ?>">Consultar castrações</a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link"  href="<?php echo URL.'lista-solicitacao'; ?>">Lista Solicitações</a>
+      </li>
     </ul>
     <form class="form-inline ms-auto my-2 my-lg-0">
       <a href="<?php echo URL.'encerrar-sessao'; ?>" class="btn btn-success my-2 my-sm-0">Encerrar Sessão</a>
