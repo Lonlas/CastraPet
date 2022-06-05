@@ -2,12 +2,6 @@
 <html lang="pt-br">
 <head>
     <?php include_once "head.php";?>
-    <style rel="stylesheet" type="text/css">
-        .corpo{
-            grid-template-areas: 'header''corpo''footer';
-            grid-template-rows: max-content auto 100px;
-        }
-    </style>
 </head>
 <body>
 

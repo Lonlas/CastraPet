@@ -51,7 +51,30 @@ class AnimalController
 
     function EditarAnimal()
     {
-        
+        $animal = new Animal();
+        $animal->idanimal = $_POST["idanimal"];
+
+        $direciona = new Raca();
+        $dadosRaca = $direciona->consultar();
+        foreach($dadosRaca as $value)
+        {
+            if($_POST["listRaca"] == $value->raca)
+            {
+                $raca = $value->idraca;
+            }
+        }
+        $animal->idraca = $raca;
+        $animal->aninome = $_POST["txtNome"];
+        $animal->especie = $_POST["slcEspecie"];
+        $animal->sexo = $_POST["slcSexo"];
+        $animal->porte = $_POST["slcPorte"];
+        $animal->cor = $_POST["txtCor"];
+        $animal->pelagem = $_POST["slcPelagem"];
+        $animal->idade = $_POST["numIdade"];
+        $animal->comunitario = $_POST["slcComunitario"];
+        $animal->atualizar();
+
+        header("Location:".URL."consulta-animais/".$_POST["idusuario"]);
     }
 
     function excluirAnimal($id)

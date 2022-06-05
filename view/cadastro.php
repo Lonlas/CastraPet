@@ -110,8 +110,9 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="txtConfirmaSenha" class="form-label">Confirme sua senha:</label>
-                                    <input class="form-control" type="password" onchange="confirmasenha()" name="txtConfirmaSenha" id="txtConfirmaSenha" maxlength="40" required>
-                                    <div class="text-danger" id="senhaigual" style="display:none;">Senha não é igual*</div>
+                                    <input class="form-control" type="password" name="txtConfirmaSenha" id="txtConfirmaSenha" maxlength="40" required>
+                                    <div class="text-danger" id="avisoIgualdade" style="display:none;">as Senhas devem ser iguais*</div>
+                                    <div class="text-danger" id="avisoComprimento" style="display:none;">A senha deve conter mais que 5 dígitos*</div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
@@ -216,24 +217,24 @@
             }
         });
     </script>
-    <script>
-       function confirmasenha()
-        {
-
-            var confirmaSenha = document.getElementById("txtConfirmaSenha");
-            var senha = document.getElementById("txtSenha");
-            var erro = document.getElementById("senhaigual");
-            if(confirmaSenha.value == senha.value)
+    <script type="text/javascript">
+        //confirme a senha
+        $("form").submit(function(){
+            if($("#txtSenha").val() != $("#txtConfirmaSenha").val())
             {
-                erro.style = "display:none;";
-            }
-            else{
-                erro.style = "display:inline;";
                 event.preventDefault();
+                $("#avisoIgualdade").show();
             }
-        }
+            else{$("#avisoIgualdade").hide();}
+
+            if(($("#txtSenha").val().length <= 5) && ($("#txtConfirmaSenha").val().length <= 5))
+            {
+                event.preventDefault();
+                $("#avisoComprimento").show();
+            }
+            else {$("#avisoComprimento").hide();}
+        });
     </script>
-    
     
 </body>
 </html>

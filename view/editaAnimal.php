@@ -98,7 +98,7 @@
             <div class="bg-primary h-100 row align-items-center">
                 <div class="container mx-auto p-3" style="grid-area:corpo;">
                     <div class="container shadow-lg text-light p-3" style="border: 0; border-radius:0; overflow: hidden; background-color: var(--preto);">
-                        <h1 class="h5 m-1">CADASTRAR ANIMAL</h1>
+                        <h1 class="h5 m-1">EDITAR ANIMAL</h1>
                     </div>
                     <div class="container shadow-lg bg-white p-4">
                         <form method="post" action="<?php echo URL.'editar-animal';?>" enctype="multipart/form-data">
@@ -196,9 +196,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">
-                <a href="<?php echo URL.'meus-animais';?>" class="btn-lg btn-success" role="button" style="border-radius: 0; text-decoration: 0; padding: 12px 35px 12px 35px; margin-left: 40px;">Voltar</a>
             </div>
         </div>
         <div class="container-fluid bg-dark" style="grid-area:footer;">
