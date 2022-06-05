@@ -129,7 +129,7 @@
                                     <div class='col-md-2 mt-2 mt-md-0'>  
                                         <button class='btn btn-warning btn-md' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$value->especie' data-sexo='$value->sexo' data-cor='$value->cor' data-raca='$value->raca' data-idade='$value->idade' data-pelagem='$value->pelagem' data-porte='$value->porte' data-comunitario='$value->comunitario' data-foto='$value->foto' >Editar</button>
                                         
-                                        <a href='".URL."excluir-animal/$value->idanimal' class='btn btn-danger float-end w-100' onclick='return confirm(\"Deseja realmente excluir?\")'><i class='fa fa-trash'></i> Excluir</a>    
+                                        <a href='".URL."excluir-animal/$value->idanimal/$value->idusuario/$value->foto' class='btn btn-danger float-end w-100' onclick='return confirm(\"Deseja realmente excluir?\")'><i class='fa fa-trash'></i> Excluir</a>    
                                     </div>
                                 </div>
                                 <hr>

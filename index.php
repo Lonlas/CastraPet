@@ -89,7 +89,7 @@ if($_GET)
         break;
         case "excluir-animal":
             $usuario = new AnimalController();
-            $usuario->excluirAnimal($url[1]);
+            $usuario->excluirAnimal($url[1],$url[2],$url[3]);
         break;
         case "solicitar-castracao":
             $usuario = new UsuarioController();
@@ -97,7 +97,7 @@ if($_GET)
         break;
         case"excluir-tutor":
             $usuario = new UsuarioController();
-            $usuario->excluir($url["1"],$url["2"]);
+            $usuario->excluir($url[1],$url[2]);
         break;
 
         // ADM
