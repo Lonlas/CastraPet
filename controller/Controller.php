@@ -83,9 +83,13 @@ class Controller
         include_once "view/cadClinica.php";
     }    
     #CONSULTAS
-    function abrirConsultaUsuario($cpf){
+    function abrirConsultaUsuario($id){
         $usuario = new Usuario();
+        $usuario->idusuario = $id;
         $dadosUsuario = $usuario->consultar();
+
+        $atualizarDadosUsuario = $usuario->retornar();
+
         include_once "view/consultaUsuario.php";
     }
     function abrirConsultaClinica($cnpj){
