@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
-                                        <input type="checkbox" name="chkNIS" id="chkNIS" value="2">
+                                        <input type="checkbox" name="chkNIS" id="chkNIS" value="1">
                                         <label for="chkNIS" class="form-label">Tenho o benefício do NIS</label>
                                     </div>
                                     <div class="form-group col-sm-6">
@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" value="1">
+                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" value="2">
                                         <label for="chkProtetor" class="form-label">Sou protetor de animais</label>
                                     </div>
                                     <div class="form-group col-sm-6">
