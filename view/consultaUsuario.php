@@ -83,7 +83,7 @@
                                             <td>$value->celular</td>
                                             <td>$value->punicao</td>
                                             <td>
-                                                <a href='". URL. "consulta-animais' class='btn btn-success col-auto'>
+                                                <a href='". URL. "consulta-animais/$value->idusuario' class='btn btn-success col-auto'>
                                                     <img src='". URL ."recursos/img/Logo-Castra-Pet.svg' alt='Animais cadastrados' width='30' class='aling-itens-center white justify-content-center'>
                                                 </a>
                                             </td>
