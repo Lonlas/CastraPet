@@ -11,44 +11,69 @@ class UsuarioController
 {
     function cadastrarUsuario(){
         //Cadastro do Login
-        $login = new Login();
-        $login->nome =  $_POST["txtNome"];
-        $login->email = $_POST["txtEmail"];
-        $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
-        $login->nivelacesso = 0;
+        $filtros = array(".", "-", "(", ")", " ");
+        $cpf = str_replace($filtros,'',$_POST["txtCPF"]);
+        $cep = str_replace($filtros,'',$_POST["txtCEP"]);
+        $rg = str_replace($filtros,'',$_POST["txtRG"]);
+        $tel = str_replace($filtros,'',$_POST["txtTel"]);
+        $celular = str_replace($filtros,'',$_POST["txtCelular"]);
 
-        //Cadastro do Usuário
-        $cadastra = new Usuario();
-        $cadastra->idlogin = $login->cadastrar();
-        $cadastra->rg =      $_POST["txtRG"];
-        $cadastra->cpf =     $_POST["txtCPF"];
-
-        if($_POST["chkProtetor"] == 2)
-            $cadastra->beneficio = $_POST["chkProtetor"];
-        else if($_POST["chkNIS"] == 1)
-            $cadastra->beneficio = $_POST["chkNIS"];
-        else
-            $cadastra->beneficio = 0;
-
-        $cadastra->telefone =  $_POST["txtTel"];
-        $cadastra->celular =   $_POST["txtCelular"];
-        $cadastra->punicao = 0;
-        $cadastra->usurua =    $_POST["txtRua"];
-        $cadastra->usubairro = $_POST["txtBairro"];
-        $cadastra->usunumero = $_POST["txtNumero"];
-        $cadastra->usucep =    $_POST["txtCEP"];
-        if(empty($_POST["txtNIS"]))
+        $consultarEmail = new Login();
+        $consultarEmail->email = $_POST["txtEmail"];
+        $dadosLogin = $consultarEmail->logar();
+        if($dadosLogin->email == null)
         {
-            $cadastra->nis = "";
+            $login = new Login();
+            $login->nome =  $_POST["txtNome"];
+            $login->email = $_POST["txtEmail"];
+            $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
+            $login->nivelacesso = 0;
+
+            //Cadastro do Usuário
+            $cadastra = new Usuario();
+            $cadastra->idlogin = $login->cadastrar();
+            $cadastra->rg = $rg;
+            $cadastra->cpf = $cpf;
+
+            if($_POST["chkProtetor"] == 2 && $_FILES["btnProtetorUpload"]["error"] == 0)
+                $cadastra->beneficio = $_POST["chkProtetor"];
+            else if($_POST["chkNIS"] == 1 && strlen($_POST["txtNIS"]) == 1)
+                $cadastra->beneficio = $_POST["chkNIS"];
+            else
+                $cadastra->beneficio = 0;
+
+            $cadastra->telefone =  $tel;
+            $cadastra->celular =   $celular;
+            $cadastra->punicao = 0;
+            $cadastra->usurua =    $_POST["txtRua"];
+            $cadastra->usubairro = $_POST["txtBairro"];
+            $cadastra->usunumero = $_POST["txtNumero"];
+            $cadastra->usucep =    $cep;
+            /*
+            COLOCAR AQUI O POST QUANDO ATUALIZAR A PÁGINA DE CADASTRO DE USUÁRIO
+
+            $cadastra->whatsapp = $_POST["#"];
+            $cadastra->docprotetor = $_POST["#"];
+            $cadastra->doccomprovante = $_POST["#"];
+            $cadastra->quantcastracoes = 1;
+            */
+            if(empty($_POST["txtNIS"]))
+            {
+                $cadastra->nis = "";
+            }
+            else
+            {
+                $cadastra->nis = $_POST["txtNIS"];
+            }
+            
+            $cadastra->cadastrar();
+            $this->logar();
+            header("Location:".URL);
         }
         else
         {
-            $cadastra->nis = $_POST["txtNIS"];
+            echo"<script>alert('Já existe um perfil com esse e-mail'); window.location='".URL."cadastra-tutor'; </script>";
         }
-        
-        $cadastra->cadastrar();
-
-        header("Location:".URL);
     }
 
     
@@ -188,12 +213,22 @@ class UsuarioController
     {
         $castracao = new Castracao();
         $castracao->idcastracao = $_POST["idCastracao"];
-        if($_POST["status"] == "Castrado")
+        if($_POST["statusAtualizado"] == "Castrado")
         {
             $castracao->status = 2;
             $castracao->atualizar();
+
+            if($_POST["status"] == "Não compareceu")
+            {
+                //Liberar a vaga de castração para a clínica
+                $clinica = new Clinica();
+                $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas - 1;
+                $clinica->subtrairVagas();
+            }
         }
-        else if($_POST["status"] == "nCompareceu")
+        else if($_POST["statusAtualizado"] == "nCompareceu")
         {
             //Adicionar o status de que o animal não compareceu à castração
             $castracao->status = 4;
@@ -203,34 +238,42 @@ class UsuarioController
             $usuario = new Usuario();
             $usuario->idusuario = $_POST["idTutor"];
             $usuario->punicao = 1;
-            $usuario->aplicarPunicao();
-
-            //Liberar a vaga de castração para a clínica
-            $clinica = new Clinica();
-            $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-            $dadosClinica = $clinica->retornar();
-            $clinica->vagas = $dadosClinica->vagas + 1;
-            $clinica->adicionarVagas();
+            $usuario->aplicarPunicao();    
             
             //Enviar aviso ao usuário dizendo que não compareceu à castração
             $email = new Email();
             $email->emailDestinatario = $_POST["emailTutor"];
             $email->nomeDestinatario =  $_POST["nomeTutor"];
             $email->nomeAnimal =        $_POST["nomeAnimal"];
+            $email->data =              $_POST["dataCastracao"];
             $email->enviarAviso();
+
+            if($_POST["status"] != "Não compareceu")
+            {
+                //Liberar a vaga de castração para a clínica
+                $clinica = new Clinica();
+                $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas + 1;
+                $clinica->adicionarVagas();
+            }
+            
         }
-        else if($_POST["status"] == "emAnalise")
+        else if($_POST["statusAtualizado"] == "emAnalise")
         {
             //Adicionar o status de que o animal retornou para a análise da castração
             $castracao->status = 0;
             $castracao->atualizarEmAnalise();
 
-            //Liberar a vaga de castração para a clínica
-            $clinica = new Clinica();
-            $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-            $dadosClinica = $clinica->retornar();
-            $clinica->vagas = $dadosClinica->vagas + 1;
-            $clinica->adicionarVagas();
+            if($_POST["status"] != "Não compareceu")
+            {
+                //Liberar a vaga de castração para a clínica
+                $clinica = new Clinica();
+                $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                $dadosClinica = $clinica->retornar();
+                $clinica->vagas = $dadosClinica->vagas + 1;
+                $clinica->adicionarVagas();
+            }
         }
         else {echo"<script>alert('Insira um valor válido'); window.location='".URL."consulta-castracao'; </script>"; return;}
 
@@ -297,6 +340,18 @@ class UsuarioController
         $_SESSION[] = null;
         session_destroy();
         header("Location:".URL);
+    }
+    function excluir($idUsuario, $idLogin)
+    {
+        $usuario = new Usuario();
+        $usuario->idusuario = $idUsuario;
+        $usuario->excluir();
+
+        $login = new Login();
+        $login->idlogin = $idLogin;
+        $login->excluir();
+
+        header("location:".URL."consulta-usuario");
     }
 }
 ?>

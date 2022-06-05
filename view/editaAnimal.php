@@ -98,7 +98,7 @@
             <div class="bg-primary h-100 row align-items-center">
                 <div class="container mx-auto p-3" style="grid-area:corpo;">
                     <div class="container shadow-lg text-light p-3" style="border: 0; border-radius:0; overflow: hidden; background-color: var(--preto);">
-                        <h1 class="h5 m-1">CADASTRAR ANIMAL</h1>
+                        <h1 class="h5 m-1">EDITAR ANIMAL</h1>
                     </div>
                     <div class="container shadow-lg bg-white p-4">
                         <form method="post" action="<?php echo URL.'editar-animal';?>" enctype="multipart/form-data">
@@ -115,8 +115,8 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="slcEspecie" class="form-label">Espécie:</label>
                                             <select id="slcEspecie" name="slcEspecie" class="form-select" required value="<?php echo $dadosAnimal->especie;?>">
-                                                <option value="1">Canina</option>
-                                                <option value="2">Felina</option>
+                                                <option value="0">Canina</option>
+                                                <option value="1">Felina</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
@@ -128,16 +128,16 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="slcSexo" class="form-label">Sexo:</label>
                                             <select id="slcSexo" name="slcSexo" class="form-select" required value="<?php echo $dadosAnimal->sexo;?>">
+                                                <option value="0">Fêmea</option>
                                                 <option value="1">Macho</option>
-                                                <option value="2">Fêmea</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="slcPelagem" class="form-label">Pelagem:</label>
                                             <select id="slcPelagem" name="slcPelagem" class="form-select" required value="<?php echo $dadosAnimal->pelagem;?>">
-                                                <option value="1">Curta</option>
-                                                <option value="2">Média</option>
-                                                <option value="3">Alta</option>
+                                                <option value="0">Curta</option>
+                                                <option value="1">Média</option>
+                                                <option value="2">Alta</option>
                                             </select>
                                         </div>
                                     </div>
@@ -149,9 +149,9 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="slcPorte" class="form-label">Porte:</label>
                                             <select id="slcPorte" name="slcPorte" class="form-select" required value="<?php echo $dadosAnimal->porte;?>">
-                                                <option value="1">Pequeno</option>
-                                                <option value="2">Médio</option>
-                                                <option value="3">Grande</option>
+                                                <option value="0">Pequeno</option>
+                                                <option value="1">Médio</option>
+                                                <option value="2">Grande</option>
                                             </select>
                                         </div>
                                     </div>
@@ -196,9 +196,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">
-                <a href="<?php echo URL.'meus-animais';?>" class="btn-lg btn-success" role="button" style="border-radius: 0; text-decoration: 0; padding: 12px 35px 12px 35px; margin-left: 40px;">Voltar</a>
             </div>
         </div>
         <div class="container-fluid bg-dark" style="grid-area:footer;">

@@ -35,7 +35,7 @@
                         <h5 class="m-0">CADASTRAR</h5>
                     </div>
                     <div class="container p-sm-3 p-md-3 p-lg-4 p-3 bg-white">
-                        <form method="post" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0" action="cadastrar-tutor">
+                        <form method="post" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0" action="cadastrar-tutor" enctype="multipart/form-data">
                             <div class="col-md-6 mb-lg-0 mb-5 p-0 pe-md-3">
                                 <div class="form-group row-6 mb-3">
                                     <label for="txtNome" class="form-label">Nome:</label>
@@ -80,7 +80,8 @@
                                         <label for="chkProtetor" class="form-label">Sou protetor de animais</label>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <input class="btn btn-success" type="button" value="Fazer upload" name="btnProtetorUpload">
+                                        <input class="btn btn-success" type="file" value="Fazer upload" accept="image/*" name="btnProtetorUpload" id="btnProtetorUpload" hidden>
+                                        <label id="labelProtetor" for="btnProtetorUpload" class="btn btn-success" style="background-color: 0;">Fazer upload</label>
                                     </div>
                                 </div>
                             </div>
@@ -109,8 +110,9 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="txtConfirmaSenha" class="form-label">Confirme sua senha:</label>
-                                    <input class="form-control" type="password" onchange="confirmasenha()" name="txtConfirmaSenha" id="txtConfirmaSenha" maxlength="40" required>
-                                    <div class="text-danger" id="senhaigual" style="display:none;">Senha não é igual*</div>
+                                    <input class="form-control" type="password" name="txtConfirmaSenha" id="txtConfirmaSenha" maxlength="40" required>
+                                    <div class="text-danger" id="avisoIgualdade" style="display:none;">as Senhas devem ser iguais*</div>
+                                    <div class="text-danger" id="avisoComprimento" style="display:none;">A senha deve conter mais que 5 dígitos*</div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
@@ -137,9 +139,21 @@
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
-    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado -->
+    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
+
+    <!-- EXTENSÃO JQUERY DAS MASCARAS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     
-    
+    <script>
+        //Adicionar Máscaras
+        $(document).ready(function (){
+            $("#txtCPF").mask('000.000.000-00');
+            $("#txtCEP").mask('00000-000');
+            $("#txtRG").mask('00.000.000-0');
+            $("#txtTel").mask('(00) 0000 0000');
+            $("#txtCelular").mask('(00) 00000 0000');
+        });
+    </script>
     <script>
         //Consultar CEP
             const $campoCEP = document.getElementById("txtCEP");
@@ -151,20 +165,20 @@
                 if($campoCEP.value != '')
                 {
                     fetch('https://viacep.com.br/ws/'+cep+'/json/')
-                    .then((aaa) => {
-                        return aaa.json();
+                    .then((RetornoDoServidor) => {
+                        return RetornoDoServidor.json();
                     })
-                    .then((bbb) => {
-                        if(bbb.erro == 'true')
+                    .then((objJS) => {
+                        if(objJS.erro == 'true')
                         {
                             $campoBairro.value = '';
                             $campoRua.value = '';
                         }else
                         {
                             //07868150
-                        console.log(bbb);
-                        $campoBairro.value = bbb.bairro;
-                        $campoRua.value = bbb.logradouro;
+                        console.log(objJS);
+                        $campoBairro.value = objJS.bairro;
+                        $campoRua.value = objJS.logradouro;
                         }
                     })
                 }
@@ -203,23 +217,24 @@
             }
         });
     </script>
-    <script>
-       function confirmasenha()
-        {
-
-            var confirmaSenha = document.getElementById("txtConfirmaSenha");
-            var senha = document.getElementById("txtSenha");
-            var erro = document.getElementById("senhaigual");
-            if(confirmaSenha.value == senha.value)
+    <script type="text/javascript">
+        //confirme a senha
+        $("form").submit(function(){
+            if($("#txtSenha").val() != $("#txtConfirmaSenha").val())
             {
-                erro.style = "display:none;";
-            }
-            else{
-                erro.style = "display:inline;";
                 event.preventDefault();
+                $("#avisoIgualdade").show();
             }
-        }
+            else{$("#avisoIgualdade").hide();}
+
+            if(($("#txtSenha").val().length <= 5) && ($("#txtConfirmaSenha").val().length <= 5))
+            {
+                event.preventDefault();
+                $("#avisoComprimento").show();
+            }
+            else {$("#avisoComprimento").hide();}
+        });
     </script>
-    <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 </html>

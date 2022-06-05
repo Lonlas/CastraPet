@@ -72,8 +72,10 @@
                                             <td>$value->clirua</td>
                                             <td>$value->clinumero</td>
                                             <td>$value->vagas</td>
-                                            <td>Editar Excluir</td>
-                                        </tr>
+                                            <td>
+                                            <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idclinica='$value->idclinica' data-idlogin='$value->idlogin' data-nome='$value->nome' data-email='$value->email' data-cnpj='$value->cnpj' data-telefone='$value->clitelefone' data-vagas='$value->vagas' data-cep='$value->clicep' data-numero='$value->clinumero' data-bairro='$value->clibairro' data-rua='$value->clirua' data->Atualizar</button>
+                                            <a href='".URL."excluir-clinica/$value->idclinica/$value->idlogin' onclick='return confirm(\"tem certeza que deseja excluir a clínica $value->nome?\")' class='btn btn-danger'>Excluir</a></td>
+                                            </tr>
                                         ";
                                     }
                                 ?>
@@ -91,7 +93,90 @@
             </div> 
         </div>
     </div>
-    
+    <!-- Modal Atualizar Clinica -->
+    <div class="modal fade" id="modalAtualizar" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <form action="<?php echo URL . 'atualizar-clinica'; ?>" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Atualizar clínica</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                    </div>
+                    <input type="hidden" name="idClinica" id="idClinica">
+                    <input type="hidden" name="idLogin" id="idLogin">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-6 mb-4">
+                                <div class="form-group row-3">
+                                    <label for="txtNome">Nome:</label>
+                                    <input type="text" id="txtNome" name="txtNome" class="form-control" placeholder="" required>
+                                </div>
+                                <div class="form-group row-3">
+                                    <label for="txtEmail">E-mail:</label>
+                                    <input type="email" id="txtEmail" name="txtEmail" class="form-control" placeholder="" required>
+                                </div>
+                                <div class="form-group row-3">
+                                    <label for="txtCNPJ">CNPJ:</label>
+                                    <input type="text" id="txtCNPJ" name="txtCNPJ" class="form-control" placeholder="" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="txtTelefone">Telefone:</label>
+                                            <input type="text" id="txtTelefone" name="txtTelefone" class="form-control" placeholder="" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="txtVagas">Vagas:</label>
+                                            <input type="number" id="txtVagas" name="txtVagas" class="form-control" placeholder="" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="txtCEP">CEP:</label>
+                                            <input type="text" id="txtCEP" name="txtCEP" class="form-control" placeholder="" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="txtNumero">Número:</label>
+                                            <input type="text" id="txtNumero" name="txtNumero" class="form-control" placeholder="" required>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="form-group">
+                                    <label for="txtBairro">Bairro:</label>
+                                    <input type="text" id="txtBairro" name="txtBairro" class="form-control" placeholder="" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtRua">Rua:</label>
+                                    <input type="text" id="txtRua" name="txtRua" class="form-control" placeholder="" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtSenha">Crie uma Senha:</label>
+                                    <input type="password" id="txtSenha" name="txtSenha" class="form-control" placeholder="" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtConfSenha">Confirme a Senha</label>
+                                    <input type="password" id="txtConfSenha" name="txtConfSenha" class="form-control" placeholder="" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='submit' class='btn btn-primary'>Atualizar Clínica</button>
+                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal -->
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->    
@@ -127,6 +212,40 @@
                 },
             } );
         } );
-        </script>
+    </script>
+
+    <script>
+        //Definindo os valores nos inputs da modal
+        
+        var exampleModal = document.getElementById('modalAtualizar')
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        var idclinica = button.getAttribute('data-idclinica')
+        var idLogin = button.getAttribute('data-idLogin')
+        var email = button.getAttribute('data-email')
+        var cnpj = button.getAttribute('data-cnpj')
+        var telefone = button.getAttribute('data-telefone')
+        var nome = button.getAttribute('data-nome')
+        var vagas = button.getAttribute('data-vagas')
+        var cep = button.getAttribute('data-cep')
+        var numero = button.getAttribute('data-numero')
+        var bairro = button.getAttribute('data-bairro')
+        var rua = button.getAttribute('data-rua')
+
+        $("#idClinica").val(idclinica)
+        $("#idLogin").val(idLogin)
+        $("#txtNome").val(nome)
+        $("#txtEmail").val(email)
+        $("#txtCNPJ").val(cnpj)
+        $("#txtTelefone").val(telefone)
+        $("#txtVagas").val(vagas)
+        $("#txtCEP").val(cep)
+        $("#txtNumero").val(numero)
+        $("#txtBairro").val(bairro)
+        $("#txtRua").val(rua)
+        })
+    </script>
 </body>
 </html>

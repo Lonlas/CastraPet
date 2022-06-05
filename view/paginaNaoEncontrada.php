@@ -4,44 +4,49 @@
     <?php include_once "head.php";?>
 </head>
 <body>
+    
     <!-- CORPO -->
-    <?php //CONTROLE DE MENU
-        if($_SESSION) //caso esteja logado e exista uma sessão
-        {
-            switch($_SESSION["dadosLogin"]->nivelacesso)
+    <div class="container-fluid d-grid min-vh-100 corpo">
+        <?php //CONTROLE DE MENU
+            if($_SESSION) //caso esteja logado e exista uma sessão
             {
-                //caso tenha nível de acesso de usuário
-                case 0: include_once "menuLogado.php"; break;
-                //caso tenha nível de acesso de clínica
-                case 1: include_once "menuClinica.php"; break;
-                //caso tenha nível de acesso de Administrador
-                case 2: include_once "menuADM.php"; break;   
+                switch($_SESSION["dadosLogin"]->nivelacesso)
+                {
+                    //caso tenha nível de acesso de usuário
+                    case 0: include_once "menuLogado.php"; break;
+                    //caso tenha nível de acesso de clínica
+                    case 1: include_once "menuClinica.php"; break;
+                    //caso tenha nível de acesso de Administrador
+                    case 2: include_once "menuADM.php"; break;   
+                }
             }
-        }
-        else{ include_once "menu.php"; }
-    ?>
-
-        <div class="container-fluid">
-            <div class="bg-primary">
-                <div class="container mx-auto row p-3">
-                    <div class="bg-dark text-light font-weight-bold">
-                        <h4 class="p-3"> 
-                            Ops... Parece que esta página não existe
-                        </h4>
+            else{ include_once "menu.php"; }
+        ?>
+        <div class="bg-primary container-fluid" style="grid-area: corpo;">
+            <div class="row h-100 align-items-center">
+                <div class="p-3">
+                    <div class="container bg-dark text-light font-weight-bold p-3">
+                        <h5 class="m-0">Ops... Parece que esta página não existe</h5>
                     </div>
-                    <div class="bg-white" style="height:500px; display:flex; justify-content:center; align-items:center;">
-                        <a href="<?php echo URL;?>">
-                            <p class="btn btn-link">
+                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white text-center" style="height:400px;">
+                        <div class="row align-items-center m-0 h-100 w-100">
+                            <a href="<?php echo URL;?>" class="">
                                 Voltar para a página principal
-                            </p>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <footer class="text-left bg-dark" style="padding: 2.5rem; color:white; background:var(--preto);">
-                    <a href="<?php echo URL.'inicio'; ?>" class="btn btn-success my-2 my-sm-0">Voltar</a>
-                </footer>
             </div>
         </div>
+        <div class="container-fluid bg-dark" style="grid-area: footer;">
+            <div class="row h-100 align-items-center">
+                <div class="px-5">
+                    <a href="<?php echo URL.'inicio';?>" class="btn btn-success">Voltar</a>
+                </div>
+            </div> 
+        </div>
+    </div>
+    
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->

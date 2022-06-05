@@ -35,7 +35,7 @@
         {
             #inputImgAnimal + label
             {
-                width: 355px;
+                width: 365px;
             }
         }
 
@@ -44,7 +44,7 @@
             #inputImgAnimal + label
             {
                 height: 200px;
-                width: 255px;
+                width: 272px;
             }
             #imgAnimal
             {
@@ -56,7 +56,7 @@
         {
             #imgAnimal
             {
-                width: 275px;
+                width: 290px;
             }
         }
         
@@ -131,16 +131,16 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="slcSexo" class="form-label">Sexo:</label>
                                             <select id="slcSexo" name="slcSexo" class="form-select" required>
+                                                <option value="0">Fêmea</option>
                                                 <option value="1">Macho</option>
-                                                <option value="2">Fêmea</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="slcPelagem" class="form-label">Pelagem:</label>
                                             <select id="slcPelagem" name="slcPelagem" class="form-select" required>
-                                                <option value="1">Curta</option>
-                                                <option value="2">Média</option>
-                                                <option value="3">Alta</option>
+                                                <option value="0">Curta</option>
+                                                <option value="1">Média</option>
+                                                <option value="2">Alta</option>
                                             </select>
                                         </div>
                                     </div>
@@ -152,9 +152,9 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="slcPorte" class="form-label">Porte:</label>
                                             <select id="slcPorte" name="slcPorte" class="form-select" required>
-                                                <option value="1">Pequeno</option>
-                                                <option value="2">Médio</option>
-                                                <option value="3">Grande</option>
+                                                <option value="0">Pequeno</option>
+                                                <option value="1">Médio</option>
+                                                <option value="2">Grande</option>
                                             </select>
                                         </div>
                                     </div>
@@ -195,9 +195,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col" style="background:var(--preto); padding: 35px 0px 35px 0px; overflow: hidden;">
-                <a href="<?php echo URL.'meus-animais';?>" class="btn-lg btn-success" role="button" style="border-radius: 0; text-decoration: 0; padding: 12px 35px 12px 35px; margin-left: 40px;">Voltar</a>
-            </div>
         </div>
         <div class="container-fluid bg-dark" style="grid-area:footer;">
             <div class="row h-100 align-items-center">
@@ -212,6 +209,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
+    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     
     <script>
         inputImgAnimal.onchange = evt => {

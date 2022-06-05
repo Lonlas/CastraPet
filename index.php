@@ -95,6 +95,10 @@ if($_GET)
             $usuario = new UsuarioController();
             $usuario->solicitarCastracao();
         break;
+        case"excluir-tutor":
+            $usuario = new UsuarioController();
+            $usuario->excluir($url["1"],$url["2"]);
+        break;
 
         // ADM
         case "home-adm":
@@ -138,7 +142,7 @@ if($_GET)
         break;
         case "consulta-animais":
             $adm = new Controller();
-            $adm->abrirConsultaAnimais();    
+            $adm->abrirConsultaAnimais($url[1]);    
         break;
         #CASTRAÇÃO - vizualização, confirmação e atualização
         case "lista-solicitacao":
@@ -162,6 +166,14 @@ if($_GET)
         case "home-clinica":
             $clinica = new Controller();
             $clinica->abrirHomeClinica();
+        break;
+        case "atualizar-clinica":
+            $clinica = new ClinicaController();
+            $clinica->atualizarClinica();
+        break;
+        case "excluir-clinica":
+            $clinica = new ClinicaController();
+            $clinica->excluirClinica($url[1], $url[2]);
         break;
 
         // LOGOUT

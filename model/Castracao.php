@@ -7,6 +7,7 @@
         private $horario;
         private $status;
         private $observacao;
+        private $obsclinica;
 
         //Método get
         function __get($atributo)

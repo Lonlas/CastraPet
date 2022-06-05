@@ -68,7 +68,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="txtCEP">CEP:</label>
-                                            <input type="number" id="txtCEP" name="txtCEP" class="form-control" placeholder="" required>
+                                            <input type="text" id="txtCEP" name="txtCEP" class="form-control" placeholder="" required>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -113,12 +113,61 @@
             </div> 
         </div>
     </div>
-    
+
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>    
+
+    <!-- EXTENSÃO JQUERY DAS MASCARAS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    
+    <script>
+        //Adicionar Máscaras
+        $(document).ready(function (){
+            $("#txtCNPJ").mask('00.000.000/0000-00');
+            $("#txtCEP").mask('00000-000');
+            $("#txtTelefone").mask('(00) 0000 0000');
+        });
+    </script>
+    <script>
+        //Consultar CEP
+            const $campoCEP = document.getElementById("txtCEP");
+            const $campoBairro = document.getElementById("txtBairro");
+            const $campoRua = document.getElementById("txtRua");
+
+            $campoCEP.addEventListener("blur", infosDoEvento => {
+                const cep = infosDoEvento.target.value;
+                if($campoCEP.value != '')
+                {
+                    fetch('https://viacep.com.br/ws/'+cep+'/json/')
+                    .then((RetornoDoServidor) => {
+                        return RetornoDoServidor.json();
+                    })
+                    .then((objJS) => {
+                        if(objJS.erro == 'true')
+                        {
+                            $campoBairro.value = '';
+                            $campoRua.value = '';
+                        }else
+                        {
+                            //07868150
+                        console.log(objJS);
+                        $campoBairro.value = objJS.bairro;
+                        $campoRua.value = objJS.logradouro;
+                        }
+                    })
+                }
+                else
+                {
+                    $campoBairro.value = '';
+                    $campoRua.value = '';
+                }
+            });
+    </script>
+
+    
 </body>
 </html>

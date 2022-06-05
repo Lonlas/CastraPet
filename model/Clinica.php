@@ -10,6 +10,7 @@
         private $clibairro;
         private $clinumero;
         private $clicep;
+        private $ativo;
 
         //Método get
         function __get($atributo)
@@ -38,8 +39,8 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO clinica (idlogin, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep) 
-                                        VALUES (:idlogin, :cnpj, :clitelefone, :vagas, :clirua, :clibairro, :clinumero, :clicep)");
+            $cmd = $con->prepare("INSERT INTO clinica (idlogin, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep, ativo) 
+                                        VALUES (:idlogin, :cnpj, :clitelefone, :vagas, :clirua, :clibairro, :clinumero, :clicep, :ativo");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin",     $this->idlogin);
@@ -50,6 +51,7 @@
             $cmd->bindParam(":clibairro",   $this->clibairro);
             $cmd->bindParam(":clinumero",   $this->clinumero);
             $cmd->bindParam(":clicep",      $this->clicep);
+            $cmd->bindParam("ativo",        $this->ativo);
 
             //Executando o comando SQL
             $cmd->execute();
@@ -62,8 +64,8 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idclinica, nome, email, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep
-                                     FROM clinica JOIN login ON clinica.idlogin = login.idlogin");
+            $cmd = $con->prepare("SELECT idclinica, login.idlogin, nome, email, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep 
+                                    FROM clinica JOIN login ON clinica.idlogin = login.idlogin");
             
             //Executando o comando SQL
             $cmd->execute();
@@ -112,15 +114,15 @@
                                     clibairro = :clibairro, clinumero = :clinumero, clicep = :clicep WHERE idclinica = :idclinica");
             
             //Parâmetros SQL
-            $cmd->bindParam(":idlogin", $this->idlogin);
-            $cmd->bindParam(":cnpj", $this->cnpj);
+            $cmd->bindParam(":cnpj",        $this->cnpj);
             $cmd->bindParam(":clitelefone", $this->clitelefone);
-            $cmd->bindParam(":vagas", $this->vagas);
-            $cmd->bindParam(":clirua", $this->clirua);
-            $cmd->bindParam(":clibairro", $this->clibairro);
-            $cmd->bindParam(":clinumero", $this->clinumero);
-            $cmd->bindParam(":clicep", $this->clicep);
-            $cmd->bindParam(":idclinica", $this->idclinica);
+            $cmd->bindParam(":vagas",       $this->vagas);
+            $cmd->bindParam(":clirua",      $this->clirua);
+            $cmd->bindParam(":clibairro",   $this->clibairro);
+            $cmd->bindParam(":clinumero",   $this->clinumero);
+            $cmd->bindParam(":clicep",      $this->clicep);
+            $cmd->bindParam(":idclinica",   $this->idclinica);
+            $cmd->bindParam(":ativo",       $this->ativo);
 
             //Executando o comando SQL
             $cmd->execute();
@@ -167,7 +169,7 @@
             $cmd = $con->prepare("UPDATE clinica SET vagas = :vagas WHERE idclinica = :idclinica");
             
             //Parâmetros SQL
-            $cmd->bindParam(":vagas", $this->vagas);
+            $cmd->bindParam(":vagas",     $this->vagas);
             $cmd->bindParam(":idclinica", $this->idclinica);
 
             //Executando o comando SQL

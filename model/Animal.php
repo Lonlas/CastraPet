@@ -13,6 +13,7 @@
         private $idade;
         private $comunitario;
         private $foto;
+        private $codchip;
 
         //Método get
         function __get($atributo)
@@ -117,6 +118,8 @@
             $cmd->bindParam(":foto",        $this->foto);
             
             $cmd->bindParam(":idanimal", $this->idanimal);
+            //$cmd->bindParam(":foto", $this->foto);
+
 
             //Executando o comando SQL
             $cmd->execute();

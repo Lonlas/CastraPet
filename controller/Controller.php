@@ -107,9 +107,15 @@ class Controller
         }
         include_once "view/consultaCastracao.php";
     }
-    function abrirConsultaAnimais(){
+
+    function abrirConsultaAnimais($idUsuario){
+        $animal = new Animal();
+        $animal->idusuario = $idUsuario;
+        $dadosAnimal = $animal->retornarAnimais();
+
         $raca = new Raca();
         $dadosRaca = $raca->consultar();
+
         include_once "view/consultaAnimais.php";
     }
     #AGENDAMENTO
