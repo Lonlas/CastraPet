@@ -215,17 +215,16 @@
                                         if($quantidadeCastracoes < $beneficio)
                                         {
                                             echo "
-                                            <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$values->idanimal'>
-                                                Solicitar castração
-                                            </button>
-                                            ";
-                                            }
-                                            echo "
-                                            <button  class='btn btn-warning w-100 mb-2 text-white'  data-bs-toggle='modal' data-bs-target='#modalEditar' data-idanimal='$values->idanimal'>Editar animal</button>
-                                            <!--<a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2 text-white' >Editar animal</a>-->
-                                            <a href='".URL."excluir-animal/$values->idanimal' class='btn btn-danger w-100' onclick='return confirm(\'Deseja realmente excluir?\')'>Excluir animal</a>
+                                                <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-bs-idanimal='$values->idanimal'>
+                                                    Solicitar castração
+                                                </button>
                                             ";
                                         }
+                                        echo "
+                                            <button type='button' id='btnEditar' class='btn btn-warning w-100 mb-2 text-white'  data-bs-toggle='modal' data-bs-target='#modalEditar' data-bs-idanimal='$values->idanimal'>Editar animal</button>
+                                            <a href='".URL."excluir-animal/$values->idanimal' class='btn btn-danger w-100' onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir animal</a>
+                                        ";
+                                    }
                                     else
                                     {
                                         switch($values->status)
@@ -277,7 +276,7 @@
         </div>
  
         <!-- MODAL: editar animal-->
-        <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="true" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+        <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <form method="post" action="<?php echo URL.'atualizar-animal';?>">
@@ -386,7 +385,7 @@
         <!--/MODAL -->
         
         <!-- MODAL: solicitar castração -->
-        <div class='modal fade' id='modalSolicitar' data-bs-keyboard='true' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+        <div class='modal fade' id='modalSolicitar' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
             <div class='modal-dialog modal-dialog-centered'>
                 <div class='modal-content'>
                     <form action="<?php echo URL.'solicitar-castracao';?>" method='post'>
@@ -413,52 +412,50 @@
 
     <!-- EXTENSÃO BOOTSTRAP -->    
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado-->
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
     <!-- EXTENSÃO JQUERY PARA O AJAX -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-
     <!-- ABRIR MODAL EDITAR -->
     <script>
         var exampleModal = document.getElementById('modalEditar')
         exampleModal.addEventListener('show.bs.modal', function (event) {
-        // Button that triggered the modal
-        var button = event.relatedTarget
-        // Extract info from data-bs-* attributes
-        var idanimal = button.getAttribute('data-idanimal')
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var idanimal = button.getAttribute('data-bs-idanimal')
 
-        $("#idAnimal").val(idanimal);
-        })
+            $("#idanimal").val(idanimal);
+        });
     </script>
 
     <!-- ABRIR MODAL SOLICITAR -->
     <script>
         var exampleModal = document.getElementById('modalSolicitar')
         exampleModal.addEventListener('show.bs.modal', function (event) {
-        // Button that triggered the modal
-        var button = event.relatedTarget
-        // Extract info from data-bs-* attributes
-        var idanimal = button.getAttribute('data-idanimal')
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var idanimal = button.getAttribute('data-bs-idanimal')
 
-        $("#idAnimal").val(idanimal);
-        })
+            $("#idanimal").val(idanimal);
+        });
     </script>  
     
     <!-- SCRIPT PARA POPULAR SELECT racas -->
     <script>
-        function carregarRaca($id = document.getElementById("tipoEspecie"))
+        function carregarRaca(id)
         {
-            //limpar todos antes de carregar (pesquisar)
+            //limpar todos antes de carregar
+            $("#racas").empty();
             $.ajax({
-                url: '<?php echo URL;?>carregar-raca/'+ $id.value,
+                url: '<?php echo URL;?>carregar-raca/'+ id.value,
                 success: function(data) {
-                    $("#racas").append(data)
-                    //$("#teste").html(data);
+                    $("#racas").append(data);
                 }
             });
         }
-    </script>  
+    </script>   
 </body>
 </html>
