@@ -34,12 +34,13 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO login (nome, email, senha, nivelacesso) VALUES (:nome, :email, :senha, :nivelacesso)");
+            $cmd = $con->prepare("INSERT INTO login (nome, email, senha, nivelacesso) 
+                                    VALUES (:nome, :email, :senha, :nivelacesso)");
             
             //Parâmetros SQL
-            $cmd->bindParam(":nome", $this->nome);
-            $cmd->bindParam(":email", $this->email);
-            $cmd->bindParam(":senha", $this->senha);
+            $cmd->bindParam(":nome",        $this->nome);
+            $cmd->bindParam(":email",       $this->email);
+            $cmd->bindParam(":senha",       $this->senha);
             $cmd->bindParam(":nivelacesso", $this->nivelacesso);
 
             //Executando o comando SQL
@@ -89,8 +90,8 @@
             $cmd = $con->prepare("UPDATE login SET nome = :nome, email = :email WHERE idlogin = :idlogin");
             
             //Parâmetros SQL
-            $cmd->bindParam(":nome", $this->nome);
-            $cmd->bindParam(":email", $this->email);
+            $cmd->bindParam(":nome",    $this->nome);
+            $cmd->bindParam(":email",   $this->email);
             $cmd->bindParam(":idlogin", $this->idlogin);
 
             //Executando o comando SQL
@@ -103,7 +104,7 @@
 
             $cmd = $con->prepare("UPDATE login SET senha = :senha WHERE idlogin = :idlogin");
 
-            $cmd->bindParam(":senha", $this->senha);
+            $cmd->bindParam(":senha",   $this->senha);
             $cmd->bindParam(":idlogin", $this->idlogin);
 
             $cmd->execute();
@@ -148,7 +149,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT * FROM usuario join login on usuario.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
+            $cmd = $con->prepare("SELECT * FROM usuario JOIN login ON usuario.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);
@@ -164,7 +165,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT * FROM clinica join login on clinica.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
+            $cmd = $con->prepare("SELECT * FROM clinica JOIN login ON clinica.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);

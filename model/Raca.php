@@ -33,7 +33,7 @@
             $cmd = $con->prepare("INSERT INTO raca (raca, tipoespecie) VALUES (:raca, :tipoespecie)");
             
             //Parâmetros SQL
-            $cmd->bindParam(":raca", $this->raca);
+            $cmd->bindParam(":raca",        $this->raca);
             $cmd->bindParam(":tipoespecie", $this->tipoespecie);
 
             //executa o comando SQL
@@ -99,8 +99,8 @@
             $cmd = $con->prepare("UPDATE raca SET raca = :raca, tipoespecie = :tipoespecie WHERE idraca = :idraca");
             
             //Parâmetros SQL
-            $cmd->bindParam(":idraca", $this->idraca);
-            $cmd->bindParam(":raca", $this->raca);
+            $cmd->bindParam(":idraca",      $this->idraca);
+            $cmd->bindParam(":raca",        $this->raca);
             $cmd->bindParam(":tipoespecie", $this->tipoespecie);
 
             //Executando o comando SQL

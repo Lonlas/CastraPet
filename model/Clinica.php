@@ -38,17 +38,18 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO clinica (idlogin, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep) VALUES (:idlogin, :cnpj, :clitelefone, :vagas, :clirua, :clibairro, :clinumero, :clicep)");
+            $cmd = $con->prepare("INSERT INTO clinica (idlogin, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep) 
+                                        VALUES (:idlogin, :cnpj, :clitelefone, :vagas, :clirua, :clibairro, :clinumero, :clicep)");
             
             //Parâmetros SQL
-            $cmd->bindParam(":idlogin", $this->idlogin);
-            $cmd->bindParam(":cnpj", $this->cnpj);
+            $cmd->bindParam(":idlogin",     $this->idlogin);
+            $cmd->bindParam(":cnpj",        $this->cnpj);
             $cmd->bindParam(":clitelefone", $this->clitelefone);
-            $cmd->bindParam(":vagas", $this->vagas);
-            $cmd->bindParam(":clirua", $this->clirua);
-            $cmd->bindParam(":clibairro", $this->clibairro);
-            $cmd->bindParam(":clinumero", $this->clinumero);
-            $cmd->bindParam(":clicep", $this->clicep);
+            $cmd->bindParam(":vagas",       $this->vagas);
+            $cmd->bindParam(":clirua",      $this->clirua);
+            $cmd->bindParam(":clibairro",   $this->clibairro);
+            $cmd->bindParam(":clinumero",   $this->clinumero);
+            $cmd->bindParam(":clicep",      $this->clicep);
 
             //Executando o comando SQL
             $cmd->execute();
@@ -61,7 +62,8 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idclinica, nome, email, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep FROM clinica JOIN login ON clinica.idlogin = login.idlogin");
+            $cmd = $con->prepare("SELECT idclinica, nome, email, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep
+                                     FROM clinica JOIN login ON clinica.idlogin = login.idlogin");
             
             //Executando o comando SQL
             $cmd->execute();
@@ -74,7 +76,8 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idclinica, nome, email, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep FROM clinica JOIN login ON clinica.idlogin = login.idlogin WHERE clinica.vagas > 0");
+            $cmd = $con->prepare("SELECT idclinica, nome, email, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep 
+                                    FROM clinica JOIN login ON clinica.idlogin = login.idlogin WHERE clinica.vagas > 0");
             
             //Executando o comando SQL
             $cmd->execute();
@@ -105,7 +108,8 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE clinica SET idlogin = :idlogin, cnpj = :cnpj, clitelefone = :clitelefone, vagas = :vagas, clirua = :clirua, clibairro = :clibairro, clinumero = :clinumero, clicep = :clicep WHERE idclinica = :idclinica");
+            $cmd = $con->prepare("UPDATE clinica SET idlogin = :idlogin, cnpj = :cnpj, clitelefone = :clitelefone, vagas = :vagas, clirua = :clirua, 
+                                    clibairro = :clibairro, clinumero = :clinumero, clicep = :clicep WHERE idclinica = :idclinica");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);

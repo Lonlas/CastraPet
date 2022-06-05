@@ -43,7 +43,7 @@
 
             //Preparar comando SQL para cadastrar
             $cmd = $con->prepare("INSERT INTO usuario (idlogin, rg, cpf, beneficio, telefone, celular, punicao, usurua, usubairro, usunumero, usucep, nis) 
-            VALUES (:idlogin, :rg, :cpf, :beneficio, NULLIF(:telefone,''), :celular, :punicao, :usurua, :usubairro, :usunumero, :usucep, NULLIF(:nis,''))");
+                                    VALUES (:idlogin, :rg, :cpf, :beneficio, NULLIF(:telefone,''), :celular, :punicao, :usurua, :usubairro, :usunumero, :usucep, NULLIF(:nis,''))");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin",   $this->idlogin);
@@ -70,7 +70,8 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idusuario, nome, email, cpf, beneficio, nis, telefone, celular, usucep, usubairro, usurua, usunumero, punicao FROM usuario JOIN login ON usuario.idlogin = login.idlogin");
+            $cmd = $con->prepare("SELECT idusuario, nome, email, cpf, rg, beneficio, nis, telefone, celular, usucep, usubairro, usurua, usunumero, punicao 
+                                    FROM usuario JOIN login ON usuario.idlogin = login.idlogin");
             
             //Executando o comando SQL
             $cmd->execute();
@@ -130,7 +131,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT * FROM usuario WHERE idusuario = :idusuario");
+            $cmd = $con->prepare("SELECT * FROM usuario JOIN login ON usuario.idlogin = login.idlogin WHERE idusuario = :idusuario");
             
             //Parâmetros SQL
             $cmd->bindParam(":idusuario", $this->idusuario);
@@ -140,6 +141,7 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+        //Método para punição
         function aplicarPunicao()
         {
             //Conectando ao banco de dados
@@ -149,7 +151,7 @@
             $cmd = $con->prepare("UPDATE usuario SET punicao = :punicao WHERE idusuario = :idusuario");
             
             //Parâmetros SQL
-            $cmd->bindParam(":punicao", $this->punicao);
+            $cmd->bindParam(":punicao",   $this->punicao);
             $cmd->bindParam(":idusuario", $this->idusuario);
 
             //Executando o comando SQL
