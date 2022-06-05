@@ -118,6 +118,11 @@ if($_GET)
             $clinica = new ClinicaController();  
             $clinica->cadastrarClinica();
         break;
+        #ATUALIZAÇÕES
+        case "atualiza-tutor":
+            $usuario = new UsuarioController();
+            $usuario->atualizarUsuario($url[1]);
+        break;
         #CONSULTAS
         case "consulta-usuario":
             $adm = new Controller();
