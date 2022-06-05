@@ -37,36 +37,36 @@
                     <div class="container bg-white pt-3">
                     <!-- Componentes aqui -->
                         <?php
-                        foreach ($dadosAnimais as $values)
+                        foreach ($dadosAnimais as $value)
                         {
                             //Reescrevendo a espécie
-                            $values->especie = str_replace("0","Canina", $values->especie);
-                            $values->especie = str_replace("1","Felina", $values->especie);
+                            $value->especie = str_replace("0","Canina", $value->especie);
+                            $value->especie = str_replace("1","Felina", $value->especie);
 
                             //Reescrevendo o sexo
-                            $values->sexo = str_replace("0","Fêmea", $values->sexo);
-                            $values->sexo = str_replace("1","Macho", $values->sexo);
+                            $value->sexo = str_replace("0","Fêmea", $value->sexo);
+                            $value->sexo = str_replace("1","Macho", $value->sexo);
 
                             //Reescrevendo a pelagem
-                            $values->pelagem = str_replace("0","Curta", $values->pelagem);
-                            $values->pelagem = str_replace("1","Média", $values->pelagem);
-                            $values->pelagem = str_replace("2","Alta", $values->pelagem);
+                            $value->pelagem = str_replace("0","Curta", $value->pelagem);
+                            $value->pelagem = str_replace("1","Média", $value->pelagem);
+                            $value->pelagem = str_replace("2","Alta", $value->pelagem);
                             
                             //Reescrevendo o porte
-                            $values->porte = str_replace("0","Pequeno", $values->porte);
-                            $values->porte = str_replace("1","Médio", $values->porte);
-                            $values->porte = str_replace("2","Grande", $values->porte);
+                            $value->porte = str_replace("0","Pequeno", $value->porte);
+                            $value->porte = str_replace("1","Médio", $value->porte);
+                            $value->porte = str_replace("2","Grande", $value->porte);
 
                             //Reescrevendo o Comunitário
-                            $values->comunitario = str_replace("0","Não", $values->comunitario);
-                            $values->comunitario = str_replace("1","Sim", $values->comunitario);
+                            $value->comunitario = str_replace("0","Não", $value->comunitario);
+                            $value->comunitario = str_replace("1","Sim", $value->comunitario);
 
                             echo
                             "
                             <!-- Começo de um animal -->
                                 <div class='row align-items-center'>
                                     <div class='col-md-3 d-flex align-items-center'>
-                                        <img src='".URL."recursos/img/Animais/$values->foto' alt='Imagem' class='mw-100'>
+                                        <img src='".URL."recursos/img/Animais/$value->foto' alt='Imagem' class='mw-100'>
                                     </div>
                                     <div class='col-md-7'>
                                         <div class='row'>
@@ -74,37 +74,37 @@
                                                 <div class='row'>
                                                     <p>
                                                         Nome:
-                                                        ".$values->aninome."
+                                                        ".$value->aninome."
                                                     </p>
                                                 </div>
                                                 <div class='row'>
                                                     <p>
                                                         Espécie:
-                                                        ".$values->especie."
+                                                        ".$value->especie."
                                                     </p>
                                                 </div>
                                                 <div class='row'>
                                                     <p>
                                                         Sexo:
-                                                        ".$values->sexo."
+                                                        ".$value->sexo."
                                                     </p>
                                                 </div>
                                                 <div class='row'>
                                                     <p>
                                                         Pelagem:
-                                                        ".$values->pelagem."
+                                                        ".$value->pelagem."
                                                     </p>
                                                 </div>
                                                 <div class='row'>
                                                     <p>
                                                         Porte:
-                                                        ".$values->porte."
+                                                        ".$value->porte."
                                                     </p>
                                                 </div>
                                                 <div class='row'>
                                                     <p class='mb-md-0'>
                                                         Animal Comunitário:
-                                                        ".$values->comunitario."
+                                                        ".$value->comunitario."
                                                     </p>
                                                 </div>
                                             </div>
@@ -112,19 +112,19 @@
                                                 <div class='row'>
                                                     <p>
                                                         Idade:
-                                                        ".$values->idade."
+                                                        ".$value->idade."
                                                     </p>
                                                 </div>
                                                 <div class='row'>
                                                     <p>
                                                         Cor:
-                                                        ".$values->cor."
+                                                        ".$value->cor."
                                                     </p>
                                                 </div>
                                                 <div class='row'>
                                                     <p class='mb-0'>
                                                         Raça:
-                                                        ".$values->raca."
+                                                        ".$value->raca."
                                                     </p>
                                                 </div>
                                             </div>
@@ -133,25 +133,13 @@
                                     </div>
                                     <div class='col-md-2 mt-2 mt-md-0'>
                                     ";
-                                    if(!isset($values->status))
+                                    if(!isset($value->status))
                                     {
-                                        switch($_SESSION["dadosUsuario"]->beneficio)
-                                        {
-                                            case 0:
-                                                $beneficio = 1;
-                                            break;
-                                            case 1:
-                                                $beneficio = 2;
-                                            break;
-                                            case 2;
-                                                $beneficio = 5;
-                                            break;
-                                        }
 
-                                        if($quantidadeCastracoes < $beneficio && $_SESSION["dadosUsuario"]->punicao == 0)
+                                        if($_SESSION["dadosUsuario"]->quantcastracoes > 0 && $_SESSION["dadosUsuario"]->punicao == 0)
                                         {
                                             echo "
-                                            <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$values->idanimal'>
+                                            <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$value->idanimal'>
                                                 Solicitar castração
                                             </button>
                                             ";
@@ -161,13 +149,13 @@
                                             echo "<span class='btn bg-danger w-100 mb-2 text-white' style='cursor: default;'>Solicitação Bloqueada</span> ";
                                         }
                                         echo "
-                                        <a href='".URL."atualizar-animal/$values->idanimal' class='btn btn-warning w-100 mb-2 text-white' >Editar animal</a>
-                                        <a href='".URL."excluir-animal/$values->idanimal' class='btn btn-danger w-100'>Excluir animal</a>
+                                        <a href='".URL."atualizar-animal/$value->idanimal' class='btn btn-warning w-100 mb-2 text-white' >Editar animal</a>
+                                        <a href='".URL."excluir-animal/$value->idanimal' class='btn btn-danger w-100'>Excluir animal</a>
                                         ";
                                     }
                                     else
                                     {
-                                        switch($values->status)
+                                        switch($value->status)
                                         {
                                             case 0:
                                                 echo "<span class='btn btn-sm bg-warning w-100 my-3 text-white fw-bold' style='cursor: default;'>Solicitação em análise</span>";

@@ -161,6 +161,7 @@
         }
 
         //Método para ver a quantidade de castrações do usuário
+        /*
         function quantidadeCastracoes()
         {
             //Conectando ao banco de dados
@@ -177,5 +178,6 @@
 
             return $cmd->fetchColumn();
         }
+        */
     }
 ?>
