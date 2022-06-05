@@ -213,7 +213,10 @@
             } );
         } );
     </script>
+
     <script>
+        //Definindo os valores nos inputs da modal
+        
         var exampleModal = document.getElementById('modalAtualizar')
         exampleModal.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal

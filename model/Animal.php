@@ -100,22 +100,20 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE animal SET idusuario = :idusuario, idraca = :idraca, aninome = :aninome, especie = :especie, sexo = :sexo, cor = :cor, pelagem = :pelagem, porte = :porte, idade = :idade, comunitario = :comunitario, foto = :foto WHERE idanimal = :idanimal");
+            $cmd = $con->prepare("UPDATE animal SET idraca = :idraca, aninome = :aninome, especie = :especie, sexo = :sexo, cor = :cor, pelagem = :pelagem, porte = :porte, idade = :idade, comunitario = :comunitario WHERE idanimal = :idanimal");
             
             //Parâmetros SQL
-            $cmd->bindParam(":idusuario", $this->idusuario);
             $cmd->bindParam(":idraca", $this->idraca);
             $cmd->bindParam(":aninome", $this->aninome);
             $cmd->bindParam(":especie", $this->especie);
             $cmd->bindParam(":sexo", $this->sexo);
             $cmd->bindParam(":cor", $this->cor);
-            $cmd->bindParam(":porte", $this->porte);
             $cmd->bindParam(":pelagem", $this->pelagem);
             $cmd->bindParam(":porte", $this->porte);
             $cmd->bindParam(":idade", $this->idade);
             $cmd->bindParam(":comunitario", $this->comunitario);
             $cmd->bindParam(":idanimal", $this->idanimal);
-            $cmd->bindParam(":foto", $this->foto);
+            //$cmd->bindParam(":foto", $this->foto);
 
 
             //Executando o comando SQL

@@ -137,7 +137,7 @@ if($_GET)
         break;
         case "consulta-animais":
             $adm = new Controller();
-            $adm->abrirConsultaAnimais();    
+            $adm->abrirConsultaAnimais($url[1]);    
         break;
         #CASTRAÇÃO - vizualização, confirmação e atualização
         case "lista-solicitacao":
