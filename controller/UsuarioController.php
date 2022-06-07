@@ -45,6 +45,8 @@ class UsuarioController
 
             $cadastra->telefone = $tel;
             $cadastra->celular = $celular;
+            //Arrumar o Whatsapp dps
+            $cadastra->whatsapp = 0;
             $cadastra->punicao = 0;
             $cadastra->usurua = $_POST["txtRua"];
             $cadastra->usubairro = $_POST["txtBairro"];
@@ -98,6 +100,7 @@ class UsuarioController
                 $cadastra->nis = $_POST["txtNIS"];
             }
             
+            $cadastra->quantcastracoes = 5;
             $cadastra->cadastrar();
             $this->logar();
             header("Location:".URL);
@@ -120,40 +123,27 @@ class UsuarioController
         echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
     }
 
-    function agendarCastracao()
+    function agendarClinicaCastracao()
     {   
         $idcastracao = $_POST["idcastracao"];
 
+        //Caso o botão recusado não seja apertado
         if(!isset($_POST["btnRecusa"]))
         {
-            if($_POST["dataHora"] != "" && $_POST["selectClinica"] != 0)
+            if($_POST["selectClinica"] != 0)
             {
                 $castracao = new Castracao();
     
                 $castracao->idclinica = $_POST["selectClinica"];
                 $castracao->status = 1;
-                $castracao->horario = $_POST["dataHora"];
                 $castracao->idcastracao = $idcastracao;
-                
+                $castracao->aprovarCastracao();
+
                 $clinica = new Clinica();
                 $clinica->idclinica = $_POST["selectClinica"];
                 $dadosClinica = $clinica->retornar();
                 $clinica->vagas = $dadosClinica->vagas - 1;
-                
-                //enviar o email
-                $email = new Email();
-                $email->data = $_POST["dataHora"];
-                $email->nomeClinica = $dadosClinica->nome;
-                $email->ruaClinica = $dadosClinica->clirua;
-                $email->bairroClinica = $dadosClinica->clibairro;
-                $email->numeroClinica = $dadosClinica->clinumero;
-                $email->emailDestinatario = $_POST["emailDestinatario"];
-                $email->nomeDestinatario = $_POST["nomeDestinatairio"];
-                $email->nomeAnimal = $_POST["aninome"];
-
                 $clinica->subtrairVagas();
-                $castracao->aprovarCastracao();
-                $email->enviarConfirmacao();
     
                 header("Location:".URL."lista-solicitacao");
             }
@@ -173,8 +163,8 @@ class UsuarioController
 
             header("Location:".URL."lista-solicitacao");
         }
-
     }
+
     function atualizarCastracao()
     {
         $castracao = new Castracao();
@@ -301,12 +291,14 @@ class UsuarioController
             echo"<script>alert('Email ou senha estão errados'); window.location='".URL."login'; </script>";
         }
     }
+
     function sair()
     {
         $_SESSION[] = null;
         session_destroy();
         header("Location:".URL);
     }
+
     function excluir($idUsuario, $idLogin)
     {
         $usuario = new Usuario();
@@ -318,6 +310,105 @@ class UsuarioController
         $login->excluir();
 
         header("location:".URL."consulta-usuario");
+    }
+
+    function recuperarSenha()
+    {
+        $login = new Login();
+        $login->email = $_POST["txtEmail"];
+        $dadosRecuperacao = $login->logar();
+        if($dadosRecuperacao && $dadosRecuperacao->nivelacesso == 0)
+        {
+            $codigo = rand(100000,999999);
+    
+            $email = new Email();
+            $email->emailDestinatario = $_POST["txtEmail"];
+            $email->codsenha = $codigo;
+            $email->enviarRecuperacao();
+
+            $login->codsenha = $codigo;
+            $login->gerarCodigo();
+
+            header("Location:".URL."codigo-de-recuperacao/$dadosRecuperacao->email");
+        }
+        else
+        {
+            setcookie("msg","Parece que esse E-mail não existe no sistema");
+            header("Location:".URL."esqueci-a-senha");
+        }
+    }
+    function confirmarCodigo()
+    {
+        $login = new Login();
+        $login->email = $_POST["txtEmail"];
+        $dadosConfirmacao = $login->confirmarCodigo();
+
+        $_SESSION["idlogin"] = $dadosConfirmacao->idlogin;
+        $codigo = $_POST["txtCod"];
+
+        
+        if(empty($_COOKIE["tentativas"])){setcookie("tentativas", 1, time() + 3600, "/");}
+        
+
+        //RESETAR O COOKIE QUE LIMITA A QUANTITADE DE TENTATIVAS PARA O CÓDIGO. USAR PARA DEBUGAR
+        //setcookie("tentativas", "", time() - 1000, "/");
+
+        if($_COOKIE["tentativas"] < 5)
+        {
+            if(isset($codigo) && strlen($codigo) === 6 && $codigo === $dadosConfirmacao->codsenha)
+            { 
+                //cookie para permitir o usuário de abrir a tela alterarsenha
+                setcookie("tentativas", "", time() - 1000, "/");
+                setcookie("confirmacao",$dadosConfirmacao->idlogin);
+                header("Location:".URL."alterar-senha/$dadosConfirmacao->idlogin");
+                return;
+            }
+            else
+            {
+                setcookie("tentativas", 1 + $_COOKIE["tentativas"], time() + 3600, "/");
+                setcookie("msg","Codigo inválido! Tente novamente");
+                header("Location:".URL."codigo-de-recuperacao/".$_POST["txtEmail"]);
+                return;
+            }
+        }
+        else
+        {
+            echo"<script>alert('Você fez muitas tentativas, tente novamente mais tarde'); window.location='".URL."login'; </script>";
+        }
+    }
+
+    function redefinirSenha()
+    {
+        if(isset($_SESSION["dadosLogin"]) && $_SESSION["dadosLogin"]->nivelacesso == 0)
+        {
+            //redefinir senha e limpar o campo codsenha
+            $login = new Login();
+            $login->idlogin = $_SESSION["dadosLogin"]->idlogin;
+            $login->senha = password_hash($_POST["confSenha"], PASSWORD_DEFAULT);
+            $login->redefinirSenha();
+
+            $_SESSION["idlogin"] = null;
+            $this->sair();
+
+            header("Location:".URL."login");
+        }
+        else if(!isset($_SESSION["dadosLogin"]) && $_COOKIE["confirmacao"] == $_SESSION["idlogin"])
+        {
+            //redefinir senha e limpar o campo codsenha
+            $login = new Login();
+            $login->idlogin = $_SESSION["idlogin"];
+            $login->senha = password_hash($_POST["confSenha"], PASSWORD_DEFAULT);
+            $login->redefinirSenha();
+
+            setcookie("confirmacao","", time() - 3600);
+
+            $_SESSION["idlogin"] = null;
+            $this->sair();
+
+            header("Location:".URL."login");
+        }
+        else
+        echo"<script>alert('Erro ao alterar a senha'); window.location='".URL."alterar-senha'; </script>";
     }
 }
 ?>

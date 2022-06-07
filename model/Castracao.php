@@ -53,7 +53,19 @@
         {
             $con = Conexao::conectar();
 
-            $cmd = $con->prepare("SELECT idcastracao, aninome, nome FROM castracao join animal on animal.idanimal = castracao.idanimal join usuario on usuario.idusuario = animal.idusuario join login on login.idlogin = usuario.idlogin WHERE status = 'null' ");
+            $cmd = $con->prepare("SELECT idcastracao, aninome, nome FROM castracao join animal on animal.idanimal = castracao.idanimal join usuario on usuario.idusuario = animal.idusuario join login on login.idlogin = usuario.idlogin WHERE status = 'null'");
+        
+            $cmd->execute();
+
+            return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
+        function clinicaConsultarSolicitacao()
+        {
+            $con = Conexao::conectar();
+
+            $cmd = $con->prepare("SELECT idcastracao, aninome, nome FROM castracao join animal on animal.idanimal = castracao.idanimal join usuario on usuario.idusuario = animal.idusuario join login on login.idlogin = usuario.idlogin WHERE castracao.idclinica = :idclinica AND horario IS NULL");
+
+            $cmd->bindParam(":idclinica", $this->idclinica);
         
             $cmd->execute();
 
@@ -64,7 +76,7 @@
         {
             $con = Conexao::conectar();
 
-            $cmd = $con->prepare("UPDATE castracao SET idclinica = :idclinica, horario = :horario, status = :status WHERE idcastracao = :idcastracao");
+            $cmd = $con->prepare("UPDATE castracao SET idclinica = :idclinica, horario = nullif(:horario,''), status = :status WHERE idcastracao = :idcastracao");
 
             $cmd->bindParam(":idclinica", $this->idclinica);
             $cmd->bindParam(":horario", $this->horario);
@@ -107,7 +119,7 @@
 
             //Preparar comando SQL para consultar
             //$cmd = $con->prepare("SELECT * FROM castracao");
-            $cmd = $con->prepare("SELECT idcastracao, clinica.idclinica, animal.aninome, horario, status, observacao, cpf, telefone, usuario.idusuario, email, nome FROM castracao JOIN animal ON castracao.idanimal = animal.idanimal JOIN usuario ON animal.idusuario = usuario.idusuario JOIN login ON login.idlogin = usuario.idlogin JOIN clinica ON castracao.idclinica = clinica.idclinica WHERE clinica.idclinica = :idclinica ORDER BY horario DESC");
+            $cmd = $con->prepare("SELECT idcastracao, clinica.idclinica, animal.aninome, horario, status, observacao, cpf, telefone, usuario.idusuario, email, nome FROM castracao JOIN animal ON castracao.idanimal = animal.idanimal JOIN usuario ON animal.idusuario = usuario.idusuario JOIN login ON login.idlogin = usuario.idlogin JOIN clinica ON castracao.idclinica = clinica.idclinica WHERE clinica.idclinica = :idclinica AND horario != 'null' ORDER BY horario DESC");
             
             $cmd->bindParam(":idclinica", $this->idclinica);
 
@@ -172,7 +184,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT idcastracao, aninome, cpf, observacao, status, email, nome from castracao join animal on animal.idanimal = castracao.idanimal join usuario on usuario.idusuario = animal.idusuario join login on usuario.idlogin = login.idlogin WHERE castracao.idcastracao = :idcastracao");
+            $cmd = $con->prepare("SELECT idcastracao, aninome, cpf, observacao, status, email, nome, foto from castracao join animal on animal.idanimal = castracao.idanimal join usuario on usuario.idusuario = animal.idusuario join login on usuario.idlogin = login.idlogin WHERE castracao.idcastracao = :idcastracao");
             
             //Parâmetros SQL
             $cmd->bindParam(":idcastracao", $this->idcastracao);

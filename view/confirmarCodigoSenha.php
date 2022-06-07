@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    
     <?php include_once "head.php";?>
-
 </head>
 <body>
-    
+
     <!-- CORPO -->
     <div class="container-fluid d-grid min-vh-100 corpo">
 
@@ -16,10 +14,10 @@
             <div class="row h-100 align-items-center">
                 <div class="p-3">
                     <div class="container bg-dark text-light font-weight-bold p-3">
-                        <h5 class="m-0">Recuperar de senha</h5>
+                        <h5 class="m-0">Codigo de recuperação</h5>
                     </div>
-                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 bg-white">
-                        <form method="post" class="container p-sm-3 p-md-3 p-lg-4 p-3" action="recuperar-senha">
+                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
+                        <form action="<?php echo URL.'confirmar-recuperacao';?>" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0" method="post">
                             <?php
                                 //exibindo mensagem de erro
                                 if(isset($_COOKIE["msg"]))
@@ -32,12 +30,13 @@
                                 setcookie("msg","",time() - 3600);
                             ?>
                             
-                            <div class="form-group mb-4">
-                                <label for="txtEmail" class="form-label">E-mail:</label>
-                                <input class="form-control" type="email" name="txtEmail" id="txtEmail" maxlength="100" required>
+                            <input type="hidden" name="txtEmail" value="<?php echo $url[1];?>">
+                            <div class="form-group mb-3">
+                                <label for="txtCod" class="form-label">Codigo de confirmação:</label>
+                                <input type="text" name="txtCod" id="txtCod" class="form-control">
                             </div>
-                            <div class="text-center">
-                                <input type="submit" class="btn btn-success mx-auto" value="Enviar">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success float-end" value="Confirmar">
                             </div>        
                         </form>
                     </div>
@@ -47,7 +46,7 @@
         <div class="container-fluid bg-dark" style="grid-area: footer;">
             <div class="row h-100 align-items-center">
                 <div class="px-5">
-                    <a href="<?php echo URL.'login';?>" class="btn btn-success">Voltar</a>
+                    <a href="<?php echo URL.'#';?>" class="btn btn-success">Voltar</a>
                 </div>
             </div> 
         </div>
