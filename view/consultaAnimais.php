@@ -7,21 +7,9 @@
 
     <!-- CORPO -->
     <div class="container-fluid d-grid min-vh-100 corpo">
-        <?php //CONTROLE DE MENU
-            if($_SESSION) //caso esteja logado e exista uma sessão
-            {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case 0: include_once "menuLogado.php"; break;
-                    //caso tenha nível de acesso de clínica
-                    case 1: include_once "menuClinica.php"; break;
-                    //caso tenha nível de acesso de Administrador
-                    case 2: include_once "menuADM.php"; break;   
-                }
-            }
-            else{ include_once "menu.php"; }
-        ?>
+
+    <?php /*Controle de menu!*/ include_once "menuControle.php";?>
+    
         <div class="bg-danger container-fluid" style="grid-area: corpo;">
             <div class="row h-100 align-items-center">
                 <div class="p-3">
@@ -129,7 +117,7 @@
                                     <div class='col-md-2 mt-2 mt-md-0'>  
                                         <button class='btn btn-warning btn-md' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$value->especie' data-sexo='$value->sexo' data-cor='$value->cor' data-raca='$value->raca' data-idade='$value->idade' data-pelagem='$value->pelagem' data-porte='$value->porte' data-comunitario='$value->comunitario' data-foto='$value->foto' >Editar</button>
                                         
-                                        <a href='".URL."excluir-animal/$value->idanimal' class='btn btn-danger float-end w-100' onclick='return confirm(\"Deseja realmente excluir?\")'><i class='fa fa-trash'></i> Excluir</a>    
+                                        <a href='".URL."excluir-animal/$value->idanimal/$value->idusuario/$value->foto' class='btn btn-danger float-end w-100' onclick='return confirm(\"Deseja realmente excluir?\")'><i class='fa fa-trash'></i> Excluir</a>    
                                     </div>
                                 </div>
                                 <hr>

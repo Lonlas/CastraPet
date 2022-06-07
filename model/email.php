@@ -23,6 +23,7 @@ require "recursos/PHPMailer/SMTP.php";
         private $ruaClinica;
         private $bairroClinica;
         private $numeroClinica;
+        private $codsenha;
 
         //Método get
         function __get($atributo)
@@ -189,7 +190,60 @@ require "recursos/PHPMailer/SMTP.php";
                 echo 'Houve um erro: ' . $e;
             }
         }
+        function enviarRecuperacao()
+        {
+            //Conteúdo da mensagem enviada
+            $Conteudo = 
+            "
+            <p><b>Recuperação de senha</b><br/>
+            Foi solicitada a recuperação da senha na sua conta</p>
+            
+            <p>Codigo de Confirmação: <b>$this->codsenha</b></p>
+
+            ";
+
+            $email = new PHPMailer(true);
+
+            try{
+                
+                //Configurações
+                $email->isSMTP();
+                $email->Host = $this->host;
+                $email->SMTPAuth = true;
+                $email->Username = $this->emailRemetente;
+                $email->Password = $this->senhaRemetente;
+                $email->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           //criptografia do email
+                $email->Port = $this->porta;
+                $email->CharSet = 'UTF-8';
+
+                //Informações de quem enviou
+                $email->setFrom($this->emailRemetente, $this->nomeRemetente); 
+                $email->addReplyTo($this->emailRemetente);
+
+                //endereço para qual será enviado o email
+
+                $email->addAddress($this->emailDestinatario);
+
+                //define se é html
+                $email->isHTML(true);
+
+                //Corpo do e-mail
+                $email->Subject = "Recuperar senha";     //Assunto / Título
+                
+                //conteúdo
+                $email->Body = $Conteudo;
+
+                $email->AltBody = "Foi soliciatada a recuperação da senha na sua conta \n\nCódigo de recuperação: "+$this->codsenha;
+                    
+                //envia
+                $email->send();
+
+                echo "Mensagem enviada com sucesso";
+            }
+            catch(Exception $e)
+            {
+                echo 'Houve um erro: ' . $e;
+            }
+        }
     }
-
-
 ?>
