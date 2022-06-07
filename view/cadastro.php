@@ -46,23 +46,27 @@
                                     <input class="form-control" type="email" name="txtEmail" id="txtEmail" maxlength="100" required>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-sm-6">
                                         <label for="txtCPF" class="form-label">CPF:<font color="red">*</font></label>
                                         <input class="form-control" type="text" name="txtCPF" id="txtCPF" maxlength="14" minlength="11" placeholder="000.000.000-00" required>
                                     </div>
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-sm-6">
                                         <label for="txtTel" class="form-label">Telefone:</label>
-                                        <input class="form-control" type="text" name="txtTel" id="txtTel" placeholder="(00) 0000 0000" maxlength="15">
+                                        <input class="form-control" type="text" name="txtTel" id="txtTel" placeholder="(00) 0000-0000" maxlength="10">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-sm-6">
                                         <label for="txtRG" class="form-label">RG:<font color="red">*</font></label>
                                         <input class="form-control" type="text" name="txtRG" id="txtRG" maxlength="12" placeholder="00.000.000-0" required>
                                     </div>
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-sm-6">
                                         <label for="txtCelular" class="form-label">Celular:<font color="red">*</font></label>
-                                        <input class="form-control" type="text" name="txtCelular" id="txtCelular" placeholder="(00) 00000 0000" maxlength="15">
+                                        <input class="form-control" type="text" name="txtCelular" id="txtCelular" placeholder="(00) 00000-0000" maxlength="15">
+                                        <div class="form-group" style="margin-bottom: -10px;">
+                                            <input type="checkbox" name="chkWhats" id="chkWhats" value="sim">
+                                            <label for="chkWhats" class="form-label">O número é Whatsapp?</label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -76,7 +80,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
-                                        <input type="checkbox" name="chkNIS" id="chkNIS" value="2">
+                                        <input type="checkbox" name="chkNIS" id="chkNIS" value="sim">
                                         <label for="chkNIS" class="form-label">Tenho o benefício do NIS</label>
                                     </div>
                                     <div class="form-group col-sm-6">
@@ -85,7 +89,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" value="1">
+                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" value="sim">
                                         <label for="chkProtetor" class="form-label">Sou protetor de animais</label>
                                     </div>
                                     <div class="form-group col-sm-6">
@@ -159,8 +163,8 @@
             $("#txtCPF").mask('000.000.000-00');
             $("#txtCEP").mask('00000-000');
             $("#txtRG").mask('00.000.000-0');
-            $("#txtTel").mask('(00) 0000 0000');
-            $("#txtCelular").mask('(00) 00000 0000');
+            $("#txtTel").mask('(00) 0000-0000');
+            $("#txtCelular").mask('(00) 00000-0000');
             $("#txtNIS").mask('000.00000.00-0');
         });
     </script>
