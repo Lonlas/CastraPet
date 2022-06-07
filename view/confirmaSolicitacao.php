@@ -2,32 +2,14 @@
 <html lang="pt-br">
 <head>
     <?php include_once "head.php";?>
-    <style rel="stylesheet" type="text/css">
-        .corpo{
-            grid-template-areas: 'header''corpo''footer';
-            grid-template-rows: max-content auto 100px;
-        }
-    </style>
 </head>
 <body>
 
     <!-- CORPO -->
     <div class="container-fluid d-grid min-vh-100 corpo">
-        <?php //CONTROLE DE MENU
-            if($_SESSION) //caso esteja logado e exista uma sessão
-            {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case 0: include_once "menuLogado.php"; break;
-                    //caso tenha nível de acesso de clínica
-                    case 1: include_once "menuClinica.php"; break;
-                    //caso tenha nível de acesso de Administrador
-                    case 2: include_once "menuADM.php"; break;   
-                }
-            }
-            else{ include_once "menu.php"; }
-        ?>
+
+    <?php /*Controle de menu!*/ include_once "menuControle.php";?>
+
         <?php
             if($_SESSION["dadosLogin"]->nivelacesso == 2){echo"<div class='bg-danger container-fluid' style='grid-area: corpo;''>";}
             else{echo"<div class='bg-warning container-fluid' style='grid-area: corpo;''>";}

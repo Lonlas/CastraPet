@@ -7,21 +7,9 @@
 
     <!-- CORPO -->
     <div class="container-fluid d-grid min-vh-100 corpo">
-        <?php //CONTROLE DE MENU
-            if(isset($_SESSION["dadosLogin"])) //caso esteja logado e exista uma sessão
-            {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case 0: include_once "menuLogado.php"; break;
-                    //caso tenha nível de acesso de clínica
-                    case 1: include_once "menuClinica.php"; break;
-                    //caso tenha nível de acesso de Administrador
-                    case 2: include_once "menuADM.php"; break;   
-                }
-            }
-            else{ include_once "menu.php"; }
-        ?>
+
+    <?php /*Controle de menu!*/ include_once "menuControle.php";?>
+    
         <div class="bg-primary container-fluid" style="grid-area: corpo;">
             <div class="row h-100 align-items-center">
                 <div class="p-3">
