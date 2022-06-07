@@ -53,6 +53,22 @@ if($_GET)
             $direciona = new Controller();
             $direciona->abrirEsqSenha();
         break;
+        case "recuperar-senha":
+            $direciona = new UsuarioController();
+            $direciona->recuperarSenha();
+        break;
+        case "codigo-de-recuperacao":
+            $direciona = new Controller();
+            $direciona->abrirRecuperacao();
+        break;
+        case "confirmar-recuperacao":
+            $direciona = new UsuarioController();
+            $direciona->confirmarCodigo();
+        break;
+        case "redefinir-senha":
+            $direciona = new UsuarioController();
+            $direciona->redefinirSenha();
+        break;
 
         // USUÁRIO
         case "home-usuario":
@@ -65,7 +81,7 @@ if($_GET)
         break;
         case "alterar-senha":
             $usuario = new Controller();
-            $usuario->abrirAlterarSenha();
+            $usuario->abrirAlterarSenha($url[1]);
         break;
         case "cadastra-animal":
             $animal = new Controller();

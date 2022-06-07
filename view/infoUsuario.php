@@ -107,7 +107,7 @@
                             </div>
                             <div class="col row">
                                 <div class="col-sm-3 mb-3">
-                                    <a href="<?php echo URL.'alterar-senha'; ?>" class="link-dark">Alterar minha senha</a>
+                                    <a href="<?php echo URL.'alterar-senha/'.$_SESSION["dadosLogin"]->idlogin; ?>" class="link-dark">Alterar minha senha</a>
                                 </div>
                                 <div class="col-sm-9">
                                     <a href="<?php echo URL.'meus-animais'; ?>" class="btn btn-success col-auto ">Meus animais</a>

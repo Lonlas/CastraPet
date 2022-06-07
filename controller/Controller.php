@@ -30,7 +30,12 @@ class Controller
     function abrirEsqSenha(){
         include_once "view/esqSenha.php";
     }
-    
+
+    function abrirRecuperacao()
+    {
+        include_once "view/confirmarCodigoSenha.php";
+    }
+
     // USUÁRIO
     function abrirHomeUsuario(){
         include_once "view/homeUsuario.php";
@@ -41,8 +46,13 @@ class Controller
     function abrirPerfil(){   
         include_once "view/infoUsuario.php";
     }
-    function abrirAlterarSenha(){
-        include_once "view/alterarSenha.php";
+    function abrirAlterarSenha($idlogin){
+        //só abrir a tela alterar senha se existir sessão de usuário ou se confirmar login for igual ao login retornado pelo banco
+        if(isset($_SESSION["dadosUsuario"]) || $_SESSION["idlogin"] == $idlogin){
+            include_once "view/alterarSenha.php";
+        }
+        else
+            include_once "view/paginaNaoEncontrada.php";
     }
     function abrirCadAnimal(){
         $raca = new Raca();

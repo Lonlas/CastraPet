@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
-                                        <input type="submit" class="btn btn-success float-end" onclick="confirmasenha()" value="Cadastrar">
+                                        <input type="submit" class="btn btn-success float-end" value="Cadastrar">
                                     </div>        
                                 </div>
                             </div>     
