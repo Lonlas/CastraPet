@@ -7,10 +7,6 @@
         input::-webkit-inner-spin-button {
             display: none;
         }
-        .vazio
-        {
-            width: 100px;
-        }
         #inputImgAnimal + label
         {
             position: absolute;

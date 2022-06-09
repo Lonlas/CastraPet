@@ -43,6 +43,7 @@
                                         $value->beneficio = str_replace("0", "-", $value->beneficio);
                                         $value->beneficio = str_replace("1", "Benefício Social", $value->beneficio);
                                         $value->beneficio = str_replace("2", "Protetor de Animais", $value->beneficio);
+                                        $value->beneficio = str_replace("3", "Em análise", $value->beneficio);
                                         
                                         $value->telefone = preg_replace("/^$/", "-", $value->telefone);
                                         $value->nis = preg_replace("/^$/", "-", $value->nis);

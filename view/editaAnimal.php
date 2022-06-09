@@ -8,11 +8,8 @@
         input::-webkit-inner-spin-button {
             display: none;
         }
-        .vazio
-        {
-            width: 100px;
-        }
-        #inputImgAnimal + label
+
+       #inputImgAnimal + label
         {
             position: absolute;
             height: 250px; 
@@ -31,7 +28,7 @@
         {
             #inputImgAnimal + label
             {
-                width: 355px;
+                width: 365px;
             }
         }
 
@@ -40,7 +37,7 @@
             #inputImgAnimal + label
             {
                 height: 200px;
-                width: 255px;
+                width: 272px;
             }
             #imgAnimal
             {
@@ -52,7 +49,7 @@
         {
             #imgAnimal
             {
-                width: 275px;
+                width: 290px;
             }
         }
         

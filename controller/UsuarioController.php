@@ -36,10 +36,10 @@ class UsuarioController
             $cadastra->rg = $rg;
             $cadastra->cpf = $cpf;
 
-            if($_POST["chkProtetor"] == 2 && $_FILES["btnProtetorUpload"]["error"] == 0)
-                $cadastra->beneficio = $_POST["chkProtetor"];
-            else if($_POST["chkNIS"] == 1 && strlen($_POST["txtNIS"]) == 1)
-                $cadastra->beneficio = $_POST["chkNIS"];
+            if($_POST["chkProtetor"] == "sim" && $_FILES["btnProtetorUpload"]["error"] == 0)
+                $cadastra->beneficio = 3;
+            else if($_POST["chkNIS"] == "sim" && strlen($_POST["txtNIS"]) == 1)
+                $cadastra->beneficio = 1;
             else
                 $cadastra->beneficio = 0;
 
@@ -52,14 +52,45 @@ class UsuarioController
             $cadastra->usubairro = $_POST["txtBairro"];
             $cadastra->usunumero = $_POST["txtNumero"];
             $cadastra->usucep = $cep;
-            /*
-            COLOCAR AQUI O POST QUANDO ATUALIZAR A PÁGINA DE CADASTRO DE USUÁRIO
+            if($_POST["chkWhats"] == "sim")
+                $cadastra->whatsapp = 1;
+            else
+                $cadastra->whatsapp = 0;
 
-            $cadastra->whatsapp = $_POST["#"];
-            $cadastra->docprotetor = $_POST["#"];
-            $cadastra->doccomprovante = $_POST["#"];
+            //TRATANDO O DOCUMENTO DO PROTETOR DE ANIMAIS
+                //Tratar o envio da imagem
+                $docProtetor = $_FILES["btnProtetorUpload"]["name"];       //Nome do arquivo
+                $docProtetorTemp = $_FILES["btnProtetorUpload"]["tmp_name"];      //nome temporário
+                
+                //pegar a extensão do arquivo
+                $info = new SplFileInfo($docProtetor);
+                $extensao = $info->getExtension();
+                
+                //gerar novo nome
+                $novoNomeProtetor = md5(microtime()) . ".$extensao";
+                
+                $pastaDestino = "recursos/img/docProtetores/$novoNomeProtetor";    //pasta destino
+                move_uploaded_file($docProtetorTemp, $pastaDestino);       //mover o arquivo 
+
+            //TRATANDO O COMPROVANTE DE ENDEREÇO
+                //Tratar o envio da imagem
+                $docComprovante = $_FILES["btnComprovante"]["name"];       //Nome do arquivo
+                $docComprovanteTemp = $_FILES["btnComprovante"]["tmp_name"];      //nome temporário
+                
+                //pegar a extensão do arquivo
+                $info = new SplFileInfo($docProtetor);
+                $extensao = $info->getExtension();
+                
+                //gerar novo nome
+                $novoNomeComprovante = md5(microtime()) . ".$extensao";
+                
+                $pastaDestino = "recursos/img/docComprovantes/$novoNomeComprovante";    //pasta destino
+                move_uploaded_file($docComprovanteTemp, $pastaDestino);       //mover o arquivo 
+            
+            $cadastra->docprotetor = $novoNomeProtetor;
+            $cadastra->doccomprovante = $novoNomeComprovante;
             $cadastra->quantcastracoes = 1;
-            */
+
             if(empty($_POST["txtNIS"]))
             {
                 $cadastra->nis = "";
