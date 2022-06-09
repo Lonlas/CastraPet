@@ -33,7 +33,7 @@
             $cmd = $con->prepare("INSERT INTO raca (raca, tipoespecie) VALUES (:raca, :tipoespecie)");
             
             //Parâmetros SQL
-            $cmd->bindParam(":raca", $this->raca);
+            $cmd->bindParam(":raca",        $this->raca);
             $cmd->bindParam(":tipoespecie", $this->tipoespecie);
 
             //executa o comando SQL
@@ -56,6 +56,23 @@
             return $cmd->fetchAll(PDO::FETCH_OBJ);
         }
 
+        function consultarRaca()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para consultar
+            $cmd = $con->prepare("SELECT * FROM raca WHERE tipoespecie = :tipoespecie");
+
+            //Parâmetros SQL
+            $cmd->bindParam(":tipoespecie", $this->tipoespecie);
+            
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
+
         //Método Excluir
         function excluir()
         {
@@ -67,7 +84,7 @@
 
             //Parâmetros SQL
             $cmd->bindParam(":idraca", $this->idraca);
-            
+
             //Executando o comando SQL
             $cmd->execute();
         }
@@ -82,8 +99,8 @@
             $cmd = $con->prepare("UPDATE raca SET raca = :raca, tipoespecie = :tipoespecie WHERE idraca = :idraca");
             
             //Parâmetros SQL
-            $cmd->bindParam(":idraca", $this->idraca);
-            $cmd->bindParam(":raca", $this->raca);
+            $cmd->bindParam(":idraca",      $this->idraca);
+            $cmd->bindParam(":raca",        $this->raca);
             $cmd->bindParam(":tipoespecie", $this->tipoespecie);
 
             //Executando o comando SQL

@@ -35,12 +35,13 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para cadastrar
-            $cmd = $con->prepare("INSERT INTO login (nome, email, senha, nivelacesso) VALUES (:nome, :email, :senha, :nivelacesso)");
+            $cmd = $con->prepare("INSERT INTO login (nome, email, senha, nivelacesso) 
+                                    VALUES (:nome, :email, :senha, :nivelacesso)");
             
             //Parâmetros SQL
-            $cmd->bindParam(":nome", $this->nome);
-            $cmd->bindParam(":email", $this->email);
-            $cmd->bindParam(":senha", $this->senha);
+            $cmd->bindParam(":nome",        $this->nome);
+            $cmd->bindParam(":email",       $this->email);
+            $cmd->bindParam(":senha",       $this->senha);
             $cmd->bindParam(":nivelacesso", $this->nivelacesso);
 
             //Executando o comando SQL
@@ -81,22 +82,48 @@
         }
         
         //Método Atualizar
-        function atualizar()
+        function atualizar(){
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar o comando SQL para atualizar
+            $cmd = $con->prepare("UPDATE login SET nome = :nome, email = :email, senha = :senha WHERE idlogin = :idlogin");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":nome",    $this->nome);
+            $cmd->bindParam(":email",   $this->email);
+            $cmd->bindParam(":senha",   $this->senha);
+            $cmd->bindParam(":idlogin", $this->idlogin);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
+        function atualizarLogin()
         {
             //Conectando ao banco de dados
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE login SET nome = :nome, email = :email, senha = :senha, nivelacesso = :nivelacesso WHERE idlogin = :idlogin");
+            $cmd = $con->prepare("UPDATE login SET nome = :nome, email = :email WHERE idlogin = :idlogin");
             
             //Parâmetros SQL
-            $cmd->bindParam(":nome", $this->nome);
-            $cmd->bindParam(":email", $this->email);
-            $cmd->bindParam(":senha", $this->senha);
-            $cmd->bindParam(":nivelacesso", $this->nivelacesso);
+            $cmd->bindParam(":nome",    $this->nome);
+            $cmd->bindParam(":email",   $this->email);
             $cmd->bindParam(":idlogin", $this->idlogin);
 
             //Executando o comando SQL
+            $cmd->execute();
+        }
+        
+        function alterarSenha()
+        {
+            $con = Conexao::conectar();
+
+            $cmd = $con->prepare("UPDATE login SET senha = :senha WHERE idlogin = :idlogin");
+
+            $cmd->bindParam(":senha",   $this->senha);
+            $cmd->bindParam(":idlogin", $this->idlogin);
+
             $cmd->execute();
         }
 
@@ -117,6 +144,7 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+
         function logar()
         {
             //Conectando ao banco de dados
@@ -133,13 +161,14 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+        
         function retornarUsuario()
         {
             //Conectando ao banco de dados
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT * FROM usuario join login on usuario.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
+            $cmd = $con->prepare("SELECT * FROM usuario JOIN login ON usuario.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);
@@ -155,7 +184,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT * FROM clinica join login on clinica.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
+            $cmd = $con->prepare("SELECT * FROM clinica JOIN login ON clinica.idlogin = login.idlogin WHERE login.idlogin = :idlogin");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin", $this->idlogin);

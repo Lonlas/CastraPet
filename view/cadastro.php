@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
-                                        <label for="chkProtetor" class="form-label">Comprovante de residência:<font color="red">*</font></label>
+                                        <label class="form-label">Comprovante de residência:<font color="red">*</font></label>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <input class="btn btn-success" type="file" value="Fazer upload do documento" accept="image/*" name="btnComprovante" id="btnComprovante" hidden>
@@ -66,7 +66,7 @@
                                         <label for="chkNIS" class="form-label">Tenho o benefício do NIS</label>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <input class="form-control" type="text" name="txtNIS" id="txtNIS" placeholder="Número do NIS" maxlength="14" disabled>
+                                        <input class="form-control" type="text" name="txtNIS" id="txtNIS" placeholder="Número do NIS" maxlength="11" disabled>
                                     </div>
                                 </div>
                                 <div class="row mb-3">

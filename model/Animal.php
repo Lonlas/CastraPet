@@ -43,21 +43,21 @@
 
             //Preparar comando SQL para cadastrar
             $cmd = $con->prepare("INSERT INTO animal (idusuario, idraca, aninome, especie, sexo, cor, pelagem, porte, idade, comunitario, foto) 
-            VALUES (:idusuario, :idraca, :aninome, :especie, :sexo, :cor, :pelagem, :porte, :idade, :comunitario, :foto)");
+                                    VALUES (:idusuario, :idraca, :aninome, :especie, :sexo, :cor, :pelagem, :porte, :idade, :comunitario, :foto)");
             
             //Parâmetros SQL
-            $cmd->bindParam(":idusuario", $this->idusuario);
-            $cmd->bindParam(":idraca", $this->idraca);
-            $cmd->bindParam(":aninome", $this->aninome);
-            $cmd->bindParam(":especie", $this->especie);
-            $cmd->bindParam(":sexo", $this->sexo);
-            $cmd->bindParam(":cor", $this->cor);
-            $cmd->bindParam(":porte", $this->porte);
-            $cmd->bindParam(":pelagem", $this->pelagem);
-            $cmd->bindParam(":porte", $this->porte);
-            $cmd->bindParam(":idade", $this->idade);
+            $cmd->bindParam(":idusuario",   $this->idusuario);
+            $cmd->bindParam(":idraca",      $this->idraca);
+            $cmd->bindParam(":aninome",     $this->aninome);
+            $cmd->bindParam(":especie",     $this->especie);
+            $cmd->bindParam(":sexo",        $this->sexo);
+            $cmd->bindParam(":cor",         $this->cor);
+            $cmd->bindParam(":porte",       $this->porte);
+            $cmd->bindParam(":pelagem",     $this->pelagem);
+            $cmd->bindParam(":porte",       $this->porte);
+            $cmd->bindParam(":idade",       $this->idade);
             $cmd->bindParam(":comunitario", $this->comunitario);
-            $cmd->bindParam(":foto", $this->foto);
+            $cmd->bindParam(":foto",        $this->foto);
 
             //Executando o comando SQL
             $cmd->execute();
@@ -70,7 +70,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT * FROM animal");
+            $cmd = $con->prepare("SELECT * FROM animal JOIN raca ON animal.idraca = raca.idraca");
             
             //Executando o comando SQL
             $cmd->execute();
@@ -101,18 +101,22 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE animal SET idraca = :idraca, aninome = :aninome, especie = :especie, sexo = :sexo, cor = :cor, pelagem = :pelagem, porte = :porte, idade = :idade, comunitario = :comunitario WHERE idanimal = :idanimal");
+            $cmd = $con->prepare("UPDATE animal SET idraca = :idraca, aninome = :aninome, especie = :especie, sexo = :sexo, cor = :cor, pelagem = :pelagem, 
+                                    porte = :porte, idade = :idade, comunitario = :comunitario, foto = :foto WHERE idanimal = :idanimal");
             
             //Parâmetros SQL
-            $cmd->bindParam(":idraca", $this->idraca);
-            $cmd->bindParam(":aninome", $this->aninome);
-            $cmd->bindParam(":especie", $this->especie);
-            $cmd->bindParam(":sexo", $this->sexo);
-            $cmd->bindParam(":cor", $this->cor);
-            $cmd->bindParam(":pelagem", $this->pelagem);
-            $cmd->bindParam(":porte", $this->porte);
-            $cmd->bindParam(":idade", $this->idade);
+            $cmd->bindParam(":idraca",      $this->idraca);
+            $cmd->bindParam(":aninome",     $this->aninome);
+            $cmd->bindParam(":especie",     $this->especie);
+            $cmd->bindParam(":sexo",        $this->sexo);
+            $cmd->bindParam(":cor",         $this->cor);
+            $cmd->bindParam(":porte",       $this->porte);
+            $cmd->bindParam(":pelagem",     $this->pelagem);
+            $cmd->bindParam(":porte",       $this->porte);
+            $cmd->bindParam(":idade",       $this->idade);
             $cmd->bindParam(":comunitario", $this->comunitario);
+            $cmd->bindParam(":foto",        $this->foto);
+            
             $cmd->bindParam(":idanimal", $this->idanimal);
             //$cmd->bindParam(":foto", $this->foto);
 
@@ -146,8 +150,9 @@
 
             //Preparar comando SQL para retornar
 
-            $cmd = $con->prepare("SELECT animal.*, raca.* , status
-            FROM animal join raca on animal.idraca = raca.idraca left join castracao on animal.idanimal = castracao.idanimal WHERE idusuario = :idusuario");
+            $cmd = $con->prepare("SELECT animal.*, raca.* , status FROM animal join raca on 
+                                    animal.idraca = raca.idraca left join castracao on 
+                                    animal.idanimal = castracao.idanimal WHERE idusuario = :idusuario");
             
             //Parâmetros SQL
             $cmd->bindParam(":idusuario", $this->idusuario);
@@ -166,7 +171,8 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT COUNT(*) FROM `castracao` WHERE idanimal IN (SELECT idanimal FROM animal WHERE idusuario = :idusuario)");
+            $cmd = $con->prepare("SELECT COUNT(*) FROM `castracao` WHERE idanimal IN 
+                                    (SELECT idanimal FROM animal WHERE idusuario = :idusuario)");
             
             //Parâmetros SQL
             $cmd->bindParam(":idusuario", $this->idusuario);
@@ -177,5 +183,15 @@
             return $cmd->fetchColumn();
         }
         */
+        function atualizarCastrado(){
+            $con = Conexao::conectar();
+
+            $cmd = $con->prepare("UPDATE animaL SET codchip = :codchip WHERE idanimal = :idanimal");
+
+            $cmd->bindParam(":codchip", $this->codchip);
+            $cmd->bindParam(":idanimal", $this->idanimal);
+
+            $cmd->execute();
+        }
     }
 ?>

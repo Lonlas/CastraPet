@@ -87,6 +87,10 @@ if($_GET)
             $animal = new Controller();
             $animal->abrirCadAnimal();
         break;
+        case "carregar-raca":
+            $raca = new AnimalController();
+            $raca->carregarRaca($url[1]);    
+        break;
         case "cadastrar-animal":
             $animal = new AnimalController();
             $animal->cadastrarAnimal();
@@ -96,12 +100,8 @@ if($_GET)
             $usuario->abrirMeusAnimais();
         break;
         case "atualizar-animal":
-            $usuario = new Controller();
-            $usuario->abrirAtualizaAnimal($url[1]);
-        break;
-        case "editar-animal":
             $usuario = new AnimalController();
-            $usuario->EditarAnimal();
+            $usuario->atualizarAnimal($url[1]);
         break;
         case "excluir-animal":
             $usuario = new AnimalController();
@@ -138,14 +138,19 @@ if($_GET)
             $clinica = new ClinicaController();  
             $clinica->cadastrarClinica();
         break;
+        #ATUALIZAÇÕES
+        case "atualiza-tutor":
+            $usuario = new UsuarioController();
+            $usuario->atualizarUsuario();
+        break;
         #CONSULTAS
         case "consulta-usuario":
             $adm = new Controller();
-            $adm->abrirConsultaUsuario($url[1]);
+            $adm->abrirConsultaUsuario();
         break;
         case "consulta-clinica":
             $adm = new Controller();
-            $adm->abrirConsultaClinica($url[1]);
+            $adm->abrirConsultaClinica();
         break;
         case "consulta-castracao":
             $adm = new Controller();
@@ -211,6 +216,7 @@ if($_GET)
 }
 else
 {
+    //testee
     //ABRIR PÁGINA INICIAL
     $direciona = new Controller();
     $direciona->abrirInicio();

@@ -55,8 +55,9 @@ class Controller
             include_once "view/paginaNaoEncontrada.php";
     }
     function abrirCadAnimal(){
-        $raca = new Raca();
-        $dadosRaca = $raca->consultar();
+        $animal = new Raca();
+        $dadosRacaAnimal = $animal->consultarRaca();
+
         include_once "view/cadAnimal.php";
     }
     function abrirMeusAnimais(){
@@ -66,15 +67,18 @@ class Controller
 
         include_once "view/meusAnimais.php";
     }
-    function abrirAtualizaAnimal($id){
+
+    /*function abrirAtualizaAnimal($id){
         $animal = new Animal();
         $animal->idanimal = $id;
         $dadosAnimal = $animal->retornar();
 
         $raca = new Raca();
-        $dadosRaca = $raca->consultar();
+        $dadosRacaCanino = $raca->consultarCanino();
+        $dadosRacaFelino = $raca->consultarFelino();
+        
         include_once "view/editaAnimal.php";
-    }
+    }*/
     
     // ADMINISTRADOR
     function abrirHomeAdm(){
@@ -88,12 +92,13 @@ class Controller
         include_once "view/cadClinica.php";
     }    
     #CONSULTAS
-    function abrirConsultaUsuario($cpf){
+    function abrirConsultaUsuario(){
         $usuario = new Usuario();
         $dadosUsuario = $usuario->consultar();
+
         include_once "view/consultaUsuario.php";
     }
-    function abrirConsultaClinica($cnpj){
+    function abrirConsultaClinica(){
         $clinica = new Clinica();
         $dadosClinica = $clinica->consultar();
         include_once "view/consultaClinica.php";
@@ -109,9 +114,9 @@ class Controller
         include_once "view/consultaCastracao.php";
     }
 
-    function abrirConsultaAnimais($idUsuario){
+    function abrirConsultaAnimais($idusuario){
         $animal = new Animal();
-        $animal->idusuario = $idUsuario;
+        $animal->idusuario = $idusuario;
         $dadosAnimal = $animal->retornarAnimais();
 
         $raca = new Raca();
