@@ -63,12 +63,28 @@
 
             return $cmd->fetchAll(PDO::FETCH_OBJ);
         }
+        function clinicaConsultarSolicitacao()
+        {
+            $con = Conexao::conectar();
+
+            $cmd = $con->prepare("SELECT idcastracao, aninome, nome FROM castracao 
+                                        join animal on animal.idanimal = castracao.idanimal 
+                                        join usuario on usuario.idusuario = animal.idusuario 
+                                        join login on login.idlogin = usuario.idlogin 
+                                    WHERE castracao.idclinica = :idclinica AND horario IS NULL");
+
+            $cmd->bindParam(":idclinica", $this->idclinica);
+        
+            $cmd->execute();
+
+            return $cmd->fetchAll(PDO::FETCH_OBJ);
+        }
 
         function aprovarCastracao()
         {
             $con = Conexao::conectar();
 
-            $cmd = $con->prepare("UPDATE castracao SET idclinica = :idclinica, horario = :horario, status = :status WHERE idcastracao = :idcastracao");
+            $cmd = $con->prepare("UPDATE castracao SET idclinica = :idclinica, horario = nullif(:horario,''), status = :status WHERE idcastracao = :idcastracao");
 
             $cmd->bindParam(":idclinica",   $this->idclinica);
             $cmd->bindParam(":horario",     $this->horario);

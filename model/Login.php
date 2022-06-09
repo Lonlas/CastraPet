@@ -192,5 +192,55 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+        
+        function gerarCodigo()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("UPDATE login SET codsenha = :codsenha WHERE email = :email OR idlogin = :idlogin");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":email", $this->email);
+            $cmd->bindParam(":idlogin", $this->idlogin);
+            $cmd->bindParam(":codsenha", $this->codsenha);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
+
+        function confirmarCodigo()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("SELECT idlogin, codsenha FROM login WHERE email = :email");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":email", $this->email);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetch(PDO::FETCH_OBJ);
+        }
+
+        function redefinirSenha()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("UPDATE login SET senha = :senha, codsenha = null WHERE idlogin = :idlogin");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":idlogin", $this->idlogin);
+            $cmd->bindParam(":senha", $this->senha);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }    
     }
 ?>

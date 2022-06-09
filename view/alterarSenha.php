@@ -4,23 +4,12 @@
     <?php include_once "head.php";?>
 </head>
 <body>
+    
     <!-- CORPO -->
     <div class="container-fluid d-grid min-vh-100 corpo">
-        <?php //CONTROLE DE MENU
-            if($_SESSION) //caso esteja logado e exista uma sessão
-            {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case 0: include_once "menuLogado.php"; break;
-                    //caso tenha nível de acesso de clínica
-                    case 1: include_once "menuClinica.php"; break;
-                    //caso tenha nível de acesso de Administrador
-                    case 2: include_once "menuADM.php"; break;   
-                }
-            }
-            else{ include_once "menu.php"; }
-        ?>
+
+    <?php /*Controle de menu!*/ include_once "menuControle.php";?>
+
         <div class="bg-primary container-fluid" style="grid-area: corpo;">
             <div class="row h-100 align-items-center">
                 <div class="p-3">
@@ -28,8 +17,9 @@
                         <h5 class="m-0">Alterar minha senha</h5>
                     </div>
                     <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
-                        <form action="<?php echo URL.'perfil'; ?>" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 m-0" method="post">
+                        <form action="<?php echo URL.'redefinir-senha'; ?>" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 m-0" method="post">
                             <div class="row align-items-center justify-content-center m-0">
+                                <input type="hidden" name="idlogin" value="<?php echo $idlogin;?>">
                                 <div class="form-group">
                                     <label class="form-label" for="novaSenha">Insira uma nova senha:</label>
                                     <input type="password" name="novaSenha" id="novaSenha" required  class="form-control">

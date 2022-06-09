@@ -1,36 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <style rel="stylesheet" type="text/css">
-        .corpo{
-            grid-template-areas: 'header''corpo''footer';
-            grid-template-rows: max-content auto 100px;
-        }
-        </style>
     <!-- CSS DataTables-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-    <?php include_once "head.php";?>
-    
+
+    <?php include_once "head.php";?> 
 </head>
 <body>
     <!-- CORPO -->
     <div class="container-fluid d-grid min-vh-100 corpo">
-        <?php //CONTROLE DE MENU
-            if($_SESSION) //caso esteja logado e exista uma sessão
-            {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case 0: include_once "menuLogado.php"; break;
-                    //caso tenha nível de acesso de clínica
-                    case 1: include_once "menuClinica.php"; break;
-                    //caso tenha nível de acesso de Administrador
-                    case 2: include_once "menuADM.php"; break;   
-                }
-            }
-            else{ include_once "menu.php"; }
-        ?>
+
+    <?php /*Controle de menu!*/ include_once "menuControle.php";?>
+    
         <div class="bg-danger container-fluid" style="grid-area: corpo;">
             <div class="row h-100 align-items-center">
                 <div class="p-3">
@@ -61,13 +43,13 @@
                                             $value->beneficio = str_replace("0", "-", $value->beneficio);
                                             $value->beneficio = str_replace("1", "Benefício Social", $value->beneficio);
                                             $value->beneficio = str_replace("2", "Protetor de Animais", $value->beneficio);
+                                            $value->beneficio = str_replace("3", "Em análise", $value->beneficio);
                                             
                                             $value->telefone = preg_replace("/^$/", "-", $value->telefone);
                                             $value->nis = preg_replace("/^$/", "-", $value->nis);
-    
+                                            
                                             $value->punicao = str_replace("0", "-", $value->punicao);
                                             $value->punicao = str_replace("1", "<span class='badge bg-danger'>Punido</span>", $value->punicao);
-
     
                                             //Testar depois:
                                             //$number="(".substr($number,0,2).") ".substr($number,2,-4)." - ".substr($number,-4);

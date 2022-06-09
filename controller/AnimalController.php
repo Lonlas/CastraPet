@@ -99,11 +99,11 @@ class AnimalController
         header("Location:".URL."meus-animais");
     }
 
-    function excluirAnimal($id)
+    function excluirAnimal($idanimal,$idusuario,$foto)
     {
         try{
             $animal = new Animal();
-            $animal->idanimal = $id;
+            $animal->idanimal = $idanimal;
 
             //removendo imagem
             $dadosAnimal = $animal->retornar();
@@ -113,12 +113,23 @@ class AnimalController
             }
             
             $animal->excluir();
-    
-            header("Location:".URL."meus-animais");
         }
         catch(Exception $e){
-            header("Location:".URL."meus-animais");
+            if($_SESSION["dadosLogin"]->nivelacesso == 2)
+            {
+                echo "<script>alert('Erro ao excluir o animal'); window.location='".URL."consulta-animais/$idusuario'; </script>";
+            }
+            else
+            {
+                echo "<script>alert('Erro ao excluir o animal'); window.location='".URL."meus-animais'; </script>";
+            }
+            return;
         }
+        if(is_file("recursos/img/Animais/$foto"))
+        {
+            unlink("recursos/img/Animais/$foto");
+        }
+        header("Location:".URL."consulta-animais/$idusuario");
     }
     
     function cadastrarRaca()

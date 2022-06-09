@@ -2,6 +2,8 @@
 use FFI\Exception;
 
 include_once "model/Clinica.php";
+include_once "model/Castracao.php";
+include_once "model/email.php";
 
 class ClinicaController
 {
@@ -72,6 +74,30 @@ class ClinicaController
         $login->excluir();
 
         header("Location:".URL."consulta-clinica");
+    }
+
+    function agendarDataCastracao()
+    {
+        $castracao = new Castracao();
+        $castracao->idcastracao = $_POST["idcastracao"];
+        $castracao->idclinica = $_SESSION["dadosClinica"]->idclinica;
+        $castracao->status = 1;
+        $castracao->horario = $_POST["horario"];
+        $castracao->aprovarCastracao();
+
+        //enviar o email
+        $email = new Email();
+        $email->data = $_POST["horario"];
+        $email->nomeClinica = $_SESSION["dadosClinica"]->nome;
+        $email->ruaClinica = $_SESSION["dadosClinica"]->clirua;
+        $email->bairroClinica = $_SESSION["dadosClinica"]->clibairro;
+        $email->numeroClinica = $_SESSION["dadosClinica"]->clinumero;
+        $email->emailDestinatario = $_POST["emailDestinatario"];
+        $email->nomeDestinatario = $_POST["nomeDestinatario"];
+        $email->nomeAnimal = $_POST["aninome"];
+        $email->enviarConfirmacao();
+
+        header("Location:".URL."lista-solicitacao");
     }
 }
 

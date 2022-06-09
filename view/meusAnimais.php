@@ -2,104 +2,14 @@
 <html lang="pt-br">
 <head>
     <?php include_once "head.php";?>
-    <style rel="stylesheet" type="text/css">
-        .corpo{
-            grid-template-areas: 'header''corpo''footer';
-            grid-template-rows: max-content auto 100px;
-        }
-    </style>
-    <style type="text/css">
-        .corpo{
-            grid-template-areas: 'header''corpo''footer';
-            grid-template-rows: max-content auto 100px;
-        }
-
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            display: none;
-        }
-        .vazio
-        {
-            width: 100px;
-        }
-        #inputImgAnimal + label
-        {
-            position: absolute;
-            height: 250px; 
-            width: 375px;
-            border: solid;
-            border-color: #198754;
-            cursor: pointer;
-        }
-        #imgAnimal
-        {
-            height: 250px;
-            width: 399px;
-        }
-
-        @media screen and (max-width: 1199px)
-        {
-            #inputImgAnimal + label
-            {
-                width: 355px;
-            }
-        }
-
-        @media screen and (max-width: 992px)
-        {
-            #inputImgAnimal + label
-            {
-                height: 200px;
-                width: 255px;
-            }
-            #imgAnimal
-            {
-                height: 200px;
-            }
-        }
-
-        @media screen and (max-width: 767px)
-        {
-            #imgAnimal
-            {
-                width: 275px;
-            }
-        }
-        
-        @media screen and (max-width: 336px)
-        {
-            #inputImgAnimal + label
-            {
-                height: 175px;
-                width: 200px;
-            }
-            #imgAnimal
-            {
-                height: 175px;
-                width: 220px;
-            }
-        }
-    </style>
 
 </head>
 <body>      
     <!-- CORPO -->
     <div class="container-fluid d-grid min-vh-100 corpo">
-        <?php //CONTROLE DE MENU
-            if($_SESSION) //caso esteja logado e exista uma sessão
-            {
-                switch($_SESSION["dadosLogin"]->nivelacesso)
-                {
-                    //caso tenha nível de acesso de usuário
-                    case 0: include_once "menuLogado.php"; break;
-                    //caso tenha nível de acesso de clínica
-                    case 1: include_once "menuClinica.php"; break;
-                    //caso tenha nível de acesso de Administrador
-                    case 2: include_once "menuADM.php"; break;   
-                }
-            }
-            else{ include_once "menu.php"; }
-        ?>
+        
+    <?php /*Controle de menu!*/ include_once "menuControle.php";?>
+    
         <div class="container-fluid">
             <div class="bg-primary h-100 row align-items-center">
                 <div class="container mx-auto p-3" style="grid-area:corpo;">
