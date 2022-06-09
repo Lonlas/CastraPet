@@ -3,6 +3,7 @@
 <head>
     <!-- CSS DataTables-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 
     <?php include_once "head.php";?> 
@@ -200,6 +201,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js'></script>
 
     <script>
         $(document).ready(function() {
@@ -207,7 +209,25 @@
                 dom: 'Bfrtip',
                 responsive: true,
                 buttons: [
-                    'csv', 'excel', 'print'
+                    'colvis',
+                    {
+                        extend:'csv',
+                        exportOptions:{
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions:{
+                            columns: ':visible'
+                        }  
+                    }
                 ],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
