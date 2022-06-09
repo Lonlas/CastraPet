@@ -131,7 +131,7 @@
 
             //Preparar comando SQL para consultar
             //$cmd = $con->prepare("SELECT * FROM castracao");
-            $cmd = $con->prepare("SELECT idcastracao, clinica.idclinica, animal.foto, animal.aninome, horario, status, observacao, cpf, usuario.idusuario, email, nome, rg, telefone, celular 
+            $cmd = $con->prepare("SELECT idcastracao, clinica.idclinica, animal.foto, animal.aninome, horario, status, observacao, cpf, usuario.idusuario, email, login.nome, rg, telefone, celular 
                                     FROM castracao 
                                         JOIN animal ON castracao.idanimal = animal.idanimal 
                                         JOIN usuario ON animal.idusuario = usuario.idusuario 

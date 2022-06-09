@@ -40,7 +40,8 @@
                                                 <th>#</th>
                                                 <th>Foto</th>
                                                 <th>Animal</th>
-                                                <th>CPF do Responsável</th>
+                                                <th>Nome do tutor</th>
+                                                <th>CPF do tutor</th>
                                                 <th>Clínica</th>
                                                 <th>Data</th>
                                                 <th>Hora</th>
@@ -71,6 +72,7 @@
                                             <td>$value->idcastracao</td>
                                             <td><img width='100px' class='img-thumbnail' src='".URL."recursos/img/$value->foto'></td>
                                             <td>$value->aninome</td>
+                                            <td>$value->nome</td>
                                             <td><a href=". URL . "consulta-usuario/$value->cpf" .">$value->cpf</a></td>
                                             <td><a href=". URL . "consulta-clinica/$value->cnpj" . ">$value->nomeclinica</a></td>
                                             <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
@@ -96,7 +98,8 @@
                                                 <th>#</th>
                                                 <th>Foto</th>
                                                 <th>Animal</th>
-                                                <th>CPF do Responsável</th>
+                                                <th>Nome do tutor</th>
+                                                <th>CPF do tutor</th>
                                                 <th>Telefone</th>
                                                 <th>Celular</th>
                                                 <th>Data</th>
@@ -129,6 +132,7 @@
                                             <td>$value->idcastracao</td>
                                             <td><img width='100px' class='img-thumbnail' src='".URL."recursos/img/$value->foto'></td>
                                             <td>$value->aninome</td>
+                                            <td>$value->nome</td>
                                             <td>$value->cpf</td>
                                             <td>$value->telefone</td>
                                             <td>$value->celular</td>

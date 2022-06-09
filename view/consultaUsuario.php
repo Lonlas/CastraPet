@@ -171,7 +171,7 @@
                                         <label for="chkNIS">Tenho o benefício do NIS</label>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <input class="form-control" type="text" name="txtNIS" id="txtNIS">
+                                        <input class="form-control" type="text" name="txtNIS" id="txtNIS" maxlength="11">
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
