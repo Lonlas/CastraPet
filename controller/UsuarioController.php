@@ -11,102 +11,138 @@ class UsuarioController
 {
     function cadastrarUsuario(){
         //Cadastro do Login
-        $filtros = array(".", "-", "(", ")", " ");
-        $cpf = str_replace($filtros,'',$_POST["txtCPF"]);
-        $cep = str_replace($filtros,'',$_POST["txtCEP"]);
-        $rg = str_replace($filtros,'',$_POST["txtRG"]);
-        $tel = str_replace($filtros,'',$_POST["txtTel"]);
-        $celular = str_replace($filtros,'',$_POST["txtCelular"]);
 
-        $consultarEmail = new Login();
-        $consultarEmail->email = $_POST["txtEmail"];
-        $dadosLogin = $consultarEmail->logar();
-        if($dadosLogin->email == null)
+        //verificando se o comprovante de endereço foi enviado corretamente
+        if($_FILES["btnComprovante"]["error"] == 0)
         {
-            $login = new Login();
-            $login->nome =  $_POST["txtNome"];
-            $login->email = $_POST["txtEmail"];
-            $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
-            $login->nivelacesso = 0;
+              
+            //filtrando a mascara dos inputs
+            $filtros = array(".", "-", "(", ")", " ");
+            $cpf = str_replace($filtros,'',$_POST["txtCPF"]);
+            $cep = str_replace($filtros,'',$_POST["txtCEP"]);
+            $rg = str_replace($filtros,'',$_POST["txtRG"]);
+            $tel = str_replace($filtros,'',$_POST["txtTel"]);
+            $celular = str_replace($filtros,'',$_POST["txtCelular"]);
+            $nis = str_replace($filtros,'',$_POST["txtNIS"]);
+            
+            $consultarEmail = new Login();
+            $consultarEmail->email = $_POST["txtEmail"];
 
-            //Cadastro do Usuário
-            $cadastra = new Usuario();
-            $cadastra->idlogin = $login->cadastrar();
-            $cadastra->rg = $rg;
-            $cadastra->cpf = $cpf;
+            $consultarCPF = new Usuario();
+            $consultarCPF->cpf = $_POST["txtCPF"];
 
-            if($_POST["chkProtetor"] == "sim" && $_FILES["btnProtetorUpload"]["error"] == 0)
-                $cadastra->beneficio = 3;
-            else if($_POST["chkNIS"] == "sim" && strlen($_POST["txtNIS"]) == 1)
-                $cadastra->beneficio = 1;
+            //Verificando o NIS
+            if($_POST["chkNIS"] == "sim" && isset($nis))
+            {
+                if(strlen($nis) == 11)
+                {
+                    $consultarNIS = new Usuario();
+                    $consultarNIS->nis = $nis;
+                    $dadosConusultaNIS = $consultarNIS->verificarNis();
+                }
+                else
+                {
+                    echo"<script>alert('digite um NIS válido'); window.location='".URL."cadastra-tutor'; </script>";
+                    return;
+                }
+            }
             else
+                $dadosConusultaNIS = null;
+            
+            //verificando se o email ou cpf ou nis já existem no banco ou não     
+            if($consultarEmail->logar() == null && $consultarCPF->verificarCPF() == null && $dadosConusultaNIS == null)
+            {
+                $login = new Login();
+                $login->nome =  $_POST["txtNome"];
+                $login->email = $_POST["txtEmail"];
+                $login->senha = password_hash($_POST["txtSenha"], PASSWORD_DEFAULT);
+                $login->nivelacesso = 0;
+    
+                //Cadastro do Usuário
+                $cadastra = new Usuario();
+                $cadastra->idlogin = $login->cadastrar();
+                $cadastra->rg = $rg;
+                $cadastra->cpf = $cpf;
                 $cadastra->beneficio = 0;
-
-            $cadastra->telefone = $tel;
-            $cadastra->celular = $celular;
-            //Arrumar o Whatsapp dps
-            $cadastra->whatsapp = 0;
-            $cadastra->punicao = 0;
-            $cadastra->usurua =    $_POST["txtRua"];
-            $cadastra->usubairro = $_POST["txtBairro"];
-            $cadastra->usunumero = $_POST["txtNumero"];
-            $cadastra->usucep = $cep;
-            if($_POST["chkWhats"] == "sim")
-                $cadastra->whatsapp = 1;
-            else
+                $cadastra->telefone = $tel;
+                $cadastra->celular = $celular;
+                //Arrumar o Whatsapp dps
                 $cadastra->whatsapp = 0;
+                $cadastra->punicao = 0;
+                $cadastra->usurua =    $_POST["txtRua"];
+                $cadastra->usubairro = $_POST["txtBairro"];
+                $cadastra->usunumero = $_POST["txtNumero"];
+                $cadastra->usucep = $cep;
+                if($_POST["chkWhats"] == "sim")
+                    $cadastra->whatsapp = 1;
+                else
+                    $cadastra->whatsapp = 0;
 
-            //TRATANDO O DOCUMENTO DO PROTETOR DE ANIMAIS
-                //Tratar o envio da imagem
-                $docProtetor = $_FILES["btnProtetorUpload"]["name"];       //Nome do arquivo
-                $docProtetorTemp = $_FILES["btnProtetorUpload"]["tmp_name"];      //nome temporário
+                //TRATANDO O COMPROVANTE DE ENDEREÇO
+                    //Tratar o envio da imagem
+                    $docComprovante = $_FILES["btnComprovante"]["name"];       //Nome do arquivo
+                    $docComprovanteTemp = $_FILES["btnComprovante"]["tmp_name"];      //nome temporário
+                    
+                    //pegar a extensão do arquivo
+                    $info = new SplFileInfo($docComprovante);
+                    $extensao = $info->getExtension();
+                    
+                    //gerar novo nome
+                    $novoNomeComprovante = md5(microtime()) . ".$extensao";
+                    
+                    $pastaDestino = "recursos/img/docComprovantes/$novoNomeComprovante";    //pasta destino
+                    move_uploaded_file($docComprovanteTemp, $pastaDestino);       //mover o arquivo 
+                    $cadastra->doccomprovante = $novoNomeComprovante;
                 
-                //pegar a extensão do arquivo
-                $info = new SplFileInfo($docProtetor);
-                $extensao = $info->getExtension();
-                
-                //gerar novo nome
-                $novoNomeProtetor = md5(microtime()) . ".$extensao";
-                
-                $pastaDestino = "recursos/img/docProtetores/$novoNomeProtetor";    //pasta destino
-                move_uploaded_file($docProtetorTemp, $pastaDestino);       //mover o arquivo 
+                    $cadastra->quantcastracoes = 1;
+    
+                if(empty($nis))
+                {
+                    $cadastra->nis = "";
+                }
+                else
+                {
+                    $cadastra->nis = $nis;
+                    $cadastra->beneficio = 1;
+                    $cadastra->quantcastracoes = 2;
+                    
+                }
+                //TRATANDO O DOCUMENTO DO PROTETOR DE ANIMAIS
 
-            //TRATANDO O COMPROVANTE DE ENDEREÇO
-                //Tratar o envio da imagem
-                $docComprovante = $_FILES["btnComprovante"]["name"];       //Nome do arquivo
-                $docComprovanteTemp = $_FILES["btnComprovante"]["tmp_name"];      //nome temporário
+                if($_POST["chkProtetor"] == "sim" && $_FILES["btnProtetorUpload"]["error"] == 0)
+                {
+                    //Tratar o envio da imagem
+                    $docProtetor = $_FILES["btnProtetorUpload"]["name"];       //Nome do arquivo
+                    $docProtetorTemp = $_FILES["btnProtetorUpload"]["tmp_name"];      //nome temporário
+                    
+                    //pegar a extensão do arquivo
+                    $info = new SplFileInfo($docProtetor);
+                    $extensao = $info->getExtension();
+                    
+                    //gerar novo nome
+                    $novoNomeProtetor = md5(microtime()) . ".$extensao";
+                    
+                    $pastaDestino = "recursos/img/docProtetores/$novoNomeProtetor";    //pasta destino
+                    move_uploaded_file($docProtetorTemp, $pastaDestino);       //mover o arquivo 
+                    $cadastra->docprotetor = $novoNomeProtetor;
+                    
+                    $cadastra->beneficio = 3;
+                }
                 
-                //pegar a extensão do arquivo
-                $info = new SplFileInfo($docProtetor);
-                $extensao = $info->getExtension();
-                
-                //gerar novo nome
-                $novoNomeComprovante = md5(microtime()) . ".$extensao";
-                
-                $pastaDestino = "recursos/img/docComprovantes/$novoNomeComprovante";    //pasta destino
-                move_uploaded_file($docComprovanteTemp, $pastaDestino);       //mover o arquivo 
-            
-            $cadastra->docprotetor = $novoNomeProtetor;
-            $cadastra->doccomprovante = $novoNomeComprovante;
-            $cadastra->quantcastracoes = 1;
-
-            if(empty($_POST["txtNIS"]))
-            {
-                $cadastra->nis = "";
+                $cadastra->cadastrar();
+                $this->logar();
+                header("Location:".URL);
             }
             else
             {
-                $cadastra->nis = $_POST["txtNIS"];
+                echo"<script>alert('Já existe um perfil com esse e-mail, CPF ou NIS cadastrados'); window.location='".URL."cadastra-tutor'; </script>";
+                return;
             }
-            
-            $cadastra->quantcastracoes = 5;
-            $cadastra->cadastrar();
-            $this->logar();
-            header("Location:".URL);
         }
         else
         {
-            echo"<script>alert('Já existe um perfil com esse e-mail'); window.location='".URL."cadastra-tutor'; </script>";
+            echo"<script>alert('Houve um erro ao enviar o comprovante de residência'); window.location='".URL."cadastra-tutor'; </script>";
+            return;
         }
     }
 
