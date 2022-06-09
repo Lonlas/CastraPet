@@ -125,16 +125,16 @@ if($_GET)
         #ATUALIZAÇÕES
         case "atualiza-tutor":
             $usuario = new UsuarioController();
-            $usuario->atualizarUsuario($url[1]);
+            $usuario->atualizarUsuario();
         break;
         #CONSULTAS
         case "consulta-usuario":
             $adm = new Controller();
-            $adm->abrirConsultaUsuario($url[1]);
+            $adm->abrirConsultaUsuario();
         break;
         case "consulta-clinica":
             $adm = new Controller();
-            $adm->abrirConsultaClinica($url[1]);
+            $adm->abrirConsultaClinica();
         break;
         case "consulta-castracao":
             $adm = new Controller();

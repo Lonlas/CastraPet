@@ -110,28 +110,52 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE usuario SET idlogin = :idlogin, rg = :rg, cpf = :cpf, beneficio = :beneficio, telefone = NULLIF(:telefone,''), celular = :celular, 
-                                        punicao = :punicao, usurua = :usurua, usubairro = :usubairro, usunumero = :usunumero, usucep = :usucep, nis = NULLIF(:nis,''), 
-                                        whatsapp = :whastapp, doccomprovante = :doccomprovante, docprotetor = NULLIF(:docprotetor,''), quantcastracoes = :quantcastracoes 
-                                     WHERE idusuario = :idusuario");
+           /* $cmd = $con->prepare("UPDATE usuario SET 
+                                                    rg = :rg, 
+                                                    cpf = :cpf, 
+                                                    beneficio = :beneficio, 
+                                                    telefone = NULLIF(:telefone,''), 
+                                                    celular = :celular, 
+                                                    punicao = :punicao, 
+                                                    usurua = :usurua, 
+                                                    usubairro = :usubairro, 
+                                                    usunumero = :usunumero, 
+                                                    usucep = :usucep, 
+                                                    nis = NULLIF(:nis,''), 
+                                                    whatsapp = :whatsapp, 
+                                                    doccomprovante = :doccomprovante, 
+                                                    docprotetor = NULLIF(:docprotetor,''), 
+                                                    quantcastracoes = :quantcastracoes
+                                      WHERE idusuario = :idusuario");*/
+            $cmd = $con->prepare("UPDATE usuario SET 
+                                                rg = :rg, 
+                                                cpf = :cpf,
+                                                beneficio = :beneficio,
+                                                telefone = NULLIF(:telefone,''), 
+                                                celular = :celular,
+                                                usurua = :usurua, 
+                                                usubairro = :usubairro, 
+                                                usunumero = :usunumero, 
+                                                usucep = :usucep, 
+                                                nis = NULLIF(:nis,'')
+                                            WHERE idusuario = :idusuario");
                 
             //Parâmetros SQL
-            $cmd->bindParam(":idlogin",         $this->idlogin);
             $cmd->bindParam(":rg",              $this->rg);
             $cmd->bindParam(":cpf",             $this->cpf);
             $cmd->bindParam(":beneficio",       $this->beneficio);
             $cmd->bindParam(":telefone",        $this->telefone);
             $cmd->bindParam(":celular",         $this->celular);
-            $cmd->bindParam(":punicao",         $this->punicao);
+           // $cmd->bindParam(":punicao",          $this->punicao);
             $cmd->bindParam(":usurua",          $this->usurua);
             $cmd->bindParam(":usubairro",       $this->usubairro);
             $cmd->bindParam(":usunumero",       $this->usunumero);
             $cmd->bindParam(":usucep",          $this->usucep);
             $cmd->bindParam(":nis",             $this->nis);
-            $cmd->bindParam(":whatsapp",        $this->whatsapp);
+            /*$cmd->bindParam(":whatsapp",        $this->whatsapp);
             $cmd->bindParam(":doccomprovante",  $this->doccomprovante);
             $cmd->bindParam(":docprotetor",     $this->docprotetor);
-            $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);
+            $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);*/
             $cmd->bindParam(":idusuario",       $this->idusuario);
 
             //Executando o comando SQL

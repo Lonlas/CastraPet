@@ -127,8 +127,12 @@
                                         <div class='col'></div>
                                     </div>
                                     <div class='col-md-2 mt-2 mt-md-0'>  
-                                        <button class='btn btn-warning btn-md' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$value->especie' data-sexo='$value->sexo' data-cor='$value->cor' data-raca='$value->raca' data-idade='$value->idade' data-pelagem='$value->pelagem' data-porte='$value->porte' data-comunitario='$value->comunitario' data-foto='$value->foto' >Editar</button>
-                                        
+                                        <button class='btn btn-warning btn-md' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
+                                                data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$value->especie' 
+                                                data-sexo='$value->sexo' data-cor='$value->cor' data-raca='$value->raca' data-idade='$value->idade' data-pelagem='$value->pelagem' 
+                                                data-porte='$value->porte' data-comunitario='$value->comunitario' data-foto='$value->foto'>
+                                            Editar
+                                        </button>
                                         <a href='".URL."excluir-animal/$value->idanimal' class='btn btn-danger float-end w-100' onclick='return confirm(\"Deseja realmente excluir?\")'><i class='fa fa-trash'></i> Excluir</a>    
                                     </div>
                                 </div>
@@ -158,7 +162,7 @@
                 <div class="modal-content">
                     <form method="post" action="<?php echo URL.'atualizar-animal';?>">
                         <div class="modal-header">
-                            <h5 class="modal-title">Atualizar</h5>
+                            <h5 class="modal-title">Editar</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
                         </div>
                         <div class="modal-body">
@@ -253,7 +257,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Alterar</button>
+                            <button type="submit" class="btn btn-success">Editar</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
@@ -268,6 +272,8 @@
     <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
+    <!-- EXTENSÃO JQUERY PARA O AJAX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- SCRIPT PARA POPULAR SELECT racas -->
     <script>

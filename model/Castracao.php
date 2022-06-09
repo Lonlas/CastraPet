@@ -96,7 +96,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idcastracao, aninome, horario, status, observacao, cpf, cnpj, nome AS 'nomeclinica' FROM castracao 
+            $cmd = $con->prepare("SELECT idcastracao, foto, aninome, horario, status, observacao, cpf, cnpj, nome AS 'nomeclinica' FROM castracao 
                                     JOIN animal ON castracao.idanimal = animal.idanimal 
                                     JOIN usuario ON animal.idusuario = usuario.idusuario 
                                     LEFT JOIN clinica ON castracao.idclinica = clinica.idclinica 
@@ -115,7 +115,8 @@
 
             //Preparar comando SQL para consultar
             //$cmd = $con->prepare("SELECT * FROM castracao");
-            $cmd = $con->prepare("SELECT idcastracao, clinica.idclinica, animal.aninome, horario, status, observacao, cpf, usuario.idusuario, email, nome, rg FROM castracao 
+            $cmd = $con->prepare("SELECT idcastracao, clinica.idclinica, animal.foto, animal.aninome, horario, status, observacao, cpf, usuario.idusuario, email, nome, rg, telefone, celular 
+                                    FROM castracao 
                                         JOIN animal ON castracao.idanimal = animal.idanimal 
                                         JOIN usuario ON animal.idusuario = usuario.idusuario 
                                         JOIN login ON login.idlogin = usuario.idlogin 
@@ -153,25 +154,27 @@
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE castracao SET status = :status WHERE idcastracao = :idcastracao");
+            $cmd = $con->prepare("UPDATE castracao SET status = :status, obsclinica = NULLIF(:obsclinica, '') WHERE idcastracao = :idcastracao");
             
             //Parâmetros SQL
             $cmd->bindParam(":status",      $this->status);
+            $cmd->bindParam(":obsclinica",  $this->obsclinica);
             $cmd->bindParam(":idcastracao", $this->idcastracao);
 
             //Executando o comando SQL
             $cmd->execute();
         }
-        function atualizarEmAnalise()
+        function reagendar()
         {
             //Conectando ao banco de dados
             $con = Conexao::conectar();
 
             //Preparar o comando SQL para atualizar
-            $cmd = $con->prepare("UPDATE castracao SET idclinica = null, horario = null, status = :status WHERE idcastracao = :idcastracao");
+            $cmd = $con->prepare("UPDATE castracao SET idclinica = null, horario = null, status = :status, obsclinica = :obsclinica WHERE idcastracao = :idcastracao");
             
             //Parâmetros SQL
-            $cmd->bindParam(":status", $this->status);
+            $cmd->bindParam(":status",      $this->status);
+            $cmd->bindParam(":obsclinica",  $this->obsclinica);
             $cmd->bindParam(":idcastracao", $this->idcastracao);
 
             //Executando o comando SQL

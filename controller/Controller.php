@@ -82,16 +82,13 @@ class Controller
         include_once "view/cadClinica.php";
     }    
     #CONSULTAS
-    function abrirConsultaUsuario($id){
+    function abrirConsultaUsuario(){
         $usuario = new Usuario();
-        $usuario->idusuario = $id;
         $dadosUsuario = $usuario->consultar();
-
-        $atualizarDadosUsuario = $usuario->retornar();
 
         include_once "view/consultaUsuario.php";
     }
-    function abrirConsultaClinica($cnpj){
+    function abrirConsultaClinica(){
         $clinica = new Clinica();
         $dadosClinica = $clinica->consultar();
         include_once "view/consultaClinica.php";
@@ -107,9 +104,9 @@ class Controller
         include_once "view/consultaCastracao.php";
     }
 
-    function abrirConsultaAnimais($idUsuario){
+    function abrirConsultaAnimais($idusuario){
         $animal = new Animal();
-        $animal->idusuario = $idUsuario;
+        $animal->idusuario = $idusuario;
         $dadosAnimal = $animal->retornarAnimais();
 
         $raca = new Raca();

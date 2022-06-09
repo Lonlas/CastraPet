@@ -183,5 +183,15 @@
             return $cmd->fetchColumn();
         }
         */
+        function atualizarCastrado(){
+            $con = Conexao::conectar();
+
+            $cmd = $con->prepare("UPDATE animaL SET codchip = :codchip WHERE idanimal = :idanimal");
+
+            $cmd->bindParam(":codchip", $this->codchip);
+            $cmd->bindParam(":idanimal", $this->idanimal);
+
+            $cmd->execute();
+        }
     }
 ?>

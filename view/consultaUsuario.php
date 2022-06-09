@@ -86,18 +86,18 @@
                                                 <td>$value->celular</td>
                                                 <td>$value->punicao</td>
                                                 <td>
-                                                    <a href='". URL. "consulta-animais' class='btn btn-success col-auto'>
+                                                    <a href='". URL. "consulta-animais/$value->idusuario' class='btn btn-success col-auto'>
                                                         <img src='". URL ."recursos/img/Logo-Castra-Pet.svg' alt='Animais cadastrados' width='30' class='aling-itens-center white justify-content-center'>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <button class='btn btn-warning btn-md text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
+                                                    <button class='btn btn-warning btn-sm-sm text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
                                                             data-idusuario='$value->idusuario' data-nome='$value->nome' data-cpf='$value->cpf' data-beneficio='$value->beneficio' data-nis='$value->nis' 
                                                             data-email='$value->email' data-telefone='$value->telefone' data-celular='$value->celular' data-punicao='$value->punicao' data-rg='$value->rg' 
-                                                            data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$atualizarDadosUsuario->idlogin'>
+                                                            data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$value->idlogin'>
                                                         <i class='fa fa-edit'></i>Editar
                                                     </button>
-                                                    <a href='".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-md' onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir</a>
+                                                    <a href='".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-sm-sm' onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir</a>
                                                 </td>
                                             </tr>
                                             ";
@@ -125,12 +125,13 @@
             <div class="modal-content">
                 <form action="<?php echo URL.'atualiza-tutor';?>" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
-                        <h5 class="modal-title">Atualizar</h5>
+                        <h5 class="modal-title">Editar</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
                     </div>
                     <div class="modal-body">
                         
-                        <input type="hidden" name="idusuario" id="idusuario"><input type="hidden" name="idlogin" id="idlogin" value="<?php echo $value->idlogin;?>">
+                        <input type="hidden" name="idusuario" id="idusuario">
+                        <input type="hidden" name="idlogin" id="idlogin">
                         
                         <div class="row">
                             <div class="col-sm-6 mb-4">
@@ -201,7 +202,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Alterar</button>
+                        <button type="submit" class="btn btn-success">Editar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
@@ -271,7 +272,7 @@
 
             
             var modalId = modalEditar.querySelector('.modal-title')
-            modalId.textContent = 'Atualizar ' + idusuario
+            modalId.textContent = 'Editar: ' + nome;
 
             $("#idusuario").val(idusuario);
             $("#idlogin").val(idlogin);
