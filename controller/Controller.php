@@ -30,7 +30,6 @@ class Controller
     function abrirEsqSenha(){
         include_once "view/esqSenha.php";
     }
-
     function abrirRecuperacao()
     {
         include_once "view/confirmarCodigoSenha.php";
@@ -38,34 +37,59 @@ class Controller
 
     // USUÁRIO
     function abrirHomeUsuario(){
-        include_once "view/homeUsuario.php";
+        //caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+
+        //Controle de privilégio
+        if ($_SESSION["dadosLogin"]->nivelacesso == 0) {
+            include_once "view/homeUsuario.php";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
     function abrirCadastro(){
         include_once "view/cadastro.php";
     }
-    function abrirPerfil(){   
-        include_once "view/infoUsuario.php";
+    function abrirPerfil(){  
+        //Caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        //Controle de privilégio
+        if ($_SESSION["dadosLogin"]->nivelacesso == 0) {
+            include_once "view/infoUsuario.php";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
     function abrirAlterarSenha($idlogin){
         //só abrir a tela alterar senha se existir sessão de usuário ou se confirmar login for igual ao login retornado pelo banco
         if(isset($_SESSION["dadosUsuario"]) || $_SESSION["idlogin"] == $idlogin){
             include_once "view/alterarSenha.php";
         }
-        else
-            include_once "view/paginaNaoEncontrada.php";
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
     function abrirCadAnimal(){
-        $animal = new Raca();
-        $dadosRacaAnimal = $animal->consultarRaca();
+        //caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
 
-        include_once "view/cadAnimal.php";
+        //Controle de privilégio
+        if ($_SESSION["dadosLogin"]->nivelacesso == 0) {
+            $animal = new Raca();
+            $dadosRacaAnimal = $animal->consultarRaca();
+
+            include_once "view/cadAnimal.php";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
     function abrirMeusAnimais(){
-        $animal = new Animal();
-        $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
-        $dadosAnimais = $animal->retornarAnimais();
+        //Caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 0) {
+            $animal = new Animal();
+            $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+            $dadosAnimais = $animal->retornarAnimais();
 
-        include_once "view/meusAnimais.php";
+            include_once "view/meusAnimais.php";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
 
     /*function abrirAtualizaAnimal($id){
@@ -82,75 +106,130 @@ class Controller
     
     // ADMINISTRADOR
     function abrirHomeAdm(){
-        include_once "view/homeAdm.php";
+        //Caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) { include_once "view/homeAdm.php"; }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
     #CADASTROS
     function abrirCadRaca(){
-        include_once "view/cadRaca.php";
+        //Caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) { include_once "view/cadRaca.php"; }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
+          
     }
     function abrirCadClinica(){
-        include_once "view/cadClinica.php";
+        //Caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) { include_once "view/cadClinica.php"; }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }    
     #CONSULTAS
     function abrirConsultaUsuario(){
-        $usuario = new Usuario();
-        $dadosUsuario = $usuario->consultar();
+        //caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        //caso não tenha privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+            $usuario = new Usuario();
+            $dadosUsuario = $usuario->consultar();
 
-        include_once "view/consultaUsuario.php";
+            include_once "view/consultaUsuario.php"; 
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
     function abrirConsultaClinica(){
-        $clinica = new Clinica();
-        $dadosClinica = $clinica->consultar();
-        include_once "view/consultaClinica.php";
+        //caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        //caso não tenha privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+            $clinica = new Clinica();
+            $dadosClinica = $clinica->consultar();
+            include_once "view/consultaClinica.php";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
     function abrirConsultaCastracao(){
-        $castracao = new Castracao();
-        if($_SESSION["dadosLogin"]->nivelacesso == 2){
+        //caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return;}
+
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+            $castracao = new Castracao();
             $dadosCastracao = $castracao->consultar();
-        } else {
+            include_once "view/consultaCastracao.php";
+        }
+        else if($_SESSION["dadosLogin"]->nivelacesso == 1){
+            $castracao = new Castracao();
             $castracao->idclinica = $_SESSION["dadosClinica"]->idclinica;
             $dadosCastracaoClinica = $castracao->consultarPraClinica();
+            include_once "view/consultaCastracao.php";
         }
-        include_once "view/consultaCastracao.php";
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
 
     function abrirConsultaAnimais($idusuario){
-        $animal = new Animal();
-        $animal->idusuario = $idusuario;
-        $dadosAnimal = $animal->retornarAnimais();
+        //caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        //caso não tenha privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2){
+            
+            $animal = new Animal();
+            $animal->idusuario = $idusuario;
+            $dadosAnimal = $animal->retornarAnimais();
 
-        $raca = new Raca();
-        $dadosRaca = $raca->consultar();
+            $raca = new Raca();
+            $dadosRaca = $raca->consultar();
 
-        include_once "view/consultaAnimais.php";
+            include_once "view/consultaAnimais.php";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
     #AGENDAMENTO
     function abrirListaSolicitacao(){
-        $castracao = new Castracao();
-        if($_SESSION["dadosLogin"]->nivelacesso == 2)
-        {
+        //caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+   
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) { 
+            $castracao = new Castracao();
             $dadosSolicitacao = $castracao->consultarSolicitacao();
-        } else {
+            include_once "view/listaSolicitacao.php";
+        }
+        else if($_SESSION["dadosLogin"]->nivelacesso == 1){
+            $castracao = new Castracao();
             $castracao->idclinica = $_SESSION["dadosClinica"]->idclinica;
             $dadosSolicitacao = $castracao->clinicaConsultarSolicitacao();
+            include_once "view/listaSolicitacao.php";
         }
-
-        include_once "view/listaSolicitacao.php";
+        else{ include_once "view/paginaNaoEncontrada.php"; }   
     }
     function abrirAgendamento($id){
-        $agendamento = new Castracao();
-        $agendamento->idcastracao = $id;
-        $dadosCastracao = $agendamento->retornar();
+        //Caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+   
+        if ($_SESSION["dadosLogin"]->nivelacesso > 0) {
+            $agendamento = new Castracao();
+            $agendamento->idcastracao = $id;
+            $dadosCastracao = $agendamento->retornar();
 
-        $clinica = new Clinica();
-        $dadosClinicas = $clinica->consultarComVagas();
+            $clinica = new Clinica();
+            $dadosClinicas = $clinica->consultarComVagas();
 
-        include_once "view/confirmaSolicitacao.php";
+            include_once "view/confirmaSolicitacao.php";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
     
     // CLÍNICA
     function abrirHomeClinica(){
-        include_once "view/homeClinica.php";
+        //caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 1) { include_once "view/homeClinica.php"; }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
     }
     
     // TESTE

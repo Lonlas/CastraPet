@@ -113,252 +113,299 @@ class UsuarioController
     
     function atualizarUsuario()
     {
-        $login = new Login();
-        $login->idlogin = $_POST["idlogin"]; 
-        $login->nome =    $_POST["txtNome"];
-        $login->email =   $_POST["txtEmail"];
-        $login->atualizarLogin();
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+            $login = new Login();
+            $login->idlogin = $_POST["idlogin"]; 
+            $login->nome =    $_POST["txtNome"];
+            $login->email =   $_POST["txtEmail"];
+            $login->atualizarLogin();
 
 
-        $usu = new Usuario();
-        $usu->rg =        $_POST["txtRG"];
-        $usu->cpf =       $_POST["txtCPF"];
+            $usu = new Usuario();
+            $usu->rg =        $_POST["txtRG"];
+            $usu->cpf =       $_POST["txtCPF"];
 
-        // Que tipo de benefício tem
-        if (isset($_POST["chkProtetor"])) {
-            $usu->beneficio = $_POST["chkProtetor"];
-        }
-        else if(isset($_POST["chkNIS"])){
-            $usu->beneficio = $_POST["chkNIS"];
-        }
-        else{ $usu->beneficio = 0; }
-
-        $usu->telefone =  $_POST["txtTel"];
-        $usu->celular =   $_POST["txtCelular"];
-        $usu->usurua =    $_POST["txtRua"];
-        $usu->usubairro = $_POST["txtBairro"];
-        $usu->usunumero = $_POST["txtNumero"];
-        $usu->usucep =    $_POST["txtCEP"];
-        
-            // NIS
-            if(empty($_POST["txtNIS"])){
-                $usu->nis = "";
+            // Que tipo de benefício tem
+            if (isset($_POST["chkProtetor"])) {
+                $usu->beneficio = $_POST["chkProtetor"];
             }
-            else{ $usu->nis = $_POST["txtNIS"];}
+            else if(isset($_POST["chkNIS"])){
+                $usu->beneficio = $_POST["chkNIS"];
+            }
+            else{ $usu->beneficio = 0; }
 
-        $usu->idusuario = $_POST["idusuario"];
-        $usu->atualizar();
+            $usu->telefone =  $_POST["txtTel"];
+            $usu->celular =   $_POST["txtCelular"];
+            $usu->usurua =    $_POST["txtRua"];
+            $usu->usubairro = $_POST["txtBairro"];
+            $usu->usunumero = $_POST["txtNumero"];
+            $usu->usucep =    $_POST["txtCEP"];
+            
+                // NIS
+                if(empty($_POST["txtNIS"])){
+                    $usu->nis = "";
+                }
+                else{ $usu->nis = $_POST["txtNIS"];}
 
-        echo "<script>
-                alert('Dados alterados com sucesso!');
-                window.location='".URL."consulta-usuario';
-              </script>";
+            $usu->idusuario = $_POST["idusuario"];
+            $usu->atualizar();
+
+            echo "<script>
+                    alert('Dados alterados com sucesso!');
+                    window.location='".URL."consulta-usuario';
+                </script>";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
 
     function excluirUsuario($id)
     {
-        $login = new Login();
-        $login->idlogin = $id;
-        $login->excluir();
-        $usu = new Usuario(); 
-        $usu->idusuario = $id;
-        $usu->excluir();
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
 
-        //direcionar novamente para a tela de consulta
-        header("Location:".URL."consulta-usuario");
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+
+            $login = new Login();
+            $login->idlogin = $id;
+            $login->excluir();
+            $usu = new Usuario(); 
+            $usu->idusuario = $id;
+            $usu->excluir();
+
+            //direcionar novamente para a tela de consulta
+            header("Location:".URL."consulta-usuario");
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
     
     function alterarSenha()
     {
-        $alterar = new Login();
-        $alterar->senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
-        $alterar->alterarSenha();
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
 
-        header("Location:".URL."perfil");
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 0) {
+
+            $alterar = new Login();
+            $alterar->senha = password_hash($_POST["senha"], PASSWORD_DEFAULT);
+            $alterar->alterarSenha();
+
+            header("Location:".URL."perfil");
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
 
     function solicitarCastracao()
     {
-        $castracao = new Castracao();
-        $castracao->idanimal =   $_POST["idAnimal"];
-        $castracao->observacao = $_POST["obsCastracao"];
-        $castracao->status = 0;
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
 
-        $castracao->cadastrar();
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 0) {
 
-        echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
+            $castracao = new Castracao();
+            $castracao->idanimal =   $_POST["idAnimal"];
+            $castracao->observacao = $_POST["obsCastracao"];
+            $castracao->status = 0;
+
+            $castracao->cadastrar();
+
+            echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
 
     function agendarClinicaCastracao()
-    {   
-        $idcastracao = $_POST["idcastracao"];
+    {
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
 
-        //Caso o botão recusado não seja apertado
-        if(!isset($_POST["btnRecusa"]))
-        {
-            if($_POST["selectClinica"] != 0)
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+   
+            $idcastracao = $_POST["idcastracao"];
+
+            //Caso o botão recusado não seja apertado
+            if(!isset($_POST["btnRecusa"]))
+            {
+                if($_POST["selectClinica"] != 0)
+                {
+                    $castracao = new Castracao();
+        
+                    $castracao->idclinica = $_POST["selectClinica"];
+                    $castracao->status = 1;
+                    $castracao->idcastracao = $idcastracao;
+                    $castracao->aprovarCastracao();
+
+                    $clinica = new Clinica();
+                    $clinica->idclinica = $_POST["selectClinica"];
+                    $dadosClinica = $clinica->retornar();
+                    $clinica->vagas = $dadosClinica->vagas - 1;
+                    $clinica->subtrairVagas();
+        
+                    header("Location:".URL."lista-solicitacao");
+                }
+                else
+                {
+                    echo "<script>alert('Selecione a clínica e/ou a data'); window.location='".URL."agendamento/$idcastracao'; </script>";
+                }
+            }
+            else if($_POST["btnRecusa"] == "Recusar")
             {
                 $castracao = new Castracao();
-    
-                $castracao->idclinica = $_POST["selectClinica"];
-                $castracao->status = 1;
-                $castracao->idcastracao = $idcastracao;
-                $castracao->aprovarCastracao();
 
-                $clinica = new Clinica();
-                $clinica->idclinica = $_POST["selectClinica"];
-                $dadosClinica = $clinica->retornar();
-                $clinica->vagas = $dadosClinica->vagas - 1;
-                $clinica->subtrairVagas();
-    
+                $castracao->idcastracao = $idcastracao;
+                $castracao->status = 3;
+
+                $castracao->recusarCastracao();
+
                 header("Location:".URL."lista-solicitacao");
             }
-            else
-            {
-                echo "<script>alert('Selecione a clínica e/ou a data'); window.location='".URL."agendamento/$idcastracao'; </script>";
-            }
         }
-        else if($_POST["btnRecusa"] == "Recusar")
-        {
-            $castracao = new Castracao();
-
-            $castracao->idcastracao = $idcastracao;
-            $castracao->status = 3;
-
-            $castracao->recusarCastracao();
-
-            header("Location:".URL."lista-solicitacao");
-        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
     function atualizarCastracao()
     {
-        $castracao = new Castracao();
-        $castracao->idcastracao = $_POST["idcastracao"];
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
 
-        switch($_POST["statusAtualizado"])
-        {
-            case 2:
-                // Animal castrado
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 1) {
 
-                $castracao->status = 2;
-                $animal = new Animal();
-                $animal->codchip = $_POST["codChip"];
-                $animal->atualizarCastrado();
-                $castracao->atualizar();
+            $castracao = new Castracao();
+            $castracao->idcastracao = $_POST["idcastracao"];
 
-                if($_POST["status"] != 4)
-                {
-                    //Liberar a vaga de castração para a clínica
-                    $clinica = new Clinica();
-                    $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-                    $dadosClinica = $clinica->retornar();
-                    $clinica->vagas = $dadosClinica->vagas - 1;
-                    $clinica->subtrairVagas();
-                }
-            break;
-            case 4:
-                // Não compareceu 
+            switch($_POST["statusAtualizado"])
+            {
+                case 2:
+                    // Animal castrado
 
-                //Adicionar o status de que o animal não compareceu à castração
-                $castracao->status = 4;
-                $castracao->atualizar();
+                    $castracao->status = 2;
+                    $animal = new Animal();
+                    $animal->codchip = $_POST["codChip"];
+                    $animal->atualizarCastrado();
+                    $castracao->atualizar();
 
-                //Aplicar uma punição ao tutor que não compareceu à castração
-                $usuario = new Usuario();
-                $usuario->idusuario = $_POST["idTutor"];
-                $usuario->punicao = 1;
-                $usuario->aplicarPunicao();    
-                
-                //Enviar aviso ao usuário dizendo que não compareceu à castração
-                $email = new Email();
-                $email->emailDestinatario = $_POST["emailTutor"];
-                $email->nomeDestinatario =  $_POST["nomeTutor"];
-                $email->nomeAnimal =        $_POST["nomeAnimal"];
-                $email->data =              $_POST["dataCastracao"];
-                $email->enviarAviso();
+                    if($_POST["status"] != 4)
+                    {
+                        //Liberar a vaga de castração para a clínica
+                        $clinica = new Clinica();
+                        $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                        $dadosClinica = $clinica->retornar();
+                        $clinica->vagas = $dadosClinica->vagas - 1;
+                        $clinica->subtrairVagas();
+                    }
+                break;
+                case 4:
+                    // Não compareceu 
 
-                if($_POST["status"] == 4)
-                {
-                    //Liberar a vaga de castração para a clínica
-                    $clinica = new Clinica();
-                    $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-                    $dadosClinica = $clinica->retornar();
-                    $clinica->vagas = $dadosClinica->vagas + 1;
-                    $clinica->adicionarVagas();
-                }
-            break; 
-            case 5:
-                // Castração cancelada
+                    //Adicionar o status de que o animal não compareceu à castração
+                    $castracao->status = 4;
+                    $castracao->atualizar();
 
-                $castracao->status = 5;
-                $castracao->excluir();
+                    //Aplicar uma punição ao tutor que não compareceu à castração
+                    $usuario = new Usuario();
+                    $usuario->idusuario = $_POST["idTutor"];
+                    $usuario->punicao = 1;
+                    $usuario->aplicarPunicao();    
+                    
+                    //Enviar aviso ao usuário dizendo que não compareceu à castração
+                    $email = new Email();
+                    $email->emailDestinatario = $_POST["emailTutor"];
+                    $email->nomeDestinatario =  $_POST["nomeTutor"];
+                    $email->nomeAnimal =        $_POST["nomeAnimal"];
+                    $email->data =              $_POST["dataCastracao"];
+                    $email->enviarAviso();
 
-                if($_POST["status"] != 4)
-                {
-                    //Liberar a vaga de castração para a clínica
-                    $clinica = new Clinica();
-                    $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-                    $dadosClinica = $clinica->retornar();
-                    $clinica->vagas = $dadosClinica->vagas + 1;
-                    $clinica->adicionarVagas();
-                }
-            break; 
-            case 6:
-                // Reagendar castração
+                    if($_POST["status"] == 4)
+                    {
+                        //Liberar a vaga de castração para a clínica
+                        $clinica = new Clinica();
+                        $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                        $dadosClinica = $clinica->retornar();
+                        $clinica->vagas = $dadosClinica->vagas + 1;
+                        $clinica->adicionarVagas();
+                    }
+                break; 
+                case 5:
+                    // Castração cancelada
 
-                //Adicionar o status de que o animal retornou para a análise da castração
-                $castracao->status = 6;
-                $castracao->obsclinica = $_POST["obsclinica"];
-                $castracao->reagendar();
+                    $castracao->status = 5;
+                    $castracao->excluir();
 
-                if($_POST["status"] != 4)
-                {
-                    //Liberar a vaga de castração para a clínica
-                    $clinica = new Clinica();
-                    $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-                    $dadosClinica = $clinica->retornar();
-                    $clinica->vagas = $dadosClinica->vagas + 1;
-                    $clinica->adicionarVagas();
-                }
-            break; 
-            case 7:
-                // Animal veio a óbito
+                    if($_POST["status"] != 4)
+                    {
+                        //Liberar a vaga de castração para a clínica
+                        $clinica = new Clinica();
+                        $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                        $dadosClinica = $clinica->retornar();
+                        $clinica->vagas = $dadosClinica->vagas + 1;
+                        $clinica->adicionarVagas();
+                    }
+                break; 
+                case 6:
+                    // Reagendar castração
 
-                $castracao->status = 7;
-                $castracao->atualizar();
+                    //Adicionar o status de que o animal retornou para a análise da castração
+                    $castracao->status = 6;
+                    $castracao->obsclinica = $_POST["obsclinica"];
+                    $castracao->reagendar();
 
-                if($_POST["status"] != 4)
-                {
-                    //Liberar a vaga de castração para a clínica
-                    $clinica = new Clinica();
-                    $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-                    $dadosClinica = $clinica->retornar();
-                    $clinica->vagas = $dadosClinica->vagas + 1;
-                    $clinica->adicionarVagas();
-                }
-            break; 
-            case 8:
-                // Animal castrado(mas com alterações)
+                    if($_POST["status"] != 4)
+                    {
+                        //Liberar a vaga de castração para a clínica
+                        $clinica = new Clinica();
+                        $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                        $dadosClinica = $clinica->retornar();
+                        $clinica->vagas = $dadosClinica->vagas + 1;
+                        $clinica->adicionarVagas();
+                    }
+                break; 
+                case 7:
+                    // Animal veio a óbito
 
-                $castracao->status = 8;
-                $castracao->obsclinica = $_POST["obsClinica"];
-                $castracao->atualizar();
+                    $castracao->status = 7;
+                    $castracao->atualizar();
 
-                if($_POST["status"] != 4)
-                {
-                    //Liberar a vaga de castração para a clínica
-                    $clinica = new Clinica();
-                    $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
-                    $dadosClinica = $clinica->retornar();
-                    $clinica->vagas = $dadosClinica->vagas - 1;
-                    $clinica->subtrairVagas();
-                }
-            break;
-            default:
-                echo"<script>alert('Insira um valor válido'); window.location='".URL."consulta-castracao'; </script>"; return; 
+                    if($_POST["status"] != 4)
+                    {
+                        //Liberar a vaga de castração para a clínica
+                        $clinica = new Clinica();
+                        $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                        $dadosClinica = $clinica->retornar();
+                        $clinica->vagas = $dadosClinica->vagas + 1;
+                        $clinica->adicionarVagas();
+                    }
+                break; 
+                case 8:
+                    // Animal castrado(mas com alterações)
+
+                    $castracao->status = 8;
+                    $castracao->obsclinica = $_POST["obsClinica"];
+                    $castracao->atualizar();
+
+                    if($_POST["status"] != 4)
+                    {
+                        //Liberar a vaga de castração para a clínica
+                        $clinica = new Clinica();
+                        $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
+                        $dadosClinica = $clinica->retornar();
+                        $clinica->vagas = $dadosClinica->vagas - 1;
+                        $clinica->subtrairVagas();
+                    }
+                break;
+                default:
+                    echo"<script>alert('Insira um valor válido'); window.location='".URL."consulta-castracao'; </script>"; return; 
+            }
+            
+            header("Location:".URL."consulta-castracao");
         }
-        
-        header("Location:".URL."consulta-castracao");
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
     
     function logar()
@@ -426,15 +473,23 @@ class UsuarioController
 
     function excluir($idUsuario, $idLogin)
     {
-        $usuario = new Usuario();
-        $usuario->idusuario = $idUsuario;
-        $usuario->excluir();
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
 
-        $login = new Login();
-        $login->idlogin = $idLogin;
-        $login->excluir();
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
 
-        header("location:".URL."consulta-usuario");
+            $usuario = new Usuario();
+            $usuario->idusuario = $idUsuario;
+            $usuario->excluir();
+
+            $login = new Login();
+            $login->idlogin = $idLogin;
+            $login->excluir();
+
+            header("location:".URL."consulta-usuario");
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
 
     function recuperarSenha()
@@ -504,6 +559,7 @@ class UsuarioController
 
     function redefinirSenha()
     {
+
         if(isset($_SESSION["dadosLogin"]) && $_SESSION["dadosLogin"]->nivelacesso == 0)
         {
             //redefinir senha e limpar o campo codsenha
