@@ -87,6 +87,10 @@ class Controller
             $animal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
             $dadosAnimais = $animal->retornarAnimais();
 
+            $usuario = new Usuario();
+            $usuario->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+            $quantcastracoes = $usuario->retornarQuantCastracao();
+
             include_once "view/meusAnimais.php";
         }
         else{ include_once "view/paginaNaoEncontrada.php"; }
@@ -159,6 +163,7 @@ class Controller
         if($_SESSION["dadosLogin"]->nivelacesso == 2) {
             $castracao = new Castracao();
             $dadosCastracao = $castracao->consultar();
+
             include_once "view/consultaCastracao.php";
         }
         else if($_SESSION["dadosLogin"]->nivelacesso == 1){

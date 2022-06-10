@@ -17,10 +17,10 @@
         <div class="bg-danger container-fluid" style="grid-area: corpo;">
             <div class="row h-100 align-items-center">
                 <div class="p-3">
-                    <div class="container bg-dark text-light font-weight-bold p-3">
+                    <div class="container-fluid bg-dark text-light font-weight-bold p-3">
                         <h5 class="m-0">Consultar Usuários</h5>
                     </div>
-                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
+                    <div class="container-fluid p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white table-responsive">
                         <div class="table-responsive">
                             <table id="tbUsuario" class="table table-hover">
                                 <thead>
@@ -46,9 +46,13 @@
                                             $value->beneficio = str_replace("2", "Protetor de Animais", $value->beneficio);
                                             $value->beneficio = str_replace("3", "Em análise", $value->beneficio);
                                             
+                                            $valorTelefone = $value->telefone;
                                             $value->telefone = preg_replace("/^$/", "-", $value->telefone);
+
+                                            $valorNis = $value->nis;
                                             $value->nis = preg_replace("/^$/", "-", $value->nis);
                                             
+                                            $valorPunicao = $value->punicao;
                                             $value->punicao = str_replace("0", "-", $value->punicao);
                                             $value->punicao = str_replace("1", "<span class='badge bg-danger'>Punido</span>", $value->punicao);
     
@@ -75,10 +79,10 @@
                                                 </td>
                                                 <td>
                                                     <button class='btn btn-warning btn-sm-sm text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
-                                                            data-idusuario='$value->idusuario' data-nome='$value->nome' data-cpf='$value->cpf' data-beneficio='$value->beneficio' data-nis='$value->nis' 
-                                                            data-email='$value->email' data-telefone='$value->telefone' data-celular='$value->celular' data-punicao='$value->punicao' data-rg='$value->rg' 
+                                                            data-idusuario='$value->idusuario' data-nome='$value->nome' data-cpf='$value->cpf' data-beneficio='$value->beneficio' data-nis='$valorNis' 
+                                                            data-email='$value->email' data-telefone='$valorTelefone' data-celular='$value->celular' data-punicao='$valorPunicao' data-rg='$value->rg' 
                                                             data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$value->idlogin'>
-                                                        <i class='fa fa-edit'></i>Editar
+                                                        Editar
                                                     </button>
                                                     <a href='".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-sm-sm' onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir</a>
                                                 </td>
@@ -145,7 +149,13 @@
                                         <label for="txtCelular" class="form-label">Celular:</label>
                                         <input class="form-control" type="text" name="txtCelular" id="txtCelular"  maxlength="15">
                                     </div>
-                                </div>   
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="form-group">
+                                        <label for="chkPunicao" class="form-label">Punição</label>
+                                        <input type="checkbox" name="chkPunicao" id="chkPunicao" value="1" class="form-check">
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-6 mb-4">
                                 <div class="row mb-3">
@@ -178,8 +188,6 @@
                                 <div class="form-group mb-4">
                                     <input type="checkbox" name="chkProtetor" id="chkProtetor" value="2">
                                     <label for="chkProtetor">Sou protetor de animais</label>
-                                    &nbsp;
-                                    <input class="btn btn-success" type="button" value="Fazer upload" name="btnProtetorUpload">
                                 </div>
                             </div>
                         </div>
@@ -198,27 +206,29 @@
 
     <!-- EXTENSÃO BOOTSTRAP -->    
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado-->
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 
+    
     <!-- DataTables -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script type='text/javascript' charset='utf8' src='https://code.jquery.com/jquery-3.5.1.js'></script>
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js'></script>
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js'></script>
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js'></script>
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js'></script>
+    <script type='text/javascript' charset='utf8' src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js'></script>
+    <script type='text/javascript' charset='utf8' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js'></script>
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js'></script>
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js'></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js'></script>
-
+    
+    <!-- EXTENSÃO JQUERY DAS MASCARAS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    
     <script>
         $(document).ready(function() {
             $('#tbUsuario').DataTable( {
                 dom: 'Bfrtip',
-                responsive: true,
                 buttons: [
                     'colvis',
                     {
@@ -240,11 +250,17 @@
                         }  
                     }
                 ],
+                columnDefs: [
+                    {
+                        targets: 1,
+                        className: 'noVis'
+                    }
+                ],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
                 },
                 "search": {
-                    "search": "<?php echo "$cpf";?>"
+                    "search": "<?php if(!isset($cpf)){$cpf = '';}echo $cpf;?>"
                 }
             } );
         } );
@@ -271,6 +287,7 @@
             var numero = button.getAttribute('data-numero')
             var bairro = button.getAttribute('data-bairro')
             var rua = button.getAttribute('data-rua')
+            var punicao = button.getAttribute('data-punicao')
 
             
             var modalId = modalEditar.querySelector('.modal-title')
@@ -279,18 +296,39 @@
             $("#idusuario").val(idusuario);
             $("#idlogin").val(idlogin);
             $("#txtNome").val(nome);
-            $("#txtCPF").val(cpf);
-            $("#chkProtetor").val(beneficio);
-            $("#txtNIS").val(nis);   
+            $("#txtCPF").val(cpf).mask('000.000.000-00');
+            if(beneficio.val == 2)
+            {
+                $("#chkProtetor").prop("checked", true);
+            }
+            else{
+                $("#chkProtetor").prop("checked", false);
+            }
+            if(nis.length == 11)
+            {
+                $("#chkNIS").prop("checked", true);
+            }
+            else{
+                $("#chkNIS").prop("checked", false);
+            }
+            $("#txtNIS").val(nis);
             $("#txtEmail").val(email);
             $("#txtTel").val(telefone);   
-            $("#txtCelular").val(celular);  
-            $("#txtRG").val(rg);
-            $("#txtCEP").val(cep);
+            $("#txtCelular").val(celular).mask('(00) 00000-0000');  
+            $("#txtRG").val(rg).mask('00.000.000-X', {'translation': {X: {pattern: /[0-9xX]/}}});
+            $("#txtCEP").val(cep).mask('00000-000');
             $("#txtNumero").val(numero);
             $("#txtBairro").val(bairro);
             $("#txtRua").val(rua);
+            if(punicao == 1)
+            {
+                $("#chkPunicao").prop("checked",true);
+            }
+            else{
+                $("#chkPunicao").prop("checked",false);
+            }
         });
     </script>
+    
 </body>
 </html>

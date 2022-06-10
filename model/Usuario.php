@@ -16,7 +16,7 @@
         private $nis;
         private $whatsapp;
         private $doccomprovante;
-        private $docprotetor;
+        //private $docprotetor;
         private $quantcastracoes;
 
         //Método get
@@ -47,7 +47,7 @@
 
             //Preparar comando SQL para cadastrar
             $cmd = $con->prepare("INSERT INTO usuario (idlogin, rg, cpf, beneficio, telefone, celular, punicao, usurua, usubairro, usunumero, usucep, nis, whatsapp, doccomprovante, docprotetor, quantcastracoes) 
-                                    VALUES (:idlogin, :rg, :cpf, :beneficio, NULLIF(:telefone,''), :celular, :punicao, :usurua, :usubairro, :usunumero, :usucep, NULLIF(:nis,''), :whatsapp, :doccomprovante, NULLIF(:docprotetor,''), :quantcastracoes)");
+                                    VALUES (:idlogin, :rg, :cpf, :beneficio, NULLIF(:telefone,''), :celular, :punicao, :usurua, :usubairro, :usunumero, :usucep, NULLIF(:nis,''), :whatsapp, :doccomprovante, /*NULLIF(:docprotetor,''),*/ :quantcastracoes)");
             
             //Parâmetros SQL
             $cmd->bindParam(":idlogin",         $this->idlogin);
@@ -64,7 +64,7 @@
             $cmd->bindParam(":nis",             $this->nis);
             $cmd->bindParam(":whatsapp",        $this->whatsapp);
             $cmd->bindParam(":doccomprovante",  $this->doccomprovante);
-            $cmd->bindParam(":docprotetor",     $this->docprotetor);
+            //$cmd->bindParam(":docprotetor",     $this->docprotetor);
             $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);
 
             //Executando o comando SQL
@@ -137,7 +137,8 @@
                                                 usubairro = :usubairro, 
                                                 usunumero = :usunumero, 
                                                 usucep = :usucep, 
-                                                nis = NULLIF(:nis,'')
+                                                nis = NULLIF(:nis,''),
+                                                punicao = :punicao
                                             WHERE idusuario = :idusuario");
                 
             //Parâmetros SQL
@@ -156,6 +157,7 @@
             $cmd->bindParam(":doccomprovante",  $this->doccomprovante);
             $cmd->bindParam(":docprotetor",     $this->docprotetor);
             $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);*/
+            $cmd->bindParam(":punicao",         $this->punicao);
             $cmd->bindParam(":idusuario",       $this->idusuario);
 
             //Executando o comando SQL
@@ -225,6 +227,39 @@
             
             //Parâmetros SQL
             $cmd->bindParam(":punicao",   $this->punicao);
+            $cmd->bindParam(":idusuario", $this->idusuario);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
+
+        function retornarQuantCastracao()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("SELECT quantcastracoes FROM usuario WHERE idusuario = :idusuario");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":idusuario", $this->idusuario);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetch(PDO::FETCH_OBJ);
+        }
+
+        function alterarQuantCastracao()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("UPDATE usuario SET quantcastracoes = :quantcastracoes WHERE idusuario = :idusuario");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":quantcastracoes",   $this->quantcastracoes);
             $cmd->bindParam(":idusuario", $this->idusuario);
 
             //Executando o comando SQL

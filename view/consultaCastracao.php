@@ -48,6 +48,7 @@
                                                 <th>Hora</th>
                                                 <th>Status</th>
                                                 <th>Observação</th>
+                                                <th>Observação CLinica</th>
                                                 <th>Ações</th>
                                             </tr>
                                         </thead>
@@ -70,6 +71,7 @@
                                         $hora = is_null($value->horario) ? '-' : date('H:i', strtotime($value->horario));
                                         
                                         $value->observacao = preg_replace("/^$/", "-", $value->observacao);
+                                        $value->obsclinica = preg_replace("/^$/", "-", $value->obsclinica);
 
                                         echo
                                         "
@@ -84,6 +86,7 @@
                                             <td>$hora</td>
                                             <td>$value->status</td>
                                             <td>$value->observacao</td>
+                                            <td>$value->obsclinica</td>
                                             <td>
                                             <!--<button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao'>
                                                 Editar
@@ -315,21 +318,27 @@
             </script>
             ";
         }
+        else
+        {
+            echo "
+                <script>
+                    $(document).ready(function() {
+                        $('#tbCastracao').DataTable( {
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'csv', 'excel', 'print'
+                            ],
+                            'language': {
+                                'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
+                            }
+                        } );
+                    } );
+                </script>
+            ";
+        }
     ?>
 
-    <script>
-        $(document).ready(function() {
-            $('#tbCastracao').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'csv', 'excel', 'print'
-                ],
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
-                }
-            } );
-        } );
-    </script>
+    
 
     <script>
         //Definindo valores aos inputs da modal

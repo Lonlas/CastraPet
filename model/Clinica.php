@@ -79,7 +79,7 @@
 
             //Preparar comando SQL para consultar
             $cmd = $con->prepare("SELECT idclinica, nome, email, cnpj, clitelefone, vagas, clirua, clibairro, clinumero, clicep 
-                                    FROM clinica JOIN login ON clinica.idlogin = login.idlogin WHERE clinica.vagas > 0");
+                                    FROM clinica JOIN login ON clinica.idlogin = login.idlogin WHERE clinica.vagas > 0 and clinica.ativo = 1");
             
             //Executando o comando SQL
             $cmd->execute();

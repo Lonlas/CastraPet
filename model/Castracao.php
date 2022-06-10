@@ -112,7 +112,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idcastracao, foto, aninome, nome AS 'nometutor', horario, status, observacao, cpf, cnpj, nome AS 'nomeclinica' FROM castracao 
+            $cmd = $con->prepare("SELECT idcastracao, foto, aninome, nome AS 'nometutor', horario, status, observacao, cpf, cnpj, nome AS 'nomeclinica', obsclinica FROM castracao 
                                     JOIN animal ON castracao.idanimal = animal.idanimal 
                                     JOIN usuario ON animal.idusuario = usuario.idusuario  
                                     LEFT JOIN clinica ON castracao.idclinica = clinica.idclinica 

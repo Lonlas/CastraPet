@@ -123,11 +123,10 @@
                                     ";
                                     if(!isset($value->status))
                                     {
-
-                                        if($_SESSION["dadosUsuario"]->quantcastracoes > 0 && $_SESSION["dadosUsuario"]->punicao == 0)
+                                        if($quantcastracoes->quantcastracoes > 0 && $_SESSION["dadosUsuario"]->punicao == 0)
                                         {
                                             echo "
-                                            <button class='btn btn-success w-100 mb-2' id='btnSolicitar' type='button' data-bs-target='#modalSolicitar' data-bs-toggle='modal' data-idanimal='$value->idanimal'>
+                                            <button class='btn btn-success w-100 mb-2' id='btnSolicitar' type='button' data-bs-target='#modalSolicitar' data-bs-toggle='modal' data-idanimal='$value->idanimal' data-idusuario='$value->idusuario'>
                                                 Solicitar castração
                                             </button>
                                             ";
@@ -202,13 +201,15 @@
                 <div class='modal-content'>
                     <form action="<?php echo URL.'solicitar-castracao';?>" method='post'>
                         <input type='hidden' id='idAnimalSolicita' name='idAnimal'>
+                        <input type="hidden" name="idusuario" id="idusuario">
+
                         <div class='modal-header'>
                             <h5 class='modal-title' id='staticBackdropLabel'>Solicitar castração</h5>
                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                         </div>
                         <div class='modal-body'>
                             <label class='form-label' for='obhsCastracao'>Observação: (opcional)</label>
-                            <textarea name='obsCastracao' id='obsCastr' rows='5' class='form-control'></textarea>
+                            <textarea name='obsCastracao' id='obsCastr' rows='5' class='form-control' placeholder="Ex: tem alegria a dipirona"></textarea>
                         </div>
                         <div class='modal-footer'>
                             <button type='submit' class='btn btn-primary'>Enviar Solicitação</button>
@@ -343,8 +344,10 @@
             var button = event.relatedTarget
             // Extract info from data-bs-* attributes
             var idanimal = button.getAttribute('data-idanimal')
+            var idusuario = button.getAttribute('data-idusuario')
 
             $("#idAnimalSolicita").val(idanimal);
+            $("#idusuario").val(idusuario)
         });
     </script>  
 

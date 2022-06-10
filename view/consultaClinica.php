@@ -3,6 +3,7 @@
 <head>
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     
     <?php include_once "head.php";?>
@@ -17,10 +18,10 @@
         <div class="bg-danger container-fluid" style="grid-area: corpo;">
             <div class="row h-100 align-items-center">
                 <div class="p-3">
-                    <div class="container bg-dark text-light font-weight-bold p-3">
+                    <div class="container-fluid bg-dark text-light font-weight-bold p-3">
                         <h5 class="m-0">Consultar Clínica</h5>
                     </div>
-                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white table-responsive">
+                    <div class="container-fluid p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white table-responsive">
                         <table id="tbClinica" class="table table-hover">
                             <thead>
                                 <th>#</th>
@@ -33,6 +34,7 @@
                                 <th>Rua</th>
                                 <th>Número</th>
                                 <th>Vagas</th>
+                                <th>Ativo</th>
                                 <th>Ações</th>
                             </thead>
                             <tbody>
@@ -41,6 +43,9 @@
                                     foreach($dadosClinica as $value)
                                     {
                                         $value->clitelefone = preg_replace("/^$/", "-", $value->clitelefone);
+                                        $valorAtivo = $value->ativo;
+                                        $value->ativo = str_replace("1", "Ativo", $value->ativo);
+                                        $value->ativo = str_replace("0", "Inativo", $value->ativo);
 
                                         echo
                                         "
@@ -55,10 +60,11 @@
                                             <td>$value->clirua</td>
                                             <td>$value->clinumero</td>
                                             <td>$value->vagas</td>
+                                            <td>$value->ativo</td>
                                             <td>
                                             <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idclinica='$value->idclinica' 
                                                     data-idlogin='$value->idlogin' data-nome='$value->nome' data-email='$value->email' data-cnpj='$value->cnpj' data-telefone='$value->clitelefone' 
-                                                    data-vagas='$value->vagas' data-cep='$value->clicep' data-numero='$value->clinumero' data-bairro='$value->clibairro' data-rua='$value->clirua' data-ativo='$value->ativo'>
+                                                    data-vagas='$value->vagas' data-cep='$value->clicep' data-numero='$value->clinumero' data-bairro='$value->clibairro' data-rua='$value->clirua' data-ativo='$valorAtivo'>
                                                 Editar
                                             </button>
                                             <a href='".URL."excluir-clinica/$value->idclinica/$value->idlogin' onclick='return confirm(\"tem certeza que deseja excluir a clínica $value->nome?\")' class='btn btn-danger'>Excluir</a></td>
@@ -189,19 +195,38 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js'></script>
 
     <script>
         $(document).ready(function() {
             $('#tbClinica').DataTable( {
                 dom: 'Bfrtip',
                 buttons: [
-                    'csv', 'excel', 'print'
+                    'colvis',
+                    {
+                        extend:'csv',
+                        exportOptions:{
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions:{
+                            columns: ':visible'
+                        }  
+                    }
                 ],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
                 },
                 "search": {
-                    "search": "<?php echo "$cnpj";?>"
+                    "search": "<?php if(!isset($cnpj)){$cnpj = '';} echo $cnpj;?>"
                 },
             } );
         } );

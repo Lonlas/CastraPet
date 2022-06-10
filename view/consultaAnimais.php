@@ -174,7 +174,7 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="tipoEspecie" class="form-label">Espécie:</label>
                                             <select id="tipoEspecie" name="tipoEspecie" class="form-select" onchange="carregarRaca(this)" required>
-                                                <option value="">... SELECIONE A ESPÉCIE ...</option>
+                                                <option>... SELECIONE A ESPÉCIE ...</option>
                                                 <option value="0">Canina</option>
                                                 <option value="1">Felina</option>
                                             </select>
@@ -188,8 +188,8 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="slcSexo" class="form-label">Sexo:</label>
                                             <select id="slcSexo" name="slcSexo" class="form-select" required>
-                                                <option value="0">Macho</option>
-                                                <option value="1">Fêmea</option>
+                                                <option value="0">Fêmea</option>
+                                                <option value="1">Macho</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
@@ -331,6 +331,6 @@
                 }
             });
         }
-    </script>  
+    </script>
 </body>
 </html>

@@ -35,16 +35,16 @@
                                 switch($_SESSION["dadosLogin"]->nivelacesso)
                                 {
                                     case 0:
-                                        echo "<a href='".URL."home-usuario' class='stretched-link text-primary'>Voltar para a página inicial</a>";
+                                        echo "<a href='".URL."home-usuario' class='stretched-link'>Voltar para a página inicial</a>";
                                     break;
                                     case 1:
-                                        echo "<a href='".URL."home-clinica' class='stretched-link text-warning'>Voltar para a página inicial</a>";
+                                        echo "<a href='".URL."home-clinica' class='stretched-link'>Voltar para a página inicial</a>";
                                     break;
                                     case 2:
-                                        echo "<a href='".URL."home-adm' class='stretched-link text-danger'>Voltar para a página inicial</a>";
+                                        echo "<a href='".URL."home-adm' class='stretched-link'>Voltar para a página inicial</a>";
                                     break;
                                     default:
-                                        echo "<a href='".URL."inicio' class='stretched-link text-dark'>Voltar para a página inicial</a>";
+                                        echo "<a href='".URL."inicio' class='stretched-link'>Voltar para a página inicial</a>";
                                 }
                             ?>
                             

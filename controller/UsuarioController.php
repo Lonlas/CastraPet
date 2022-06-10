@@ -61,7 +61,7 @@ class UsuarioController
                 //Cadastro do Usuário
                 $cadastra = new Usuario();
                 $cadastra->idlogin = $login->cadastrar();
-                $cadastra->rg = $rg;
+                $cadastra->rg = strtoupper($rg);
                 $cadastra->cpf = $cpf;
                 $cadastra->beneficio = 0;
                 $cadastra->telefone = $tel;
@@ -109,7 +109,7 @@ class UsuarioController
                 }
                 //TRATANDO O DOCUMENTO DO PROTETOR DE ANIMAIS
 
-                if($_POST["chkProtetor"] == "sim" && $_FILES["btnProtetorUpload"]["error"] == 0)
+                /*if($_POST["chkProtetor"] == "sim" && $_FILES["btnProtetorUpload"]["error"] == 0)
                 {
                     //Tratar o envio da imagem
                     $docProtetor = $_FILES["btnProtetorUpload"]["name"];       //Nome do arquivo
@@ -127,7 +127,7 @@ class UsuarioController
                     $cadastra->docprotetor = $novoNomeProtetor;
                     
                     $cadastra->beneficio = 3;
-                }
+                }*/
                 
                 $cadastra->cadastrar();
                 $this->logar();
@@ -154,6 +154,16 @@ class UsuarioController
 
         //Controle de privilégio
         if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+
+            //filtrando a mascara dos inputs
+            $filtros = array(".", "-", "(", ")", " ");
+            $cpf = str_replace($filtros,'',$_POST["txtCPF"]);
+            $cep = str_replace($filtros,'',$_POST["txtCEP"]);
+            $rg = str_replace($filtros,'',$_POST["txtRG"]);
+            $tel = str_replace($filtros,'',$_POST["txtTel"]);
+            $celular = str_replace($filtros,'',$_POST["txtCelular"]);
+            $nis = str_replace($filtros,'',$_POST["txtNIS"]);
+
             $login = new Login();
             $login->idlogin = $_POST["idlogin"]; 
             $login->nome =    $_POST["txtNome"];
@@ -162,8 +172,8 @@ class UsuarioController
 
 
             $usu = new Usuario();
-            $usu->rg =        $_POST["txtRG"];
-            $usu->cpf =       $_POST["txtCPF"];
+            $usu->rg =        strtoupper($rg);
+            $usu->cpf =       $cpf;
 
             // Que tipo de benefício tem
             if (isset($_POST["chkProtetor"])) {
@@ -174,20 +184,26 @@ class UsuarioController
             }
             else{ $usu->beneficio = 0; }
 
-            $usu->telefone =  $_POST["txtTel"];
-            $usu->celular =   $_POST["txtCelular"];
+            $usu->telefone =  $tel;
+            $usu->celular =   $celular;
             $usu->usurua =    $_POST["txtRua"];
             $usu->usubairro = $_POST["txtBairro"];
             $usu->usunumero = $_POST["txtNumero"];
-            $usu->usucep =    $_POST["txtCEP"];
+            $usu->usucep =    $cep;
             
                 // NIS
-                if(empty($_POST["txtNIS"])){
+                if(empty($nis)){
                     $usu->nis = "";
                 }
-                else{ $usu->nis = $_POST["txtNIS"];}
+                else{ $usu->nis = $nis;}
 
             $usu->idusuario = $_POST["idusuario"];
+            if(isset($_POST["chkPunicao"]))
+            {
+                $usu->punicao = $_POST["chkPunicao"];
+            }else{
+                $usu->punicao = 0;
+            }
             $usu->atualizar();
 
             echo "<script>
@@ -244,12 +260,21 @@ class UsuarioController
         //Controle de privilégio
         if($_SESSION["dadosLogin"]->nivelacesso == 0) {
 
+            
+
             $castracao = new Castracao();
             $castracao->idanimal =   $_POST["idAnimal"];
             $castracao->observacao = $_POST["obsCastracao"];
             $castracao->status = 0;
 
             $castracao->cadastrar();
+            
+            $usuario = new Usuario();
+            $usuario->idusuario = $_POST["idusuario"];
+            $quantCastracaoAtual = $usuario->retornarQuantCastracao();
+
+            $usuario->quantcastracoes = $quantCastracaoAtual - 1;
+            $usuario->alterarQuantCastracao();
 
             echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
         }

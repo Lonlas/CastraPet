@@ -163,7 +163,7 @@ class AnimalController
             catch(Exception $e){
                 if($_SESSION["dadosLogin"]->nivelacesso == 2)
                 {
-                    echo "<script>alert('Erro ao excluir o animal'); window.location='".URL."consulta-animais/$idusuario'; </script>";
+                    echo "<script>alert('Erro ao excluir o animal! Verifique se esse animal não possui um cadastro nas castrações'); window.location='".URL."consulta-animais/$idusuario'; </script>";
                 }
                 else
                 {

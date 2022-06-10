@@ -130,7 +130,7 @@
                                 <div class="row">
                                     <p>
                                         <?php 
-                                            if(empty($_SESSION["dadosUsuario"]->docprotetor)){
+                                            if(empty($_SESSION["dadosUsuario"]->beneficio == 2)){
                                                 echo "<input type='checkbox' disabled>";  
                                                 echo " Sou protetor de animais";
                                             }
