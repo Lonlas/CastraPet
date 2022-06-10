@@ -62,7 +62,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT * FROM raca WHERE tipoespecie = :tipoespecie");
+            $cmd = $con->prepare("SELECT * FROM raca WHERE tipoespecie in(:tipoespecie,2) ");
 
             //Parâmetros SQL
             $cmd->bindParam(":tipoespecie", $this->tipoespecie);

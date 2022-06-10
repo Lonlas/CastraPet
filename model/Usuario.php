@@ -179,6 +179,41 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+
+        function verificarNis()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("SELECT nis FROM usuario WHERE nis = :nis");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":nis", $this->nis);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetch(PDO::FETCH_OBJ);
+        }
+
+        function verificarCPF()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("SELECT cpf FROM usuario WHERE cpf = :cpf");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":cpf", $this->cpf);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetch(PDO::FETCH_OBJ);
+        }
+
         //Método para punição
         function aplicarPunicao()
         {

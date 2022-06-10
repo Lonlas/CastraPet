@@ -22,24 +22,29 @@
                         foreach ($dadosAnimais as $value)
                         {
                             //Reescrevendo a espécie
+                            $valorEspecie = $value->especie;
                             $value->especie = str_replace("0","Canina", $value->especie);
                             $value->especie = str_replace("1","Felina", $value->especie);
 
                             //Reescrevendo o sexo
+                            $valorSexo = $value->sexo;
                             $value->sexo = str_replace("0","Fêmea", $value->sexo);
                             $value->sexo = str_replace("1","Macho", $value->sexo);
 
                             //Reescrevendo a pelagem
+                            $valorPelagem = $value->pelagem;
                             $value->pelagem = str_replace("0","Curta", $value->pelagem);
                             $value->pelagem = str_replace("1","Média", $value->pelagem);
                             $value->pelagem = str_replace("2","Alta", $value->pelagem);
                             
                             //Reescrevendo o porte
+                            $valorPorte = $value->porte;
                             $value->porte = str_replace("0","Pequeno", $value->porte);
                             $value->porte = str_replace("1","Médio", $value->porte);
                             $value->porte = str_replace("2","Grande", $value->porte);
 
                             //Reescrevendo o Comunitário
+                            $valorComunitario = $value->comunitario;
                             $value->comunitario = str_replace("0","Não", $value->comunitario);
                             $value->comunitario = str_replace("1","Sim", $value->comunitario);
 
@@ -122,7 +127,7 @@
                                         if($_SESSION["dadosUsuario"]->quantcastracoes > 0 && $_SESSION["dadosUsuario"]->punicao == 0)
                                         {
                                             echo "
-                                            <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$value->idanimal'>
+                                            <button class='btn btn-success w-100 mb-2' id='btnSolicitar' type='button' data-bs-target='#modalSolicitar' data-bs-toggle='modal' data-idanimal='$value->idanimal'>
                                                 Solicitar castração
                                             </button>
                                             ";
@@ -132,7 +137,12 @@
                                             echo "<span class='btn bg-danger w-100 mb-2 text-white' style='cursor: default;'>Solicitação Bloqueada</span> ";
                                         }
                                         echo "
-                                        <a href='".URL."atualizar-animal/$value->idanimal' class='btn btn-warning w-100 mb-2 text-white' >Editar animal</a>
+                                        <button class='btn btn-warning w-100 mb-2' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
+                                                data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$valorEspecie' 
+                                                data-sexo='$valorSexo' data-cor='$value->cor' data-raca='$value->idraca' data-idade='$value->idade' data-pelagem='$valorPelagem' 
+                                                data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$value->foto'>
+                                                Editar animal
+                                        </button>
                                         <a href='".URL."excluir-animal/$value->idanimal' class='btn btn-danger w-100'>Excluir animal</a>
                                         ";
                                     }
@@ -301,7 +311,7 @@
             <div class='modal-dialog modal-dialog-centered'>
                 <div class='modal-content'>
                     <form action="<?php echo URL.'solicitar-castracao';?>" method='post'>
-                        <input type='text' id='idAnimal' name='idAnimal'>
+                        <input type='text' id='idAnimalSolicita' name='idAnimal'>
                         <div class='modal-header'>
                             <h5 class='modal-title' id='staticBackdropLabel'>Solicitar castração</h5>
                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
@@ -319,6 +329,7 @@
             </div>
         </div>
         <!-- /MODAL -->
+        
         <!-- /CORPO -->
     </div>
 
@@ -329,19 +340,6 @@
     <!-- EXTENSÃO JQUERY PARA O AJAX -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-    <!-- ABRIR MODAL EDITAR -->
-    <script>
-        var exampleModal = document.getElementById('modalEditar')
-        exampleModal.addEventListener('show.bs.modal', function (event) {
-            // Button that triggered the modal
-            var button = event.relatedTarget
-            // Extract info from data-bs-* attributes
-            var idanimal = button.getAttribute('data-bs-idanimal')
-
-            $("#idanimal").val(idanimal);
-        });
-    </script>
-
     <!-- ABRIR MODAL SOLICITAR -->
     <script>
         var exampleModal = document.getElementById('modalSolicitar')
@@ -349,14 +347,69 @@
             // Button that triggered the modal
             var button = event.relatedTarget
             // Extract info from data-bs-* attributes
-            var idanimal = button.getAttribute('data-bs-idanimal')
+            var idanimal = button.getAttribute('data-idanimal')
 
-            $("#idanimal").val(idanimal);
+            $("#idAnimalSolicita").val(idanimal);
         });
     </script>  
-    
-    <!-- SCRIPT PARA POPULAR SELECT racas -->
+
+    <!-- ABRIR MODAL EDITAR -->
     <script>
+        //Definindo os valores nos inputs da modal
+
+        var modal = document.getElementById('modalEditar')
+        modal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var idusuario = button.getAttribute('data-idusuario')
+            var idanimal = button.getAttribute('data-idanimal')
+            var nome = button.getAttribute('data-nome')
+            var especie = parseInt(button.getAttribute('data-especie'))
+            var sexo = parseInt(button.getAttribute('data-sexo'))
+            var cor = button.getAttribute('data-cor')
+            
+            var idade = button.getAttribute('data-idade')
+            var pelagem = parseInt(button.getAttribute('data-pelagem'))
+            var foto = button.getAttribute('data-foto')
+            if (foto == "")
+            {
+                foto = "imagem_exemplo.jpg";
+            }
+            $(document).ready(function()
+            {
+                $("#racas").empty(); //limpar todos antes de carregar
+                $.ajax({
+                    url: '<?php echo URL;?>carregar-raca/'+ especie,
+                    success: function(data) {
+                        $("#racas").append(data);
+                        try{
+                            $("#racas option").filter("[value="+raca+"]").attr("selected",true)
+                        }
+                        catch{}
+                    }
+                });
+            })
+            
+            var raca = button.getAttribute('data-raca')
+            var porte = button.getAttribute('data-porte')
+            var comunitario = button.getAttribute('data-comunitario')
+
+            $("#idusuario").val(idusuario)
+            $("#idanimal").val(idanimal)
+            $("#txtNome").val(nome)
+            $("#tipoEspecie option").filter("[value="+especie+"]").attr("selected",true)
+            $("#slcSexo option").filter("option[value="+sexo+"]").attr("selected",true)
+            $("#slcPelagem option").filter("option[value="+pelagem+"]").attr("selected",true)
+            $("#slcPorte option").filter("option[value="+porte+"]").attr("selected",true)
+            $("#slcComunitario option").filter("option[value="+comunitario+"]").attr("selected",true)
+            $("#txtCor").val(cor)
+            $("#numIdade").val(idade)
+            $("#imgAnimal").prop("src","<?php echo URL.'recursos/img/Animais/';?>"+foto);
+        })
+    </script>
+    <script>
+        //Carregar raças
         function carregarRaca(id)
         {
             //limpar todos antes de carregar
@@ -369,5 +422,7 @@
             });
         }
     </script>   
+
+    
 </body>
 </html>

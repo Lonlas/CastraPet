@@ -119,7 +119,7 @@
                                                 data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$value->especie' 
                                                 data-sexo='$value->sexo' data-cor='$value->cor' data-raca='$value->raca' data-idade='$value->idade' data-pelagem='$value->pelagem' 
                                                 data-porte='$value->porte' data-comunitario='$value->comunitario' data-foto='$value->foto'>
-                                            Editar
+                                                Editar animal
                                         </button>
                                         <a href='".URL."excluir-animal/$value->idanimal/$value->idusuario/$value->foto' class='btn btn-danger float-end w-100' onclick='return confirm(\"Deseja realmente excluir?\")'><i class='fa fa-trash'></i> Excluir</a>    
                                     </div>
@@ -169,7 +169,7 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="tipoEspecie" class="form-label">Espécie:</label>
-                                            <select id="tipoEspecie" name="tipoEspecie" class="form-select"  onchange="carregarRaca(this)" required>
+                                            <select id="tipoEspecie" name="tipoEspecie" class="form-select" onchange="carregarRaca(this)" required>
                                                 <option value="">... SELECIONE A ESPÉCIE ...</option>
                                                 <option value="0">Canina</option>
                                                 <option value="1">Felina</option>

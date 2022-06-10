@@ -58,7 +58,7 @@
                                             <td>
                                             <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idclinica='$value->idclinica' 
                                                     data-idlogin='$value->idlogin' data-nome='$value->nome' data-email='$value->email' data-cnpj='$value->cnpj' data-telefone='$value->clitelefone' 
-                                                    data-vagas='$value->vagas' data-cep='$value->clicep' data-numero='$value->clinumero' data-bairro='$value->clibairro' data-rua='$value->clirua'>
+                                                    data-vagas='$value->vagas' data-cep='$value->clicep' data-numero='$value->clinumero' data-bairro='$value->clibairro' data-rua='$value->clirua' data-ativo='$value->ativo'>
                                                 Editar
                                             </button>
                                             <a href='".URL."excluir-clinica/$value->idclinica/$value->idlogin' onclick='return confirm(\"tem certeza que deseja excluir a clínica $value->nome?\")' class='btn btn-danger'>Excluir</a></td>
@@ -120,6 +120,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <label for="chkAtivo" class="form-label">Ativo:</label>
+                                    <input type="checkbox" name="chkAtivo" id="chkAtivo" value="1" class="form-check">
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
@@ -151,6 +155,8 @@
                                 <div class="form-group">
                                     <label for="txtConfSenha">Confirme a Senha</label>
                                     <input type="password" id="txtConfSenha" name="txtConfSenha" class="form-control" placeholder="" required>
+                                    <div class="text-danger" id="avisoIgualdade" style="display:none;">as Senhas devem ser iguais*</div>
+                                    <div class="text-danger" id="avisoComprimento" style="display:none;">A senha deve conter mais que 5 dígitos*</div>
                                 </div>
                             </div>
                         </div>
@@ -220,6 +226,7 @@
         var numero = button.getAttribute('data-numero')
         var bairro = button.getAttribute('data-bairro')
         var rua = button.getAttribute('data-rua')
+        var ativo = button.getAttribute('data-ativo')
 
         $("#idClinica").val(idclinica)
         $("#idLogin").val(idLogin)
@@ -232,7 +239,31 @@
         $("#txtNumero").val(numero)
         $("#txtBairro").val(bairro)
         $("#txtRua").val(rua)
+        if(ativo == 1)
+        {
+            $("#chkAtivo").prop("checked", true);
+        }
+        else 
+            $("#chkAtivo").prop("checked", false);
         })
+    </script>
+    <script type="text/javascript">
+        //confirme a senha
+        $("form").submit(function(){
+            if($("#txtSenha").val() != $("#txtConfSenha").val())
+            {
+                event.preventDefault();
+                $("#avisoIgualdade").show();
+            }
+            else{$("#avisoIgualdade").hide();}
+
+            if(($("#txtSenha").val().length <= 5) && ($("#txtConfSenha").val().length <= 5))
+            {
+                event.preventDefault();
+                $("#avisoComprimento").show();
+            }
+            else {$("#avisoComprimento").hide();}
+        });
     </script>
 </body>
 </html>

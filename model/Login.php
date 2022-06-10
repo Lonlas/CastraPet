@@ -144,6 +144,7 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+
         function logar()
         {
             //Conectando ao banco de dados
@@ -160,6 +161,7 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+        
         function retornarUsuario()
         {
             //Conectando ao banco de dados
