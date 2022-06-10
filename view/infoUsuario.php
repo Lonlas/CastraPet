@@ -131,14 +131,12 @@
                                     <p>
                                         <?php 
                                             if(empty($_SESSION["dadosUsuario"]->docprotetor)){
-                                                echo "<input type='checkbox' checked disabled>";  
-                                                echo " Sou protetor de animais ";
-                                                echo "<input class='btn btn-success col-auto' type='button' value='Visualizar documento' name='btnProtetorDoc'>";
+                                                echo "<input type='checkbox' disabled>";  
+                                                echo " Sou protetor de animais";
                                             }
                                             else{
                                                 echo "<input type='checkbox' checked disabled>";
-                                                echo " Sou protetor de animais &nbsp";
-                                                echo "<button class='btn btn-success col-auto' type='button' name='btnProtetorDoc' data-bs-target='#modalImagem' data-bs-toggle='modal' data-bs-imagem='".$_SESSION["dadosUsuario"]->docprotetor."'>Visualizar documento</button>";
+                                                echo " Sou protetor de animais";
                                             }
                                         ?>
                                     </p>

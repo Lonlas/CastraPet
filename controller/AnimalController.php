@@ -39,7 +39,7 @@ class AnimalController
             $animal->comunitario = $_POST["slcComunitario"];
 
             /* UPLOAD IMAGEM */
-            if($_FILES["foto"]["error"] == 0)
+            if($_FILES["imgAnimal"]["error"] == 0)
             {
                 $nomeArquivo = $_FILES["imgAnimal"]["name"];    //Nome do arquivo
                 $nomeTemp =    $_FILES["imgAnimal"]["tmp_name"];   //nome temporário
@@ -65,16 +65,14 @@ class AnimalController
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
 
-    function atualizarAnimal($idusuario,$id)
+    function atualizarAnimal()
     {
-        //caso não usuário não esteja logado
-        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
 
         //Controle de privilégio
         if($_SESSION["dadosLogin"]->nivelacesso == 0 || $_SESSION["dadosLogin"]->nivelacesso == 2) {
 
             $animal = new Animal();
-            $animal->idanimal =    $id;
+            $animal->idanimal =    $_POST["idanimal"];
             $animal->aninome =     $_POST["txtNome"];
             $animal->especie =     $_POST["tipoEspecie"];
             $animal->idade =       $_POST["numIdade"];
@@ -84,35 +82,59 @@ class AnimalController
             $animal->porte =       $_POST["slcPorte"];
             $animal->idraca =      $_POST["racas"];
             $animal->comunitario = $_POST["slcComunitario"];
-
+    
             /* UPLOAD IMAGEM */
-            if($_FILES["foto"]["error"] == 0 && $animal->foto != "")
+            $infoanimal = new Animal();
+            $infoanimal->idanimal = $_POST["idanimal"];
+            $dadosAnimal = $infoanimal->retornar();
+            if($_FILES["foto"]["error"] == 0)
             {
-                $nomeTemp =      $_FILES["foto"]["tmp_name"];
-                $pastaDestino = "recursos/img/Animal/".$animal->foto;
-                move_uploaded_file($nomeTemp, $pastaDestino);
+                
+                if(empty($dadosAnimal->foto))
+                {
+                    $nomeArquivo = $_FILES["foto"]["name"];       //Nome do arquivo
+                    $nomeTemp =    $_FILES["foto"]["tmp_name"];      //nome temporário
+                    
+                    //pegar a extensão do arquivo
+                    $info = new SplFileInfo($nomeArquivo);
+                    $extensao = $info->getExtension();
+                    
+                    //gerar novo nome
+                    $novoNome = md5(microtime()) . ".$extensao";
+                    
+                    $pastaDestino = "recursos/img/Animais/$novoNome";    //pasta destino
+                    move_uploaded_file($nomeTemp, $pastaDestino);       //mover o arquivo 
+                    
+                    //enviando para o banco
+                    $animal->foto = $novoNome;
+                }
+                else {
+                    unlink("recursos/img/Animais/$dadosAnimal->foto"); //excluir o arquivo
+    
+                    $nomeArquivo = $_FILES["foto"]["name"];       //Nome do arquivo
+                    $nomeTemp =    $_FILES["foto"]["tmp_name"];      //nome temporário
+                    
+                    //pegar a extensão do arquivo
+                    $info = new SplFileInfo($nomeArquivo);
+                    $extensao = $info->getExtension();
+                    
+                    //gerar novo nome
+                    $novoNome = md5(microtime()) . ".$extensao";
+                    
+                    $pastaDestino = "recursos/img/Animais/$novoNome";    //pasta destino
+                    move_uploaded_file($nomeTemp, $pastaDestino);       //mover o arquivo 
+                    
+                    //enviando para o banco
+                    $animal->foto = $novoNome;
+                }
             }
-            else {
-                $nomeArquivo = $_FILES["imgAnimal"]["name"];       //Nome do arquivo
-                $nomeTemp =    $_FILES["imgAnimal"]["tmp_name"];      //nome temporário
-                
-                //pegar a extensão do arquivo
-                $info = new SplFileInfo($nomeArquivo);
-                $extensao = $info->getExtension();
-                
-                //gerar novo nome
-                $novoNome = md5(microtime()) . ".$extensao";
-                
-                $pastaDestino = "recursos/img/Animais/$novoNome";    //pasta destino
-                move_uploaded_file($nomeTemp, $pastaDestino);       //mover o arquivo 
-                
-                //enviando para o banco
-                $animal->foto = $novoNome;
-            }   
-
+            else
+            $animal->foto = $dadosAnimal->foto;
+    
             $animal->atualizar();
+
             if($_SESSION["dadosLogin"]->nivelacesso == 0){ header("Location:".URL."meus-animais"); }
-            else{ header("Location:".URL."consulta-animais/$idusuario");}
+            else{ header("Location:".URL."consulta-animais/".$_POST['idusuario']);}
            
         }
     }
