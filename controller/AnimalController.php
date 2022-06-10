@@ -65,7 +65,7 @@ class AnimalController
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
 
-    function atualizarAnimal($id,$idusuario)
+    function atualizarAnimal($idusuario,$id)
     {
         //caso não usuário não esteja logado
         if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }

@@ -100,7 +100,7 @@ if($_GET)
         break;
         case "atualizar-animal":
             $usuario = new AnimalController();
-            $usuario->atualizarAnimal($url[1]);
+            $usuario->atualizarAnimal($url[1],$url[2]);
         break;
         case "excluir-animal":
             $usuario = new AnimalController();
