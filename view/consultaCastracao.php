@@ -70,9 +70,9 @@
                                         "
                                         <tr>
                                             <td>$value->idcastracao</td>
-                                            <td><img width='100px' class='img-thumbnail' src='".URL."recursos/img/$value->foto'></td>
+                                            <td><img width='300px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
                                             <td>$value->aninome</td>
-                                            <td>$value->nome</td>
+                                            <td>$value->nometutor</td>
                                             <td><a href=". URL . "consulta-usuario/$value->cpf" .">$value->cpf</a></td>
                                             <td><a href=". URL . "consulta-clinica/$value->cnpj" . ">$value->nomeclinica</a></td>
                                             <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
@@ -130,9 +130,9 @@
                                         "
                                         <tr>
                                             <td>$value->idcastracao</td>
-                                            <td><img width='100px' class='img-thumbnail' src='".URL."recursos/img/$value->foto'></td>
+                                            <td><img width='300px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
                                             <td>$value->aninome</td>
-                                            <td>$value->nome</td>
+                                            <td>$value->nometutor</td>
                                             <td>$value->cpf</td>
                                             <td>$value->telefone</td>
                                             <td>$value->celular</td>
@@ -143,7 +143,7 @@
                                             <td>
                                                 <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' 
                                                         data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' 
-                                                        data-nomeTutor='$value->nome' data-foto='$value->foto' data-nomeAnimal='$value->aninome' 
+                                                        data-nomeTutor='$value->nometutor' data-foto='$value->foto' data-nomeAnimal='$value->aninome' 
                                                         data-status='$value->status' data-dataCastracao='$value->horario'>
                                                     Editar
                                                 </button>
@@ -199,8 +199,8 @@
                                             <option value='7'>Animal foi a óbito</option>
                                             <option value='8'>Animal Castrado (Suas informações devem ser editadas)</option>
                                         </select>
-                                        <small class='form-text text-muted'>Coloque em \"Animal Castrado (Suas informações devem ser editadas)\" 
-                                                apenas em caso do animal ser diferente do cadastrado</small>
+                                        <small class='form-text text-muted'>Coloque em \"Animal Castrado (Suas informações devem ser editadas)\",
+                                                somente se alguma informação estiver incorreta!</small>
                                     </div>
                                     <div class='form-group mb-4'>
                                         <label class='form-label' for='codChip'>Número do chip:</label>

@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 include_once "controller/Controller.php";
@@ -160,7 +159,8 @@ if($_GET)
             $adm = new Controller();
             $adm->abrirConsultaAnimais($url[1]);    
         break;
-        #CASTRAÇÃO - vizualização, confirmação e atualização
+        
+        // CASTRAÇÃO - vizualização, confirmação e atualização
         case "lista-solicitacao":
             $adm = new Controller();
             $adm->abrirListaSolicitacao();   

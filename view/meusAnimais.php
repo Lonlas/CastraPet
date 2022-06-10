@@ -274,7 +274,7 @@
                                             <label>Foto do animal:</label>
                                             <?php if($dadosAnimal->foto == "") $dadosAnimal->foto = "...img/imagem_exemplo.jpg"; ?>
                                             <label id="labelImgAnimal" for="inputImgAnimal" style="background-color: 0;"></label>
-                                            <img src="<?php echo URL."recursos/img/$dadosAnimal->foto";?>" alt="Foto do Animal" id="imgAnimal" for="inputImgAnimal">
+                                            <img src="<?php echo URL."recursos/img/Animais/$dadosAnimal->foto";?>" alt="Foto do Animal" id="imgAnimal" for="inputImgAnimal">
                                         </div>
                                         <div class="col-md-6 justify-content-center aling-content-center">
                                             <label>Trocar foto:</label>
@@ -287,7 +287,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Alterar</button>
+                            <button type="submit" class="btn btn-success">Editar</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
