@@ -76,6 +76,8 @@
                                 <div class="form-group">
                                     <label for="txtConfSenha">Confirme a Senha</label>
                                     <input type="password" id="txtConfSenha" name="txtConfSenha" class="form-control" placeholder="" required>
+                                    <div class="text-danger" id="avisoIgualdade" style="display:none;">as Senhas devem ser iguais*</div>
+                                    <div class="text-danger" id="avisoComprimento" style="display:none;">A senha deve conter mais que 5 dígitos*</div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
@@ -149,6 +151,24 @@
                     $campoRua.value = '';
                 }
             });
+    </script>
+    <script type="text/javascript">
+        //confirme a senha
+        $("form").submit(function(){
+            if($("#txtSenha").val() != $("#txtConfSenha").val())
+            {
+                event.preventDefault();
+                $("#avisoIgualdade").show();
+            }
+            else{$("#avisoIgualdade").hide();}
+
+            if(($("#txtSenha").val().length <= 5) && ($("#txtConfSenha").val().length <= 5))
+            {
+                event.preventDefault();
+                $("#avisoComprimento").show();
+            }
+            else {$("#avisoComprimento").hide();}
+        });
     </script>
 
     

@@ -130,15 +130,15 @@
                                 <div class="row">
                                     <p>
                                         <?php 
-                                            if($_SESSION["dadosUsuario"]->beneficio == '2'){
+                                            if(empty($_SESSION["dadosUsuario"]->docprotetor)){
                                                 echo "<input type='checkbox' checked disabled>";  
                                                 echo " Sou protetor de animais ";
                                                 echo "<input class='btn btn-success col-auto' type='button' value='Visualizar documento' name='btnProtetorDoc'>";
                                             }
                                             else{
-                                                echo "<input type='checkbox' disabled>";
+                                                echo "<input type='checkbox' checked disabled>";
                                                 echo " Sou protetor de animais &nbsp";
-                                                echo "<input class='btn btn-success col-auto' type='button' value='Visualizar documento' name='btnProtetorDoc' disabled>";
+                                                echo "<button class='btn btn-success col-auto' type='button' name='btnProtetorDoc' data-bs-target='#modalImagem' data-bs-toggle='modal' data-bs-imagem='".$_SESSION["dadosUsuario"]->docprotetor."'>Visualizar documento</button>";
                                             }
                                         ?>
                                     </p>
@@ -165,7 +165,24 @@
             </div>
         </div>
     </div>
-
+    <!-- MODAL: imagem protetor-->
+    <div class="modal fade" id="modalImagem" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Documento Comprovante de protetor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="" class="img-fluid" id="img">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <!--/MODAL -->
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
@@ -173,5 +190,21 @@
     <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado-->
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ABRIR MODAL EDITAR -->
+    <script>
+        //Definindo os valores nos inputs da modal
+        var modal = document.getElementById('modalImagem')
+        modal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+
+            var img = button.getAttribute('data-bs-imagem')
+
+            $("#img").prop("src","<?php echo URL.'recursos/img/docProtetores/'?>"+img);
+        })
+    </script>
+
 </body>
 </html>

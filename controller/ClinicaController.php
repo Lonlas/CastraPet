@@ -57,7 +57,12 @@ class ClinicaController
         $clinica->clibairro =   $_POST["txtBairro"];
         $clinica->clinumero =   $_POST["txtNumero"];
         $clinica->clicep =      $_POST["txtCEP"];
-        //$clinica->ativo = $_POST["#"]; COLOCAR AQUI QUANDO ATUALIZAR A TELA DE ATUALIZAÇÃO DE CLINICA
+        if($_POST["chkAtivo"] == 1)
+        {
+            $clinica->ativo = 1;
+        }
+        else
+        $clinica->ativo = 0;
         $clinica->atualizar();
 
         header("location:".URL."consulta-clinica");

@@ -55,10 +55,10 @@ class AnimalController
         header("Location:".URL."meus-animais");
     }
 
-    function atualizarAnimal($id)
+    function atualizarAnimal()
     {
         $animal = new Animal();
-        $animal->idanimal =    $id;
+        $animal->idanimal =    $_POST["idanimal"];
         $animal->aninome =     $_POST["txtNome"];
         $animal->especie =     $_POST["tipoEspecie"];
         $animal->idade =       $_POST["numIdade"];
@@ -70,29 +70,50 @@ class AnimalController
         $animal->comunitario = $_POST["slcComunitario"];
 
         /* UPLOAD IMAGEM */
-        if($_FILES["foto"]["error"] == 0 && $animal->foto != "")
+
+        if($_FILES["foto"]["error"] == 0)
         {
-            $nomeTemp =      $_FILES["foto"]["tmp_name"];
-            $pastaDestino = "recursos/img/Animal/".$animal->foto;
-            move_uploaded_file($nomeTemp, $pastaDestino);
+            $infoanimal = new Animal();
+            $infoanimal->idanimal = $_POST["idanimal"];
+            $dadosAnimal = $infoanimal->retornar();
+            if(empty($dadosAnimal->foto) && !is_file("recursos/img/Animais/$dadosAnimal->foto"))
+            {
+                $nomeArquivo = $_FILES["foto"]["name"];       //Nome do arquivo
+                $nomeTemp =    $_FILES["foto"]["tmp_name"];      //nome temporário
+
+                //pegar a extensão do arquivo
+                $info = new SplFileInfo($nomeArquivo);
+                $extensao = $info->getExtension();
+
+                //gerar novo nome
+                $novoNome = md5(microtime()) . ".$extensao";
+
+                $pastaDestino = "recursos/img/Animal/".$dadosAnimal->foto;
+                move_uploaded_file($nomeTemp, $pastaDestino);
+
+                //enviando para o banco
+                $animal->foto = $novoNome;
+            }
+            else {
+                unlink("recursos/img/Animais/$dadosAnimal->foto"); //excluir o arquivo
+
+                $nomeArquivo = $_FILES["foto"]["name"];       //Nome do arquivo
+                $nomeTemp =    $_FILES["foto"]["tmp_name"];      //nome temporário
+                
+                //pegar a extensão do arquivo
+                $info = new SplFileInfo($nomeArquivo);
+                $extensao = $info->getExtension();
+                
+                //gerar novo nome
+                $novoNome = md5(microtime()) . ".$extensao";
+                
+                $pastaDestino = "recursos/img/Animais/$novoNome";    //pasta destino
+                move_uploaded_file($nomeTemp, $pastaDestino);       //mover o arquivo 
+                
+                //enviando para o banco
+                $animal->foto = $novoNome;
+            }
         }
-        else {
-            $nomeArquivo = $_FILES["imgAnimal"]["name"];       //Nome do arquivo
-            $nomeTemp =    $_FILES["imgAnimal"]["tmp_name"];      //nome temporário
-            
-            //pegar a extensão do arquivo
-            $info = new SplFileInfo($nomeArquivo);
-            $extensao = $info->getExtension();
-            
-            //gerar novo nome
-            $novoNome = md5(microtime()) . ".$extensao";
-            
-            $pastaDestino = "recursos/img/Animais/$novoNome";    //pasta destino
-            move_uploaded_file($nomeTemp, $pastaDestino);       //mover o arquivo 
-            
-            //enviando para o banco
-            $animal->foto = $novoNome;
-        }   
 
         $animal->atualizar();
 

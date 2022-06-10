@@ -41,7 +41,6 @@
                                                 <th>#</th>
                                                 <th>Foto</th>
                                                 <th>Animal</th>
-                                                <th>Nome do tutor</th>
                                                 <th>CPF do tutor</th>
                                                 <th>Clínica</th>
                                                 <th>Data</th>
@@ -75,9 +74,8 @@
                                         "
                                         <tr>
                                             <td>$value->idcastracao</td>
-                                            <td><img width='100px' class='img-thumbnail' src='".URL."recursos/img/$value->foto'></td>
+                                            <td><img width='100px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
                                             <td>$value->aninome</td>
-                                            <td>$value->nome</td>
                                             <td><a href=". URL . "consulta-usuario/$value->cpf" .">$value->cpf</a></td>
                                             <td><a href=". URL . "consulta-clinica/$value->cnpj" . ">$value->nomeclinica</a></td>
                                             <td>$data</td>
@@ -135,7 +133,7 @@
                                         "
                                         <tr>
                                             <td>$value->idcastracao</td>
-                                            <td><img width='100px' class='img-thumbnail' src='".URL."recursos/img/$value->foto'></td>
+                                            <td><img width='100px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
                                             <td>$value->aninome</td>
                                             <td>$value->nome</td>
                                             <td>$value->cpf</td>
