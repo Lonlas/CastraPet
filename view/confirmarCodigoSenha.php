@@ -30,7 +30,7 @@
                                 setcookie("msg","",time() - 3600);
                             ?>
                             
-                            <input type="hidden" name="txtEmail" value="<?php echo $url[1];?>">
+                            <input type="hidden" name="txtEmail" value="<?php echo $email;?>">
                             <div class="form-group mb-3">
                                 <label for="txtCod" class="form-label">Codigo de confirmação:</label>
                                 <input type="text" name="txtCod" id="txtCod" class="form-control">
