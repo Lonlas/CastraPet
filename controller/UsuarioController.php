@@ -328,7 +328,7 @@ class UsuarioController
             $email->emailDestinatario = $_POST["txtEmail"];
             $email->codsenha = $codigo;
             $email->enviarRecuperacao();
-
+            
             $login->codsenha = $codigo;
             $login->gerarCodigo();
 

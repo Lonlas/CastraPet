@@ -3,6 +3,7 @@
 <head>
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     
     <?php include_once "head.php";?>
@@ -57,9 +58,10 @@
                                         $value->status = str_replace("2", "Castrado", $value->status);
                                         $value->status = str_replace("3", "Reprovado", $value->status);
                                         $value->status = str_replace("4", "Não compareceu", $value->status);
-
+                                        $data = is_null($value->horario) ? '-' : date('d/m/Y', strtotime($value->horario));
+                                        $hora = is_null($value->horario) ? '-' : date('H:i', strtotime($value->horario));
                                         $value->observacao = preg_replace("/^$/", "-", $value->observacao);
-                                        
+
                                         echo
                                         "
                                         <tr>
@@ -67,8 +69,8 @@
                                             <td>$value->aninome</td>
                                             <td><a href=". URL . "consulta-usuario/$value->cpf" .">$value->cpf</a></td>
                                             <td><a href=". URL . "consulta-clinica/$value->cnpj" . ">$value->nomeclinica</a></td>
-                                            <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
-                                            <td>". date('H:i',strtotime($value->horario)) ."</td>
+                                            <td>$data</td>
+                                            <td>$hora</td>
                                             <td>$value->status</td>
                                             <td>$value->observacao</td>
                                             <td>
@@ -218,8 +220,8 @@
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
 
     <!-- DataTables -->
-    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js'></script>
     <script type='text/javascript' charset='utf8' src='https://code.jquery.com/jquery-3.5.1.js'></script>
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js'></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js'></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js'></script>
     
@@ -232,25 +234,50 @@
             <script type='text/javascript' charset='utf8' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js'></script>
             <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js'></script>
             <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js'></script>
+            <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js'></script>
+            <script>
+                $(document).ready(function() {
+                    $('#tbCastracao').DataTable( {
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'colvis',
+                            {
+                                extend:'csv',
+                                exportOptions:{
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'excel',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'print',
+                                exportOptions:{
+                                    columns: ':visible'
+                                }  
+                            }
+                        ],
+                        'language': {
+                            'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
+                        },
+                        columnDefs: [
+                            {
+                                targets: 1,
+                                className: 'noVis'
+                            }
+                        ]
+                    } );
+                } );
+            </script>
             ";
         }
     ?>
 
-    <script>
-        $(document).ready(function() {
-            $('#tbCastracao').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'csv', 'excel', 'print'
-                ],
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
-                }
-            } );
-        } );
-    </script>
-
-
+    
+    
     <script>
         //Definindo valores aos inputs da modal
         var modal = document.getElementById('modalAtualizar')

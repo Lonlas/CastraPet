@@ -10,11 +10,11 @@ require "recursos/PHPMailer/SMTP.php";
     class Email
     {
         //Atributos
-        private $host = "smtp.gmail.com";                   //servidor do protocolo de envio de email     
-        private $emailRemetente = "castrapet.f@gmail.com";  //email do remetente
-        private $senhaRemetente = "#Castra2022Pet.";         //senha do remetente
+        private $host = "smtp.office365.com";                                                //servidor do protocolo de envio de email     
+        private $emailRemetente = "castrapet.franco@outlook.com";/*"castrapet.f@gmail.com";*/  //email do remetente
+        private $senhaRemetente = "pet.CastraF";/*"#Castra2022Pet.";*/                          //senha do remetente
         private $nomeRemetente = "PetCastra";               //nome do remetente
-        private $porta = 465;                                //porta do servidor TCP (ver na função mail no PHP.ini)
+        private $porta = 587;                               //porta do servidor TLS/STARTTLS/SSL
         private $emailDestinatario;                         //email a ser enviado
         private $nomeDestinatario;                          //nome do destinatário
         private $nomeAnimal;                                //nome do Animal
@@ -97,7 +97,7 @@ require "recursos/PHPMailer/SMTP.php";
                 $email->SMTPAuth = true;
                 $email->Username = $this->emailRemetente;
                 $email->Password = $this->senhaRemetente;
-                $email->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           //criptografia do email
+                $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;           //criptografia do email
                 $email->Port = $this->porta;
                 $email->CharSet = 'UTF-8';
 
@@ -151,12 +151,13 @@ require "recursos/PHPMailer/SMTP.php";
             try{
                 
                 //Configurações
+
                 $email->isSMTP();
                 $email->Host = $this->host;
                 $email->SMTPAuth = true;
                 $email->Username = $this->emailRemetente;
                 $email->Password = $this->senhaRemetente;
-                $email->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           //criptografia do email
+                $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;           //criptografia do email
                 $email->Port = $this->porta;
                 $email->CharSet = 'UTF-8';
 
@@ -207,12 +208,13 @@ require "recursos/PHPMailer/SMTP.php";
             try{
                 
                 //Configurações
-                $email->isSMTP();
+                $email->isSMTP();                
+                $email->SMTPDebug = 0;
                 $email->Host = $this->host;
                 $email->SMTPAuth = true;
                 $email->Username = $this->emailRemetente;
                 $email->Password = $this->senhaRemetente;
-                $email->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           //criptografia do email
+                $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;           //criptografia do email
                 $email->Port = $this->porta;
                 $email->CharSet = 'UTF-8';
 
@@ -233,7 +235,7 @@ require "recursos/PHPMailer/SMTP.php";
                 //conteúdo
                 $email->Body = $Conteudo;
 
-                $email->AltBody = "Foi soliciatada a recuperação da senha na sua conta \n\nCódigo de recuperação: "+$this->codsenha;
+                $email->AltBody = "Foi soliciatada a recuperação da senha na sua conta \n\nCódigo de recuperação: $this->codsenha";
                     
                 //envia
                 $email->send();
