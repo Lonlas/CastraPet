@@ -53,7 +53,7 @@
                             <!-- Começo de um animal -->
                                 <div class='row align-items-center'>
                                     <div class='col-md-3 d-flex align-items-center'>
-                                        <img src='".URL."recursos/img/Animais/$value->foto' alt='Imagem' class='mw-100 img-thumbnail' style='height: 200px; width: 300px;'>
+                                        <img src='".URL."recursos/img/Animais/$value->foto' alt='Imagem' class='mw-100' style='height: 200px; width: 300px;'>
                                     </div>
                                     <div class='col-md-7'>
                                         <div class='row'>
