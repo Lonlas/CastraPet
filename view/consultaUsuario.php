@@ -25,6 +25,7 @@
                             <table id="tbUsuario" class="table table-hover">
                                 <thead>
                                     <th>#</th>
+                                    <th>Comp. Residência</th>
                                     <th>Nome</th>
                                     <th>CPF</th>
                                     <th>RG</th>
@@ -63,6 +64,11 @@
                                             "
                                             <tr>
                                                 <td>$value->idusuario</td>
+                                                <td>
+                                                    <button id='btnImg' type='button' data-bs-target='#modalImg' data-bs-toggle='modal' data-img='$value->doccomprovante'>
+                                                        <img width='150px' class='img-thumbnail' src='".URL."recursos/img/docComprovantes/$value->doccomprovante'>
+                                                    </button>
+                                                </td>
                                                 <td>$value->nome</td>
                                                 <td>$value->cpf</td>
                                                 <td>$value->rg</td>
@@ -74,7 +80,7 @@
                                                 <td>$value->punicao</td>
                                                 <td>
                                                     <a href='". URL. "consulta-animais/$value->idusuario' class='btn btn-success col-auto'>
-                                                        <img src='". URL ."recursos/img/Logo-Castra-Pet.svg' alt='Animais cadastrados' width='30' class='aling-itens-center white justify-content-center'>
+                                                        <img src='". URL ."recursos/img/Logo-Castra-Pet.svg' alt='Animais cadastrados' width='30px' class='aling-itens-center white justify-content-center'>
                                                     </a>
                                                 </td>
                                                 <td>
@@ -197,6 +203,24 @@
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL -->
+    <!-- MODAL: img docComprovante-->
+    <div class="modal fade" id="modalImg" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Comprovante de Residência</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                </div>
+                <div class="modal-body row justify-content-center">   
+                    <img id="modalImagem" src="recursos/img/doccomprovantes/">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -327,6 +351,19 @@
             else{
                 $("#chkPunicao").prop("checked",false);
             }
+        });
+    </script>
+    <!-- ABRIR MODAL editar usuário -->
+    <script>
+        var modalEditar = document.getElementById('modalImg')
+        modalEditar.addEventListener('show.bs.modal', function (event) {
+
+            var button = event.relatedTarget
+
+            var img = button.getAttribute('data-img')
+
+            $("#modalImagem").prop("src", "<?php echo URL.'recursos/img/doccomprovantes/'?>"+img);
+
         });
     </script>
     
