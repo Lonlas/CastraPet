@@ -428,7 +428,9 @@
                 }
             });
         }
-    </script>   
+    </script>
+
+    <!-- SCRIPT PARA MOSTRAR AS FOTOS EM TEMPO REAL -->
     <script>
         inputImgAnimal.onchange = evt => {
             const [file] = inputImgAnimal.files
