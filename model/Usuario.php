@@ -151,6 +151,7 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
+        
         function aplicarPunicao()
         {
             //Conectando ao banco de dados
@@ -161,6 +162,23 @@
             
             //Parâmetros SQL
             $cmd->bindParam(":punicao", $this->punicao);
+            $cmd->bindParam(":idusuario", $this->idusuario);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
+
+        //Atualizar quantidade de castrações
+        function atualizarQuantCastracoes()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para atualizar
+            $cmd = $con->prepare("UPDATE usuario SET quantcastracoes = :quantcastracoes WHERE idusuario = :idusuario");
+                
+            //Parâmetros SQL
+            $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);
             $cmd->bindParam(":idusuario", $this->idusuario);
 
             //Executando o comando SQL
