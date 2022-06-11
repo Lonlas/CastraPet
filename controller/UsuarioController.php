@@ -18,6 +18,7 @@ class UsuarioController
         $rg = str_replace($filtros,'',$_POST["txtRG"]);
         $tel = str_replace($filtros,'',$_POST["txtTel"]);
         $celular = str_replace($filtros,'',$_POST["txtCelular"]);
+        $nis = str_replace($filtros,'',$_POST["txtNIS"]);
 
         $consultarEmail = new Login();
         $consultarEmail->email = $_POST["txtEmail"];
@@ -35,11 +36,17 @@ class UsuarioController
             $cadastra->idlogin = $login->cadastrar();
             $cadastra->rg = $rg;
             $cadastra->cpf = $cpf;
+            $cadastra->quantcastracoes = 1;
 
+            /*
             if($_POST["chkProtetor"] == "sim" && $_FILES["btnProtetorUpload"]["error"] == 0)
                 $cadastra->beneficio = 3;
-            else if($_POST["chkNIS"] == "sim" && strlen($_POST["txtNIS"]) == 1)
+            */
+            if($_POST["chkNIS"] == "sim" && strlen($nis) == 11)
+            {
                 $cadastra->beneficio = 1;
+                $cadastra->quantcastracoes = 2;
+            }
             else
                 $cadastra->beneficio = 0;
 
@@ -57,28 +64,13 @@ class UsuarioController
             else
                 $cadastra->whatsapp = 0;
 
-            //TRATANDO O DOCUMENTO DO PROTETOR DE ANIMAIS
-                //Tratar o envio da imagem
-                $docProtetor = $_FILES["btnProtetorUpload"]["name"];       //Nome do arquivo
-                $docProtetorTemp = $_FILES["btnProtetorUpload"]["tmp_name"];      //nome temporário
-                
-                //pegar a extensão do arquivo
-                $info = new SplFileInfo($docProtetor);
-                $extensao = $info->getExtension();
-                
-                //gerar novo nome
-                $novoNomeProtetor = md5(microtime()) . ".$extensao";
-                
-                $pastaDestino = "recursos/img/docProtetores/$novoNomeProtetor";    //pasta destino
-                move_uploaded_file($docProtetorTemp, $pastaDestino);       //mover o arquivo 
-
             //TRATANDO O COMPROVANTE DE ENDEREÇO
                 //Tratar o envio da imagem
                 $docComprovante = $_FILES["btnComprovante"]["name"];       //Nome do arquivo
                 $docComprovanteTemp = $_FILES["btnComprovante"]["tmp_name"];      //nome temporário
                 
                 //pegar a extensão do arquivo
-                $info = new SplFileInfo($docProtetor);
+                $info = new SplFileInfo($docComprovante);
                 $extensao = $info->getExtension();
                 
                 //gerar novo nome
@@ -87,20 +79,17 @@ class UsuarioController
                 $pastaDestino = "recursos/img/docComprovantes/$novoNomeComprovante";    //pasta destino
                 move_uploaded_file($docComprovanteTemp, $pastaDestino);       //mover o arquivo 
             
-            $cadastra->docprotetor = $novoNomeProtetor;
             $cadastra->doccomprovante = $novoNomeComprovante;
-            $cadastra->quantcastracoes = 1;
 
-            if(empty($_POST["txtNIS"]))
+            if(empty($nis))
             {
                 $cadastra->nis = "";
             }
             else
             {
-                $cadastra->nis = $_POST["txtNIS"];
+                $cadastra->nis = $nis;
             }
-            
-            $cadastra->quantcastracoes = 5;
+
             $cadastra->cadastrar();
             $this->logar();
             header("Location:".URL);
@@ -114,13 +103,27 @@ class UsuarioController
     function solicitarCastracao()
     {
         $castracao = new Castracao();
-        $castracao->idanimal = $_POST["idAnimal"];
-        $castracao->observacao = $_POST["obsCastracao"];
-        $castracao->status = 0;
+        $usuario = new Usuario();
+        $usuario->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+        $dadosUsuario = $usuario->retornar();
+        if($dadosUsuario->quantcastracoes >= 0)
+        {
+            $castracao->idusuario = $usuario->idusuario;
+            $castracao->idanimal = $_POST["idAnimal"];
+            $castracao->observacao = $_POST["obsCastracao"];
+            $castracao->status = 0;
+            $_SESSION["dadosUsuario"]->quantcastracoes--;
+            $usuario->quantcastracoes = $_SESSION["dadosUsuario"]->quantcastracoes;
 
-        $castracao->cadastrar();
+            $usuario->atualizarQuantCastracoes();
+            $castracao->cadastrar();
 
-        echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
+            echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
+        }
+        else
+        {
+            echo"<script>alert('Seu limite de castrações foi atingido'); window.location='".URL."meus-animais'; </script>";
+        }
     }
 
     function agendarClinicaCastracao()
