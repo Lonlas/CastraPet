@@ -192,6 +192,18 @@ class Controller
         }
         else{ include_once "view/paginaNaoEncontrada.php"; }
     }
+
+    function abrirConsultaRaca(){
+        //caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        //caso não tenha privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+            $raca = new Raca();
+            $dadosRaca = $raca->consultar();
+            include_once "view/consultaRaca.php";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
+    }
     #AGENDAMENTO
     function abrirListaSolicitacao(){
         //caso o usuário não esteja logado

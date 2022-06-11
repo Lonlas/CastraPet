@@ -190,10 +190,10 @@ class AnimalController
         if($_SESSION["dadosLogin"]->nivelacesso == 2) {
             try
             {
-                $cadastra = new Raca();
-                $cadastra->raca = $_POST["txtRaca"];
-                $cadastra->tipoespecie = $_POST["tipoEspecie"];
-                $cadastra->cadastrar();
+                $raca = new Raca();
+                $raca->raca = $_POST["txtRaca"];
+                $raca->tipoespecie = $_POST["tipoEspecie"];
+                $raca->cadastrar();
 
                 echo"<script>alert('Raça cadastrada com sucesso'); window.location='".URL."cadastra-raca'; </script>";
             }
@@ -204,5 +204,56 @@ class AnimalController
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
+
+    //Atualizar Raça
+    function atualizarRaca()
+    {
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+            try
+            {
+                $raca = new Raca();
+                $raca->idraca = $_POST["idRaca"];
+                $raca->raca = $_POST["txtRaca"];
+                $raca->tipoespecie = $_POST["tipoEspecie"];
+                $raca->atualizar();
+
+                echo"<script>alert('Raça atualizada com sucesso'); window.location='".URL."consulta-raca'; </script>";
+            }
+            catch(Exception $e)
+            {
+                echo"<script>alert('Erro: $e'); window.location='".URL."consulta-raca'; </script>";
+            }
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
+    }
+    
+    //Excluir Raça
+    function excluirRaca($idraca)
+    {
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+            try
+            {
+                $raca = new Raca();
+                $raca->idraca = $idraca;
+
+                $raca->excluir();
+            }
+            catch(Exception $e)
+            {
+                echo "<script>alert('Erro: $e'); window.location='".URL."consulta-raca'; </script>";
+            }
+            header("Location:".URL."consulta-raca");
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
+    }
+
 }
 ?>

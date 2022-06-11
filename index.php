@@ -142,6 +142,10 @@ if($_GET)
             $usuario = new UsuarioController();
             $usuario->atualizarUsuario();
         break;
+        case "atualiza-raca":
+            $raca = new AnimalController();
+            $raca->atualizarRaca();
+        break;
         #CONSULTAS
         case "consulta-usuario":
             $adm = new Controller();
@@ -158,6 +162,15 @@ if($_GET)
         case "consulta-animais":
             $adm = new Controller();
             $adm->abrirConsultaAnimais($url[1]);    
+        break;
+        case "consulta-raca":
+            $adm = new Controller();
+            $adm->abrirConsultaRaca();
+        break;
+        #EXCLUSÕES
+        case "excluir-raca":
+            $raca = new AnimalController();
+            $raca->excluirRaca($url[1]);
         break;
         
         // CASTRAÇÃO - vizualização, confirmação e atualização
