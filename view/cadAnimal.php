@@ -65,6 +65,9 @@
             }
         }
     </style>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>  
     
@@ -91,8 +94,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
-                                            <label for="slcEspecie" class="form-label">Espécie:</label>
-                                            <select id="slcEspecie" name="slcEspecie" class="form-select" required>
+                                            <label for="tipoEspecie" class="form-label">Espécie:</label>
+                                            <select id="tipoEspecie" name="tipoEspecie" class="form-select"  onchange="carregarRaca(this)" required>
+                                                <option value="">... SELECIONE A ESPÉCIE ...</option>
                                                 <option value="0">Canina</option>
                                                 <option value="1">Felina</option>
                                             </select>
@@ -136,15 +140,10 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="listRaca" class="form-label">Raça:</label>
-                                            <input list="racas" name="listRaca" id="listRaca" class="form-control" maxlength="30" required>
-                                            <datalist id="racas">
-                                                <?php
-                                                    foreach($dadosRaca as $value)
-                                                    {
-                                                        echo "<option value='$value->raca'>";
-                                                    }
-                                                ?>
-                                            </datalist>
+                                            <select name="racas" id="racas" class="form-select">
+                                                <option value="">... SELECIONE A RAÇA ...</option>
+
+                                            </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="slcComunitario" class="form-label">Animal Comunitário:</label>
@@ -190,6 +189,8 @@
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <!-- EXTENSÃO JQUERY PARA O AJAX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
     <script>
         inputImgAnimal.onchange = evt => {
@@ -200,5 +201,20 @@
             }
         }
     </script>
+     
+    <!-- SCRIPT PARA POPULAR SELECT racas -->
+    <script>
+        function carregarRaca(id)
+        {
+            //limpar todos antes de carregar
+            $("#racas").empty();
+            $.ajax({
+                url: '<?php echo URL;?>carregar-raca/'+ id.value,
+                success: function(data) {
+                    $("#racas").append(data);
+                }
+            });
+        }
+    </script>  
 </body>
 </html>

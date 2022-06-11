@@ -40,7 +40,7 @@
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
                                         <label for="txtRG" class="form-label">RG:<font color="red">*</font></label>
-                                        <input class="form-control" type="text" name="txtRG" id="txtRG" maxlength="12" placeholder="00.000.000-0" required>
+                                        <input class="form-control" type="text" name="txtRG" id="txtRG" maxlength="12" placeholder="00.000.000-X" required>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="txtCelular" class="form-label">Celular:<font color="red">*</font></label>
@@ -66,7 +66,7 @@
                                         <label for="chkNIS" class="form-label">Tenho o benefício do NIS</label>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <input class="form-control" type="text" name="txtNIS" id="txtNIS" placeholder="Número do NIS" maxlength="14" disabled>
+                                        <input class="form-control" type="text" name="txtNIS" id="txtNIS" placeholder="Número do NIS" maxlength="11" disabled>
                                     </div>
                                 </div>
                                 <!--
@@ -74,10 +74,6 @@
                                     <div class="form-group col-sm-6">
                                         <input type="checkbox" name="chkProtetor" id="chkProtetor" value="sim">
                                         <label for="chkProtetor" class="form-label">Sou protetor de animais</label>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <input class="btn btn-success" type="file" value="Fazer upload do documento" accept="image/*" name="btnProtetorUpload" id="btnProtetorUpload" hidden disabled>
-                                        <label id="labelProtetor" for="btnProtetorUpload" class="btn btn-success disabled" style="background-color: 0;">Fazer upload do documento</label>
                                     </div>
                                 </div>
                                 -->
@@ -146,7 +142,7 @@
         $(document).ready(function (){
             $("#txtCPF").mask('000.000.000-00');
             $("#txtCEP").mask('00000-000');
-            $("#txtRG").mask('00.000.000-0');
+            $("#txtRG").mask('00.000.000-X', {'translation': {X: {pattern: /[0-9xX]/}}});
             $("#txtTel").mask('(00) 0000-0000');
             $("#txtCelular").mask('(00) 00000-0000');
             $("#txtNIS").mask('000.00000.00-0');
