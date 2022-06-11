@@ -30,7 +30,7 @@ class Controller
     function abrirEsqSenha(){
         include_once "view/esqSenha.php";
     }
-    function abrirRecuperacao()
+    function abrirRecuperacao($email)
     {
         include_once "view/confirmarCodigoSenha.php";
     }

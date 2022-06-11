@@ -58,7 +58,7 @@ if($_GET)
         break;
         case "codigo-de-recuperacao":
             $direciona = new Controller();
-            $direciona->abrirRecuperacao();
+            $direciona->abrirRecuperacao($url[1]);
         break;
         case "confirmar-recuperacao":
             $direciona = new UsuarioController();
