@@ -39,13 +39,16 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>Foto</th>
                                                 <th>Animal</th>
-                                                <th>CPF do Responsável</th>
+                                                <th>Nome do tutor</th>
+                                                <th>CPF do tutor</th>
                                                 <th>Clínica</th>
                                                 <th>Data</th>
                                                 <th>Hora</th>
                                                 <th>Status</th>
                                                 <th>Observação</th>
+                                                <th>Observação CLinica</th>
                                                 <th>Ações</th>
                                             </tr>
                                         </thead>
@@ -53,28 +56,41 @@
                                         ";
                                     foreach($dadosCastracao as $value)
                                     {
-                                        $value->status = str_replace("0", "Em análise", $value->status);
-                                        $value->status = str_replace("1", "Aprovado", $value->status);
-                                        $value->status = str_replace("2", "Castrado", $value->status);
-                                        $value->status = str_replace("3", "Reprovado", $value->status);
-                                        $value->status = str_replace("4", "Não compareceu", $value->status);
+                                        
+
+                                        $value->status = str_replace("0", "Solicitação em análise", $value->status);
+                                        $value->status = str_replace("1", "Solicitação aprovada", $value->status);
+                                        $value->status = str_replace("2", "Animal castrado", $value->status);
+                                        $value->status = str_replace("3", "Solicitação reprovada", $value->status);
+                                        $value->status = str_replace("4", "Tutor não compareceu", $value->status);
+                                        $value->status = str_replace("5", "Castração cancelada", $value->status); 
+                                        $value->status = str_replace("6", "Reagendar castração", $value->status); 
+                                        $value->status = str_replace("7", "Animal foi a óbito", $value->status);
+                                        $value->status = str_replace("8", "Animal Castrado (Porém suas informações devem ser editadas)", $value->status); 
                                         $data = is_null($value->horario) ? '-' : date('d/m/Y', strtotime($value->horario));
                                         $hora = is_null($value->horario) ? '-' : date('H:i', strtotime($value->horario));
+                                        
                                         $value->observacao = preg_replace("/^$/", "-", $value->observacao);
+                                        $value->obsclinica = preg_replace("/^$/", "-", $value->obsclinica);
 
                                         echo
                                         "
                                         <tr>
                                             <td>$value->idcastracao</td>
+                                            <td><img width='300px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
                                             <td>$value->aninome</td>
+                                            <td>$value->nometutor</td>
                                             <td><a href=". URL . "consulta-usuario/$value->cpf" .">$value->cpf</a></td>
                                             <td><a href=". URL . "consulta-clinica/$value->cnpj" . ">$value->nomeclinica</a></td>
                                             <td>$data</td>
                                             <td>$hora</td>
                                             <td>$value->status</td>
                                             <td>$value->observacao</td>
+                                            <td>$value->obsclinica</td>
                                             <td>
-                                            <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao'>Atualizar</button>
+                                            <!--<button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao'>
+                                                Editar
+                                            </button>-->
                                             <a href='".URL."excluir-catracao/$value->idcastracao' class='btn btn-danger' onClick='return confirm(\"Tem certeza que deseja excluir a castracao do $value->aninome?\")'>Excluir</a>
                                             </td>
                                             
@@ -88,9 +104,12 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>Foto</th>
                                                 <th>Animal</th>
-                                                <th>CPF do Responsável</th>
+                                                <th>Nome do tutor</th>
+                                                <th>CPF do tutor</th>
                                                 <th>Telefone</th>
+                                                <th>Celular</th>
                                                 <th>Data</th>
                                                 <th>Hora</th>
                                                 <th>Status</th>
@@ -103,11 +122,15 @@
 
                                     foreach($dadosCastracaoClinica as $value)
                                     {
-                                        $value->status = str_replace("0", "Em análise", $value->status);
-                                        $value->status = str_replace("1", "Aprovado", $value->status);
-                                        $value->status = str_replace("2", "Castrado", $value->status);
-                                        $value->status = str_replace("3", "Reprovado", $value->status);
-                                        $value->status = str_replace("4", "Não compareceu", $value->status);
+                                        $value->status = str_replace("0", "Solicitação em análise", $value->status);
+                                        $value->status = str_replace("1", "Solicitação aprovada", $value->status);
+                                        $value->status = str_replace("2", "Animal castrado", $value->status);
+                                        $value->status = str_replace("3", "Solicitação reprovada", $value->status);
+                                        $value->status = str_replace("4", "Tutor não compareceu", $value->status);
+                                        $value->status = str_replace("5", "Castração cancelada", $value->status); 
+                                        $value->status = str_replace("6", "Reagendar castração", $value->status); 
+                                        $value->status = str_replace("7", "Animal foi a óbito", $value->status); 
+                                        $value->status = str_replace("8", "Animal Castrado (Suas informações devem ser editadas)", $value->status); 
                                         
                                         $value->observacao = preg_replace("/^$/", "-", $value->observacao);
                                         
@@ -115,15 +138,23 @@
                                         "
                                         <tr>
                                             <td>$value->idcastracao</td>
+                                            <td><img width='300px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
                                             <td>$value->aninome</td>
+                                            <td>$value->nometutor</td>
                                             <td>$value->cpf</td>
                                             <td>$value->telefone</td>
+                                            <td>$value->celular</td>
                                             <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
                                             <td>". date('H:i',strtotime($value->horario)) ."</td>
                                             <td>$value->status</td>
                                             <td>$value->observacao</td>
                                             <td>
-                                                <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' data-nomeTutor='$value->nome' data-nomeAnimal='$value->aninome' data-status='$value->status' data-dataCastracao='$value->horario'>Atualizar</button>
+                                                <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' 
+                                                        data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' 
+                                                        data-nomeTutor='$value->nometutor' data-foto='$value->foto' data-nomeAnimal='$value->aninome' 
+                                                        data-status='$value->status' data-dataCastracao='$value->horario'>
+                                                    Editar
+                                                </button>
                                             </td>
                                         </tr>
                                         ";
@@ -144,6 +175,7 @@
                 </div>
             </div> 
         </div>
+        
         <?php
         //MODAL DA CLÍNICA
             if($_SESSION["dadosLogin"]->nivelacesso == 1){
@@ -160,23 +192,35 @@
                                 <input type='hidden' id='nomeTutor' name='nomeTutor'>
                                 <input type='hidden' id='dataCastracao' name='dataCastracao'>
                                 <div class='modal-header'>
-                                    <h5 class='modal-title' id='staticBackdropLabel'>Atualizar castração</h5>
+                                    <h5 class='modal-title' id='staticBackdropLabel'>Editar castração</h5>
                                     <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                 </div>
                                 <div class='modal-body'>
-                                    <div class='form-group'>
-                                        <label for='status' class='label-form'>Status da castração</label>
-                                        <select name='statusAtualizado' id='status' class='form-select'>
+                                    <div class='form-group mb-4'>
+                                        <label for='statusAtualizado' class='label-form'>Status da castração</label>
+                                        <select name='statusAtualizado' id='statusAtualizado' class='form-select'>
                                             <option value=''>-- Atualize o status --</option>
-                                            <option value='Castrado'>Castrado</option>
-                                            <option value='nCompareceu'>Não compareceu</option>
-                                            <option value='emAnalise'>Em Análise</option>
+                                            <option value='2'>Animal Castrado</option>
+                                            <option value='4'>Tutor não compareceu</option>
+                                            <option value='5'>Castração cancelada</option>
+                                            <option value='6'>Reagendar castração</option>
+                                            <option value='7'>Animal foi a óbito</option>
+                                            <option value='8'>Animal Castrado (Suas informações devem ser editadas)</option>
                                         </select>
-                                        <small class='form-text text-muted'>Coloque em \"Em Análise\" apenas em caso da clínica não poder castrar o animal</small>
+                                        <small class='form-text text-muted'>Coloque em \"Animal Castrado (Suas informações devem ser editadas)\",
+                                                somente se alguma informação estiver incorreta!</small>
+                                    </div>
+                                    <div class='form-group mb-4'>
+                                        <label class='form-label' for='codChip'>Número do chip:</label>
+                                        <input type='text' name='codChip' id='codChip' class='form-control' maxlength='15'>
+                                    <div>
+                                    <div class='form-group'>
+                                        <label class='form-label' for='obsClinica'>Observação:</label>
+                                        <textarea name='obsClinica' id='obsClinica' rows='5' class='form-control'></textarea>
                                     </div>
                                 </div>
                                 <div class='modal-footer'>
-                                    <button type='submit' class='btn btn-primary'>Atualizar Castração</button>
+                                    <button type='submit' class='btn btn-primary'>Editar</button>
                                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                                 </div>
                             </form>
@@ -185,7 +229,7 @@
                 </div>";
             }
         //MODAL DO ADM
-            else if($_SESSION["dadosLogin"]->nivelacesso == 2){
+            /*else if($_SESSION["dadosLogin"]->nivelacesso == 2){
                 echo"
                 <div class='modal fade' id='modalAtualizar' data-bs-keyboard='true' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
                     <div class='modal-dialog modal-dialog-centered'>
@@ -193,22 +237,22 @@
                             <form action='".URL."atualizar-castracao' method='post'>
                                 <input type='hidden' id='idCastracao' name='idCastracao'>
                                 <div class='modal-header'>
-                                    <h5 class='modal-title' id='staticBackdropLabel'>Atualizar castração</h5>
+                                    <h5 class='modal-title' id='staticBackdropLabel'>Editar castração</h5>
                                     <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                 </div>
                                 <div class='modal-body'>
-                                    <label class='form-label' for='obhsCastracao'>Observação: (opcional)</label>
-                                    <textarea name='obsCastracao' id='obsCastr' rows='5' class='form-control'></textarea>
+                                    <label class='form-label' for='obsCastracao'>Observação: (opcional)</label>
+                                    <textarea name='obsCastracao' id='obsCastracao' rows='5' class='form-control' disabled></textarea>
                                 </div>
                                 <div class='modal-footer'>
-                                    <button type='submit' class='btn btn-primary'>Atualizar Castração</button>
+                                    <button type='submit' class='btn btn-primary'>Editar</button>
                                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>";
-            }
+            }*/
         ?>
         <!-- /MODAL -->
         <!-- /CORPO -->
@@ -274,10 +318,28 @@
             </script>
             ";
         }
+        else
+        {
+            echo "
+                <script>
+                    $(document).ready(function() {
+                        $('#tbCastracao').DataTable( {
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'csv', 'excel', 'print'
+                            ],
+                            'language': {
+                                'url': '//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json'
+                            }
+                        } );
+                    } );
+                </script>
+            ";
+        }
     ?>
 
     
-    
+
     <script>
         //Definindo valores aos inputs da modal
         var modal = document.getElementById('modalAtualizar')

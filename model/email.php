@@ -11,8 +11,8 @@ require "recursos/PHPMailer/SMTP.php";
     {
         //Atributos
         private $host = "smtp.office365.com";                                                //servidor do protocolo de envio de email     
-        private $emailRemetente = "castrapet.franco@outlook.com";/*"castrapet.f@gmail.com";*/  //email do remetente
-        private $senhaRemetente = "pet.CastraF";/*"#Castra2022Pet.";*/                          //senha do remetente
+        private $emailRemetente = "castrapet.franco@outlook.com";                           //email do remetente
+        private $senhaRemetente = "pet.CastraF";                                            //senha do remetente
         private $nomeRemetente = "PetCastra";               //nome do remetente
         private $porta = 587;                               //porta do servidor TLS/STARTTLS/SSL
         private $emailDestinatario;                         //email a ser enviado

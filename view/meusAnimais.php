@@ -22,24 +22,29 @@
                         foreach ($dadosAnimais as $value)
                         {
                             //Reescrevendo a espécie
+                            $valorEspecie = $value->especie;
                             $value->especie = str_replace("0","Canina", $value->especie);
                             $value->especie = str_replace("1","Felina", $value->especie);
 
                             //Reescrevendo o sexo
+                            $valorSexo = $value->sexo;
                             $value->sexo = str_replace("0","Fêmea", $value->sexo);
                             $value->sexo = str_replace("1","Macho", $value->sexo);
 
                             //Reescrevendo a pelagem
+                            $valorPelagem = $value->pelagem;
                             $value->pelagem = str_replace("0","Curta", $value->pelagem);
                             $value->pelagem = str_replace("1","Média", $value->pelagem);
                             $value->pelagem = str_replace("2","Alta", $value->pelagem);
                             
                             //Reescrevendo o porte
+                            $valorPorte = $value->porte;
                             $value->porte = str_replace("0","Pequeno", $value->porte);
                             $value->porte = str_replace("1","Médio", $value->porte);
                             $value->porte = str_replace("2","Grande", $value->porte);
 
                             //Reescrevendo o Comunitário
+                            $valorComunitario = $value->comunitario;
                             $value->comunitario = str_replace("0","Não", $value->comunitario);
                             $value->comunitario = str_replace("1","Sim", $value->comunitario);
 
@@ -52,7 +57,7 @@
                                     </div>
                                     <div class='col-md-7'>
                                         <div class='row'>
-                                            <div class='col-md-9'>
+                                            <div class='col-md-7'>
                                                 <div class='row'>
                                                     <p>
                                                         Nome:
@@ -90,7 +95,7 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div class='col-md-3'>
+                                            <div class='col-md-5'>
                                                 <div class='row'>
                                                     <p>
                                                         Idade:
@@ -114,14 +119,14 @@
                                         <div class='col'></div>
                                     </div>
                                     <div class='col-md-2 mt-2 mt-md-0'>
+                                        
                                     ";
                                     if(!isset($value->status))
                                     {
-
-                                        if($_SESSION["dadosUsuario"]->quantcastracoes > 0 && $_SESSION["dadosUsuario"]->punicao == 0)
+                                        if($quantcastracoes->quantcastracoes > 0 && $_SESSION["dadosUsuario"]->punicao == 0)
                                         {
                                             echo "
-                                            <button type='button' class='btn btn-success w-100 mb-2' data-bs-toggle='modal' data-bs-target='#modalSolicitar' data-idanimal='$value->idanimal'>
+                                            <button class='btn btn-success w-100 mb-2' id='btnSolicitar' type='button' data-bs-target='#modalSolicitar' data-bs-toggle='modal' data-idanimal='$value->idanimal' data-idusuario='$value->idusuario'>
                                                 Solicitar castração
                                             </button>
                                             ";
@@ -131,7 +136,12 @@
                                             echo "<span class='btn bg-danger w-100 mb-2 text-white' style='cursor: default;'>Solicitação Bloqueada</span> ";
                                         }
                                         echo "
-                                        <a href='".URL."atualizar-animal/$value->idanimal' class='btn btn-warning w-100 mb-2 text-white' >Editar animal</a>
+                                        <button class='btn btn-warning w-100 mb-2' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
+                                                data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$valorEspecie' 
+                                                data-sexo='$valorSexo' data-cor='$value->cor' data-raca='$value->idraca' data-idade='$value->idade' data-pelagem='$valorPelagem' 
+                                                data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$value->foto'>
+                                                Editar animal
+                                        </button>
                                         <a href='".URL."excluir-animal/$value->idanimal' class='btn btn-danger w-100'>Excluir animal</a>
                                         ";
                                     }
@@ -173,7 +183,7 @@
                                 </div>
                                 <hr>
                             <!-- Fim de um animal -->
-                            ";
+                            ";  
                         }
                         ?>
                         <div class="row align-items-center p-3">
@@ -194,48 +204,232 @@
             </div>
         </div>
         
-        <!-- MODAL -->
-            <div class='modal fade' id='modalSolicitar' data-bs-keyboard='true' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
-                <div class='modal-dialog modal-dialog-centered'>
-                    <div class='modal-content'>
-                        <form action="<?php echo URL.'solicitar-castracao';?>" method='post'>
-                            <input type='hidden' id='idAnimal' name='idAnimal'>
-                            <div class='modal-header'>
-                                <h5 class='modal-title' id='staticBackdropLabel'>Solicitar castração</h5>
-                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                            </div>
-                            <div class='modal-body'>
-                                <label class='form-label' for='obhsCastracao'>Observação: (opcional)</label>
-                                <textarea name='obsCastracao' id='obsCastr' rows='5' class='form-control'></textarea>
-                            </div>
-                            <div class='modal-footer'>
-                                <button type='submit' class='btn btn-primary'>Enviar Solicitação</button>
-                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
-                            </div>
-                        </form>
-                    </div>
+        <!-- MODAL: solicitar castração -->
+        <div class='modal fade' id='modalSolicitar' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+            <div class='modal-dialog modal-dialog-centered'>
+                <div class='modal-content'>
+                    <form action="<?php echo URL.'solicitar-castracao';?>" method='post'>
+                        <input type='hidden' id='idAnimalSolicita' name='idAnimal'>
+                        <input type="hidden" name="idusuario" id="idusuario">
+
+                        <div class='modal-header'>
+                            <h5 class='modal-title' id='staticBackdropLabel'>Solicitar castração</h5>
+                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                        </div>
+                        <div class='modal-body'>
+                            <label class='form-label' for='obhsCastracao'>Observação: (opcional)</label>
+                            <textarea name='obsCastracao' id='obsCastr' rows='5' class='form-control' placeholder="Ex: tem alegria a dipirona"></textarea>
+                        </div>
+                        <div class='modal-footer'>
+                            <button type='submit' class='btn btn-primary'>Enviar Solicitação</button>
+                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
         <!-- /MODAL -->
+        <!-- MODAL: editar animal-->
+        <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <form method="post" id="formEdita" action="<?php echo URL.'atualizar-animal';?>" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Editar</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <input type="hidden" name="idanimal" id="idanimal">
+                            <input type="hidden" name="idusuario" id="idusuario">
+
+                            <div class="row">
+                                <div class="col-md">
+                                    <div class="row">
+                                        <div class="col-12 mb-2">
+                                            <label for="txtNome" class="form-label">Nome do Animal:</label>
+                                            <input type="text" class="form-control" id="txtNome" name="txtNome" maxlength="50" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="tipoEspecie" class="form-label">Espécie:</label>
+                                            <select id="tipoEspecie" name="tipoEspecie" class="form-select" onchange="carregarRaca(this)" required>
+                                                <option>... SELECIONE A ESPÉCIE ...</option>
+                                                <option value="0">Canina</option>
+                                                <option value="1">Felina</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="numIdade" class="form-label">Idade:</label>
+                                            <input type="number" class="form-control" id="numIdade" name="numIdade" min="0" max="100" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="slcSexo" class="form-label">Sexo:</label>
+                                            <select id="slcSexo" name="slcSexo" class="form-select" required>
+                                                <option value="0">Fêmea</option>
+                                                <option value="1">Macho</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="slcPelagem" class="form-label">Pelagem:</label>
+                                            <select id="slcPelagem" name="slcPelagem" class="form-select" required>
+                                                <option value="0">Curta</option>
+                                                <option value="1">Média</option>
+                                                <option value="2">Alta</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="txtCor" class="form-label">Cor:</label>
+                                            <input type="text" class="form-control" id="txtCor" name="txtCor" maxlength="30" required>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="slcPorte" class="form-label">Porte:</label>
+                                            <select id="slcPorte" name="slcPorte" class="form-select" required>
+                                                <option value="0">Pequeno</option>
+                                                <option value="1">Médio</option>
+                                                <option value="2">Grande</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="listRaca" class="form-label">Raça:</label>
+                                            <select name="racas" id="racas" class="form-select" required>
+                                                <option value="">... SELECIONE A RAÇA ...</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="slcComunitario" class="form-label">Animal Comunitário:</label>
+                                            <select id="slcComunitario" name="slcComunitario" class="form-select" required>
+                                                <option value="0">Não</option>
+                                                <option value="1">Sim</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center mb-3 aling-content-center">
+                                        <div class="col-lg-6 justify-content-center aling-content-center">
+                                            <label>Foto do animal:</label>
+                                            <label id="labelImgAnimal" for="inputImgAnimal" class="form-label"></label>
+                                            <img src="recursos/img/" alt="Foto do Animal" id="imgAnimal" for="inputImgAnimal" style="width:100%;">
+                                        </div>
+                                        <div class="col-lg-6 justify-content-center aling-content-center">
+                                            <label id="labelImgAnimal" for="inputImgAnimal" class="form-label">Trocar foto:</label>
+                                            <input type="file" name="foto" id="inputImgAnimal" class="form-control" accept="image/*">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Editar</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>    
+        </div>
+        <!--/MODAL -->
         <!-- /CORPO -->
     </div>
 
     <!-- EXTENSÃO BOOTSTRAP -->    
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <!--<script src="<?php echo URL; ?>recursos/js/popper.min.js"></script> Ultrapassado-->
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
-
+    <!-- EXTENSÃO JQUERY PARA O AJAX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!-- ABRIR MODAL SOLICITAR -->
     <script>
         var exampleModal = document.getElementById('modalSolicitar')
         exampleModal.addEventListener('show.bs.modal', function (event) {
-        // Button that triggered the modal
-        var button = event.relatedTarget
-        // Extract info from data-bs-* attributes
-        var idanimal = button.getAttribute('data-idanimal')
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var idanimal = button.getAttribute('data-idanimal')
+            var idusuario = button.getAttribute('data-idusuario')
 
-        $("#idAnimal").val(idanimal);
+            $("#idAnimalSolicita").val(idanimal);
+            $("#idusuario").val(idusuario)
+        });
+    </script>  
+
+    <!-- ABRIR MODAL EDITAR -->
+    <script>
+        //Definindo os valores nos inputs da modal
+
+        var modal = document.getElementById('modalEditar')
+        modal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var idusuario = button.getAttribute('data-idusuario')
+            var idanimal = button.getAttribute('data-idanimal')
+            var nome = button.getAttribute('data-nome')
+            var especie = parseInt(button.getAttribute('data-especie'))
+            var sexo = parseInt(button.getAttribute('data-sexo'))
+            var cor = button.getAttribute('data-cor')
+            
+            var idade = button.getAttribute('data-idade')
+            var pelagem = parseInt(button.getAttribute('data-pelagem'))
+            var foto = button.getAttribute('data-foto')
+            if (foto == "")
+            {
+                foto = "imagem_exemplo.jpg";
+            }
+            $(document).ready(function()
+            {
+                $("#racas").empty(); //limpar todos antes de carregar
+                $.ajax({
+                    url: '<?php echo URL;?>carregar-raca/'+ especie,
+                    success: function(data) {
+                        $("#racas").append(data);
+                        try{
+                            $("#racas option").filter("[value="+raca+"]").attr("selected",true)
+                        }
+                        catch{}
+                    }
+                });
+            })
+            
+            var raca = button.getAttribute('data-raca')
+            var porte = button.getAttribute('data-porte')
+            var comunitario = button.getAttribute('data-comunitario')
+
+            $("#idusuario").val(idusuario)
+            $("#idanimal").val(idanimal)
+            $("#txtNome").val(nome)
+            $("#tipoEspecie option").filter("[value="+especie+"]").attr("selected",true)
+            $("#slcSexo option").filter("option[value="+sexo+"]").attr("selected",true)
+            $("#slcPelagem option").filter("option[value="+pelagem+"]").attr("selected",true)
+            $("#slcPorte option").filter("option[value="+porte+"]").attr("selected",true)
+            $("#slcComunitario option").filter("option[value="+comunitario+"]").attr("selected",true)
+            $("#txtCor").val(cor)
+            $("#numIdade").val(idade)
+            $("#imgAnimal").prop("src","<?php echo URL.'recursos/img/Animais/';?>"+foto);
         })
     </script>
+    <script>
+        //Carregar raças
+        function carregarRaca(id)
+        {
+            //limpar todos antes de carregar
+            $("#racas").empty();
+            $.ajax({
+                url: '<?php echo URL;?>carregar-raca/'+ id.value,
+                success: function(data) {
+                    $("#racas").append(data);
+                }
+            });
+        }
+    </script>   
+
+    
 </body>
 </html>
