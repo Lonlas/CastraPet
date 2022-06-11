@@ -42,6 +42,7 @@
                                     <?php
                                         foreach($dadosUsuario as $value)
                                         {
+                                            $valorBeneficio = $value->beneficio;
                                             $value->beneficio = str_replace("0", "-", $value->beneficio);
                                             $value->beneficio = str_replace("1", "Benefício Social", $value->beneficio);
                                             $value->beneficio = str_replace("2", "Protetor de Animais", $value->beneficio);
@@ -85,7 +86,7 @@
                                                 </td>
                                                 <td>
                                                     <button class='btn btn-warning btn-sm-sm text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
-                                                            data-idusuario='$value->idusuario' data-nome='$value->nome' data-cpf='$value->cpf' data-beneficio='$value->beneficio' data-nis='$valorNis' 
+                                                            data-idusuario='$value->idusuario' data-nome='$value->nome' data-cpf='$value->cpf' data-beneficio='$valorBeneficio' data-nis='$valorNis' 
                                                             data-email='$value->email' data-telefone='$valorTelefone' data-celular='$value->celular' data-punicao='$valorPunicao' data-rg='$value->rg' 
                                                             data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$value->idlogin'>
                                                         Editar
@@ -321,7 +322,7 @@
             $("#idlogin").val(idlogin);
             $("#txtNome").val(nome);
             $("#txtCPF").val(cpf).mask('000.000.000-00');
-            if(beneficio.val == 2)
+            if(beneficio == 2)
             {
                 $("#chkProtetor").prop("checked", true);
             }
