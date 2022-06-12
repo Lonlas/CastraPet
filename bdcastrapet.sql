@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 04-Jun-2022 às 21:56
+-- Generation Time: 12-Jun-2022 às 02:58
 -- Versão do servidor: 5.6.34
 -- PHP Version: 7.1.11
 
@@ -105,7 +105,7 @@ INSERT INTO `castracao` (`idcastracao`, `idanimal`, `idclinica`, `horario`, `sta
 CREATE TABLE `clinica` (
   `idclinica` int(11) NOT NULL,
   `idlogin` int(11) NOT NULL,
-  `cnpj` varchar(18) NOT NULL,
+  `cnpj` varchar(14) NOT NULL,
   `clitelefone` varchar(11) NOT NULL,
   `vagas` int(11) NOT NULL,
   `clirua` varchar(50) NOT NULL,
@@ -191,7 +191,7 @@ CREATE TABLE `usuario` (
   `idlogin` int(11) NOT NULL,
   `rg` char(9) NOT NULL,
   `cpf` char(11) NOT NULL,
-  `beneficio` tinyint(4) NOT NULL,
+  `beneficio` tinyint(4) NOT NULL COMMENT '0 - Sem benefício; 1 - Benefício Soical; 2 - Protetor de Animais; 3 - Em análise',
   `telefone` varchar(10) DEFAULT NULL,
   `celular` varchar(11) NOT NULL,
   `whatsapp` tinyint(4) NOT NULL COMMENT '0 - Celular não é whatsapp; 1 - Celular é whatsapp',
@@ -201,7 +201,6 @@ CREATE TABLE `usuario` (
   `usunumero` varchar(5) NOT NULL,
   `usucep` varchar(8) NOT NULL,
   `nis` char(11) DEFAULT NULL,
-  `docprotetor` varchar(255) DEFAULT NULL,
   `doccomprovante` varchar(255) DEFAULT NULL,
   `quantcastracoes` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -210,12 +209,12 @@ CREATE TABLE `usuario` (
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`idusuario`, `idlogin`, `rg`, `cpf`, `beneficio`, `telefone`, `celular`, `whatsapp`, `punicao`, `usurua`, `usubairro`, `usunumero`, `usucep`, `nis`, `docprotetor`, `doccomprovante`, `quantcastracoes`) VALUES
-(18, 24, '123', '123', 2, '123', '123', 0, 0, '123', '123', '123', '123', NULL, NULL, NULL, 3),
-(19, 27, '551661230', '12345678900', 1, NULL, '11976798730', 0, 0, 'Rua das flores', 'Bairro teste', '125', '09875456', '12345678900', NULL, NULL, 2),
-(20, 28, '400289226', '78945612300', 1, NULL, '11940028922', 0, 0, 'Rua Maluca', 'Bairro Louco', '123', '09875456', '78945612300', NULL, NULL, 0),
-(21, 32, '12345678X', '12312305599', 0, NULL, '', 0, 0, 'GuardiÃ£o do MacarrÃ£o', 'Amondegas Flutuantes', '702', '05578654', NULL, NULL, NULL, 0),
-(22, 33, '12345228X', '12312305511', 0, NULL, '11912345678', 0, 0, 'GuardiÃ£o do MacarrÃ£o', 'Amondegas Flutuantes', '700', '05578654', NULL, NULL, NULL, 0);
+INSERT INTO `usuario` (`idusuario`, `idlogin`, `rg`, `cpf`, `beneficio`, `telefone`, `celular`, `whatsapp`, `punicao`, `usurua`, `usubairro`, `usunumero`, `usucep`, `nis`, `doccomprovante`, `quantcastracoes`) VALUES
+(18, 24, '123', '123', 2, '123', '123', 0, 0, '123', '123', '123', '123', NULL, NULL, 3),
+(19, 27, '551661230', '12345678900', 1, NULL, '11976798730', 0, 0, 'Rua das flores', 'Bairro teste', '125', '09875456', '12345678900', NULL, 2),
+(20, 28, '400289226', '78945612300', 1, NULL, '11940028922', 0, 0, 'Rua Maluca', 'Bairro Louco', '123', '09875456', '78945612300', NULL, 0),
+(21, 32, '12345678X', '12312305599', 0, NULL, '', 0, 0, 'GuardiÃ£o do MacarrÃ£o', 'Amondegas Flutuantes', '702', '05578654', NULL, NULL, 0),
+(22, 33, '12345228X', '12312305511', 0, NULL, '11912345678', 0, 0, 'GuardiÃ£o do MacarrÃ£o', 'Amondegas Flutuantes', '700', '05578654', NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
