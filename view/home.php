@@ -159,7 +159,7 @@
                                                             <li>Tenha alergia a anestesia;</li>
                                                             <li>Esteja amamentando filhotes com menos de 45 dias;</li>
                                                             <li>For muito idoso (acima de 08 anos);</li>
-                                                            <li>Tenha menos de 3 meses</li>
+                                                            <li>Tenha menos de 3 meses.</li>
                                                         </ul>
                                                     </p>
                                                 </div>
@@ -171,18 +171,18 @@
                                             <div class="collapse" id="pergunta10">
                                                 <div class="card card-body border-primary">
                                                     <p>
-                                                        <span class="fw-bold">R:</span> Sim, Caso o tutor não entre em contanto com a clínica da castração justificando sua falta, será aplicada uma punição impedindo-o de solicitar a castração de seus animais durante a campanha de castração.
+                                                        <span class="fw-bold">R:</span> Sim, caso o tutor não entre em contanto com a clínica da castração justificando sua falta, será aplicada uma punição impedindo-o de solicitar a castração de seus animais durante a campanha de castração.
                                                     </p>
                                                 </div>
                                             </div>
 
                                             <a class="list-group-item" data-bs-toggle="collapse" href="#pergunta11" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                <li class="ms-3">O programa de castração de Franco da rocha está disponível para moradores de outros municípios?</li>
+                                                <li class="ms-3">O programa de castração de Franco da Rocha está disponível para moradores de outros municípios?</li>
                                             </a>
                                             <div class="collapse" id="pergunta11">
                                                 <div class="card card-body border-primary">
                                                     <p>
-                                                        <span class="fw-bold">R:</span> Não, o programa de castração é reservado para moradores de Franco da Rocha 
+                                                        <span class="fw-bold">R:</span> Não, o programa de castração é reservado apenas para moradores de Franco da Rocha.
                                                     </p>
                                                 </div>
                                             </div>
