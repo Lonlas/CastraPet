@@ -197,27 +197,6 @@ class UsuarioController
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
-
-    function excluirUsuario($id)
-    {
-        //caso não usuário não esteja logado
-        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
-
-        //Controle de privilégio
-        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
-
-            $login = new Login();
-            $login->idlogin = $id;
-            $login->excluir();
-            $usu = new Usuario(); 
-            $usu->idusuario = $id;
-            $usu->excluir();
-
-            //direcionar novamente para a tela de consulta
-            header("Location:".URL."consulta-usuario");
-        }
-        else{ include_once "view/paginaNaoEncontrada.php"; } 
-    }
     
     function alterarSenha()
     {
