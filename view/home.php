@@ -30,6 +30,7 @@
                                             <li>Prevenção de <span class="fw-bold text-decoration-underline">distúrbios testiculares</span> em machos (neoplasias, orquites (inflamação do testículo), epididimites (inflamação do epidídimo), além de auxiliar no tratamento de doenças andrógeno-dependentes como a hiperplasia prostática benigna, prostatite crônica (inflamação da próstata), adenoma e hérnia perineal;</li>
                                             <li>Auxílio no tratamento de doenças não relacionadas ao sistema reprodutivo, como diabetes e epilepsia;</li>
                                             <li>Possível redução de comportamentos indesejados como territorialismo, agressividade e marcação de território.</li>
+                                            <li>Possível redução de animais abandonados nas ruas.</li>
                                         </ul>
                                     </p>
                                 </div>
@@ -39,10 +40,10 @@
                                     <div class="card">
                                         <h4 class="card-header">Perguntas Frequentes:</h4>
                                         <ol class="list-group list-group-flush">
-                                            <a class="list-group-item" data-bs-toggle="collapse" href="#pergunta1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            <a class="list-group-item" data-bs-toggle="collapse" href="#pergunta0" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                 <li class="ms-2">É necessário pagar algo para castrar meu animal?</li>
                                             </a>
-                                            <div class="collapse" id="pergunta1">
+                                            <div class="collapse" id="pergunta0">
                                                 <div class="card card-body border-primary">
                                                     <p>
                                                         <span class="fw-bold">R:</span> Não, o programa de castração é gratuito, o tutor tem apenas que lidar com os custos de transporte e cuidados pós-cirúrgicos.
@@ -50,6 +51,17 @@
                                                 </div>
                                             </div>
                                             
+                                            <a class="list-group-item" data-bs-toggle="collapse" href="#pergunta1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <li class="ms-2">Com quantos anos posso solicitar a castração de meu animal?</li>
+                                            </a>
+                                            <div class="collapse" id="pergunta1">
+                                                <div class="card card-body border-primary">
+                                                    <p>
+                                                        <span class="fw-bold">R:</span> A partir de 18 anos você pode solicitar a castração de seu animal.
+                                                    </p>
+                                                </div>
+                                            </div>
+
                                             <a class="list-group-item" data-bs-toggle="collapse" href="#pergunta2" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                 <li class="ms-2">Posso castrar mais de um animal?</li>
                                             </a>
@@ -134,7 +146,7 @@
                                             </div>
 
                                             <a class="list-group-item" data-bs-toggle="collapse" href="#pergunta9" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                <li class="ms-2">Tem algo que impeça o meu animal de ser castrado?</li>
+                                                <li class="ms-3">Tem algo que impeça o meu animal de ser castrado?</li>
                                             </a>
                                             <div class="collapse" id="pergunta9">
                                                 <div class="card card-body border-primary">
@@ -145,8 +157,32 @@
                                                             <li>Esteja no período de acasalamento;</li>
                                                             <li>Não tenha seguido as orientações pré-cirúrgicas;</li>
                                                             <li>Tenha alergia a anestesia;</li>
-                                                            <li>Esteja com filhotes no útero;</li>
+                                                            <li>Esteja amamentando filhotes com menos de 45 dias;</li>
+                                                            <li>For muito idoso (acima de 08 anos);</li>
+                                                            <li>Tenha menos de 3 meses</li>
                                                         </ul>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <a class="list-group-item" data-bs-toggle="collapse" href="#pergunta10" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <li class="ms-3">Existe alguma penalidade caso eu não compareça na clínica no dia da castração?</li>
+                                            </a>
+                                            <div class="collapse" id="pergunta10">
+                                                <div class="card card-body border-primary">
+                                                    <p>
+                                                        <span class="fw-bold">R:</span> Sim, Caso o tutor não entre em contanto com a clínica da castração justificando sua falta, será aplicada uma punição impedindo-o de solicitar a castração de seus animais durante a campanha de castração.
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <a class="list-group-item" data-bs-toggle="collapse" href="#pergunta11" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                <li class="ms-3">O programa de castração de Franco da rocha está disponível para moradores de outros municípios?</li>
+                                            </a>
+                                            <div class="collapse" id="pergunta11">
+                                                <div class="card card-body border-primary">
+                                                    <p>
+                                                        <span class="fw-bold">R:</span> Não, o programa de castração é reservado para moradores de Franco da Rocha 
                                                     </p>
                                                 </div>
                                             </div>
