@@ -67,7 +67,7 @@
                                                     data-vagas='$value->vagas' data-cep='$value->clicep' data-numero='$value->clinumero' data-bairro='$value->clibairro' data-rua='$value->clirua' data-ativo='$valorAtivo'>
                                                 Editar
                                             </button>
-                                            <a href='".URL."excluir-clinica/$value->idclinica/$value->idlogin' onclick='return confirm(\"tem certeza que deseja excluir a clínica $value->nome?\")' class='btn btn-danger'>Excluir</a></td>
+                                            <a onclick='confirmar($value->idclinica, $value->idlogin)' class='btn btn-danger'>Excluir</a></td>
                                             </tr>
                                         ";
                                     }
@@ -197,6 +197,10 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js'></script>
 
+    <!-- JS SweetAlert 2-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#tbClinica').DataTable( {
@@ -289,6 +293,33 @@
             }
             else {$("#avisoComprimento").hide();}
         });
+    </script>
+
+    <!-- SCRIPT CONFIRMAÇÃO PARA EXCLUIR A CLÍNICA -->
+    <script>
+        function confirmar(idcli, idlog)
+        {
+            Swal.fire({
+                title: 'Você tem certeza que deseja excluir?',
+                text: "Você não será capaz de desfazer esta ação!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Excluir',
+                cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Excluído!', //title:
+                        'Clínica apagado com sucesso.', //text:
+                        'success', //icon:
+                    ).then(()=> {
+                        window.location='<?php echo URL;?>excluir-clinica/'+idcli+'/'+idlog;
+                        }
+                    )}
+            })
+        }
     </script>
 </body>
 </html>

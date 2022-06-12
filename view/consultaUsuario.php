@@ -91,7 +91,7 @@
                                                             data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$value->idlogin'>
                                                         Editar
                                                     </button>
-                                                    <a href='".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-sm-sm' onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir</a>
+                                                    <a class='btn btn-danger btn-sm-sm' onclick='confirmar($value->idusuario, $value->idlogin)'>Excluir</a>
                                                 </td>
                                             </tr>
                                             ";
@@ -249,6 +249,10 @@
     
     <!-- EXTENSÃO JQUERY DAS MASCARAS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <!-- JS SweetAlert 2-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
     
     <script>
         $(document).ready(function() {
@@ -367,6 +371,31 @@
 
         });
     </script>
-    
+    <!-- SCRIPT CONFIRMAÇÃO PARA EXCLUIR O USUÁRIO -->
+    <script>
+        function confirmar(idusu, idlogin)
+        {
+            Swal.fire({
+                title: 'Você tem certeza que deseja excluir?',
+                text: "Você não será capaz de desfazer esta ação!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Excluir',
+                cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Excluído!', //title:
+                        'Usuário apagado com sucesso.', //text:
+                        'success', //icon:
+                    ).then(()=> {
+                        window.location='<?php echo URL;?>excluir-tutor/'+idusu+'/'+idlogin;
+                        }
+                    )}
+            })
+        }
+    </script>
 </body>
 </html>

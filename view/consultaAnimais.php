@@ -126,7 +126,7 @@
                                             data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$value->foto'>
                                             Editar animal
                                     </button>
-                                        <a href='".URL."excluir-animal/$value->idanimal/$value->idusuario/$value->foto' class='btn btn-danger float-end w-100' onclick='return confirm(\"Deseja realmente excluir?\")'><i class='fa fa-trash'></i> Excluir</a>    
+                                        <a class='btn btn-danger float-end w-100' onclick='confirmar($value->idanimal,$value->idusuario,$value->foto)'><i class='fa fa-trash'></i> Excluir</a>    
                                     </div>
                                 </div>
                                 <hr>
@@ -261,6 +261,9 @@
     <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
     <script src="<?php echo URL;?>recursos/js/bootstrap.bundle.min.js"></script>
+    <!-- JS SweetAlert 2-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
     <!-- EXTENSÃO JQUERY PARA O AJAX -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- ABRIR MODAL EDITAR -->
@@ -330,6 +333,33 @@
                     $("#racas").append(data);
                 }
             });
+        }
+    </script>
+
+    <!-- SCRIPT CONFIRMAÇÃO PARA EXCLUIR O ANIMAL -->
+    <script>
+        function confirmar(idani,idusu,foto)
+        {
+            Swal.fire({
+                title: 'Você tem certeza que deseja excluir?',
+                text: "Você não será capaz de desfazer esta ação!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Excluir',
+                cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Excluído!', //title:
+                        'Animal apagado com sucesso.', //text:
+                        'success', //icon:
+                    ).then(()=> {
+                        window.location='<?php echo URL;?>excluir-animal/'+idani+'/'+idusu+'/'+foto;
+                        }
+                    )}
+            })
         }
     </script>
 </body>

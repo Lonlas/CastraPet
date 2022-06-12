@@ -91,7 +91,7 @@
                                             <!--<button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao'>
                                                 Editar
                                             </button>-->
-                                            <a href='".URL."excluir-catracao/$value->idcastracao' class='btn btn-danger' onClick='return confirm(\"Tem certeza que deseja excluir a castracao do $value->aninome?\")'>Excluir</a>
+                                            <a class='btn btn-danger' onClick='confirmar($value->idcastracao)'>Excluir</a>
                                             </td>
                                             
                                         </tr>
@@ -268,6 +268,10 @@
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js'></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js'></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js'></script>
+
+    <!-- JS SweetAlert 2-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
     
     <?php
         if($_SESSION["dadosLogin"]->nivelacesso == 2)
@@ -364,6 +368,40 @@
         $("#dataCastracao").val(dataCastracao)
         })
     </script>
-
+    
+    <?php
+        if($_SESSION["dadosLogin"]->nivelacesso == 2)
+        {
+            echo
+            "
+            <!-- SCRIPT CONFIRMAÇÃO PARA EXCLUIR A CASTRAÇÃO -->
+            <script>
+                function confirmar(id)
+                {
+                    Swal.fire({
+                        title: 'Você tem certeza que deseja excluir?',
+                        text: 'Você não será capaz de desfazer esta ação!',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Excluir',
+                        cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'Excluído!', //title:
+                                'Castração apagada com sucesso.', //text:
+                                'success', //icon:
+                            ).then(()=> {
+                                window.location='<?php echo URL;?>excluir-raca/'+id;
+                                }
+                            )}
+                    })
+                }
+            </script>
+            ";
+        }
+    ?>
 </body>
 </html>
