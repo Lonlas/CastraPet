@@ -40,8 +40,8 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Foto</th>
+                                                <th>RGA</th>
                                                 <th>Animal</th>
-                                                <th>Nome do tutor</th>
                                                 <th>CPF do tutor</th>
                                                 <th>Clínica</th>
                                                 <th>Data</th>
@@ -78,8 +78,8 @@
                                         <tr>
                                             <td>$value->idcastracao</td>
                                             <td><img width='300px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
+                                            <td>$value->idanimal</td>
                                             <td>$value->aninome</td>
-                                            <td>$value->nometutor</td>
                                             <td><a href=". URL . "consulta-usuario/$value->cpf" .">$value->cpf</a></td>
                                             <td><a href=". URL . "consulta-clinica/$value->cnpj" . ">$value->nomeclinica</a></td>
                                             <td>$data</td>
@@ -105,6 +105,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Foto</th>
+                                                <th>RGA</th>
                                                 <th>Animal</th>
                                                 <th>Nome do tutor</th>
                                                 <th>CPF do tutor</th>
@@ -139,6 +140,7 @@
                                         <tr>
                                             <td>$value->idcastracao</td>
                                             <td><img width='300px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
+                                            <td>$value->idanimal</td>
                                             <td>$value->aninome</td>
                                             <td>$value->nometutor</td>
                                             <td>$value->cpf</td>
@@ -151,7 +153,7 @@
                                             <td>
                                                 <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' 
                                                         data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' 
-                                                        data-nomeTutor='$value->nometutor' data-foto='$value->foto' data-nomeAnimal='$value->aninome' 
+                                                        data-nomeTutor='$value->nometutor' data-foto='$value->foto' data-nomeAnimal='$value->aninome' data-idAnimal='$value->idanimal'
                                                         data-status='$value->status' data-dataCastracao='$value->horario'>
                                                     Editar
                                                 </button>
@@ -186,6 +188,7 @@
                             <form action='".URL."atualizar-castracao' method='post'>
                                 <input type='hidden' id='idCastracao' name='idCastracao'>
                                 <input type='hidden' id='status' name='status'>
+                                <input type='hidden' id='idAnimal' name='idAnimal'>
                                 <input type='hidden' id='idTutor' name='idTutor'>
                                 <input type='hidden' id='emailTutor' name='emailTutor'>
                                 <input type='hidden' id='nomeAnimal' name='nomeAnimal'>
@@ -220,7 +223,7 @@
                                     </div>
                                 </div>
                                 <div class='modal-footer'>
-                                    <button type='submit' class='btn btn-primary'>Editar</button>
+                                <input type='submit' value='Editar' class='btn btn-warning'>
                                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                                 </div>
                             </form>
@@ -354,6 +357,7 @@
         var idCastracao = button.getAttribute('data-idcastracao')
         var emailTutor = button.getAttribute('data-emailTutor')
         var idTutor = button.getAttribute('data-idTutor')
+        var idAnimal = button.getAttribute('data-idAnimal')
         var nomeAnimal = button.getAttribute('data-nomeAnimal')
         var nomeTutor = button.getAttribute('data-nomeTutor')
         var status = button.getAttribute('data-status')
@@ -362,6 +366,7 @@
         $("#idCastracao").val(idCastracao)
         $("#emailTutor").val(emailTutor)
         $("#idTutor").val(idTutor)
+        $("#idAnimal").val(idAnimal)
         $("#nomeAnimal").val(nomeAnimal)
         $("#nomeTutor").val(nomeTutor)
         $("#status").val(status)

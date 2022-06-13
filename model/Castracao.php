@@ -112,7 +112,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idcastracao, foto, aninome, nome AS 'nometutor', horario, status, observacao, cpf, cnpj, nome AS 'nomeclinica', obsclinica FROM castracao 
+            $cmd = $con->prepare("SELECT idcastracao, foto, aninome, nome AS 'nometutor', horario, status, observacao, cpf, cnpj, nome AS 'nomeclinica', obsclinica, animal.idanimal FROM castracao 
                                     JOIN animal ON castracao.idanimal = animal.idanimal 
                                     JOIN usuario ON animal.idusuario = usuario.idusuario  
                                     LEFT JOIN clinica ON castracao.idclinica = clinica.idclinica 
@@ -131,7 +131,7 @@
 
             //Preparar comando SQL para consultar
             //$cmd = $con->prepare("SELECT * FROM castracao");
-            $cmd = $con->prepare("SELECT idcastracao, clinica.idclinica, animal.foto, animal.aninome, nome AS 'nometutor', horario, status, observacao, cpf, usuario.idusuario, email, rg, telefone, celular 
+            $cmd = $con->prepare("SELECT idcastracao, clinica.idclinica, animal.foto, animal.aninome, nome AS 'nometutor', horario, status, observacao, cpf, usuario.idusuario, email, rg, telefone, celular, animal.idanimal 
                                     FROM castracao 
                                         JOIN animal ON castracao.idanimal = animal.idanimal 
                                         JOIN usuario ON animal.idusuario = usuario.idusuario 
@@ -204,7 +204,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para retornar
-            $cmd = $con->prepare("SELECT idcastracao, aninome, cpf, observacao, status, foto, email, nome FROM castracao 
+            $cmd = $con->prepare("SELECT idcastracao, aninome, cpf, observacao, status, foto, email, nome, idanimal FROM castracao 
                                         JOIN animal ON animal.idanimal = castracao.idanimal 
                                         JOIN usuario ON usuario.idusuario = animal.idusuario 
                                         JOIN login ON usuario.idlogin = login.idlogin 

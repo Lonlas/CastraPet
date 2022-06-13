@@ -348,10 +348,12 @@ class UsuarioController
                     // Animal castrado
 
                     $castracao->status = 2;
+                    $castracao->atualizar();
+                    
                     $animal = new Animal();
+                    $animal->idanimal = $_POST["idanimal"];
                     $animal->codchip = $_POST["codChip"];
                     $animal->atualizarCastrado();
-                    $castracao->atualizar();
 
                     if($_POST["status"] != 4)
                     {
@@ -450,6 +452,11 @@ class UsuarioController
                     $castracao->status = 8;
                     $castracao->obsclinica = $_POST["obsClinica"];
                     $castracao->atualizar();
+
+                    $animal = new Animal();
+                    $animal->idanimal = $_SESSION["dadosAnimal"]->idanimal;
+                    $animal->codchip = $_POST["codChip"];
+                    $animal->atualizarCastrado();
 
                     if($_POST["status"] != 4)
                     {
