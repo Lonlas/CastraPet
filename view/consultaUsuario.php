@@ -289,7 +289,7 @@
                     "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
                 },
                 "search": {
-                    "search": "<?php if(!isset($cpf)){$cpf = '';}echo $cpf;?>"
+                    "search": "<?php if(!isset($cpf)){$cpf = '';} echo $cpf;?>"
                 }
             } );
         } );

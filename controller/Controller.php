@@ -133,7 +133,7 @@ class Controller
         else{ include_once "view/paginaNaoEncontrada.php"; }
     }    
     #CONSULTAS
-    function abrirConsultaUsuario(){
+    function abrirConsultaUsuario($cpf){
         //caso o usuário não esteja logado
         if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
         //caso não tenha privilégio
@@ -145,7 +145,7 @@ class Controller
         }
         else{ include_once "view/paginaNaoEncontrada.php"; }
     }
-    function abrirConsultaClinica(){
+    function abrirConsultaClinica($cnpj){
         //caso o usuário não esteja logado
         if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
         //caso não tenha privilégio
