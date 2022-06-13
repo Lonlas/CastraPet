@@ -48,7 +48,7 @@
                                                 <th>Hora</th>
                                                 <th>Status</th>
                                                 <th>Observação</th>
-                                                <th>Observação CLinica</th>
+                                                <th>Observação Clínica</th>
                                                 <th>Ações</th>
                                             </tr>
                                         </thead>
