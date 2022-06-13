@@ -3,7 +3,7 @@ class Conexao{
 
     static function conectar(){
         //Informações para acessar o servidor do banco de dados
-        $localhost = "mysql:host=localhost;port=3306;dbname=bdcastrapet";
+        $localhost = "mysql:host=localhost;port=3306;dbname=bdpetcastra";
         $usuario = "root";
         $senha = "usbw";
         
