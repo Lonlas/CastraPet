@@ -9,6 +9,39 @@ include_once "model/Clinica.php";
 
 class UsuarioController
 {
+    function novoMes(){
+
+        $tutores = new Usuario();
+        $dadosTutor = $tutores->consultar();
+        
+        foreach($dadosTutor as $tutor)
+        {
+            switch($tutor->beneficio){
+                case 0:
+                    $quantcastracoes = 1;
+                    $tutores->quantcastracoes = $quantcastracoes;
+                break;
+                case 1:
+                    $quantcastracoes = 2;
+                    $tutores->quantcastracoes = $quantcastracoes;
+                break;
+                case 2:
+                    $quantcastracoes = 5;
+                    $tutores->quantcastracoes = $quantcastracoes;
+                break;
+            }
+            if($tutores->punicao > 0)
+            {
+                $tutores->punicao = $tutor->punicao - 1; 
+            }
+            else
+                $tutores->punicao = 0;
+            $tutores->novoMes();
+        }
+        echo"<script>alert('Novo mês iniciado com sucesso!'); window.location='".URL."home-adm'; </script>";
+    }
+
+
     function cadastrarUsuario(){
         //Cadastro do Login
 
@@ -126,7 +159,8 @@ class UsuarioController
                     move_uploaded_file($docProtetorTemp, $pastaDestino);       //mover o arquivo 
                     $cadastra->docprotetor = $novoNomeProtetor;
                     
-                    $cadastra->beneficio = 3;
+                    $cadastra->beneficio = 2;
+                    $cadastra->quantcastracoes = 5;
                 }*/
                 
                 $cadastra->cadastrar();
@@ -259,8 +293,6 @@ class UsuarioController
 
         //Controle de privilégio
         if($_SESSION["dadosLogin"]->nivelacesso == 0) {
-
-            
 
             $castracao = new Castracao();
             $castracao->idanimal =   $_POST["idAnimal"];

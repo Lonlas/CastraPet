@@ -116,6 +116,10 @@ if($_GET)
         break;
 
         // ADM
+        case "novo-mes":
+            $adm = new UsuarioController();
+            $adm->novoMes();
+        break;
         case "home-adm":
             $adm = new Controller();
             $adm->abrirHomeAdm();

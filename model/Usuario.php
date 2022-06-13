@@ -265,5 +265,20 @@
             //Executando o comando SQL
             $cmd->execute();
         }
+
+        function novoMes()
+        {
+           //Conectando ao banco de dados
+           $con = Conexao::conectar();
+
+           //Preparar comando SQL para retornar
+           $cmd = $con->prepare("UPDATE usuario SET quantcastracoes = :quantcastracoes, punicao = :punicao");
+            
+           //Parâmetros SQL
+           $cmd->bindParam(":quantcastracoes",   $this->quantcastracoes);
+           $cmd->bindParam(":punicao",           $this->punicao);
+           //Executando o comando SQL
+           $cmd->execute();
+        }
     }
 ?>

@@ -152,8 +152,8 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group">
-                                        <label for="chkPunicao" class="form-label">Punição</label>
-                                        <input type="checkbox" name="chkPunicao" id="chkPunicao" value="1" class="form-check">
+                                        <input type="checkbox" name="chkPunicao" id="chkPunicao" value="1" class="form-check-input">
+                                        <label for="chkPunicao" class="form-check-label">Punição</label>
                                     </div>
                                 </div>
                             </div>
