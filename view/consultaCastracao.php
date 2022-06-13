@@ -394,7 +394,7 @@
                                 'Castração apagada com sucesso.', //text:
                                 'success', //icon:
                             ).then(()=> {
-                                window.location='<?php echo URL;?>excluir-raca/'+id;
+                                window.location='excluir-castracao/'+id;
                                 }
                             )}
                     })

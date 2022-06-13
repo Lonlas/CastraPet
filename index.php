@@ -194,6 +194,10 @@ if($_GET)
             $castracao = new UsuarioController();
             $castracao->atualizarCastracao();
         break;
+        case "excluir-castracao":
+            $castracao = new UsuarioController();
+            $castracao->excluirCastracao($url[1]);
+        break;
 
         // CLÍNICA
         case "home-clinica":

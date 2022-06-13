@@ -436,6 +436,24 @@ class UsuarioController
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
+
+    //Excluir Castração
+    function excluirCastracao($id)
+    {
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+
+            $castracao = new Castracao();
+            $castracao->idcastracao = $id;
+            $castracao->excluir();
+
+            header("Location:".URL."consulta-castracao");
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
+    }
     
     function logar()
     {
