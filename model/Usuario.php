@@ -18,7 +18,6 @@
         private $doccomprovante;
         //private $docprotetor;
         private $quantcastracoes;
-
         //Método get
         function __get($atributo)
         {
