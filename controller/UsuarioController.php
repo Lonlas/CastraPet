@@ -29,7 +29,7 @@ class UsuarioController
             $consultarEmail->email = $_POST["txtEmail"];
 
             $consultarCPF = new Usuario();
-            $consultarCPF->cpf = $_POST["txtCPF"];
+            $consultarCPF->cpf = $cpf;
 
             //Verificando o NIS
             if($_POST["chkNIS"] == "sim" && isset($nis))
@@ -62,20 +62,19 @@ class UsuarioController
                 $cadastra = new Usuario();
                 $cadastra->idlogin = $login->cadastrar();
                 $cadastra->rg = strtoupper($rg);
+                $cadastra->cpf = $cpf;
                 if($this->validaCPF($cpf))
                 {
                     $cadastra->cpf = $cpf;
                 }
                 else
                 {
-                    echo"<script>alert('digite um CPF válido'); window.location='".URL."cadastra-tutor'; </script>";
+                    echo"<script>alert('Digite um CPF válido'); window.location='".URL."cadastra-tutor'; </script>";
                     return;
                 }
                 $cadastra->beneficio = 0;
                 $cadastra->telefone = $tel;
                 $cadastra->celular = $celular;
-                //Arrumar o Whatsapp dps
-                $cadastra->whatsapp = 0;
                 $cadastra->punicao = 0;
                 $cadastra->usurua =    $_POST["txtRua"];
                 $cadastra->usubairro = $_POST["txtBairro"];
@@ -102,7 +101,7 @@ class UsuarioController
                     move_uploaded_file($docComprovanteTemp, $pastaDestino);       //mover o arquivo 
                     $cadastra->doccomprovante = $novoNomeComprovante;
                 
-                    $cadastra->quantcastracoes = 1;
+                $cadastra->quantcastracoes = 1;
     
                 if(empty($nis))
                 {
