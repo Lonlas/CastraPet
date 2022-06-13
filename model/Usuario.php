@@ -272,11 +272,12 @@
            $con = Conexao::conectar();
 
            //Preparar comando SQL para retornar
-           $cmd = $con->prepare("UPDATE usuario SET quantcastracoes = :quantcastracoes, punicao = :punicao");
+           $cmd = $con->prepare("UPDATE usuario SET quantcastracoes = :quantcastracoes, punicao = :punicao WHERE idusuario = :idusuario");
             
            //Parâmetros SQL
            $cmd->bindParam(":quantcastracoes",   $this->quantcastracoes);
            $cmd->bindParam(":punicao",           $this->punicao);
+           $cmd->bindParam(":idusuario",           $this->idusuario);
            //Executando o comando SQL
            $cmd->execute();
         }

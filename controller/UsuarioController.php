@@ -11,6 +11,7 @@ class UsuarioController
 {
     function novoMes(){
 
+        
         $tutores = new Usuario();
         $dadosTutor = $tutores->consultar();
         
@@ -18,25 +19,76 @@ class UsuarioController
         {
             switch($tutor->beneficio){
                 case 0:
-                    $quantcastracoes = 1;
-                    $tutores->quantcastracoes = $quantcastracoes;
-                break;
-                case 1:
-                    $quantcastracoes = 2;
-                    $tutores->quantcastracoes = $quantcastracoes;
+                    $tutores->quantcastracoes = 1;
+                    if($tutores->punicao > 0)
+                    {
+                        $tutores->punicao = $tutor->punicao - 1; 
+                    }
+                    else
+                    {
+                        $tutores->punicao = 0;
+                        $tutores->idusuario = $tutor->idusuario;
+                        $tutores->novoMes();
+                    }
+                    break;
+                    case 1:
+                        $tutores->quantcastracoes = 2;
+                    if($tutores->punicao > 0)
+                    {
+                        $tutores->punicao = $tutor->punicao - 1; 
+                    }
+                    else
+                    {
+                        $tutores->punicao = 0;
+                        $tutores->idusuario = $tutor->idusuario;
+                        $tutores->novoMes();
+                    }
                 break;
                 case 2:
-                    $quantcastracoes = 5;
-                    $tutores->quantcastracoes = $quantcastracoes;
+                    $tutores->quantcastracoes = 5;
+                    if($tutores->punicao > 0)
+                    {
+                        $tutores->punicao = $tutor->punicao - 1; 
+                    }
+                    else
+                    {
+                        $tutores->punicao = 0;
+                        $tutores->idusuario = $tutor->idusuario;
+                        $tutores->novoMes();
+                    }
+                    break;
+                case 3:
+                    if(strlen($tutor->nis) == 11)
+                    {
+                        $tutores->quantcastracoes = 2;
+                        if($tutores->punicao > 0)
+                        {
+                            $tutores->punicao = $tutor->punicao - 1; 
+                        }
+                        else
+                        {
+                            $tutores->punicao = 0;
+                            $tutores->idusuario = $tutor->idusuario;
+                            $tutores->novoMes();
+                        }
+                    }
+                    else
+                    {
+                        $tutores->quantcastracoes = 5;
+                        if($tutores->punicao > 0)
+                        {
+                            $tutores->punicao = $tutor->punicao - 1; 
+                        }
+                        else
+                        {
+                            $tutores->punicao = 0;
+                            $tutores->idusuario = $tutor->idusuario;
+                            $tutores->novoMes();
+                        }
+                    }
+                    
                 break;
             }
-            if($tutores->punicao > 0)
-            {
-                $tutores->punicao = $tutor->punicao - 1; 
-            }
-            else
-                $tutores->punicao = 0;
-            $tutores->novoMes();
         }
         echo"<script>alert('Novo mês iniciado com sucesso!'); window.location='".URL."home-adm'; </script>";
     }
