@@ -62,7 +62,7 @@ class UsuarioController
             $consultarEmail->email = $_POST["txtEmail"];
 
             $consultarCPF = new Usuario();
-            $consultarCPF->cpf = $_POST["txtCPF"];
+            $consultarCPF->cpf = $cpf;
 
             //Verificando o NIS
             if($_POST["chkNIS"] == "sim" && isset($nis))
@@ -96,11 +96,18 @@ class UsuarioController
                 $cadastra->idlogin = $login->cadastrar();
                 $cadastra->rg = strtoupper($rg);
                 $cadastra->cpf = $cpf;
+                if($this->validaCPF($cpf))
+                {
+                    $cadastra->cpf = $cpf;
+                }
+                else
+                {
+                    echo"<script>alert('Digite um CPF válido'); window.location='".URL."cadastra-tutor'; </script>";
+                    return;
+                }
                 $cadastra->beneficio = 0;
                 $cadastra->telefone = $tel;
                 $cadastra->celular = $celular;
-                //Arrumar o Whatsapp dps
-                $cadastra->whatsapp = 0;
                 $cadastra->punicao = 0;
                 $cadastra->usurua =    $_POST["txtRua"];
                 $cadastra->usubairro = $_POST["txtBairro"];
@@ -127,7 +134,7 @@ class UsuarioController
                     move_uploaded_file($docComprovanteTemp, $pastaDestino);       //mover o arquivo 
                     $cadastra->doccomprovante = $novoNomeComprovante;
                 
-                    $cadastra->quantcastracoes = 1;
+                $cadastra->quantcastracoes = 1;
     
                 if(empty($nis))
                 {
@@ -138,12 +145,6 @@ class UsuarioController
                     $cadastra->nis = $nis;
                     $cadastra->beneficio = 1;
                     $cadastra->quantcastracoes = 2;
-                }
-                //TRATANDO O DOCUMENTO DO PROTETOR DE ANIMAIS
-
-                if($_POST["chkProtetor"] == "sim")
-                {
-                    $cadastra->beneficio = 3;
                 }
                 
                 $cadastra->cadastrar();
@@ -163,6 +164,32 @@ class UsuarioController
         }
     }
 
+    function validaCPF($cpf) {
+         
+        // Verifica se foi informado todos os digitos corretamente
+        if (strlen($cpf) != 11) {
+            return false;
+        }
+    
+        // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+        if (preg_match('/(\d)\1{10}/', $cpf)) {
+            return false;
+        }
+    
+        // Faz o calculo para validar o CPF
+        for ($t = 9; $t < 11; $t++) {
+            for ($d = 0, $c = 0; $c < $t; $c++) {
+                $d += $cpf[$c] * (($t + 1) - $c);
+            }
+            $d = ((10 * $d) % 11) % 10;
+            if ($cpf[$c] != $d) {
+                return false;
+            }
+        }
+        return true;
+    
+    }
+    
     
     function atualizarUsuario()
     {
@@ -472,6 +499,24 @@ class UsuarioController
                     echo"<script>alert('Insira um valor válido'); window.location='".URL."consulta-castracao'; </script>"; return; 
             }
             
+            header("Location:".URL."consulta-castracao");
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
+    }
+
+    //Excluir Castração
+    function excluirCastracao($id)
+    {
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+
+            $castracao = new Castracao();
+            $castracao->idcastracao = $id;
+            $castracao->excluir();
+
             header("Location:".URL."consulta-castracao");
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 

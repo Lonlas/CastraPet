@@ -206,7 +206,7 @@
             //Preparar comando SQL para retornar
             $cmd = $con->prepare("SELECT idcastracao, aninome, cpf, observacao, status, foto, email, nome, idanimal FROM castracao 
                                         JOIN animal ON animal.idanimal = castracao.idanimal 
-                                        JOIN usuario ON usuario.idusuario = animal.idusuario 
+                                        JOIN usuario ON usuario.idusuario = animal.idusuario
                                         JOIN login ON usuario.idlogin = login.idlogin 
                                     WHERE castracao.idcastracao = :idcastracao");
             

@@ -22,8 +22,8 @@
           Consultar
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="<?php echo URL.'consulta-usuario'; ?>">Usuários</a></li>
-          <li><a class="dropdown-item" href="<?php echo URL.'consulta-clinica'; ?>">Clínicas</a></li>
+          <li><a class="dropdown-item" href="<?php echo URL.'consulta-usuario/'; ?>">Usuários</a></li>
+          <li><a class="dropdown-item" href="<?php echo URL.'consulta-clinica/'; ?>">Clínicas</a></li>
           <li><a class="dropdown-item" href="<?php echo URL.'consulta-castracao'; ?>">Castrações</a></li>
           <li><a class="dropdown-item" href="<?php echo URL.'consulta-raca'; ?>">Raças</a></li>
         </ul>

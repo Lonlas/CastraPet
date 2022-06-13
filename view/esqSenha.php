@@ -16,7 +16,7 @@
             <div class="row h-100 align-items-center">
                 <div class="p-3">
                     <div class="container bg-dark text-light font-weight-bold p-3">
-                        <h5 class="m-0">Recuperar de senha</h5>
+                        <h5 class="m-0">Recuperar Senha</h5>
                     </div>
                     <div class="container p-sm-3 p-md-3 p-lg-4 p-3 bg-white">
                         <form method="post" class="container p-sm-3 p-md-3 p-lg-4 p-3" action="recuperar-senha">

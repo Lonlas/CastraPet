@@ -113,13 +113,14 @@ class ClinicaController
         //Controle de privilégio
         if($_SESSION["dadosLogin"]->nivelacesso == 1) {
 
-            $castracao = new Castracao();
+            /*$castracao = new Castracao();
             $castracao->idcastracao = $_POST["idcastracao"];
             $castracao->idclinica = $_SESSION["dadosClinica"]->idclinica;
             $castracao->status = 1;
             $castracao->horario = $_POST["horario"];
-            $castracao->aprovarCastracao();
 
+            $castracao->aprovarCastracao();
+*/
             //enviar o email
             $email = new Email();
             $email->data = $_POST["horario"];
@@ -130,8 +131,7 @@ class ClinicaController
             $email->emailDestinatario = $_POST["emailDestinatario"];
             $email->nomeDestinatario = $_POST["nomeDestinatario"];
             $email->nomeAnimal = $_POST["aninome"];
-            $email->clitelefone = $_POST["dadosClinica"]->clitelefone;
-            $email->enviarConfirmacao();
+            $email->clitelefone = $_SESSION["dadosClinica"]->clitelefone;
 
             header("Location:".URL."lista-solicitacao");
         }

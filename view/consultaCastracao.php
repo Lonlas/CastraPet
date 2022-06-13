@@ -48,7 +48,7 @@
                                                 <th>Hora</th>
                                                 <th>Status</th>
                                                 <th>Observação</th>
-                                                <th>Observação CLinica</th>
+                                                <th>Observação Clínica</th>
                                                 <th>Ações</th>
                                             </tr>
                                         </thead>
@@ -399,7 +399,7 @@
                                 'Castração apagada com sucesso.', //text:
                                 'success', //icon:
                             ).then(()=> {
-                                window.location='<?php echo URL;?>excluir-raca/'+id;
+                                window.location='excluir-castracao/'+id;
                                 }
                             )}
                     })

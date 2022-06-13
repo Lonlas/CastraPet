@@ -153,11 +153,11 @@ if($_GET)
         #CONSULTAS
         case "consulta-usuario":
             $adm = new Controller();
-            $adm->abrirConsultaUsuario();
+            $adm->abrirConsultaUsuario($url[1]);
         break;
         case "consulta-clinica":
             $adm = new Controller();
-            $adm->abrirConsultaClinica();
+            $adm->abrirConsultaClinica($url[1]);
         break;
         case "consulta-castracao":
             $adm = new Controller();
@@ -197,6 +197,10 @@ if($_GET)
         case "atualizar-castracao":
             $castracao = new UsuarioController();
             $castracao->atualizarCastracao();
+        break;
+        case "excluir-castracao":
+            $castracao = new UsuarioController();
+            $castracao->excluirCastracao($url[1]);
         break;
 
         // CLÍNICA

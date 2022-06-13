@@ -31,6 +31,8 @@
                                     <div class="form-group col-sm-6">
                                         <label for="txtCPF" class="form-label">CPF:<font color="red">*</font></label>
                                         <input class="form-control" type="text" name="txtCPF" id="txtCPF" maxlength="14" minlength="11" placeholder="000.000.000-00" required>
+                                        <div class="text-danger" id="cpfInvalido" style="display:none;">CPF Inválido</div>
+                                        <div class="text-success" id="cpfValido" style="display:none;">CPF Válido</div>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="txtTel" class="form-label">Telefone:</label>
@@ -104,7 +106,7 @@
                                 <div class="form-group mb-3">
                                     <label for="txtConfirmaSenha" class="form-label">Confirme sua senha:<font color="red">*</font></label>
                                     <input class="form-control" type="password" name="txtConfirmaSenha" id="txtConfirmaSenha" maxlength="40" required>
-                                    <div class="text-danger" id="avisoIgualdade" style="display:none;">as Senhas devem ser iguais*</div>
+                                    <div class="text-danger" id="avisoIgualdade" style="display:none;">As senhas devem ser iguais*</div>
                                     <div class="text-danger" id="avisoComprimento" style="display:none;">A senha deve conter mais que 5 dígitos*</div>
                                 </div>
                                 <div class="row">
@@ -233,6 +235,22 @@
             else {$("#avisoComprimento").hide();}
         });
     </script>
-    
+    <!-- VALIDADOR DE CPF -->
+    <script src="https://cdn.jsdelivr.net/npm/js-brasil/js-brasil.js"></script>
+    <script>
+        $("#txtCPF").on("blur", function(){
+            let cpf_value = $(this).val();
+            
+            if(jsbrasil.validateBr.cpf(cpf_value)) {
+                event.preventDefault();
+                $("#cpfValido").show();
+                $("#cpfInvalido").hide();
+            } else {
+                event.preventDefault();
+                $("#cpfInvalido").show();
+                $("#cpfValido").hide();
+            }
+        });
+    </script>
 </body>
 </html>

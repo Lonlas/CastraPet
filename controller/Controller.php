@@ -133,7 +133,7 @@ class Controller
         else{ include_once "view/paginaNaoEncontrada.php"; }
     }    
     #CONSULTAS
-    function abrirConsultaUsuario(){
+    function abrirConsultaUsuario($cpf){
         //caso o usuário não esteja logado
         if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
         //caso não tenha privilégio
@@ -145,12 +145,13 @@ class Controller
         }
         else{ include_once "view/paginaNaoEncontrada.php"; }
     }
-    function abrirConsultaClinica(){
+    function abrirConsultaClinica($cnpj){
         //caso o usuário não esteja logado
         if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
         //caso não tenha privilégio
         if($_SESSION["dadosLogin"]->nivelacesso == 2) {
             $clinica = new Clinica();
+
             $dadosClinica = $clinica->consultar();
             include_once "view/consultaClinica.php";
         }
@@ -161,9 +162,10 @@ class Controller
         if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return;}
 
         if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+            
             $castracao = new Castracao();
             $dadosCastracao = $castracao->consultar();
-
+            
             include_once "view/consultaCastracao.php";
         }
         else if($_SESSION["dadosLogin"]->nivelacesso == 1){
