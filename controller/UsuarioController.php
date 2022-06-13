@@ -25,11 +25,9 @@ class UsuarioController
                         $tutores->punicao = $tutor->punicao - 1; 
                     }
                     else
-                    {
                         $tutores->punicao = 0;
-                        $tutores->idusuario = $tutor->idusuario;
-                        $tutores->novoMes();
-                    }
+                    $tutores->idusuario = $tutor->idusuario;
+                    $tutores->novoMes();
                     break;
                     case 1:
                         $tutores->quantcastracoes = 2;
@@ -38,11 +36,9 @@ class UsuarioController
                         $tutores->punicao = $tutor->punicao - 1; 
                     }
                     else
-                    {
                         $tutores->punicao = 0;
-                        $tutores->idusuario = $tutor->idusuario;
-                        $tutores->novoMes();
-                    }
+                    $tutores->idusuario = $tutor->idusuario;
+                    $tutores->novoMes();
                 break;
                 case 2:
                     $tutores->quantcastracoes = 5;
@@ -51,11 +47,9 @@ class UsuarioController
                         $tutores->punicao = $tutor->punicao - 1; 
                     }
                     else
-                    {
                         $tutores->punicao = 0;
-                        $tutores->idusuario = $tutor->idusuario;
-                        $tutores->novoMes();
-                    }
+                    $tutores->idusuario = $tutor->idusuario;
+                    $tutores->novoMes();
                     break;
                 case 3:
                     if(strlen($tutor->nis) == 11)
@@ -66,25 +60,22 @@ class UsuarioController
                             $tutores->punicao = $tutor->punicao - 1; 
                         }
                         else
-                        {
                             $tutores->punicao = 0;
-                            $tutores->idusuario = $tutor->idusuario;
-                            $tutores->novoMes();
-                        }
+                        $tutores->idusuario = $tutor->idusuario;
+                        $tutores->novoMes();
                     }
                     else
                     {
-                        $tutores->quantcastracoes = 5;
+                        $tutores->quantcastracoes = 1;
                         if($tutores->punicao > 0)
                         {
                             $tutores->punicao = $tutor->punicao - 1; 
                         }
                         else
-                        {
                             $tutores->punicao = 0;
-                            $tutores->idusuario = $tutor->idusuario;
-                            $tutores->novoMes();
-                        }
+                        $tutores->idusuario = $tutor->idusuario;
+                        $tutores->novoMes();
+                        
                     }
                     
                 break;
