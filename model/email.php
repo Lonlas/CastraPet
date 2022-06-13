@@ -24,6 +24,7 @@ require "recursos/PHPMailer/SMTP.php";
         private $bairroClinica;
         private $numeroClinica;
         private $codsenha;
+        private $clitelefone;
 
         //Método get
         function __get($atributo)
@@ -50,6 +51,7 @@ require "recursos/PHPMailer/SMTP.php";
 
                 <p><b>Clínica: </b>$this->nomeClinica <br/>
                 <b>Endereço: </b>$this->ruaClinica, $this->numeroClinica - $this->bairroClinica, Franco da Rocha - SP</p>
+                <b>Telefone: </b>$this->telefoneClinica</p>
 
                 <p><u>Chegar com 10 minutos de antecedência.</u></p>
 

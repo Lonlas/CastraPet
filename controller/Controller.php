@@ -30,7 +30,7 @@ class Controller
     function abrirEsqSenha(){
         include_once "view/esqSenha.php";
     }
-    function abrirRecuperacao()
+    function abrirRecuperacao($email)
     {
         include_once "view/confirmarCodigoSenha.php";
     }
@@ -189,6 +189,18 @@ class Controller
             $dadosRaca = $raca->consultar();
 
             include_once "view/consultaAnimais.php";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; }
+    }
+
+    function abrirConsultaRaca(){
+        //caso o usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        //caso não tenha privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
+            $raca = new Raca();
+            $dadosRaca = $raca->consultar();
+            include_once "view/consultaRaca.php";
         }
         else{ include_once "view/paginaNaoEncontrada.php"; }
     }

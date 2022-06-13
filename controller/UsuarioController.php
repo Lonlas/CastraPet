@@ -138,30 +138,13 @@ class UsuarioController
                     $cadastra->nis = $nis;
                     $cadastra->beneficio = 1;
                     $cadastra->quantcastracoes = 2;
-                    
                 }
                 //TRATANDO O DOCUMENTO DO PROTETOR DE ANIMAIS
 
-                /*if($_POST["chkProtetor"] == "sim" && $_FILES["btnProtetorUpload"]["error"] == 0)
+                if($_POST["chkProtetor"] == "sim")
                 {
-                    //Tratar o envio da imagem
-                    $docProtetor = $_FILES["btnProtetorUpload"]["name"];       //Nome do arquivo
-                    $docProtetorTemp = $_FILES["btnProtetorUpload"]["tmp_name"];      //nome temporário
-                    
-                    //pegar a extensão do arquivo
-                    $info = new SplFileInfo($docProtetor);
-                    $extensao = $info->getExtension();
-                    
-                    //gerar novo nome
-                    $novoNomeProtetor = md5(microtime()) . ".$extensao";
-                    
-                    $pastaDestino = "recursos/img/docProtetores/$novoNomeProtetor";    //pasta destino
-                    move_uploaded_file($docProtetorTemp, $pastaDestino);       //mover o arquivo 
-                    $cadastra->docprotetor = $novoNomeProtetor;
-                    
-                    $cadastra->beneficio = 2;
-                    $cadastra->quantcastracoes = 5;
-                }*/
+                    $cadastra->beneficio = 3;
+                }
                 
                 $cadastra->cadastrar();
                 $this->logar();
@@ -247,27 +230,6 @@ class UsuarioController
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
-
-    function excluirUsuario($id)
-    {
-        //caso não usuário não esteja logado
-        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
-
-        //Controle de privilégio
-        if($_SESSION["dadosLogin"]->nivelacesso == 2) {
-
-            $login = new Login();
-            $login->idlogin = $id;
-            $login->excluir();
-            $usu = new Usuario(); 
-            $usu->idusuario = $id;
-            $usu->excluir();
-
-            //direcionar novamente para a tela de consulta
-            header("Location:".URL."consulta-usuario");
-        }
-        else{ include_once "view/paginaNaoEncontrada.php"; } 
-    }
     
     function alterarSenha()
     {
@@ -293,22 +255,29 @@ class UsuarioController
 
         //Controle de privilégio
         if($_SESSION["dadosLogin"]->nivelacesso == 0) {
-
             $castracao = new Castracao();
-            $castracao->idanimal =   $_POST["idAnimal"];
-            $castracao->observacao = $_POST["obsCastracao"];
-            $castracao->status = 0;
-
-            $castracao->cadastrar();
-            
             $usuario = new Usuario();
-            $usuario->idusuario = $_POST["idusuario"];
-            $quantCastracaoAtual = $usuario->retornarQuantCastracao();
-
-            $usuario->quantcastracoes = $quantCastracaoAtual - 1;
-            $usuario->alterarQuantCastracao();
-
-            echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
+            $usuario->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+            $dadosUsuario = $usuario->retornar();
+            
+            if($dadosUsuario->quantcastracoes >= 0)
+            {
+                $castracao->idusuario = $usuario->idusuario;
+                $castracao->idanimal = $_POST["idAnimal"];
+                $castracao->observacao = $_POST["obsCastracao"];
+                $castracao->status = 0;
+                $_SESSION["dadosUsuario"]->quantcastracoes--;
+                $usuario->quantcastracoes = $_SESSION["dadosUsuario"]->quantcastracoes;
+    
+                $usuario->atualizarQuantCastracoes();
+                $castracao->cadastrar();
+    
+                echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
+            }
+            else
+            {
+                echo"<script>alert('Seu limite de castrações foi atingido'); window.location='".URL."meus-animais'; </script>";
+            }
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }

@@ -130,6 +130,7 @@ class ClinicaController
             $email->emailDestinatario = $_POST["emailDestinatario"];
             $email->nomeDestinatario = $_POST["nomeDestinatario"];
             $email->nomeAnimal = $_POST["aninome"];
+            $email->clitelefone = $_POST["dadosClinica"]->clitelefone;
             $email->enviarConfirmacao();
 
             header("Location:".URL."lista-solicitacao");

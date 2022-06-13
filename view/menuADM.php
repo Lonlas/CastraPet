@@ -25,6 +25,7 @@
           <li><a class="dropdown-item" href="<?php echo URL.'consulta-usuario'; ?>">Usuários</a></li>
           <li><a class="dropdown-item" href="<?php echo URL.'consulta-clinica'; ?>">Clínicas</a></li>
           <li><a class="dropdown-item" href="<?php echo URL.'consulta-castracao'; ?>">Castrações</a></li>
+          <li><a class="dropdown-item" href="<?php echo URL.'consulta-raca'; ?>">Raças</a></li>
         </ul>
       </li>
       <li class="nav-item active">

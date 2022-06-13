@@ -25,6 +25,7 @@
                             <table id="tbUsuario" class="table table-hover">
                                 <thead>
                                     <th>#</th>
+                                    <th>Comp. Residência</th>
                                     <th>Nome</th>
                                     <th>CPF</th>
                                     <th>RG</th>
@@ -41,6 +42,7 @@
                                     <?php
                                         foreach($dadosUsuario as $value)
                                         {
+                                            $valorBeneficio = $value->beneficio;
                                             $value->beneficio = str_replace("0", "-", $value->beneficio);
                                             $value->beneficio = str_replace("1", "Benefício Social", $value->beneficio);
                                             $value->beneficio = str_replace("2", "Protetor de Animais", $value->beneficio);
@@ -63,6 +65,11 @@
                                             "
                                             <tr>
                                                 <td>$value->idusuario</td>
+                                                <td>
+                                                    <button id='btnImg' type='button' data-bs-target='#modalImg' data-bs-toggle='modal' data-img='$value->doccomprovante'>
+                                                        <img width='150px' class='img-thumbnail' src='".URL."recursos/img/docComprovantes/$value->doccomprovante'>
+                                                    </button>
+                                                </td>
                                                 <td>$value->nome</td>
                                                 <td>$value->cpf</td>
                                                 <td>$value->rg</td>
@@ -74,17 +81,17 @@
                                                 <td>$value->punicao</td>
                                                 <td>
                                                     <a href='". URL. "consulta-animais/$value->idusuario' class='btn btn-success col-auto'>
-                                                        <img src='". URL ."recursos/img/Logo-Castra-Pet.svg' alt='Animais cadastrados' width='30' class='aling-itens-center white justify-content-center'>
+                                                        <img src='". URL ."recursos/img/Logo-Castra-Pet.svg' alt='Animais cadastrados' width='30px' class='aling-itens-center white justify-content-center'>
                                                     </a>
                                                 </td>
                                                 <td>
                                                     <button class='btn btn-warning btn-sm-sm text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
-                                                            data-idusuario='$value->idusuario' data-nome='$value->nome' data-cpf='$value->cpf' data-beneficio='$value->beneficio' data-nis='$valorNis' 
+                                                            data-idusuario='$value->idusuario' data-nome='$value->nome' data-cpf='$value->cpf' data-beneficio='$valorBeneficio' data-nis='$valorNis' 
                                                             data-email='$value->email' data-telefone='$valorTelefone' data-celular='$value->celular' data-punicao='$valorPunicao' data-rg='$value->rg' 
                                                             data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$value->idlogin'>
                                                         Editar
                                                     </button>
-                                                    <a href='".URL."excluir-usuario/$value->idusuario' class='btn btn-danger btn-sm-sm' onclick='return confirm(\"Deseja realmente excluir?\")'>Excluir</a>
+                                                    <a class='btn btn-danger btn-sm-sm' onclick='confirmar($value->idusuario, $value->idlogin)'>Excluir</a>
                                                 </td>
                                             </tr>
                                             ";
@@ -201,6 +208,24 @@
         </div>
     </div>
     <!-- MODAL -->
+    <!-- MODAL: img docComprovante-->
+    <div class="modal fade" id="modalImg" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Comprovante de Residência</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                </div>
+                <div class="modal-body row justify-content-center">   
+                    <img id="modalImagem" src="recursos/img/doccomprovantes/">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL -->
 
     <!-- /CORPO -->
 
@@ -224,6 +249,10 @@
     
     <!-- EXTENSÃO JQUERY DAS MASCARAS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <!-- JS SweetAlert 2-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
     
     <script>
         $(document).ready(function() {
@@ -297,7 +326,7 @@
             $("#idlogin").val(idlogin);
             $("#txtNome").val(nome);
             $("#txtCPF").val(cpf).mask('000.000.000-00');
-            if(beneficio.val == 2)
+            if(beneficio == 2)
             {
                 $("#chkProtetor").prop("checked", true);
             }
@@ -329,6 +358,44 @@
             }
         });
     </script>
-    
+    <!-- ABRIR MODAL editar usuário -->
+    <script>
+        var modalEditar = document.getElementById('modalImg')
+        modalEditar.addEventListener('show.bs.modal', function (event) {
+
+            var button = event.relatedTarget
+
+            var img = button.getAttribute('data-img')
+
+            $("#modalImagem").prop("src", "<?php echo URL.'recursos/img/doccomprovantes/'?>"+img);
+
+        });
+    </script>
+    <!-- SCRIPT CONFIRMAÇÃO PARA EXCLUIR O USUÁRIO -->
+    <script>
+        function confirmar(idusu, idlogin)
+        {
+            Swal.fire({
+                title: 'Você tem certeza que deseja excluir?',
+                text: "Você não será capaz de desfazer esta ação!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Excluir',
+                cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Excluído!', //title:
+                        'Usuário apagado com sucesso.', //text:
+                        'success', //icon:
+                    ).then(()=> {
+                        window.location='<?php echo URL;?>excluir-tutor/'+idusu+'/'+idlogin;
+                        }
+                    )}
+            })
+        }
+    </script>
 </body>
 </html>

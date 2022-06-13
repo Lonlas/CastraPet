@@ -78,7 +78,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idusuario, login.idlogin, nome, email, cpf, rg, beneficio, nis, telefone, celular, usucep, usubairro, usurua, usunumero, punicao 
+            $cmd = $con->prepare("SELECT idusuario, login.idlogin, doccomprovante, nome, email, cpf, rg, beneficio, nis, telefone, celular, usucep, usubairro, usurua, usunumero, punicao 
                                     FROM usuario JOIN login ON usuario.idlogin = login.idlogin");
             
             //Executando o comando SQL
@@ -250,16 +250,17 @@
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
 
-        function alterarQuantCastracao()
+        //Atualizar quantidade de castrações
+        function atualizarQuantCastracoes()
         {
             //Conectando ao banco de dados
             $con = Conexao::conectar();
 
-            //Preparar comando SQL para retornar
+            //Preparar comando SQL para atualizar
             $cmd = $con->prepare("UPDATE usuario SET quantcastracoes = :quantcastracoes WHERE idusuario = :idusuario");
-            
+                
             //Parâmetros SQL
-            $cmd->bindParam(":quantcastracoes",   $this->quantcastracoes);
+            $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);
             $cmd->bindParam(":idusuario", $this->idusuario);
 
             //Executando o comando SQL

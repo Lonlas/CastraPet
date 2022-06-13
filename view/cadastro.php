@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
-                                        <label class="form-label">Comprovante de residência:<font color="red">*</font></label>
+                                        <label for="btnComprovante" class="form-label">Comprovante de residência:<font color="red">*</font></label>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <input class="btn btn-success" type="file" value="Fazer upload do documento" accept="image/*" name="btnComprovante" id="btnComprovante" hidden>
@@ -69,12 +69,14 @@
                                         <input class="form-control" type="text" name="txtNIS" id="txtNIS" placeholder="Número do NIS" maxlength="11" disabled>
                                     </div>
                                 </div>
+                                <!--
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
                                         <input type="checkbox" name="chkProtetor" id="chkProtetor" value="sim">
                                         <label for="chkProtetor" class="form-label">Sou protetor de animais</label>
                                     </div>
                                 </div>
+                                -->
                             </div>
                             <div class="col-md-6 p-0 ps-md-3">
                                 <div class="row mb-3">
@@ -195,6 +197,7 @@
             }
         });
     </script>
+    <!--
     <script>
         //Protetor de Animais
         $('#chkProtetor').change(function()
@@ -211,6 +214,7 @@
             }
         });
     </script>
+    -->
     <script type="text/javascript">
         //confirme a senha
         $("form").submit(function(){
