@@ -62,7 +62,15 @@ class UsuarioController
                 $cadastra = new Usuario();
                 $cadastra->idlogin = $login->cadastrar();
                 $cadastra->rg = strtoupper($rg);
-                $cadastra->cpf = $cpf;
+                if($this->validaCPF($cpf))
+                {
+                    $cadastra->cpf = $cpf;
+                }
+                else
+                {
+                    echo"<script>alert('digite um CPF válido'); window.location='".URL."cadastra-tutor'; </script>";
+                    return;
+                }
                 $cadastra->beneficio = 0;
                 $cadastra->telefone = $tel;
                 $cadastra->celular = $celular;
@@ -106,12 +114,6 @@ class UsuarioController
                     $cadastra->beneficio = 1;
                     $cadastra->quantcastracoes = 2;
                 }
-                //TRATANDO O DOCUMENTO DO PROTETOR DE ANIMAIS
-
-                if($_POST["chkProtetor"] == "sim")
-                {
-                    $cadastra->beneficio = 3;
-                }
                 
                 $cadastra->cadastrar();
                 $this->logar();
@@ -130,6 +132,32 @@ class UsuarioController
         }
     }
 
+    function validaCPF($cpf) {
+         
+        // Verifica se foi informado todos os digitos corretamente
+        if (strlen($cpf) != 11) {
+            return false;
+        }
+    
+        // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+        if (preg_match('/(\d)\1{10}/', $cpf)) {
+            return false;
+        }
+    
+        // Faz o calculo para validar o CPF
+        for ($t = 9; $t < 11; $t++) {
+            for ($d = 0, $c = 0; $c < $t; $c++) {
+                $d += $cpf[$c] * (($t + 1) - $c);
+            }
+            $d = ((10 * $d) % 11) % 10;
+            if ($cpf[$c] != $d) {
+                return false;
+            }
+        }
+        return true;
+    
+    }
+    
     
     function atualizarUsuario()
     {
