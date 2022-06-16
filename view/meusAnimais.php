@@ -21,6 +21,10 @@
                         <?php
                         foreach ($dadosAnimais as $value)
                         {
+                            //Reescrevendo a foto
+                            $valorFoto = $value->foto;
+                            $value->foto == '' ? $value->foto = "Animal_sem_imagem.png" : $value->foto = $value->foto ;
+
                             //Reescrevendo a espécie
                             $valorEspecie = $value->especie;
                             $value->especie = str_replace("0","Canina", $value->especie);
@@ -139,7 +143,7 @@
                                         <button class='btn btn-warning w-100 mb-2' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
                                                 data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$valorEspecie' 
                                                 data-sexo='$valorSexo' data-cor='$value->cor' data-raca='$value->idraca' data-idade='$value->idade' data-pelagem='$valorPelagem' 
-                                                data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$value->foto'>
+                                                data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$valorFoto'>
                                                 Editar animal
                                         </button>
                                         <a class='btn btn-danger w-100' onclick='confirmar($value->idanimal)'>Excluir animal</a>

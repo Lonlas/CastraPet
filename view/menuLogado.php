@@ -15,7 +15,7 @@
         <a class="nav-link"  href="<?php echo URL.'sobre'; ?>">Sobre</a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link"  href="https://www.francodarocha.sp.gov.br/">Prefeitura Franco da Rocha</a>
+        <a class="nav-link"  href="https://www.francodarocha.sp.gov.br/" target="_blank">Prefeitura Franco da Rocha</a>
     </li>
     </ul>
     <form class="form-inline ms-auto my-2 my-lg-0"> 

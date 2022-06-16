@@ -20,16 +20,16 @@
                         <form method="post" class="p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0" action="cadastrar-tutor" enctype="multipart/form-data">
                             <div class="col-md-6 mb-lg-0 mb-5 p-0 pe-md-3">
                                 <div class="form-group row-6 mb-3">
-                                    <label for="txtNome" class="form-label">Nome:<font color="red">*</font></label>
+                                    <label for="txtNome" class="form-label">Nome:<font color="red"> *</font></label>
                                     <input  class="form-control" type="text" name="txtNome" id="txtNome" maxlength="70" required>
                                 </div>
                                 <div class="form-group row-6 mb-3">
-                                    <label for="txtEmail" class="form-label">Email:<font color="red">*</font></label>
+                                    <label for="txtEmail" class="form-label">Email:<font color="red"> *</font></label>
                                     <input class="form-control" type="email" name="txtEmail" id="txtEmail" maxlength="100" required>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
-                                        <label for="txtCPF" class="form-label">CPF:<font color="red">*</font></label>
+                                        <label for="txtCPF" class="form-label">CPF:<font color="red"> *</font></label>
                                         <input class="form-control" type="text" name="txtCPF" id="txtCPF" maxlength="14" minlength="11" placeholder="000.000.000-00" required>
                                         <div class="text-danger" id="cpfInvalido" style="display:none;">CPF Inválido</div>
                                         <div class="text-success" id="cpfValido" style="display:none;">CPF Válido</div>
@@ -41,11 +41,11 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
-                                        <label for="txtRG" class="form-label">RG:<font color="red">*</font></label>
+                                        <label for="txtRG" class="form-label">RG:<font color="red"> *</font></label>
                                         <input class="form-control" type="text" name="txtRG" id="txtRG" maxlength="12" placeholder="00.000.000-X" required>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="txtCelular" class="form-label">Celular:<font color="red">*</font></label>
+                                        <label for="txtCelular" class="form-label">Celular:<font color="red"> *</font></label>
                                         <input class="form-control" type="text" name="txtCelular" id="txtCelular" placeholder="(00) 00000-0000" maxlength="15">
                                         <div class="form-group" style="margin-bottom: -10px;">
                                             <input type="checkbox" name="chkWhats" id="chkWhats" value="sim">
@@ -55,11 +55,10 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">
-                                        <label for="btnComprovante" class="form-label">Comprovante de residência:<font color="red">*</font></label>
+                                        <label for="btnComprovante" class="form-label">Comprovante de residência:<font color="red"> *</font></label>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <input class="btn btn-success" type="file" value="Fazer upload do documento" accept="image/*" name="btnComprovante" id="btnComprovante" hidden>
-                                        <label id="labelComprovante" for="btnComprovante" class="btn btn-success" style="background-color: 0;">Enviar comprovante de residência</label>
+                                        <input class="form-control" type="file" value="Fazer upload do documento" accept="image/*" name="btnComprovante" id="btnComprovante">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -71,40 +70,32 @@
                                         <input class="form-control" type="text" name="txtNIS" id="txtNIS" placeholder="Número do NIS" maxlength="11" disabled>
                                     </div>
                                 </div>
-                                <!--
-                                <div class="row mb-3">
-                                    <div class="form-group col-sm-6">
-                                        <input type="checkbox" name="chkProtetor" id="chkProtetor" value="sim">
-                                        <label for="chkProtetor" class="form-label">Sou protetor de animais</label>
-                                    </div>
-                                </div>
-                                -->
                             </div>
                             <div class="col-md-6 p-0 ps-md-3">
                                 <div class="row mb-3">
                                     <div class="form-group col-6">
-                                        <label for="txtCEP" class="form-label">CEP:<font color="red">*</font></label>
+                                        <label for="txtCEP" class="form-label">CEP:<font color="red"> *</font></label>
                                         <input class="form-control" type="text" name="txtCEP" id="txtCEP" maxlength="9" placeholder="00000-000" required> 
                                     </div>
                                     <div class="form-group col-6">
-                                        <label for="txtNumero" class="form-label">Número:<font color="red">*</font></label>
+                                        <label for="txtNumero" class="form-label">Número:<font color="red"> *</font></label>
                                         <input class="form-control" type="text" name="txtNumero" id="txtNumero" maxlength="5" required>
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="txtBairro" class="form-label">Bairro:<font color="red">*</font></label>
+                                    <label for="txtBairro" class="form-label">Bairro:<font color="red"> *</font></label>
                                     <input class="form-control" type="text" name="txtBairro" id="txtBairro" maxlength="50" required>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="txtRua" class="form-label">Rua:<font color="red">*</font></label>
+                                    <label for="txtRua" class="form-label">Rua:<font color="red"> *</font></label>
                                     <input class="form-control" type="text" name="txtRua" id="txtRua" maxlength="50" required>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="txtSenha" class="form-label">Crie uma senha:<font color="red">*</font></label>
+                                    <label for="txtSenha" class="form-label">Crie uma senha:<font color="red"> *</font></label>
                                     <input class="form-control" type="password" name="txtSenha" id="txtSenha" maxlength="40" required>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="txtConfirmaSenha" class="form-label">Confirme sua senha:<font color="red">*</font></label>
+                                    <label for="txtConfirmaSenha" class="form-label">Confirme sua senha:<font color="red"> *</font></label>
                                     <input class="form-control" type="password" name="txtConfirmaSenha" id="txtConfirmaSenha" maxlength="40" required>
                                     <div class="text-danger" id="avisoIgualdade" style="display:none;">As senhas devem ser iguais*</div>
                                     <div class="text-danger" id="avisoComprimento" style="display:none;">A senha deve conter mais que 5 dígitos*</div>
@@ -199,24 +190,6 @@
             }
         });
     </script>
-    <!--
-    <script>
-        //Protetor de Animais
-        $('#chkProtetor').change(function()
-        {
-            if(this.checked) 
-            {
-                $('#btnProtetorUpload').prop('disabled', false);
-                $('#labelProtetor').removeClass("disabled");
-            } 
-            else 
-            {
-                $('#btnProtetorUpload').prop('disabled', true);
-                $('#labelProtetor').addClass("disabled");
-            }
-        });
-    </script>
-    -->
     <script type="text/javascript">
         //confirme a senha
         $("form").submit(function(){
