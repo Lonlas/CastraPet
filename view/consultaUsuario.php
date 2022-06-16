@@ -55,8 +55,7 @@
                                             $value->nis = preg_replace("/^$/", "-", $value->nis);
                                             
                                             $valorPunicao = $value->punicao;
-                                            $value->punicao = str_replace("0", "-", $value->punicao);
-                                            $value->punicao = str_replace("1", "<span class='badge bg-danger'>Punido</span>", $value->punicao);
+                                            $value->punicao == 0 ? $value->punicao = '-' : $value->punicao = "<span class='badge bg-danger'>Punido</span>";
     
                                             //Testar depois:
                                             //$number="(".substr($number,0,2).") ".substr($number,2,-4)." - ".substr($number,-4);

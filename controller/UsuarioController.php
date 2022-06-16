@@ -20,7 +20,7 @@ class UsuarioController
             switch($tutor->beneficio){
                 case 0:
                     $tutores->quantcastracoes = 1;
-                    if($tutores->punicao > 0)
+                    if($tutor->punicao > 0)
                     {
                         $tutores->punicao = $tutor->punicao - 1; 
                     }
@@ -31,7 +31,7 @@ class UsuarioController
                     break;
                     case 1:
                         $tutores->quantcastracoes = 2;
-                    if($tutores->punicao > 0)
+                    if($tutor->punicao > 0)
                     {
                         $tutores->punicao = $tutor->punicao - 1; 
                     }
@@ -42,7 +42,7 @@ class UsuarioController
                 break;
                 case 2:
                     $tutores->quantcastracoes = 5;
-                    if($tutores->punicao > 0)
+                    if($tutor->punicao > 0)
                     {
                         $tutores->punicao = $tutor->punicao - 1; 
                     }
@@ -55,7 +55,7 @@ class UsuarioController
                     if(strlen($tutor->nis) == 11)
                     {
                         $tutores->quantcastracoes = 2;
-                        if($tutores->punicao > 0)
+                        if($tutor->punicao > 0)
                         {
                             $tutores->punicao = $tutor->punicao - 1; 
                         }
@@ -67,7 +67,7 @@ class UsuarioController
                     else
                     {
                         $tutores->quantcastracoes = 1;
-                        if($tutores->punicao > 0)
+                        if($tutor->punicao > 0)
                         {
                             $tutores->punicao = $tutor->punicao - 1; 
                         }
@@ -445,7 +445,7 @@ class UsuarioController
                     //Aplicar uma punição ao tutor que não compareceu à castração
                     $usuario = new Usuario();
                     $usuario->idusuario = $_POST["idTutor"];
-                    $usuario->punicao = 1;
+                    $usuario->punicao = 2;
                     $usuario->aplicarPunicao();    
                     
                     //Enviar aviso ao usuário dizendo que não compareceu à castração

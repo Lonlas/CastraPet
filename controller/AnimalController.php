@@ -128,8 +128,7 @@ class AnimalController
                     $animal->foto = $novoNome;
                 }
             }
-            else
-            $animal->foto = $dadosAnimal->foto;
+            else{$animal->foto = $dadosAnimal->foto;}
     
             $animal->atualizar();
 

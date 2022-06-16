@@ -49,8 +49,8 @@ require "recursos/PHPMailer/SMTP.php";
                 <p><b>Data:</b> ".date('d-m-Y',strtotime($this->data))."<br/>
                 <b>Hora:</b> ".date('H:i',strtotime($this->data))."</p>
 
-                <p><b>Clínica: </b>$this->nomeClinica <br/>
-                <b>Endereço: </b>$this->ruaClinica, $this->numeroClinica - $this->bairroClinica, Franco da Rocha - SP</p>
+                <><b>Clínica: </b>$this->nomeClinica <br/>
+                <b>Endereço: </b>$this->ruaClinica, $this->numeroClinica - $this->bairroClinica, Franco da Rocha - SP<br>
                 <b>Telefone: </b>$this->clitelefone</p>
 
                 <p><u>Chegar com 10 minutos de antecedência.</u></p>

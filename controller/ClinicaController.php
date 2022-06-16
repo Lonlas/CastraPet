@@ -133,6 +133,8 @@ class ClinicaController
             $email->nomeAnimal = $_POST["aninome"];
             $email->clitelefone = $_SESSION["dadosClinica"]->clitelefone;
 
+            $email->enviarConfirmacao();
+
             header("Location:".URL."lista-solicitacao");
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 

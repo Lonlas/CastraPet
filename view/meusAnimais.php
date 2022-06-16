@@ -135,7 +135,7 @@
                                             </button>
                                             ";
                                         }
-                                        else if($_SESSION["dadosUsuario"]->punicao == 1)
+                                        else if($_SESSION["dadosUsuario"]->punicao != 0)
                                         {
                                             echo "<span class='btn bg-danger w-100 mb-2 text-white' style='cursor: default;'>Solicitação Bloqueada</span> ";
                                         }
