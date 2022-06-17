@@ -136,7 +136,6 @@ class UsuarioController
     
                 //Cadastro do Usuário
                 $cadastra = new Usuario();
-                $cadastra->idlogin = $login->cadastrar();
                 $cadastra->rg = strtoupper($rg);
                 $cadastra->cpf = $cpf;
                 if($this->validaCPF($cpf))
@@ -157,28 +156,28 @@ class UsuarioController
                 $cadastra->usunumero = $_POST["txtNumero"];
                 $cadastra->usucep = $cep;
                 if($_POST["chkWhats"] == "sim")
-                    $cadastra->whatsapp = 1;
+                $cadastra->whatsapp = 1;
                 else
                     $cadastra->whatsapp = 0;
 
                 //TRATANDO O COMPROVANTE DE ENDEREÇO
-                    //Tratar o envio da imagem
-                    $docComprovante = $_FILES["btnComprovante"]["name"];       //Nome do arquivo
-                    $docComprovanteTemp = $_FILES["btnComprovante"]["tmp_name"];      //nome temporário
-                    
-                    //pegar a extensão do arquivo
-                    $info = new SplFileInfo($docComprovante);
-                    $extensao = $info->getExtension();
-                    
-                    //gerar novo nome
-                    $novoNomeComprovante = md5(microtime()) . ".$extensao";
-                    
-                    $pastaDestino = "recursos/img/docComprovantes/$novoNomeComprovante";    //pasta destino
-                    move_uploaded_file($docComprovanteTemp, $pastaDestino);       //mover o arquivo 
-                    $cadastra->doccomprovante = $novoNomeComprovante;
+                //Tratar o envio da imagem
+                $docComprovante = $_FILES["btnComprovante"]["name"];       //Nome do arquivo
+                $docComprovanteTemp = $_FILES["btnComprovante"]["tmp_name"];      //nome temporário
+                
+                //pegar a extensão do arquivo
+                $info = new SplFileInfo($docComprovante);
+                $extensao = $info->getExtension();
+                
+                //gerar novo nome
+                $novoNomeComprovante = md5(microtime()) . ".$extensao";
+                
+                $pastaDestino = "recursos/img/docComprovantes/$novoNomeComprovante";    //pasta destino
+                move_uploaded_file($docComprovanteTemp, $pastaDestino);       //mover o arquivo 
+                $cadastra->doccomprovante = $novoNomeComprovante;
                 
                 $cadastra->quantcastracoes = 1;
-    
+                
                 if(empty($nis))
                 {
                     $cadastra->nis = "";
@@ -190,6 +189,7 @@ class UsuarioController
                     $cadastra->quantcastracoes = 2;
                 }
                 
+                $cadastra->idlogin = $login->cadastrar();
                 $cadastra->cadastrar();
                 $this->logar();
                 header("Location:".URL);
