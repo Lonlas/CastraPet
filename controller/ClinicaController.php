@@ -79,7 +79,7 @@ class ClinicaController
             $clinica->ativo = 0;
             $clinica->atualizar();
 
-            header("location:".URL."consulta-clinica");
+            header("location:".URL."consulta-clinica/");
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
@@ -100,7 +100,7 @@ class ClinicaController
             $login->idlogin = $idLogin;
             $login->excluir();
 
-            header("Location:".URL."consulta-clinica");
+            header("Location:".URL."consulta-clinica/");
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }

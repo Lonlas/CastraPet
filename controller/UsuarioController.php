@@ -295,7 +295,7 @@ class UsuarioController
 
             echo "<script>
                     alert('Dados alterados com sucesso!');
-                    window.location='".URL."consulta-usuario';
+                    window.location='".URL."consulta-usuario/';
                 </script>";
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
@@ -644,7 +644,7 @@ class UsuarioController
             $login->idlogin = $idLogin;
             $login->excluir();
 
-            header("location:".URL."consulta-usuario");
+            header("location:".URL."consulta-usuario/");
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
