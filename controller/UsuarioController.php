@@ -10,7 +10,7 @@ include_once "model/Clinica.php";
 class UsuarioController
 {
     function novoMes(){
-          
+
         $tutores = new Usuario();
         $dadosTutor = $tutores->consultar();
         
@@ -398,6 +398,7 @@ class UsuarioController
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
+
     function atualizarCastracao()
     {
         //caso não usuário não esteja logado
@@ -407,21 +408,21 @@ class UsuarioController
         if($_SESSION["dadosLogin"]->nivelacesso == 1) {
 
             $castracao = new Castracao();
-            $castracao->idcastracao = $_POST["idcastracao"];
+            $castracao->idcastracao = $_POST["idCastracao"];
 
             switch($_POST["statusAtualizado"])
             {
                 case 2:
                     // Animal castrado
 
-                    $castracao->status = 2;
+                    $castracao->status = 2;  
                     $castracao->atualizar();
-                    
+
                     $animal = new Animal();
-                    $animal->idanimal = $_POST["idanimal"];
+                    $animal->idanimal = $_POST["idAnimal"];
                     $animal->codchip = $_POST["codChip"];
                     $animal->atualizarCastrado();
-
+                    
                     if($_POST["status"] != 4)
                     {
                         //Liberar a vaga de castração para a clínica
@@ -484,7 +485,7 @@ class UsuarioController
 
                     //Adicionar o status de que o animal retornou para a análise da castração
                     $castracao->status = 6;
-                    $castracao->obsclinica = $_POST["obsclinica"];
+                    $castracao->obsclinica = $_POST["obsClinica"];
                     $castracao->reagendar();
 
                     if($_POST["status"] != 4)
@@ -521,7 +522,7 @@ class UsuarioController
                     $castracao->atualizar();
 
                     $animal = new Animal();
-                    $animal->idanimal = $_SESSION["dadosAnimal"]->idanimal;
+                    $animal->idanimal = $_POST["idAnimal"];
                     $animal->codchip = $_POST["codChip"];
                     $animal->atualizarCastrado();
 
