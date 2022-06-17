@@ -21,6 +21,7 @@ class AnimalController
 
     function cadastrarAnimal()
     {
+        
         //caso não usuário não esteja logado
         if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
 
@@ -37,7 +38,7 @@ class AnimalController
             $animal->pelagem =     $_POST["slcPelagem"];
             $animal->idade =       $_POST["numIdade"];
             $animal->comunitario = $_POST["slcComunitario"];
-
+            
             /* UPLOAD IMAGEM */
             if($_FILES["imgAnimal"]["error"] == 0)
             {
@@ -67,6 +68,8 @@ class AnimalController
 
     function atualizarAnimal()
     {
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
 
         //Controle de privilégio
         if($_SESSION["dadosLogin"]->nivelacesso == 0 || $_SESSION["dadosLogin"]->nivelacesso == 2) {
@@ -135,7 +138,7 @@ class AnimalController
             if($_SESSION["dadosLogin"]->nivelacesso == 0){ header("Location:".URL."meus-animais"); }
             else{ header("Location:".URL."consulta-animais/".$_POST['idusuario']);}
            
-        }
+        } else{ include_once "view/paginaNaoEncontrada.php"; }
     }
 
     function excluirAnimal($idanimal,$idusuario,$foto)

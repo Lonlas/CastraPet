@@ -10,8 +10,7 @@ include_once "model/Clinica.php";
 class UsuarioController
 {
     function novoMes(){
-
-        
+          
         $tutores = new Usuario();
         $dadosTutor = $tutores->consultar();
         
@@ -28,8 +27,8 @@ class UsuarioController
                         $tutores->punicao = 0;
                     $tutores->idusuario = $tutor->idusuario;
                     $tutores->novoMes();
-                    break;
-                    case 1:
+                break;
+                case 1:
                         $tutores->quantcastracoes = 2;
                     if($tutor->punicao > 0)
                     {
@@ -50,7 +49,7 @@ class UsuarioController
                         $tutores->punicao = 0;
                     $tutores->idusuario = $tutor->idusuario;
                     $tutores->novoMes();
-                    break;
+                break;
                 case 3:
                     if(strlen($tutor->nis) == 11)
                     {
@@ -75,9 +74,7 @@ class UsuarioController
                             $tutores->punicao = 0;
                         $tutores->idusuario = $tutor->idusuario;
                         $tutores->novoMes();
-                        
-                    }
-                    
+                    } 
                 break;
             }
         }
