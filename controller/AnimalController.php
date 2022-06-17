@@ -152,9 +152,9 @@ class AnimalController
 
                 //removendo imagem
                 $dadosAnimal = $animal->retornar();
-                if(is_file("recursos/img/$dadosAnimal->foto")) //verificar se o arquivo existe
+                if(is_file("recursos/img/Animais/$dadosAnimal->foto")) //verificar se o arquivo existe
                 {
-                    unlink("recursos/img/$dadosAnimal->foto"); //excluir o arquivo
+                    unlink("recursos/img/Animais/$dadosAnimal->foto"); //excluir o arquivo
                 }
                 
                 $animal->excluir();
