@@ -31,8 +31,8 @@
                                     <div class="form-group col-sm-6">
                                         <label for="txtCPF" class="form-label">CPF:<font color="red"> *</font></label>
                                         <input class="form-control" type="text" name="txtCPF" id="txtCPF" maxlength="14" minlength="11" placeholder="000.000.000-00" required>
-                                        <div class="text-danger" id="cpfInvalido" style="display:none;">CPF Inválido</div>
-                                        <div class="text-success" id="cpfValido" style="display:none;">CPF Válido</div>
+                                        <div class="invalid-feedback" id="cpfInvalido" style="display:none;">CPF Inválido</div>
+                                        <div class="valid-feedback" id="cpfValido" style="display:none;">CPF Válido</div>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="txtTel" class="form-label">Telefone:</label>
@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <label for="txtCelular" class="form-label">Celular:<font color="red"> *</font></label>
-                                        <input class="form-control" type="text" name="txtCelular" id="txtCelular" placeholder="(00) 00000-0000" maxlength="15">
+                                        <input class="form-control" type="text" name="txtCelular" id="txtCelular" placeholder="(00) 00000-0000" maxlength="15" required>
                                         <div class="form-group" style="margin-bottom: -10px;">
                                             <input type="checkbox" name="chkWhats" id="chkWhats" value="sim">
                                             <label for="chkWhats" class="form-label">O número é Whatsapp?</label>
@@ -58,7 +58,7 @@
                                         <label for="btnComprovante" class="form-label">Comprovante de residência:<font color="red"> *</font></label>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <input class="form-control" type="file" value="Fazer upload do documento" accept="image/*" name="btnComprovante" id="btnComprovante">
+                                        <input class="form-control" type="file" value="Fazer upload do documento" accept="image/*" name="btnComprovante" id="btnComprovante" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="txtNumero" class="form-label">Número:<font color="red"> *</font></label>
-                                        <input class="form-control" type="text" name="txtNumero" id="txtNumero" maxlength="5" required>
+                                        <input class="form-control" type="text" name="txtNumero" id="txtNumero" maxlength="11" required>
                                     </div>
                                 </div>
                                 <div class="form-group mb-3">
@@ -97,8 +97,8 @@
                                 <div class="form-group mb-3">
                                     <label for="txtConfirmaSenha" class="form-label">Confirme sua senha:<font color="red"> *</font></label>
                                     <input class="form-control" type="password" name="txtConfirmaSenha" id="txtConfirmaSenha" maxlength="40" required>
-                                    <div class="text-danger" id="avisoIgualdade" style="display:none;">As senhas devem ser iguais*</div>
-                                    <div class="text-danger" id="avisoComprimento" style="display:none;">A senha deve conter mais que 5 dígitos*</div>
+                                    <div class="invalid-feedback" id="avisoIgualdade" style="display:none;">As senhas devem ser iguais*</div>
+                                    <div class="invalid-feedback" id="avisoComprimento" style="display:none;">A senha deve conter mais que 5 dígitos*</div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
@@ -182,10 +182,12 @@
             if(this.checked) 
             {
                 $('#txtNIS').prop('disabled',false);
+                $('#txtNIS').prop('required',true);
             } 
             else 
             {
                 $('#txtNIS').prop('disabled',true);
+                $('#txtNIS').prop('required',false);
                 $('#txtNIS').val(null);
             }
         });
@@ -215,11 +217,9 @@
             let cpf_value = $(this).val();
             
             if(jsbrasil.validateBr.cpf(cpf_value)) {
-                event.preventDefault();
                 $("#cpfValido").show();
                 $("#cpfInvalido").hide();
             } else {
-                event.preventDefault();
                 $("#cpfInvalido").show();
                 $("#cpfValido").hide();
             }
