@@ -111,19 +111,19 @@ class UsuarioController
                 {
                     $consultarNIS = new Usuario();
                     $consultarNIS->nis = $nis;
-                    $dadosConusultaNIS = $consultarNIS->verificarNis();
+                    $dadosConsultaNIS = $consultarNIS->verificarNis();
                 }
                 else
                 {
-                    echo"<script>alert('digite um NIS válido'); window.location='".URL."cadastra-tutor'; </script>";
+                    echo"<script>alert('Digite um NIS válido'); window.location='".URL."cadastra-tutor'; </script>";
                     return;
                 }
             }
             else
-                $dadosConusultaNIS = null;
+                $dadosConsultaNIS = null;
             
             //verificando se o email ou cpf ou nis já existem no banco ou não     
-            if($consultarEmail->logar() == null && $consultarCPF->verificarCPF() == null && $dadosConusultaNIS == null)
+            if($consultarEmail->logar() == null && $consultarCPF->verificarCPF() == null && $dadosConsultaNIS == null)
             {
                 $login = new Login();
                 $login->nome =  $_POST["txtNome"];
@@ -134,18 +134,19 @@ class UsuarioController
                 //Cadastro do Usuário
                 $cadastra = new Usuario();
                 $cadastra->rg = strtoupper($rg);
-                $cadastra->cpf = $cpf;
-                if($this->validaCPF($cpf))
-                {
-                    $cadastra->cpf = $cpf;
-                }
-                else
+                if(!$this->validaCPF($cpf))
                 {
                     echo"<script>alert('Digite um CPF válido'); window.location='".URL."cadastra-tutor'; </script>";
                     return;
                 }
+                $cadastra->cpf = $cpf;
                 $cadastra->beneficio = 0;
                 $cadastra->telefone = $tel;
+                if(strlen($celular) != 11)
+                {
+                    echo"<script>alert('Digite um celular válido'); window.location='".URL."cadastra-tutor'; </script>";
+                    return;
+                }
                 $cadastra->celular = $celular;
                 $cadastra->punicao = 0;
                 $cadastra->usurua =    $_POST["txtRua"];
@@ -165,7 +166,14 @@ class UsuarioController
                 //pegar a extensão do arquivo
                 $info = new SplFileInfo($docComprovante);
                 $extensao = $info->getExtension();
-                
+
+                /* Não tá funfando ainda por algum motivo
+                if($extensao != "jpg" || $extensao != "png" || $extensao != "jpeg")
+                {
+                    echo"<script>alert('O comprovante de endereço deve ser enviado em formato jpg, png ou jpeg'); window.location='".URL."cadastra-tutor'; </script>";
+                    return;
+                }
+                */
                 //gerar novo nome
                 $novoNomeComprovante = md5(microtime()) . ".$extensao";
                 
