@@ -145,22 +145,8 @@
 
             return $cmd->fetch(PDO::FETCH_OBJ);
         }
-        function subtrairVagas()
-        {
-            //Conectando ao banco de dados
-            $con = Conexao::conectar();
-
-            //Preparar comando SQL para retornar
-            $cmd = $con->prepare("UPDATE clinica SET vagas = :vagas WHERE idclinica = :idclinica");
-            
-            //Parâmetros SQL
-            $cmd->bindParam(":vagas", $this->vagas);
-            $cmd->bindParam(":idclinica", $this->idclinica);
-
-            //Executando o comando SQL
-            $cmd->execute();
-        }
-        function adicionarVagas()
+        
+        function alterarVagas()
         {
             //Conectando ao banco de dados
             $con = Conexao::conectar();

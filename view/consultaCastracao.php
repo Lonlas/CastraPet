@@ -123,6 +123,7 @@
 
                                     foreach($dadosCastracaoClinica as $value)
                                     {
+                                        $valorStatus = $value->status;
                                         $value->status = str_replace("0", "Solicitação em análise", $value->status);
                                         $value->status = str_replace("1", "Solicitação aprovada", $value->status);
                                         $value->status = str_replace("2", "Animal castrado", $value->status);
@@ -154,7 +155,7 @@
                                                 <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' 
                                                         data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' 
                                                         data-nomeTutor='$value->nometutor' data-foto='$value->foto' data-nomeAnimal='$value->aninome' data-idAnimal='$value->idanimal'
-                                                        data-status='$value->status' data-dataCastracao='$value->horario'>
+                                                        data-status='$valorStatus' data-dataCastracao='$value->horario'>
                                                     Editar
                                                 </button>
                                             </td>

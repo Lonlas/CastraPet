@@ -348,7 +348,7 @@
             $("#txtNumero").val(numero);
             $("#txtBairro").val(bairro);
             $("#txtRua").val(rua);
-            if(punicao == 1)
+            if(punicao > 0)
             {
                 $("#chkPunicao").prop("checked",true);
             }

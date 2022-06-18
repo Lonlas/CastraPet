@@ -57,7 +57,7 @@
                                         JOIN animal ON animal.idanimal = castracao.idanimal 
                                         JOIN usuario ON usuario.idusuario = animal.idusuario 
                                         JOIN login ON login.idlogin = usuario.idlogin 
-                                    WHERE status = 'null' ");
+                                    WHERE status in('null', 6) ");
         
             $cmd->execute();
 

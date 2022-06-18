@@ -172,10 +172,13 @@
                                                 echo "<span class='btn btn-sm bg-danger w-100 my-3 text-white fw-bold' style='cursor: default;'>Solicitação cancelada</span>";
                                             break;
                                             case 6:
-                                                echo "<span class='btn btn-sm bg-success w-100 my-3 text-white fw-bold' style='cursor: default;'>Solicitação reagendada</span>";
+                                                echo "<span class='btn btn-sm bg-warning w-100 my-3 text-white fw-bold' style='cursor: default;'>Solicitação em análise</span>";
                                             break;
                                             case 7:
                                                 echo "<span class='btn btn-sm bg-dark w-100 my-3 text-white fw-bold' style='cursor: default;'>Animal foi a óbito</span>";
+                                            break;
+                                            case 8:
+                                                echo "<span class='btn btn-sm bg-success w-100 my-3 text-white fw-bold' style='cursor: default;'>Animal Castrado</span>";
                                             break;
                                             default:
                                                 echo "<span class='btn btn-sm bg-secondary w-100 my-3 text-white fw-bold' style='cursor: default;'>Ocorreu um erro</span>";

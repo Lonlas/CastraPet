@@ -383,7 +383,7 @@ class UsuarioController
                     $clinica->idclinica = $_POST["selectClinica"];
                     $dadosClinica = $clinica->retornar();
                     $clinica->vagas = $dadosClinica->vagas - 1;
-                    $clinica->subtrairVagas();
+                    $clinica->alterarVagas();
         
                     header("Location:".URL."lista-solicitacao");
                 }
@@ -431,14 +431,14 @@ class UsuarioController
                     $animal->codchip = $_POST["codChip"];
                     $animal->atualizarCastrado();
                     
-                    if($_POST["status"] != 4)
+                    if($_POST["status"] == 4 || $_POST["status"] == 7)
                     {
                         //Liberar a vaga de castração para a clínica
                         $clinica = new Clinica();
                         $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
                         $dadosClinica = $clinica->retornar();
                         $clinica->vagas = $dadosClinica->vagas - 1;
-                        $clinica->subtrairVagas();
+                        $clinica->alterarVagas();
                     }
                 break;
                 case 4:
@@ -462,14 +462,14 @@ class UsuarioController
                     $email->data =              $_POST["dataCastracao"];
                     $email->enviarAviso();
 
-                    if($_POST["status"] == 4)
+                    if($_POST["status"] != 4 && $_POST["status"] != 7)
                     {
                         //Liberar a vaga de castração para a clínica
                         $clinica = new Clinica();
                         $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
                         $dadosClinica = $clinica->retornar();
                         $clinica->vagas = $dadosClinica->vagas + 1;
-                        $clinica->adicionarVagas();
+                        $clinica->alterarVagas();
                     }
                 break; 
                 case 5:
@@ -478,14 +478,14 @@ class UsuarioController
                     $castracao->status = 5;
                     $castracao->excluir();
 
-                    if($_POST["status"] != 4)
+                    if($_POST["status"] != 4 && $_POST["status"] != 7)
                     {
                         //Liberar a vaga de castração para a clínica
                         $clinica = new Clinica();
                         $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
                         $dadosClinica = $clinica->retornar();
                         $clinica->vagas = $dadosClinica->vagas + 1;
-                        $clinica->adicionarVagas();
+                        $clinica->alterarVagas();
                     }
                 break; 
                 case 6:
@@ -496,14 +496,14 @@ class UsuarioController
                     $castracao->obsclinica = $_POST["obsClinica"];
                     $castracao->reagendar();
 
-                    if($_POST["status"] != 4)
+                    if($_POST["status"] != 4 && $_POST["status"] != 7)
                     {
                         //Liberar a vaga de castração para a clínica
                         $clinica = new Clinica();
                         $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
                         $dadosClinica = $clinica->retornar();
                         $clinica->vagas = $dadosClinica->vagas + 1;
-                        $clinica->adicionarVagas();
+                        $clinica->alterarVagas();
                     }
                 break; 
                 case 7:
@@ -512,14 +512,14 @@ class UsuarioController
                     $castracao->status = 7;
                     $castracao->atualizar();
 
-                    if($_POST["status"] != 4)
+                    if($_POST["status"] != 4 && $_POST["status"] != 7)
                     {
                         //Liberar a vaga de castração para a clínica
                         $clinica = new Clinica();
                         $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
                         $dadosClinica = $clinica->retornar();
                         $clinica->vagas = $dadosClinica->vagas + 1;
-                        $clinica->adicionarVagas();
+                        $clinica->alterarVagas();
                     }
                 break; 
                 case 8:
@@ -534,14 +534,14 @@ class UsuarioController
                     $animal->codchip = $_POST["codChip"];
                     $animal->atualizarCastrado();
 
-                    if($_POST["status"] != 4)
+                    if($_POST["status"] == 4 || $_POST["status"] == 7)
                     {
                         //Liberar a vaga de castração para a clínica
                         $clinica = new Clinica();
                         $clinica->idclinica = $_SESSION["dadosClinica"]->idclinica;
                         $dadosClinica = $clinica->retornar();
                         $clinica->vagas = $dadosClinica->vagas - 1;
-                        $clinica->subtrairVagas();
+                        $clinica->alterarVagas();
                     }
                 break;
                 default:
