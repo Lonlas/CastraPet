@@ -55,7 +55,8 @@
         <div class="container-fluid bg-dark" style="grid-area: footer;">
             <div class="row h-100 align-items-center">
                 <div class="px-5">
-                    <a href="<?php echo URL.'home-adm';?>" class="btn btn-success">Voltar</a>
+                <?php if($_SESSION["dadosLogin"]->nivelacesso == 1){echo "<a href='".URL."home-clinica' class='btn btn-success'>Voltar</a>";}?>
+                    <?php if($_SESSION["dadosLogin"]->nivelacesso == 2){echo "<a href='".URL."home-adm' class='btn btn-success'>Voltar</a>";}?>
                 </div>
             </div> 
         </div>
