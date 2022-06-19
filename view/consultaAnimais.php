@@ -140,7 +140,7 @@
         <div class="container-fluid bg-dark" style="grid-area: footer;">
             <div class="row h-100 align-items-center">
                 <div class="px-5">
-                    <a href="<?php echo URL.'consulta-usuario';?>" class="btn btn-success">Voltar</a>
+                    <a href="<?php echo URL.'consulta-usuario/';?>" class="btn btn-success">Voltar</a>
                 </div>
             </div> 
         </div>
