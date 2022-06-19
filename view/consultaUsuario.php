@@ -90,7 +90,7 @@
                                                             data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$value->idlogin'>
                                                         Editar
                                                     </button>
-                                                    <a class='btn btn-danger btn-sm-sm' onclick='confirmar($value->idusuario, $value->idlogin)'>Excluir</a>
+                                                
                                                 </td>
                                             </tr>
                                             ";

@@ -49,7 +49,6 @@
                                             <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idraca='$value->idraca' data-raca='$value->raca' data-tipoespecie='$valorEspecie'>
                                                 Editar
                                             </button>
-                                            <a class='btn btn-danger' onclick='confirmar($value->idraca)'>Excluir</a></td>
                                             </tr>
                                         ";
                                     }

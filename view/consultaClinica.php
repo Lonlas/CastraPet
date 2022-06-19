@@ -67,7 +67,6 @@
                                                     data-vagas='$value->vagas' data-cep='$value->clicep' data-numero='$value->clinumero' data-bairro='$value->clibairro' data-rua='$value->clirua' data-ativo='$valorAtivo'>
                                                 Editar
                                             </button>
-                                            <a onclick='confirmar($value->idclinica, $value->idlogin)' class='btn btn-danger'>Excluir</a></td>
                                             </tr>
                                         ";
                                     }

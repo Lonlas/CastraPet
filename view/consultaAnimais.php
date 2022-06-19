@@ -120,13 +120,12 @@
                                         <div class='col'></div>
                                     </div>
                                     <div class='col-md-2 mt-2 mt-md-0'>  
-                                    <button class='btn btn-warning w-100 mb-2' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
-                                            data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$valorEspecie' 
-                                            data-sexo='$valorSexo' data-cor='$value->cor' data-raca='$value->idraca' data-idade='$value->idade' data-pelagem='$valorPelagem' 
-                                            data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$value->foto'>
-                                            Editar animal
-                                    </button>
-                                        <a class='btn btn-danger float-end w-100' onclick='confirmar($value->idanimal,$value->idusuario,$value->foto)'><i class='fa fa-trash'></i> Excluir</a>    
+                                        <button class='btn btn-warning w-100 mb-2' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
+                                                data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$valorEspecie' 
+                                                data-sexo='$valorSexo' data-cor='$value->cor' data-raca='$value->idraca' data-idade='$value->idade' data-pelagem='$valorPelagem' 
+                                                data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$value->foto'>
+                                                Editar animal
+                                        </button>    
                                     </div>
                                 </div>
                                 <hr>
