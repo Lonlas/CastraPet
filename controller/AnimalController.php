@@ -49,6 +49,11 @@ class AnimalController
                 $info = new SplFileInfo($nomeArquivo);
                 $extensao = $info->getExtension();
                 
+                if($extensao != "jpg" && $extensao != "png" && $extensao != "jpeg")
+                {
+                    echo"<script>alert('A foto do animal deve ser enviada em formato jpg, png ou jpeg'); window.location='".URL."cadastra-tutor'; </script>";
+                    return;
+                }
                 //gerar novo nome
                 $novoNome = md5(microtime()) . ".$extensao";
                 
@@ -121,6 +126,11 @@ class AnimalController
                     $info = new SplFileInfo($nomeArquivo);
                     $extensao = $info->getExtension();
                     
+                    if($extensao != "jpg" && $extensao != "png" && $extensao != "jpeg")
+                    {
+                        echo"<script>alert('A foto do animal deve ser enviada em formato jpg, png ou jpeg'); window.location='".URL."cadastra-tutor'; </script>";
+                        return;
+                    }
                     //gerar novo nome
                     $novoNome = md5(microtime()) . ".$extensao";
                     

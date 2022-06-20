@@ -167,13 +167,11 @@ class UsuarioController
                 $info = new SplFileInfo($docComprovante);
                 $extensao = $info->getExtension();
 
-                /* Não tá funfando ainda por algum motivo
-                if($extensao != "jpg" || $extensao != "png" || $extensao != "jpeg")
+                if($extensao != "jpg" && $extensao != "png" && $extensao != "jpeg")
                 {
                     echo"<script>alert('O comprovante de endereço deve ser enviado em formato jpg, png ou jpeg'); window.location='".URL."cadastra-tutor'; </script>";
                     return;
                 }
-                */
                 //gerar novo nome
                 $novoNomeComprovante = md5(microtime()) . ".$extensao";
                 
