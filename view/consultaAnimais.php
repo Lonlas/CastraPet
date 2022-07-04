@@ -125,7 +125,8 @@
                                                 data-sexo='$valorSexo' data-cor='$value->cor' data-raca='$value->idraca' data-idade='$value->idade' data-pelagem='$valorPelagem' 
                                                 data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$value->foto'>
                                                 Editar animal
-                                        </button>    
+                                        </button>
+                                        <a class='btn btn-danger w-100' onClick='confirmar($value->idanimal, $value->idusuario, &apos;$value->foto&apos;)'>Excluir</a>
                                     </div>
                                 </div>
                                 <hr>
@@ -341,7 +342,7 @@
         {
             Swal.fire({
                 title: 'Você tem certeza que deseja excluir?',
-                text: "Você não será capaz de desfazer esta ação!",
+                text: "Esta ação irá excluir qualquer castração que esteja atrelada a esse animal. Você não será capaz de desfazer esta ação!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
