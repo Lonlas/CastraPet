@@ -53,7 +53,10 @@ require "recursos/PHPMailer/SMTP.php";
                 <b>Endereço: </b>$this->ruaClinica, $this->numeroClinica - $this->bairroClinica, Franco da Rocha - SP<br>
                 <b>Telefone: </b>$this->clitelefone</p>
 
+                <p>Levar seus documentos, documentos do animal e um comprovante de residência em seu nome</p>
+
                 <p><u>Chegar com 10 minutos de antecedência.</u></p>
+
 
                 <h3>Orientações sobre a castração:</h3>
                 <ul>
