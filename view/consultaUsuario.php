@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css"/>    
+
     <?php include_once "head.php";?> 
 </head>
 <body>
@@ -15,12 +17,12 @@
     <?php /*Controle de menu!*/ include_once "menuControle.php";?>
     
         <div class="bg-danger container-fluid" style="grid-area: corpo;">
-            <div class="row h-100 align-items-center">
+            <div class="row h-100 align-items-center" style="max-width:100vw;">
                 <div class="p-3">
                     <div class="container-fluid bg-dark text-light font-weight-bold p-3">
                         <h5 class="m-0">Consultar Usuários</h5>
                     </div>
-                    <div class="container-fluid p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white table-responsive">
+                    <div class="container-fluid p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
                         <div class="table-responsive">
                             <table id="tbUsuario" class="table table-hover">
                                 <thead>
@@ -32,6 +34,9 @@
                                     <th>Benefício</th>
                                     <th>NIS</th>
                                     <th>E-mail</th>
+                                    <th>Bairro</th>
+                                    <th>Rua</th>
+                                    <th>Número</th>
                                     <th>Telefone</th>
                                     <th>Celular</th>
                                     <th>Punição</th>
@@ -57,6 +62,8 @@
                                             $valorPunicao = $value->punicao;
                                             $value->punicao == 0 ? $value->punicao = '-' : $value->punicao = "<span class='badge bg-danger'>Punido</span>";
     
+                                            $value->whatsapp == 1 ? $value->whatsapp = "<a href='https://api.whatsapp.com/send?phone=55$value->celular&text=Olá $value->nome!' target='_blank'><img src='".URL."recursos/img/whatsapp.png'></a>" : $value->whatsapp = "";
+
                                             //Testar depois:
                                             //$number="(".substr($number,0,2).") ".substr($number,2,-4)." - ".substr($number,-4);
     
@@ -75,8 +82,11 @@
                                                 <td>$value->beneficio</td>
                                                 <td>$value->nis</td>
                                                 <td>$value->email</td>
+                                                <td>$value->usubairro</td>
+                                                <td>$value->usurua</td>
+                                                <td>$value->usunumero</td>
                                                 <td>$value->telefone</td>
-                                                <td>$value->celular</td>
+                                                <td style='width:140px;'>$value->celular $value->whatsapp</td>
                                                 <td>$value->punicao</td>
                                                 <td>
                                                     <a href='". URL. "consulta-animais/$value->idusuario' class='btn btn-success col-auto'>
@@ -245,6 +255,8 @@
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js'></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js'></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js'></script>
+
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js'></script>
     
     <!-- EXTENSÃO JQUERY DAS MASCARAS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
@@ -256,6 +268,8 @@
     <script>
         $(document).ready(function() {
             $('#tbUsuario').DataTable( {
+                'responsive':true,
+                'autoWidth':false,
                 dom: 'Bfrtip',
                 buttons: [
                     'colvis',

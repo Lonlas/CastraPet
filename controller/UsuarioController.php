@@ -345,7 +345,7 @@ class UsuarioController
                 $usuario->atualizarQuantCastracoes();
                 $castracao->cadastrar();
     
-                echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
+                echo"<script>window.location='".URL."meus-animais'; </script>";
             }
             else
             {

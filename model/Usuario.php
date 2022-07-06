@@ -77,7 +77,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idusuario, login.idlogin, doccomprovante, nome, email, cpf, rg, beneficio, nis, telefone, celular, usucep, usubairro, usurua, usunumero, punicao 
+            $cmd = $con->prepare("SELECT idusuario, login.idlogin, doccomprovante, nome, email, cpf, rg, beneficio, nis, telefone, celular, whatsapp, usucep, usubairro, usurua, usunumero, punicao 
                                     FROM usuario JOIN login ON usuario.idlogin = login.idlogin");
             
             //Executando o comando SQL
