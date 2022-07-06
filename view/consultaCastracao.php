@@ -89,9 +89,9 @@
                                             <td>$value->obsclinica</td>
                                             <td>
                                             <!--<button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idcastracao='$value->idcastracao'>
-                                                Editar
+                                                <img src=". URL . "recursos/img/pencil-square.svg".">
                                             </button>-->
-                                            <a class='btn btn-danger' onClick='confirmar($value->idcastracao)'>Excluir</a>
+                                            <a class='btn btn-danger' onClick='confirmar($value->idcastracao)'><img src=". URL . "recursos/img/trash3.svg"."></a>
                                             </td>
                                             
                                         </tr>
@@ -156,7 +156,7 @@
                                                         data-idcastracao='$value->idcastracao' data-emailTutor='$value->email' data-idTutor='$value->idusuario' 
                                                         data-nomeTutor='$value->nometutor' data-foto='$value->foto' data-nomeAnimal='$value->aninome' data-idAnimal='$value->idanimal'
                                                         data-status='$valorStatus' data-dataCastracao='$value->horario'>
-                                                    Editar
+                                                        <img src=". URL . "recursos/img/pencil-square.svg".">
                                                 </button>
                                             </td>
                                         </tr>

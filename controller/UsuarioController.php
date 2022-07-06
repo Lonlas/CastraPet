@@ -301,6 +301,57 @@ class UsuarioController
                     window.location='".URL."consulta-usuario/';
                 </script>";
         }
+        else if($_SESSION["dadosLogin"]->nivelacesso == 0) {
+            
+            //filtrando a mascara dos inputs
+            $filtros = array(".", "-", "(", ")", " ");
+            $cpf = str_replace($filtros,'',$_POST["txtCPF"]);
+            $cep = str_replace($filtros,'',$_POST["txtCEP"]);
+            $rg = str_replace($filtros,'',$_POST["txtRG"]);
+            $tel = str_replace($filtros,'',$_POST["txtTel"]);
+            $celular = str_replace($filtros,'',$_POST["txtCelular"]);
+            $nis = str_replace($filtros,'',$_POST["txtNIS"]);
+
+            $login = new Login();
+            $login->idlogin = $_POST["idlogin"]; 
+            $login->nome =    $_POST["txtNome"];
+            $login->email =   $_POST["txtEmail"];
+            $login->atualizarLogin();
+
+
+            $usu = new Usuario();
+            $usu->rg =        strtoupper($rg);
+            $usu->cpf =       $cpf;
+
+            // Que tipo de benefício tem
+            if (isset($_POST["chkProtetor"])) {
+                $usu->beneficio = $_POST["chkProtetor"];
+            }
+            else if(isset($_POST["chkNIS"])){
+                $usu->beneficio = $_POST["chkNIS"];
+            }
+            else{ $usu->beneficio = 0; }
+
+            $usu->telefone =  $tel;
+            $usu->celular =   $celular;
+            $usu->usurua =    $_POST["txtRua"];
+            $usu->usubairro = $_POST["txtBairro"];
+            $usu->usunumero = $_POST["txtNumero"];
+            $usu->usucep =    $cep;
+            
+                // NIS
+                if(empty($nis)){
+                    $usu->nis = "";
+                }
+                else{ $usu->nis = $nis;}
+
+            $usu->atualizar();
+
+            echo "<script>
+                    alert('Dados alterados com sucesso!');
+                    window.location='".URL."perfil';
+                </script>";
+        }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
     

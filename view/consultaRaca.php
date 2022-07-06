@@ -47,7 +47,7 @@
                                             <td>$value->tipoespecie</td>
                                             <td>
                                             <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idraca='$value->idraca' data-raca='$value->raca' data-tipoespecie='$valorEspecie'>
-                                                Editar
+                                                <img src=". URL . "recursos/img/pencil-square.svg".">
                                             </button>
                                             </tr>
                                         ";
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class='modal-footer'>
-                        <button type='submit' class='btn btn-primary'>Editar</button>
+                        <button type='submit' class='btn btn-warning'>Editar</button>
                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                     </div>
                 </form>

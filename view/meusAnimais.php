@@ -144,9 +144,9 @@
                                                 data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$valorEspecie' 
                                                 data-sexo='$valorSexo' data-cor='$value->cor' data-raca='$value->idraca' data-idade='$value->idade' data-pelagem='$valorPelagem' 
                                                 data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$valorFoto'>
-                                                Editar animal
+                                                Editar
                                         </button>
-                                        <a class='btn btn-danger w-100' onclick='confirmar($value->idanimal)'>Excluir animal</a>
+                                        <a class='btn btn-danger w-100' onclick='confirmar($value->idanimal)'>Excluir</a>
                                         ";
                                     }
                                     else

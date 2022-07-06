@@ -88,7 +88,7 @@
                                                             data-idusuario='$value->idusuario' data-nome='$value->nome' data-cpf='$value->cpf' data-beneficio='$valorBeneficio' data-nis='$valorNis' 
                                                             data-email='$value->email' data-telefone='$valorTelefone' data-celular='$value->celular' data-punicao='$valorPunicao' data-rg='$value->rg' 
                                                             data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$value->idlogin'>
-                                                        Editar
+                                                        <img src=". URL . "recursos/img/pencil-square.svg".">
                                                     </button>
                                                 
                                                 </td>
@@ -357,7 +357,7 @@
             }
         });
     </script>
-    <!-- ABRIR MODAL editar usuário -->
+    <!-- ABRIR MODAL comprovante -->
     <script>
         var modalEditar = document.getElementById('modalImg')
         modalEditar.addEventListener('show.bs.modal', function (event) {

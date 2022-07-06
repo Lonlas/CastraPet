@@ -153,9 +153,9 @@
             $cmd->bindParam(":usucep",          $this->usucep);
             $cmd->bindParam(":nis",             $this->nis);
             /*$cmd->bindParam(":whatsapp",        $this->whatsapp);
-            $cmd->bindParam(":doccomprovante",  $this->doccomprovante);
             $cmd->bindParam(":docprotetor",     $this->docprotetor);
             $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);*/
+            $cmd->bindParam(":doccomprovante",  $this->doccomprovante);
             $cmd->bindParam(":punicao",         $this->punicao);
             $cmd->bindParam(":idusuario",       $this->idusuario);
 
