@@ -621,7 +621,9 @@ class UsuarioController
         }
         else
         {
-            echo"<script>alert('Email ou senha estão errados'); window.location='".URL."login'; </script>";
+            setcookie("msg","Email ou senha estão errados");
+            header("Location:".URL."login");
+            return;
         }
     }
 

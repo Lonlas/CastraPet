@@ -140,7 +140,7 @@
                                         $value->status = str_replace("5", "Castração cancelada", $value->status); 
                                         $value->status = str_replace("6", "Reagendar castração", $value->status); 
                                         $value->status = str_replace("7", "Animal foi a óbito", $value->status); 
-                                        $value->status = str_replace("8", "Animal Castrado (Suas informações devem ser editadas)", $value->status); 
+                                        $value->status = str_replace("8", "Animal Castrado (Suas informações devem ser editadas)", $value->status);
 
                                         $value->whatsapp == 1 ? $value->whatsapp = "<a href='https://api.whatsapp.com/send?phone=55$value->celular&text=Olá $value->nometutor! Somos da clínica ".$_SESSION['dadosLogin']->nome."' target='_blank'><img src='".URL."recursos/img/whatsapp.png'></a>" : $value->whatsapp = "";
                                         
