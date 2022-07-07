@@ -17,6 +17,17 @@
                     </div>
                     <div class="container p-sm-3 p-md-3 p-lg-4 p-3 bg-white">
                         <form action="logar" class="container p-sm-3 p-md-3 p-lg-4 p-3" method="POST">
+                            <?php
+                                //exibindo mensagem de erro
+                                if(isset($_COOKIE["msg"]))
+                                {
+                                    echo "<div class='alert alert-danger' role='alert'>
+                                        ".$_COOKIE['msg']."
+                                    </div>";
+                                }
+                                //excluindo cookie de erro
+                                setcookie("msg","",time() - 3600);
+                            ?>
                             <div class="form-group">
                                 <label for="email">E-mail:</label>
                                 <input type="email" id="email" name="txtEmail" class="form-control" placeholder="" required>

@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css"/>
+    
     <?php include_once "head.php";?>
 </head>
 <body>
@@ -25,12 +27,12 @@
                 echo "<div class='bg-danger container-fluid' style='grid-area: corpo;'>";
             }
         ?>
-            <div class="row h-100 align-items-center">
+            <div class="row h-100 align-items-center" style="max-width:100vw;">
                 <div class="p-3">
-                    <div class="container bg-dark text-light font-weight-bold p-3">
+                    <div class="container-fluid bg-dark text-light font-weight-bold p-3">
                         <h5 class="m-0">Consultar Castrações</h5>
                     </div>
-                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white table-responsive">
+                    <div class="container-fluid p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
                         <table id="tbCastracao" class="table table-hover">
                             <?php
                                 if($_SESSION["dadosLogin"]->nivelacesso == 2)
@@ -43,6 +45,9 @@
                                                 <th>RGA</th>
                                                 <th>Animal</th>
                                                 <th>CPF do tutor</th>
+                                                <th>Bairro</th>
+                                                <th>Rua</th>
+                                                <th>Número</th>
                                                 <th>Clínica</th>
                                                 <th>Data</th>
                                                 <th>Hora</th>
@@ -77,10 +82,13 @@
                                         "
                                         <tr>
                                             <td>$value->idcastracao</td>
-                                            <td><img width='300px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
+                                            <td><img width='150px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
                                             <td>$value->idanimal</td>
                                             <td>$value->aninome</td>
                                             <td><a href=". URL . "consulta-usuario/$value->cpf" .">$value->cpf</a></td>
+                                            <td>$value->usubairro</td>
+                                            <td>$value->usurua</td>
+                                            <td>$value->usunumero</td>
                                             <td><a href=". URL . "consulta-clinica/$value->cnpj" . ">$value->nomeclinica</a></td>
                                             <td>$data</td>
                                             <td>$hora</td>
@@ -132,7 +140,9 @@
                                         $value->status = str_replace("5", "Castração cancelada", $value->status); 
                                         $value->status = str_replace("6", "Reagendar castração", $value->status); 
                                         $value->status = str_replace("7", "Animal foi a óbito", $value->status); 
-                                        $value->status = str_replace("8", "Animal Castrado (Suas informações devem ser editadas)", $value->status); 
+                                        $value->status = str_replace("8", "Animal Castrado (Suas informações devem ser editadas)", $value->status);
+
+                                        $value->whatsapp == 1 ? $value->whatsapp = "<a href='https://api.whatsapp.com/send?phone=55$value->celular&text=Olá $value->nometutor! Somos da clínica ".$_SESSION['dadosLogin']->nome."' target='_blank'><img src='".URL."recursos/img/whatsapp.png'></a>" : $value->whatsapp = "";
                                         
                                         $value->observacao = preg_replace("/^$/", "-", $value->observacao);
                                         
@@ -140,13 +150,13 @@
                                         "
                                         <tr>
                                             <td>$value->idcastracao</td>
-                                            <td><img width='300px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
+                                            <td><img width='150px' class='img-thumbnail' src='".URL."recursos/img/Animais/$value->foto'></td>
                                             <td>$value->idanimal</td>
                                             <td>$value->aninome</td>
                                             <td>$value->nometutor</td>
                                             <td>$value->cpf</td>
                                             <td>$value->telefone</td>
-                                            <td>$value->celular</td>
+                                            <td>$value->celular $value->whatsapp</td>
                                             <td>". date('d/m/Y',strtotime($value->horario)) ."</td>
                                             <td>". date('H:i',strtotime($value->horario)) ."</td>
                                             <td>$value->status</td>
@@ -272,7 +282,9 @@
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js'></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js'></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js'></script>
-
+    
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js'></script>
+    
     <!-- JS SweetAlert 2-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -290,6 +302,8 @@
             <script>
                 $(document).ready(function() {
                     $('#tbCastracao').DataTable( {
+                        'responsive': true,
+                        'autoWidth': false,
                         dom: 'Bfrtip',
                         buttons: [
                             'colvis',
@@ -332,6 +346,8 @@
                 <script>
                     $(document).ready(function() {
                         $('#tbCastracao').DataTable( {
+                            'responsive': true,
+                            'autoWidth':false,
                             dom: 'Bfrtip',
                             buttons: [
                                 'csv', 'excel', 'print'

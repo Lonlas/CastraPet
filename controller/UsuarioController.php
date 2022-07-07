@@ -396,7 +396,7 @@ class UsuarioController
                 $usuario->atualizarQuantCastracoes();
                 $castracao->cadastrar();
     
-                echo"<script>alert('Solicitação enviada'); window.location='".URL."meus-animais'; </script>";
+                echo"<script>window.location='".URL."meus-animais'; </script>";
             }
             else
             {
@@ -672,7 +672,9 @@ class UsuarioController
         }
         else
         {
-            echo"<script>alert('Email ou senha estão errados'); window.location='".URL."login'; </script>";
+            setcookie("msg","Email ou senha estão errados");
+            header("Location:".URL."login");
+            return;
         }
     }
 
