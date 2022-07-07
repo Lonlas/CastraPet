@@ -77,7 +77,7 @@
             $con = Conexao::conectar();
 
             //Preparar comando SQL para consultar
-            $cmd = $con->prepare("SELECT idusuario, login.idlogin, doccomprovante, nome, email, cpf, rg, beneficio, nis, telefone, celular, usucep, usubairro, usurua, usunumero, punicao 
+            $cmd = $con->prepare("SELECT idusuario, login.idlogin, doccomprovante, nome, email, cpf, rg, beneficio, nis, telefone, celular, whatsapp, usucep, usubairro, usurua, usunumero, punicao 
                                     FROM usuario JOIN login ON usuario.idlogin = login.idlogin");
             
             //Executando o comando SQL
@@ -152,9 +152,9 @@
             $cmd->bindParam(":usucep",          $this->usucep);
             $cmd->bindParam(":nis",             $this->nis);
             /*$cmd->bindParam(":whatsapp",        $this->whatsapp);
-            $cmd->bindParam(":doccomprovante",  $this->doccomprovante);
             $cmd->bindParam(":docprotetor",     $this->docprotetor);
             $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);*/
+            $cmd->bindParam(":doccomprovante",  $this->doccomprovante);
             $cmd->bindParam(":punicao",         $this->punicao);
             $cmd->bindParam(":idusuario",       $this->idusuario);
 

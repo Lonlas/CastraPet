@@ -52,13 +52,13 @@
                             $value->comunitario = str_replace("1","Sim", $value->comunitario);
                             echo 
                             "<!-- Começo de um animal -->
-                                <div class='row mt-3'>
+                                <div class='row mt-3 mx-2'>
                                     <div class='col-md-3 d-flex align-items-center'>
                                         <img src='".URL."recursos/img/Animais/$value->foto' alt='Imagem' class='mw-100' style='height: 200px; width: 300px;'>
                                     </div>
-                                    <div class='col-md-7'>
+                                    <div class='col-md-7 mt-2'>
                                         <div class='row'>
-                                            <div class='col-md-9'>
+                                            <div class='col-md-7'>
                                                 <div class='row'>
                                                     <p>
                                                         Nome:
@@ -96,7 +96,7 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div class='col-md-3'>
+                                            <div class='col-md-5'>
                                                 <div class='row'>
                                                     <p>
                                                         Idade:
@@ -120,13 +120,13 @@
                                         <div class='col'></div>
                                     </div>
                                     <div class='col-md-2 mt-2 mt-md-0'>  
-                                        <button class='btn btn-warning w-100 mb-2' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
+                                        <button class='btn btn-warning' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
                                                 data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$valorEspecie' 
                                                 data-sexo='$valorSexo' data-cor='$value->cor' data-raca='$value->idraca' data-idade='$value->idade' data-pelagem='$valorPelagem' 
                                                 data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$value->foto'>
-                                                Editar animal
+                                                <img src=". URL . "recursos/img/pencil-square.svg".">
                                         </button>
-                                        <a class='btn btn-danger w-100' onClick='confirmar($value->idanimal, $value->idusuario, &apos;$value->foto&apos;)'>Excluir</a>
+                                        <a class='btn btn-danger' onClick='confirmar($value->idanimal, $value->idusuario, &apos;$value->foto&apos;)'><img src=". URL . "recursos/img/trash3.svg"."></a>
                                     </div>
                                 </div>
                                 <hr>

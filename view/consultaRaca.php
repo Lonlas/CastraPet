@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css"/>
+
     <?php include_once "head.php";?>
 </head>
 <body>
@@ -16,12 +18,12 @@
         <?php /*Controle de menu!*/ include_once "menuControle.php";?>
     
         <div class="bg-danger container-fluid" style="grid-area: corpo;">
-            <div class="row h-100 align-items-center">
+            <div class="row h-100 align-items-center" style="max-width:100vw;">
                 <div class="p-3">
-                    <div class="container-fluid bg-dark text-light font-weight-bold p-3">
+                    <div class="container bg-dark text-light font-weight-bold p-3">
                         <h5 class="m-0">Consultar Raças</h5>
                     </div>
-                    <div class="container-fluid p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white table-responsive">
+                    <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
                         <table id="tbRaca" class="table table-hover">
                             <thead>
                                 <th>#</th>
@@ -47,7 +49,7 @@
                                             <td>$value->tipoespecie</td>
                                             <td>
                                             <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#modalAtualizar' data-idraca='$value->idraca' data-raca='$value->raca' data-tipoespecie='$valorEspecie'>
-                                                Editar
+                                                <img src=". URL . "recursos/img/pencil-square.svg".">
                                             </button>
                                             </tr>
                                         ";
@@ -95,7 +97,7 @@
                         </div>
                     </div>
                     <div class='modal-footer'>
-                        <button type='submit' class='btn btn-primary'>Editar</button>
+                        <button type='submit' class='btn btn-warning'>Editar</button>
                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
                     </div>
                 </form>
@@ -123,6 +125,8 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js'></script>
+
+    <script type='text/javascript' charset='utf8' src='https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js'></script>
     
     <!-- JS SweetAlert 2-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -131,6 +135,8 @@
     <script>
         $(document).ready(function() {
             $('#tbRaca').DataTable( {
+                "responsive":true,
+                "autoWidth":false,
                 dom: 'Bfrtip',
                 buttons: [
                     'colvis',

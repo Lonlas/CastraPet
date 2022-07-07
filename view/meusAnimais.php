@@ -144,9 +144,9 @@
                                                 data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$valorEspecie' 
                                                 data-sexo='$valorSexo' data-cor='$value->cor' data-raca='$value->idraca' data-idade='$value->idade' data-pelagem='$valorPelagem' 
                                                 data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$valorFoto'>
-                                                Editar animal
+                                                Editar
                                         </button>
-                                        <a class='btn btn-danger w-100' onclick='confirmar($value->idanimal)'>Excluir animal</a>
+                                        <a class='btn btn-danger w-100' onclick='confirmar($value->idanimal)'>Excluir</a>
                                         ";
                                     }
                                     else
@@ -224,8 +224,11 @@
                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                         </div>
                         <div class='modal-body'>
-                            <label class='form-label' for='obhsCastracao'>Observação: (opcional)</label>
+                            <label class='form-label' for='obsCastr'>Observação: (opcional)</label>
                             <textarea name='obsCastracao' id='obsCastr' rows='5' class='form-control' placeholder="Ex: tem alegria a dipirona"></textarea>
+                            <p class="form-text">
+                                Você não poderá excluir ou editar esse animal após o envio da solicitação!
+                            </p>
                         </div>
                         <div class='modal-footer'>
                             <button type='submit' class='btn btn-primary'>Enviar Solicitação</button>

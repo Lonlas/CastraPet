@@ -51,7 +51,7 @@ class AnimalController
                 
                 if($extensao != "jpg" && $extensao != "png" && $extensao != "jpeg")
                 {
-                    echo"<script>alert('A foto do animal deve ser enviada em formato jpg, png ou jpeg'); window.location='".URL."cadastra-tutor'; </script>";
+                    echo"<script>alert('A foto do animal deve ser enviada em formato jpg, png ou jpeg'); window.location='".URL."cadastra-animal'; </script>";
                     return;
                 }
                 //gerar novo nome
