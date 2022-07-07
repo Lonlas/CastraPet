@@ -254,25 +254,29 @@ class UsuarioController
             $celular = str_replace($filtros,'',$_POST["txtCelular"]);
             $nis = str_replace($filtros,'',$_POST["txtNIS"]);
 
+            
             $login = new Login();
             $login->idlogin = $_POST["idlogin"]; 
             $login->nome =    $_POST["txtNome"];
             $login->email =   $_POST["txtEmail"];
-            $login->atualizarLogin();
-
 
             $usu = new Usuario();
-            $usu->rg =        strtoupper($rg);
-            $usu->cpf =       $cpf;
-
-            // Que tipo de benefício tem
-            if (isset($_POST["chkProtetor"])) {
-                $usu->beneficio = $_POST["chkProtetor"];
+            $usu->idusuario = $_POST["idusuario"];
+            $usu->rg = strtoupper($rg);
+            if(!$this->validaCPF($cpf))
+            {
+                echo"<script>alert('Digite um CPF válido'); window.location='".URL."consulta-usuario/'; </script>";
+                return;
             }
-            else if(isset($_POST["chkNIS"])){
+            $usu->cpf = $cpf;
+
+            $usu->beneficio = 0;
+            if(isset($_POST["chkNIS"])){
                 $usu->beneficio = $_POST["chkNIS"];
             }
-            else{ $usu->beneficio = 0; }
+            if(isset($_POST["chkProtetor"])) {
+                $usu->beneficio = $_POST["chkProtetor"];
+            }
 
             $usu->telefone =  $tel;
             $usu->celular =   $celular;
@@ -286,19 +290,162 @@ class UsuarioController
                     $usu->nis = "";
                 }
                 else{ $usu->nis = $nis;}
-
-            $usu->idusuario = $_POST["idusuario"];
+            
+            $usu->punicao = 0;
             if(isset($_POST["chkPunicao"]))
             {
                 $usu->punicao = $_POST["chkPunicao"];
-            }else{
-                $usu->punicao = 0;
             }
+            
+            $login->atualizarLogin();
             $usu->atualizar();
 
             echo "<script>
                     alert('Dados alterados com sucesso!');
                     window.location='".URL."consulta-usuario/';
+                </script>";
+        }
+        else{ include_once "view/paginaNaoEncontrada.php"; } 
+    }
+
+    function atualizarDadosUsuario()
+    {
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+        
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 0) {
+            
+            //filtrando a mascara dos inputs
+            $filtros = array(".", "-", "(", ")", " ");
+            $cpf = str_replace($filtros,'',$_POST["txtCPF"]);
+            $rg = str_replace($filtros,'',$_POST["txtRG"]);
+            $tel = str_replace($filtros,'',$_POST["txtTel"]);
+            $celular = str_replace($filtros,'',$_POST["txtCelular"]);
+            $nis = str_replace($filtros,'',$_POST["txtNIS"]);
+            
+            $login = new Login();
+            $usu = new Usuario();
+            $login->idlogin = $_POST["idlogin"]; 
+            $login->nome =    $_POST["txtNome"];
+            $login->email =   $_POST["txtEmail"];
+            
+            //Verificando o NIS
+            if($_POST["chkNIS"] == "sim" && isset($nis))
+            {
+                if(strlen($nis) == 11)
+                {
+                    $usu = new Usuario();
+                    $usu->nis = $nis;
+                    $dadosConsultaNIS = $usu->verificarNis();
+                }
+                else
+                {
+                    echo"<script>alert('Digite um NIS válido'); window.location='".URL."cadastra-tutor'; </script>";
+                    return;
+                }
+            }
+            else
+                $dadosConsultaNIS = null;
+            
+            //verificando se o email ou cpf ou nis já existem no banco ou não     
+            if($login->logar() == null && $usu->verificarCPF() == null && $dadosConsultaNIS == null)
+            {
+                $usu->idusuario = $_POST["idusuario"];
+                $usu->rg = strtoupper($rg);
+                $usu->telefone =  $tel;
+                $usu->celular =   $celular;
+                $usu->whatsapp = 0;
+                if(isset($_POST["chkWhatsapp"])){
+                    $usu->whatsapp = 1;
+                }
+    
+                if(!$this->validaCPF($cpf))
+                {
+                    echo"<script>alert('Digite um CPF válido'); window.location='".URL."perfil'; </script>";
+                    return;
+                }
+                $usu->cpf = $cpf;
+                
+                $usu->beneficio = $_SESSION["dadosUsuario"]->beneficio;
+                if(isset($_POST["chkNIS"]) && $usu->beneficio != 2){
+                    $usu->beneficio = $_POST["chkNIS"];
+                }
+    
+                $usu->nis = "";
+                if(isset($nis))
+                {
+                    $usu->nis = $nis;
+                }
+                
+                $login->atualizarLogin();
+                $usu->atualizarDadosUsuario();
+    
+                echo "<script>
+                        alert('Dados alterados com sucesso!');
+                        window.location='".URL."perfil';
+                    </script>";
+            }
+            else
+            {
+                echo"<script>alert('Já existe um perfil com esse e-mail, CPF ou NIS cadastrados'); window.location='".URL."perfil'; </script>";
+            }
+        } else { include_once "view/paginaNaoEncontrada.php"; }
+    }
+
+    function AlterarEnderecoUsuario()
+    {
+        //caso não usuário não esteja logado
+        if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
+
+        //Controle de privilégio
+        if($_SESSION["dadosLogin"]->nivelacesso == 0) {
+
+            //filtrando a mascara dos inputs
+            $filtros = array(".", "-", "(", ")", " ");
+            $cep = str_replace($filtros,'',$_POST["txtCEP"]);
+
+            $usu = new Usuario();
+            $usu->idusuario = $_POST["idusuario"];
+            $usu->usurua =    $_POST["txtRua"];
+            $usu->usubairro = $_POST["txtBairro"];
+            $usu->usunumero = $_POST["txtNumero"];
+            $usu->usucep =    $cep;
+
+            
+            //TRATANDO O COMPROVANTE DE ENDEREÇO
+                //Tratar o envio da imagem
+                $docComprovante = $_FILES["btnComprovante"]["name"];       //Nome do arquivo
+                $docComprovanteTemp = $_FILES["btnComprovante"]["tmp_name"];      //nome temporário
+                
+                //pegar a extensão do arquivo
+                $info = new SplFileInfo($docComprovante);
+                $extensao = $info->getExtension();
+
+                if($extensao != "jpg" && $extensao != "png" && $extensao != "jpeg")
+                {
+                    echo"<script>alert('O comprovante de endereço deve ser enviado em formato jpg, png ou jpeg'); window.location='".URL."cadastra-tutor'; </script>";
+                    return;
+                }
+                //gerar novo nome
+                $novoNomeComprovante = md5(microtime()) . ".$extensao";
+                
+                $pastaDestino = "recursos/img/docComprovantes/$novoNomeComprovante";    //pasta destino
+                move_uploaded_file($docComprovanteTemp, $pastaDestino);       //mover o arquivo 
+                $usu->doccomprovante = $novoNomeComprovante;
+
+                //Removendo o Comprovante  de endereço antigo
+                $dadosUsuario = $usu->retornar();
+                if(is_file("recursos/img/Animais/$dadosUsuario->doccomprovante")) //verificar se o arquivo existe
+                {
+                    unlink("recursos/img/Animais/$dadosUsuario->doccomprovante"); //excluir o arquivo
+                }
+            
+            $usu->atualizarEnderecoUsuario();
+
+            echo "<script>
+                    alert('Endereço com sucesso!');
+                    window.location='".URL."perfil';
                 </script>";
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 

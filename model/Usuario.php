@@ -146,7 +146,6 @@
             $cmd->bindParam(":beneficio",       $this->beneficio);
             $cmd->bindParam(":telefone",        $this->telefone);
             $cmd->bindParam(":celular",         $this->celular);
-           // $cmd->bindParam(":punicao",          $this->punicao);
             $cmd->bindParam(":usurua",          $this->usurua);
             $cmd->bindParam(":usubairro",       $this->usubairro);
             $cmd->bindParam(":usunumero",       $this->usunumero);
@@ -157,6 +156,67 @@
             $cmd->bindParam(":docprotetor",     $this->docprotetor);
             $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);*/
             $cmd->bindParam(":punicao",         $this->punicao);
+            $cmd->bindParam(":idusuario",       $this->idusuario);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
+
+        //Método atualizar dados usuario
+        function atualizarDadosUsuario()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar o comando SQL para atualizar
+            $cmd = $con->prepare("UPDATE usuario SET 
+                                                    nome = :nome, 
+                                                    email = :email, 
+                                                    cpf = :cpf, 
+                                                    rg = :rg, 
+                                                    telefone = NULLIF(:telefone,''), 
+                                                    celular = :celular,
+                                                    nis = NULLIF(:nis,''), 
+                                                    beneficio = :beneficio, 
+                                                    whatsapp = :whatsapp
+                                      WHERE idusuario = :idusuario");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":nome",            $this->nome);
+            $cmd->bindParam(":email",           $this->email);
+            $cmd->bindParam(":cpf",             $this->cpf);
+            $cmd->bindParam(":rg",              $this->rg);
+            $cmd->bindParam(":telefone",        $this->telefone);
+            $cmd->bindParam(":celular",         $this->celular);
+            $cmd->bindParam(":nis",             $this->nis);
+            $cmd->bindParam(":beneficio",       $this->beneficio);
+            $cmd->bindParam(":whatsapp",        $this->whatsapp);
+
+            //Executando o comando SQL
+            $cmd->execute();
+        }
+
+        //Método atualizar endereço usuario
+        function atualizarEnderecoUsuario()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar o comando SQL para atualizar
+            $cmd = $con->prepare("UPDATE usuario SET 
+                                                    usurua = :usurua, 
+                                                    usubairro = :usubairro, 
+                                                    usunumero = :usunumero, 
+                                                    usucep = :usucep,
+                                                    doccomprovante = :doccomprovante
+                                      WHERE idusuario = :idusuario");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":usurua",          $this->usurua);
+            $cmd->bindParam(":usubairro",       $this->usubairro);
+            $cmd->bindParam(":usunumero",       $this->usunumero);
+            $cmd->bindParam(":usucep",          $this->usucep);
+            $cmd->bindParam(":doccomprovante",  $this->doccomprovante);
             $cmd->bindParam(":idusuario",       $this->idusuario);
 
             //Executando o comando SQL
