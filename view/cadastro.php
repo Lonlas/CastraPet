@@ -192,24 +192,6 @@
             }
         });
     </script>
-    <script type="text/javascript">
-        //confirme a senha
-        $("form").submit(function(){
-            if($("#txtSenha").val() != $("#txtConfirmaSenha").val())
-            {
-                event.preventDefault();
-                $("#avisoIgualdade").show();
-            }
-            else{$("#avisoIgualdade").hide();}
-
-            if(($("#txtSenha").val().length <= 5) && ($("#txtConfirmaSenha").val().length <= 5))
-            {
-                event.preventDefault();
-                $("#avisoComprimento").show();
-            }
-            else {$("#avisoComprimento").hide();}
-        });
-    </script>
     <!-- VALIDADOR DE CPF -->
     <script src="https://cdn.jsdelivr.net/npm/js-brasil/js-brasil.js"></script>
     <script>
@@ -222,6 +204,29 @@
             } else {
                 $("#cpfInvalido").show();
                 $("#cpfValido").hide();
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        //confirme a senha
+        $("form").submit(function(event){
+            if($("#txtSenha").val() != $("#txtConfirmaSenha").val())
+            {
+                event.preventDefault();
+                $("#avisoIgualdade").show();
+            }
+            else{$("#avisoIgualdade").hide();}
+            
+            if(($("#txtSenha").val().length <= 5) && ($("#txtConfirmaSenha").val().length <= 5))
+            {
+                event.preventDefault();
+                $("#avisoComprimento").show();
+            }
+            else {$("#avisoComprimento").hide();}
+
+            if(!jsbrasil.validateBr.cpf($("#txtCPF").val()))
+            {
+                event.preventDefault();
             }
         });
     </script>

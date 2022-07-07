@@ -196,9 +196,13 @@
     <script>
         inputImgAnimal.onchange = evt => {
             const [file] = inputImgAnimal.files
-            if (file) {
+            if (file && $("#inputImgAnimal").val() != "") {
                 var url = URL.createObjectURL(file);
                 imgAnimal.src = url;
+            }
+            else
+            {
+                imgAnimal.src = "recursos/img/imagem_exemplo.jpg";
             }
         }
     </script>

@@ -140,6 +140,8 @@
                                     <div class="form-group col-6">
                                         <label for="txtCPF" class="form-label">CPF:</label>
                                         <input class="form-control" type="text" name="txtCPF" id="txtCPF"  maxlength="14" required>
+                                        <div class="invalid-feedback" id="cpfInvalido" style="display:none;">CPF Inválido</div>
+                                        <div class="valid-feedback" id="cpfValido" style="display:none;">CPF Válido</div>
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="txtTel" class="form-label">Telefone:</label>
@@ -158,7 +160,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group">
-                                        <input type="checkbox" name="chkPunicao" id="chkPunicao" value="1" class="form-check-input">
+                                        <input type="checkbox" name="chkPunicao" id="chkPunicao" class="form-check-input">
                                         <label for="chkPunicao" class="form-check-label">Punição</label>
                                     </div>
                                 </div>
@@ -351,16 +353,18 @@
             if(punicao > 0)
             {
                 $("#chkPunicao").prop("checked",true);
+                $("#chkPunicao").val(punicao);
             }
             else{
                 $("#chkPunicao").prop("checked",false);
+                $("#chkPunicao").val('2');
             }
         });
     </script>
-    <!-- ABRIR MODAL editar usuário -->
+    <!-- ABRIR MODAL Comprovante usuário -->
     <script>
-        var modalEditar = document.getElementById('modalImg')
-        modalEditar.addEventListener('show.bs.modal', function (event) {
+        var modalComprovante = document.getElementById('modalImg')
+        modalComprovante.addEventListener('show.bs.modal', function (event) {
 
             var button = event.relatedTarget
 
@@ -395,6 +399,21 @@
                     )}
             })
         }
+    </script>
+    <!-- VALIDADOR DE CPF -->
+    <script src="https://cdn.jsdelivr.net/npm/js-brasil/js-brasil.js"></script>
+    <script>
+        $("#txtCPF").on("blur", function(){
+            let cpf_value = $(this).val();
+            
+            if(jsbrasil.validateBr.cpf(cpf_value)) {
+                $("#cpfValido").show();
+                $("#cpfInvalido").hide();
+            } else {
+                $("#cpfInvalido").show();
+                $("#cpfValido").hide();
+            }
+        });
     </script>
 </body>
 </html>
