@@ -61,7 +61,8 @@
                                             
                                             $valorPunicao = $value->punicao;
                                             $value->punicao == 0 ? $value->punicao = '-' : $value->punicao = "<span class='badge bg-danger'>Punido</span>";
-    
+                                            
+                                            $whats = $value->whatsapp;
                                             $value->whatsapp == 1 ? $value->whatsapp = "<a href='https://api.whatsapp.com/send?phone=55$value->celular&text=Olá $value->nome!' target='_blank'><img src='".URL."recursos/img/whatsapp.png'></a>" : $value->whatsapp = "";
 
                                             //Testar depois:
@@ -97,7 +98,7 @@
                                                     <button class='btn btn-warning btn-sm-sm text-light' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
                                                             data-idusuario='$value->idusuario' data-nome='$value->nome' data-cpf='$value->cpf' data-beneficio='$valorBeneficio' data-nis='$valorNis' 
                                                             data-email='$value->email' data-telefone='$valorTelefone' data-celular='$value->celular' data-punicao='$valorPunicao' data-rg='$value->rg' 
-                                                            data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$value->idlogin'>
+                                                            data-cep='$value->usucep' data-numero='$value->usunumero' data-bairro='$value->usubairro' data-rua='$value->usurua' data-idlogin='$value->idlogin' data-whats='$whats'>
                                                         <img src=". URL . "recursos/img/pencil-square.svg".">
                                                     </button>
                                                 
@@ -166,6 +167,10 @@
                                     <div class="form-group col-6">
                                         <label for="txtCelular" class="form-label">Celular:</label>
                                         <input class="form-control" type="text" name="txtCelular" id="txtCelular"  maxlength="15">
+                                        <div class="form-group">
+                                            <input type="checkbox" name="chkWhats" id="chkWhats" value="sim">
+                                            <label for="chkWhats" class="form-label" style="font-size: 0.9em;">O número é Whatsapp?</label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -332,6 +337,7 @@
             var bairro = button.getAttribute('data-bairro')
             var rua = button.getAttribute('data-rua')
             var punicao = button.getAttribute('data-punicao')
+            var whats = button.getAttribute('data-whats')
 
             
             var modalId = modalEditar.querySelector('.modal-title')
@@ -372,6 +378,13 @@
             else{
                 $("#chkPunicao").prop("checked",false);
                 $("#chkPunicao").val('2');
+            }
+            if(whats == 1)
+            {
+                $("#chkWhats").prop("checked", true);
+            }
+            else{
+                $("#chkWhats").prop("checked", false);
             }
         });
     </script>
