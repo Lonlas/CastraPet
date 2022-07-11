@@ -146,6 +146,14 @@ if($_GET)
             $usuario = new UsuarioController();
             $usuario->atualizarUsuario();
         break;
+        case "atualiza-perfil":
+            $usuario = new UsuarioController();
+            $usuario->atualizarDadosUsuario();
+        break;
+        case "atualiza-endereco":
+            $usuario = new UsuarioController();
+            $usuario->atualizarEnderecoUsuario();
+        break;
         case "atualiza-raca":
             $raca = new AnimalController();
             $raca->atualizarRaca();

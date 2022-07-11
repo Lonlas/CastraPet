@@ -137,6 +137,7 @@
                                                 usunumero = :usunumero, 
                                                 usucep = :usucep, 
                                                 nis = NULLIF(:nis,''),
+                                                whatsapp = :whatsapp,
                                                 punicao = :punicao
                                             WHERE idusuario = :idusuario");
                 
@@ -151,10 +152,7 @@
             $cmd->bindParam(":usunumero",       $this->usunumero);
             $cmd->bindParam(":usucep",          $this->usucep);
             $cmd->bindParam(":nis",             $this->nis);
-            /*$cmd->bindParam(":whatsapp",        $this->whatsapp);
-            $cmd->bindParam(":docprotetor",     $this->docprotetor);
-            $cmd->bindParam(":quantcastracoes", $this->quantcastracoes);*/
-            $cmd->bindParam(":doccomprovante",  $this->doccomprovante);
+            $cmd->bindParam(":whatsapp",        $this->whatsapp);
             $cmd->bindParam(":punicao",         $this->punicao);
             $cmd->bindParam(":idusuario",       $this->idusuario);
 
@@ -170,9 +168,6 @@
 
             //Preparar o comando SQL para atualizar
             $cmd = $con->prepare("UPDATE usuario SET 
-                                                    nome = :nome, 
-                                                    email = :email, 
-                                                    cpf = :cpf, 
                                                     rg = :rg, 
                                                     telefone = NULLIF(:telefone,''), 
                                                     celular = :celular,
@@ -182,15 +177,13 @@
                                       WHERE idusuario = :idusuario");
             
             //Parâmetros SQL
-            $cmd->bindParam(":nome",            $this->nome);
-            $cmd->bindParam(":email",           $this->email);
-            $cmd->bindParam(":cpf",             $this->cpf);
             $cmd->bindParam(":rg",              $this->rg);
             $cmd->bindParam(":telefone",        $this->telefone);
             $cmd->bindParam(":celular",         $this->celular);
             $cmd->bindParam(":nis",             $this->nis);
             $cmd->bindParam(":beneficio",       $this->beneficio);
             $cmd->bindParam(":whatsapp",        $this->whatsapp);
+            $cmd->bindParam(":idusuario",       $this->idusuario);
 
             //Executando o comando SQL
             $cmd->execute();

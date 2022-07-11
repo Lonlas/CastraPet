@@ -23,7 +23,7 @@
             <div class="bg-primary h-100 row align-items-center">
                 <div class="container mx-auto p-3"style="grid-area:corpo;">
                     <div class="container bg-dark text-light font-weight-bold p-3">
-                        Olá <?php echo $_SESSION["dadosLogin"]->nome."!"; ?>
+                        Olá <?php echo $dadosUsuario->nome."!"; ?>
                     </div>
                     <div class="container bg-white">
                         <form action="<?php echo URL.'perfil'; ?>" class="p-sm-3 p-md-3 p-lg-3 p-3 px-0 row m-0 justify-items-center" method="POST">
@@ -31,33 +31,34 @@
                                 DADOS PESSOAIS 
                                 <img src="<?php echo URL.'recursos/img/pencil.svg';?>" class="btn btn-secudary" id='btnEditar' type='button'
                                     data-bs-target='#modalEditar' data-bs-toggle='modal' 
-                                        data-idusuario='<?php echo $_SESSION["dadosUsuario"]->idusuario;?>'
-                                        data-idlogin='<?php echo $_SESSION["dadosLogin"]->idlogin;?>' 
-                                        data-nome='<?php echo $_SESSION["dadosUsuario"]->nome;?>'
-                                        data-email='<?php echo $_SESSION["dadosUsuario"]->email;?>'
-                                        data-cpf='<?php echo $_SESSION["dadosUsuario"]->cpf;?>'
-                                        data-rg='<?php echo $_SESSION["dadosUsuario"]->rg;?>' 
-                                        data-telefone='<?php echo $_SESSION["dadosUsuario"]->telefone;?>' 
-                                        data-celular='<?php echo $_SESSION["dadosUsuario"]->celular;?>'
-                                        data-beneficio='<?php echo $_SESSION["dadosUsuario"]->beneficio;?>'
-                                        data-nis='<?php echo $_SESSION["dadosUsuario"]->nis;?>' >
+                                        data-idusuario='<?php echo $dadosUsuario->idusuario?>'
+                                        data-idlogin='<?php echo $dadosUsuario->idlogin;?>' 
+                                        data-nome='<?php echo $dadosUsuario->nome;?>'
+                                        data-email='<?php echo $dadosUsuario->email;?>'
+                                        data-rg='<?php echo $dadosUsuario->rg;?>'
+                                        data-cpf='<?php echo $dadosUsuario->cpf;?>'
+                                        data-telefone='<?php echo $dadosUsuario->telefone;?>' 
+                                        data-celular='<?php echo $dadosUsuario->celular;?>'
+                                        data-whatsapp='<?php echo $dadosUsuario->whatsapp?>'
+                                        data-beneficio='<?php echo $dadosUsuario->beneficio;?>'
+                                        data-nis='<?php echo $dadosUsuario->nis;?>' >
                                 <hr>
                             </div>
                             <div class="col-md-7 form-group">
                                 <div class="row">
-                                    <p>Nome: <?php echo $_SESSION["dadosUsuario"]->nome;?></p>
+                                    <p>Nome: <?php echo $dadosUsuario->nome;?></p>
                                 </div>
                                 <div class="row">
-                                    <p>E-mail: <?php echo $_SESSION["dadosUsuario"]->email;?></p>
+                                    <p>E-mail: <?php echo $dadosUsuario->email;?></p>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
                                         <?php
                                             //Formatando o CPF
-                                            $bloco1 = substr($_SESSION["dadosUsuario"]->cpf,0,3);
-                                            $bloco2 = substr($_SESSION["dadosUsuario"]->cpf,3,3);
-                                            $bloco3 = substr($_SESSION["dadosUsuario"]->cpf,6,3);
-                                            $digverificador = substr($_SESSION["dadosUsuario"]->cpf,-2);
+                                            $bloco1 = substr($dadosUsuario->cpf,0,3);
+                                            $bloco2 = substr($dadosUsuario->cpf,3,3);
+                                            $bloco3 = substr($dadosUsuario->cpf,6,3);
+                                            $digverificador = substr($dadosUsuario->cpf,-2);
                                             $CPF_Formatado = $bloco1.".".$bloco2.".".$bloco3."-".$digverificador;
                                         ?>
                                         <p>CPF: <?php echo $CPF_Formatado?></p>
@@ -65,23 +66,23 @@
                                     <div class="col-6">
                                         <?php
                                             //Formatando o Telefone
-                                            $ddd = substr($_SESSION["dadosUsuario"]->telefone,0,2);
-                                            $bloco1 = substr($_SESSION["dadosUsuario"]->telefone,2,4);
-                                            $bloco2 = substr($_SESSION["dadosUsuario"]->telefone,6,4);
+                                            $ddd = substr($dadosUsuario->telefone,0,2);
+                                            $bloco1 = substr($dadosUsuario->telefone,2,4);
+                                            $bloco2 = substr($dadosUsuario->telefone,6,4);
                                             $Telefone_Formatado = "(".$ddd.") ".$bloco1."-".$bloco2;
 
                                         ?>
-                                        <p>Telefone: <?php if(empty($_SESSION["dadosUsuario"]->telefone)) echo "-"; else echo $Telefone_Formatado;?></p>
+                                        <p>Telefone: <?php if(empty($dadosUsuario->telefone)) echo "-"; else echo $Telefone_Formatado;?></p>
                                     </div>    
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
                                         <?php
                                             //Formatando o RG
-                                            $bloco1 = substr($_SESSION["dadosUsuario"]->rg,0,2);
-                                            $bloco2 = substr($_SESSION["dadosUsuario"]->rg,2,3);
-                                            $bloco3 = substr($_SESSION["dadosUsuario"]->rg,5,3);
-                                            $digverificador = substr($_SESSION["dadosUsuario"]->rg,-1);
+                                            $bloco1 = substr($dadosUsuario->rg,0,2);
+                                            $bloco2 = substr($dadosUsuario->rg,2,3);
+                                            $bloco3 = substr($dadosUsuario->rg,5,3);
+                                            $digverificador = substr($dadosUsuario->rg,-1);
                                             $RG_Formatado = $bloco1.".".$bloco2.".".$bloco3."-".$digverificador;
                                         ?>
                                         <p>RG: <?php echo $RG_Formatado?></p>
@@ -89,9 +90,9 @@
                                     <div class="col-6">
                                         <?php
                                             //Formatando o Celular
-                                            $ddd = substr($_SESSION["dadosUsuario"]->celular,0,2);
-                                            $bloco1 = substr($_SESSION["dadosUsuario"]->celular,2,5);
-                                            $bloco2 = substr($_SESSION["dadosUsuario"]->celular,7,4);
+                                            $ddd = substr($dadosUsuario->celular,0,2);
+                                            $bloco1 = substr($dadosUsuario->celular,2,5);
+                                            $bloco2 = substr($dadosUsuario->celular,7,4);
                                             $Celular_Formatado = "(".$ddd.") ".$bloco1."-".$bloco2;
                                         ?>
                                         <p>Celular: <?php echo $Celular_Formatado;?></p>
@@ -102,32 +103,32 @@
                                         ENDEREÇO
                                         <img src="<?php echo URL.'recursos/img/pencil.svg';?>" class="btn btn-secudary" id='btnEditar' type='button'
                                             data-bs-target='#modalEditarEndereco' data-bs-toggle='modal' 
-                                                data-idusuario='<?php echo $_SESSION["dadosUsuario"]->idusuario;?>'
+                                                data-idusuario='<?php echo $dadosUsuario->idusuario;?>'
                                                 data-idlogin='<?php echo $_SESSION["dadosLogin"]->idlogin;?>'
-                                                data-cep='<?php echo $_SESSION["dadosUsuario"]->usucep;?>'
-                                                data-rua='<?php echo $_SESSION["dadosUsuario"]->usurua;?>'
-                                                data-numero='<?php echo $_SESSION["dadosUsuario"]->usunumero;?>'
-                                                data-bairro='<?php echo $_SESSION["dadosUsuario"]->usubairro;?>'>
+                                                data-cep='<?php echo $dadosUsuario->usucep;?>'
+                                                data-rua='<?php echo $dadosUsuario->usurua;?>'
+                                                data-numero='<?php echo $dadosUsuario->usunumero;?>'
+                                                data-bairro='<?php echo $dadosUsuario->usubairro;?>'>
                                         <hr>
                                     </div>
                                     <div class="col-6">
                                         <?php
                                             //Formatando o CEP
-                                            $bloco1 = substr($_SESSION["dadosUsuario"]->usucep,0,5);
-                                            $bloco2 = substr($_SESSION["dadosUsuario"]->usucep,-3);
+                                            $bloco1 = substr($dadosUsuario->usucep,0,5);
+                                            $bloco2 = substr($dadosUsuario->usucep,-3);
                                             $CEP_Formatado = $bloco1."-".$bloco2;
                                         ?>
                                         <p>CEP: <?php echo $CEP_Formatado?></p>
                                     </div>
                                     <div class="col-6">
-                                        <p>Número: <?php echo $_SESSION["dadosUsuario"]->usunumero;?></p>
+                                        <p>Número: <?php echo $dadosUsuario->usunumero;?></p>
                                     </div>    
                                 </div>
                                 <div class="row">
-                                    <p>Bairro: <?php echo $_SESSION["dadosUsuario"]->usubairro;?></p>
+                                    <p>Bairro: <?php echo $dadosUsuario->usubairro;?></p>
                                 </div>
                                 <div class="row">
-                                    <p>Rua: <?php echo $_SESSION["dadosUsuario"]->usurua;?></p>
+                                    <p>Rua: <?php echo $dadosUsuario->usurua;?></p>
                                 </div>
                             </div>
                             <div class="col-md-5 form-group mt-4">
@@ -138,7 +139,7 @@
                                 <div class="row">
                                     <p>
                                         <?php 
-                                            if(empty($_SESSION["dadosUsuario"]->nis))
+                                            if(empty($dadosUsuario->nis))
                                             {
                                                 echo "<input type='checkbox' disabled>";
                                                 echo " Tenho benefício NIS: - ";
@@ -148,10 +149,10 @@
                                                 echo "<input type='checkbox' checked disabled>";
     
                                                 //Formatando o NIS
-                                                $bloco1 = substr($_SESSION["dadosUsuario"]->nis,0,3);
-                                                $bloco2 = substr($_SESSION["dadosUsuario"]->nis,3,5);
-                                                $bloco3 = substr($_SESSION["dadosUsuario"]->nis,8,2);
-                                                $digverificador = substr($_SESSION["dadosUsuario"]->nis,-1);
+                                                $bloco1 = substr($dadosUsuario->nis,0,3);
+                                                $bloco2 = substr($dadosUsuario->nis,3,5);
+                                                $bloco3 = substr($dadosUsuario->nis,8,2);
+                                                $digverificador = substr($dadosUsuario->nis,-1);
                                                 $NIS_Formatado = $bloco1.".".$bloco2.".".$bloco3."-".$digverificador;
     
                                                 echo " Tenho benefício NIS: $NIS_Formatado";
@@ -162,7 +163,7 @@
                                 <div class="row">
                                     <p>
                                         <?php 
-                                            if(empty($_SESSION["dadosUsuario"]->beneficio == 2)){
+                                            if(empty($dadosUsuario->beneficio == 2)){
                                                 echo "<input type='checkbox' disabled>";  
                                                 echo " Sou protetor de animais";
                                             }
@@ -218,7 +219,7 @@
     <div class="modal fade" id="modalEditar" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <form action="<?php echo URL.'atualiza-tutor';?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo URL.'atualiza-perfil';?>" method="post" id="formDadosUsuario" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title">Editar dados pessoais</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
@@ -240,8 +241,8 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-6">
-                                        <label for="txtCPF" class="form-label">CPF:<font color="red"> *</font></label>
-                                        <input class="form-control" type="text" name="txtCPF" id="txtCPF" maxlength="14" required>
+                                        <label for="txtCPF" class="form-label">CPF:</label>
+                                        <input class="form-control" type="text" name="txtCPF" id="txtCPF" maxlength="14" readonly>
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="txtTel" class="form-label">Telefone:</label>
@@ -256,6 +257,10 @@
                                     <div class="form-group col-6">
                                         <label for="txtCelular" class="form-label">Celular:<font color="red"> *</font></label>
                                         <input class="form-control" type="text" name="txtCelular" id="txtCelular" maxlength="15" required>
+                                        <div class="form-group" style="margin-bottom: -10px;">
+                                            <input type="checkbox" name="chkWhats" id="chkWhats" value="sim">
+                                            <label for="chkWhats" class="form-label">O número é Whatsapp?</label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -283,15 +288,15 @@
     <div class="modal fade" id="modalEditarEndereco" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
-                <form action="<?php echo URL.'atualiza-tutor';?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo URL.'atualiza-endereco';?>" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title">Editar endereço</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
                     </div>
                     <div class="modal-body">
                         
-                        <input type="hidden" name="idusuario" id="idusuario">
-                        <input type="hidden" name="idlogin" id="idlogin">
+                        <input type="hidden" name="idusuario" id="idusuario2">
+                        <input type="hidden" name="idlogin" id="idlogin2">
                         
                         <div class="row">
                             <div class="col mb-4">
@@ -352,18 +357,18 @@
             var idusuario = button.getAttribute('data-idusuario')
             var idlogin = button.getAttribute('data-idlogin')
             var nome = button.getAttribute('data-nome')
-            var cpf = button.getAttribute('data-cpf')
             var beneficio = button.getAttribute('data-beneficio')
             var nis = button.getAttribute('data-nis')
             var email = button.getAttribute('data-email')
             var telefone = button.getAttribute('data-telefone')
             var celular = button.getAttribute('data-celular')
             var rg = button.getAttribute('data-rg')
+            var cpf = button.getAttribute('data-cpf')
+            var whatsapp = button.getAttribute('data-whatsapp')
 
             $("#idusuario").val(idusuario);
             $("#idlogin").val(idlogin);
             $("#txtNome").val(nome);
-            $("#txtCPF").val(cpf).mask('000.000.000-00');
             if(beneficio == 2)
             {
                 $("#chkProtetor").prop("checked", true);
@@ -382,15 +387,23 @@
             $("#txtEmail").val(email);
             $("#txtTel").val(telefone);   
             $("#txtCelular").val(celular).mask('(00) 00000-0000');  
+            if(whatsapp == 1)
+            {
+                $("#chkWhats").prop("checked", true);
+            }
+            else{
+                $("#chkWhats").prop("checked", false);
+            }
             $("#txtRG").val(rg).mask('00.000.000-X', {'translation': {X: {pattern: /[0-9xX]/}}});
+            $("#txtCPF").val(cpf).mask('000.000.000-00');
             
         });
     </script>
 
     <!-- ABRIR MODAL editar endereço usuário -->
     <script>
-        var modalEditar = document.getElementById('modalEditarEndereco')
-        modalEditar.addEventListener('show.bs.modal', function (event) {
+        var modalEditarEndereco = document.getElementById('modalEditarEndereco')
+        modalEditarEndereco.addEventListener('show.bs.modal', function (event) {
 
             var button = event.relatedTarget
 
@@ -401,8 +414,8 @@
             var bairro = button.getAttribute('data-bairro')
             var rua = button.getAttribute('data-rua')
 
-            $("#idusuario").val(idusuario);
-            $("#idlogin").val(idlogin);
+            $("#idusuario2").val(idusuario);
+            $("#idlogin2").val(idlogin);
             $("#txtCEP").val(cep).mask('00000-000');
             $("#txtNumero").val(numero);
             $("#txtBairro").val(bairro);
@@ -477,22 +490,6 @@
                     $campoRua.value = '';
                 }
             });
-    </script>
-
-    <!-- VALIDADOR DE CPF -->
-    <script src="https://cdn.jsdelivr.net/npm/js-brasil/js-brasil.js"></script>
-    <script>
-        $("#txtCPF").on("blur", function(){
-            let cpf_value = $(this).val();
-            
-            if(jsbrasil.validateBr.cpf(cpf_value)) {
-                $("#cpfValido").show();
-                $("#cpfInvalido").hide();
-            } else {
-                $("#cpfInvalido").show();
-                $("#cpfValido").hide();
-            }
-        });
     </script>
      <!-- EXTENSÃO JQUERY DAS MASCARAS -->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>

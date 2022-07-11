@@ -280,6 +280,11 @@ class UsuarioController
 
             $usu->telefone =  $tel;
             $usu->celular =   $celular;
+            $usu->whatsapp = 0;
+            if($_POST["chkWhats"] == "sim")
+            {
+                $usu->whatsapp = 1;
+            }
             $usu->usurua =    $_POST["txtRua"];
             $usu->usubairro = $_POST["txtBairro"];
             $usu->usunumero = $_POST["txtNumero"];
@@ -305,6 +310,7 @@ class UsuarioController
                     window.location='".URL."consulta-usuario/';
                 </script>";
         }
+        /*
         else if($_SESSION["dadosLogin"]->nivelacesso == 0) {
             
             //filtrando a mascara dos inputs
@@ -356,6 +362,7 @@ class UsuarioController
                     window.location='".URL."perfil';
                 </script>";
         }
+        */
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }
 
@@ -369,69 +376,45 @@ class UsuarioController
             
             //filtrando a mascara dos inputs
             $filtros = array(".", "-", "(", ")", " ");
-            $cpf = str_replace($filtros,'',$_POST["txtCPF"]);
             $rg = str_replace($filtros,'',$_POST["txtRG"]);
             $tel = str_replace($filtros,'',$_POST["txtTel"]);
             $celular = str_replace($filtros,'',$_POST["txtCelular"]);
             $nis = str_replace($filtros,'',$_POST["txtNIS"]);
             
             $login = new Login();
-            $usu = new Usuario();
             $login->idlogin = $_POST["idlogin"]; 
             $login->nome =    $_POST["txtNome"];
             $login->email =   $_POST["txtEmail"];
-            
-            //Verificando o NIS
-            if($_POST["chkNIS"] == "sim" && isset($nis))
+
+            //Verificando se o Email já existe e se é diferente do atual
+            $verificaEmail = $login->logar();
+            $dadosLogin = $login->retornar();
+            if($verificaEmail == null || $dadosLogin->email == $_POST["txtEmail"])
             {
-                if(strlen($nis) == 11)
-                {
-                    $usu = new Usuario();
-                    $usu->nis = $nis;
-                    $dadosConsultaNIS = $usu->verificarNis();
-                }
-                else
-                {
-                    echo"<script>alert('Digite um NIS válido'); window.location='".URL."cadastra-tutor'; </script>";
-                    return;
-                }
-            }
-            else
-                $dadosConsultaNIS = null;
-            
-            //verificando se o email ou cpf ou nis já existem no banco ou não     
-            if($login->logar() == null && $usu->verificarCPF() == null && $dadosConsultaNIS == null)
-            {
+                $usu = new Usuario();
                 $usu->idusuario = $_POST["idusuario"];
                 $usu->rg = strtoupper($rg);
                 $usu->telefone =  $tel;
                 $usu->celular =   $celular;
                 $usu->whatsapp = 0;
-                if(isset($_POST["chkWhatsapp"])){
+                if(isset($_POST["chkWhats"])){
                     $usu->whatsapp = 1;
                 }
-    
-                if(!$this->validaCPF($cpf))
-                {
-                    echo"<script>alert('Digite um CPF válido'); window.location='".URL."perfil'; </script>";
-                    return;
-                }
-                $usu->cpf = $cpf;
                 
                 $usu->beneficio = $_SESSION["dadosUsuario"]->beneficio;
                 if(isset($_POST["chkNIS"]) && $usu->beneficio != 2){
                     $usu->beneficio = $_POST["chkNIS"];
                 }
-    
+
                 $usu->nis = "";
-                if(isset($nis))
+                if(!empty($nis))
                 {
                     $usu->nis = $nis;
                 }
                 
-                $login->atualizarLogin();
+                $login->atualizar();
                 $usu->atualizarDadosUsuario();
-    
+
                 echo "<script>
                         alert('Dados alterados com sucesso!');
                         window.location='".URL."perfil';
@@ -439,12 +422,13 @@ class UsuarioController
             }
             else
             {
-                echo"<script>alert('Já existe um perfil com esse e-mail, CPF ou NIS cadastrados'); window.location='".URL."perfil'; </script>";
+                echo"<script>alert('Email já cadastrado!'); window.location='".URL."perfil'; </script>";
+                return;
             }
         } else { include_once "view/paginaNaoEncontrada.php"; }
     }
 
-    function AlterarEnderecoUsuario()
+    function atualizarEnderecoUsuario()
     {
         //caso não usuário não esteja logado
         if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
@@ -462,8 +446,7 @@ class UsuarioController
             $usu->usubairro = $_POST["txtBairro"];
             $usu->usunumero = $_POST["txtNumero"];
             $usu->usucep =    $cep;
-
-            
+ 
             //TRATANDO O COMPROVANTE DE ENDEREÇO
                 //Tratar o envio da imagem
                 $docComprovante = $_FILES["btnComprovante"]["name"];       //Nome do arquivo
@@ -475,7 +458,7 @@ class UsuarioController
 
                 if($extensao != "jpg" && $extensao != "png" && $extensao != "jpeg")
                 {
-                    echo"<script>alert('O comprovante de endereço deve ser enviado em formato jpg, png ou jpeg'); window.location='".URL."cadastra-tutor'; </script>";
+                    echo"<script>alert('O comprovante de endereço deve ser enviado em formato jpg, png ou jpeg'); window.location='".URL."perfil'; </script>";
                     return;
                 }
                 //gerar novo nome
@@ -487,17 +470,21 @@ class UsuarioController
 
                 //Removendo o Comprovante  de endereço antigo
                 $dadosUsuario = $usu->retornar();
-                if(is_file("recursos/img/Animais/$dadosUsuario->doccomprovante")) //verificar se o arquivo existe
+                if(is_file("recursos/img/docComprovantes/$dadosUsuario->doccomprovante")) //verificar se o arquivo existe
                 {
-                    unlink("recursos/img/Animais/$dadosUsuario->doccomprovante"); //excluir o arquivo
+                    unlink("recursos/img/docComprovantes/$dadosUsuario->doccomprovante"); //excluir o arquivo
                 }
             
-            $usu->atualizarEnderecoUsuario();
-
-            echo "<script>
-                    alert('Endereço com sucesso!');
-                    window.location='".URL."perfil';
-                </script>";
+            try{
+                $usu->atualizarEnderecoUsuario();
+    
+                echo "<script>
+                        alert('Endereço com sucesso!');
+                        window.location='".URL."perfil';
+                    </script>";
+            } catch (Exception $e) {
+                echo"<script>alert('Erro ao atualizar o endereço'); window.location='".URL."perfil'; </script>";
+            }
         }
         else{ include_once "view/paginaNaoEncontrada.php"; } 
     }

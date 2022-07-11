@@ -54,6 +54,9 @@ class Controller
         if(!isset($_SESSION["dadosLogin"])) { header("Location:".URL."login"); return; }
         //Controle de privilégio
         if ($_SESSION["dadosLogin"]->nivelacesso == 0) {
+            $login = new Login();
+            $login->idlogin = $_SESSION["dadosLogin"]->idlogin;
+            $dadosUsuario = $login->retornarUsuario();
             include_once "view/infoUsuario.php";
         }
         else{ include_once "view/paginaNaoEncontrada.php"; }
