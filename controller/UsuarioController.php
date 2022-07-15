@@ -382,7 +382,7 @@ class UsuarioController
             $nis = str_replace($filtros,'',$_POST["txtNIS"]);
             
             $login = new Login();
-            $login->idlogin = $_POST["idlogin"]; 
+            $login->idlogin = $_SESSION["dadosLogin"]->idlogin; 
             $login->nome =    $_POST["txtNome"];
             $login->email =   $_POST["txtEmail"];
 
@@ -392,7 +392,7 @@ class UsuarioController
             if($verificaEmail == null || $dadosLogin->email == $_POST["txtEmail"])
             {
                 $usu = new Usuario();
-                $usu->idusuario = $_POST["idusuario"];
+                $usu->idusuario = $_SESSION["dadosUsuario"]->idusuario;
                 $usu->rg = strtoupper($rg);
                 $usu->telefone =  $tel;
                 $usu->celular =   $celular;
@@ -412,7 +412,7 @@ class UsuarioController
                     $usu->nis = $nis;
                 }
                 
-                $login->atualizar();
+                $login->atualizarLogin();
                 $usu->atualizarDadosUsuario();
 
                 echo "<script>
@@ -441,7 +441,7 @@ class UsuarioController
             $cep = str_replace($filtros,'',$_POST["txtCEP"]);
 
             $usu = new Usuario();
-            $usu->idusuario = $_POST["idusuario"];
+            $usu->idusuario = $_SESSION["dadosUsuario"]->idusuario;
             $usu->usurua =    $_POST["txtRua"];
             $usu->usubairro = $_POST["txtBairro"];
             $usu->usunumero = $_POST["txtNumero"];
