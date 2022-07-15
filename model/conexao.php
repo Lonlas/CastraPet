@@ -5,7 +5,7 @@ class Conexao{
         //Informações para acessar o servidor do banco de dados
         $localhost = "mysql:host=localhost;port=3306;dbname=bdpetcastra";
         $usuario = "root";
-        $senha = "usbw";
+        $senha = "";
         
         $con = new PDO($localhost,$usuario,$senha);
         
