@@ -580,6 +580,7 @@ class UsuarioController
                 $castracao = new Castracao();
 
                 $castracao->idcastracao = $idcastracao;
+                $castracao->msgrecusa = $_POST["msgRecusa"];
                 $castracao->status = 3;
 
                 $castracao->recusarCastracao();

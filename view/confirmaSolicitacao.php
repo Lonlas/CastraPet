@@ -21,9 +21,19 @@
                     </div>
                     <div class="container p-sm-3 p-md-3 p-lg-4 p-3 px-0 bg-white">
                         <?php 
-                        if($_SESSION["dadosLogin"]->nivelacesso == 2){echo"<form action='".URL."agendar-clinica' class='p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0' method='post'>";}
-                        else{echo"<form action='".URL."agendar' class='p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0' method='post'>";}?>
-                        
+                        if($_SESSION["dadosLogin"]->nivelacesso == 2)
+                        {
+                            echo"
+                                <form action='".URL."agendar-clinica' class='p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0' method='post'>
+                            ";
+                        }
+                        else
+                        {
+                            echo"
+                                <form action='".URL."agendar' class='p-sm-3 p-md-3 p-lg-4 p-3 px-0 row m-0' method='post'>
+                            ";
+                        }
+                        ?>
                             <input type="hidden" name="emailDestinatario" id="emailDestinatario" value="<?php echo $dadosCastracao->email;?>">
                             <input type="hidden" name="nomeDestinatario" id="nomeDestinatairio" value="<?php echo $dadosCastracao->nome;?>">
                             <div class="col-sm-6 px-3">
@@ -67,24 +77,27 @@
                                             echo"
                                                 <label for='horario' class='form-label'>Selecione a data e hora da castracao</label>
                                                 <input type='datetime-local' name='horario' id='horario' class='form-control' required>
-                                            ";
+                                                ";
                                         }
                                         ?>
                                    </div>    
                                 </div>
                                 <div class="row float-end my-3">
                                     <div class="">
-
                                         <?php
                                             if($_SESSION["dadosLogin"]->nivelacesso == 2)
                                             {
-                                                echo"<!-- Botão recusar solicitação -->
-                                                <input type='submit' id='btnrecusa' value='Recusar' name='btnRecusa' class='btn btn-danger float-end me-3'>";
-
+                                                
                                                 echo"
-                                                <!-- Botão confirmar solicitação -->
-                                                <input type='submit' value='Confirmar' class='btn btn-success float-end me-1'>";
-                                            
+                                                    <!-- Botão confirmar solicitação -->
+                                                    <input type='submit' value='Confirmar' class='btn btn-success'>
+                                                ";
+                                                
+                                                echo"
+                                                    <!-- Botão recusar solicitação -->
+                                                    
+                                                    <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#modalRecusar'>Recusar</button>
+                                                    ";
                                             }
                                             else
                                             {
@@ -92,15 +105,44 @@
                                                 <!-- Botão confirmar solicitação -->
                                                 <input type='submit' value='Confirmar' class='btn btn-success float-end me-1'>";
                                             }
-                                        ?>
+                                            ?>
+
                                     </div>
                                 </div>
                             </div>
+                            <?php
+                            
+                            if($_SESSION["dadosLogin"]->nivelacesso == 2)
+                            {
+                                echo "
+                                    <div class='modal fade' id='modalRecusar' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                        <div class='modal-dialog'>
+                                            <div class='modal-content'>
+                                                <div class='modal-header'>
+                                                    <h5 class='modal-title' id='exampleModalLabel'>Mensagem de recusa da solicitação</h5>
+                                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                </div>
+                                                <div class='modal-body'>
+                                                    <textarea class='form-control' name='msgRecusa' maxlength='200' rows='4'></textarea>
+                                                </div>
+                                                <div class='modal-footer'>
+                                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancelar</button>
+                                                    <button type='submit' name='btnRecusa' value='Recusar' class='btn btn-primary'>Recusar solicitação</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    ";
+                                }
+                                
+                                ?>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="container-fluid bg-dark" style="grid-area: footer;">
             <div class="row h-100 align-items-center">
                 <div class="px-5">
@@ -109,13 +151,22 @@
             </div> 
         </div>
     </div>
-    
     <!-- /CORPO -->
 
     <!-- EXTENSÃO BOOTSTRAP -->
     <script src="<?php echo URL; ?>recursos/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="<?php echo URL; ?>recursos/js/popper.min.js"></script>
     <script src="<?php echo URL; ?>recursos/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL; ?>recursos/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var modalrecusar = document.getElementById('modalRecusar')
+        modalrecusar.addEventListener('show.bs.modal', function (event) {
+            
+            var button = event.relatedTarget
+            
+            var recipient = button.getAttribute('data-bs-whatever')
+            
+        })
+        </script>
        
 </body>
 </html>

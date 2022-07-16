@@ -149,7 +149,7 @@
 
             //Preparar comando SQL para retornar
 
-            $cmd = $con->prepare("SELECT animal.*, raca.*, status FROM animal join raca on 
+            $cmd = $con->prepare("SELECT animal.*, raca.*, status, msgrecusa FROM animal join raca on 
                                     animal.idraca = raca.idraca left join castracao on 
                                     animal.idanimal = castracao.idanimal WHERE idusuario = :idusuario");
             
@@ -171,6 +171,5 @@
 
             $cmd->execute();
         }
-
     }
 ?>

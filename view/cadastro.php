@@ -26,6 +26,9 @@
                                 <div class="form-group row-6 mb-3">
                                     <label for="txtEmail" class="form-label">Email:<font color="red"> *</font></label>
                                     <input class="form-control" type="email" name="txtEmail" id="txtEmail" maxlength="100" required>
+                                    <p class="form-text">
+                                    Insira um email que possa receber emails.
+                                    </p>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-group col-sm-6">

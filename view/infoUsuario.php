@@ -226,9 +226,6 @@
                     </div>
                     <div class="modal-body">
                         
-                        <input type="hidden" name="idusuario" id="idusuario">
-                        <input type="hidden" name="idlogin" id="idlogin">
-                        
                         <div class="row">
                             <div class="col mb-4">
                                 <div class="form-group row-6 mb-3">
@@ -294,9 +291,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
                     </div>
                     <div class="modal-body">
-                        
-                        <input type="hidden" name="idusuario" id="idusuario2">
-                        <input type="hidden" name="idlogin" id="idlogin2">
                         
                         <div class="row">
                             <div class="col mb-4">

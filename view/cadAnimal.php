@@ -102,7 +102,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6 mb-2">
-                                            <label for="numIdade" class="form-label">Idade:</label>
+                                            <label for="numIdade" class="form-label">Idade (anos):</label>
                                             <input type="number" class="form-control" id="numIdade" name="numIdade" min="0" max="100" required>
                                         </div>
                                     </div>

@@ -8,6 +8,7 @@
         private $status;
         private $observacao;
         private $obsclinica;
+        private $msgrecusa;
 
         //Método get
         function __get($atributo)
@@ -98,9 +99,10 @@
         {
             $con = Conexao::conectar();
 
-            $cmd = $con->prepare("UPDATE castracao SET status = :status WHERE idcastracao = :idcastracao");
+            $cmd = $con->prepare("UPDATE castracao SET status = :status, msgrecusa = nullif(:msgrecusa,'') WHERE idcastracao = :idcastracao");
 
             $cmd->bindParam(":status",      $this->status);
+            $cmd->bindParam(":msgrecusa", $this->msgrecusa);
             $cmd->bindParam(":idcastracao", $this->idcastracao);
 
             $cmd->execute();

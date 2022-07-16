@@ -164,6 +164,13 @@
                                             break;
                                             case 3:
                                                 echo "<span class='btn btn-sm bg-danger w-100 my-3 text-white fw-bold' style='cursor: default;'>Solicitação recusada</span>";
+                                                if(isset($value->msgrecusa))
+                                                {
+                                                    echo "
+                                                    <div class='alert alert-danger p-1'>$value->msgrecusa</div>
+                                                    ";
+                                                }
+
                                             break;
                                             case 4:
                                                 echo "<span class='btn btn-sm bg-danger w-100 my-3 text-white fw-bold' style='cursor: default;'>Tutor não compareceu</span>";
