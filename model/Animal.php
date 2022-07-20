@@ -76,6 +76,22 @@
 
             return $cmd->fetchAll(PDO::FETCH_OBJ);
         }
+        function consultarAnimaisPorDono()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para consultar
+            $cmd = $con->prepare("SELECT idanimal FROM animal WHERE idusuario = :idusuario");
+            
+            //passando parâmetros
+            $cmd->bindParam(":idusuario", $this->idusuario);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetchAll(PDO::FETCH_COLUMN);
+        }
 
         //Método excluir
         function excluir()

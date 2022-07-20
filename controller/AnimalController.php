@@ -145,7 +145,22 @@ class AnimalController
             }
             else{$animal->foto = $dadosAnimal->foto;}
     
-            $animal->atualizar();
+            $verificaanimal = new Animal();
+            $verificaanimal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+            $animais = $verificaanimal->consultarAnimaisPorDono();
+            
+            //verificando se o animal realmente pertence aquele dono
+            if(in_array($_POST["idanimal"], $animais))
+            {
+                $animal->atualizar();
+            }
+            else
+            {
+                echo "<script>alert('Você não tem permissão para editar esse animal'); window.location='".URL."meus-animais'; </script>";
+                exit();
+            }
+
+            
 
             //Excluir a castração caso exista
             $castracao = new Castracao();
@@ -190,7 +205,27 @@ class AnimalController
                     unlink("recursos/img/Animais/$dadosAnimal->foto"); //excluir o arquivo
                 }
                 
-                $animal->excluir();
+                if($_SESSION["dadosLogin"]->nivelacesso == 0){
+
+                    //verificando se o animal realmente pertence aquele dono
+                    $verificaanimal = new Animal();
+                    $verificaanimal->idusuario = $_SESSION["dadosUsuario"]->idusuario;
+                    $animais = $verificaanimal->consultarAnimaisPorDono();
+                    
+                    if(in_array($idanimal, $animais))
+                    {                        
+                        $animal->excluir();
+                    }
+                    else
+                    {
+                        echo "<script>alert('Você não tem permissão para excluir esse animal'); window.location='".URL."meus-animais'; </script>";
+                        exit();
+                    }
+                }
+                else{
+                    $animal->excluir();    
+                }
+                
             }
             catch(Exception $e){
                 if($_SESSION["dadosLogin"]->nivelacesso == 2)
