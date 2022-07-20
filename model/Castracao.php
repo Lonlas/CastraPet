@@ -164,20 +164,6 @@
             //Executando o comando SQL
             $cmd->execute();
         }
-        function excluirCastracaoAnimal()
-        {
-            //Conectando ao banco de dados
-            $con = Conexao::conectar();
-
-            //Preparar comando SQL para deletar
-            $cmd = $con->prepare("DELETE FROM castracao WHERE idanimal = :idanimal");
-
-            //Parâmetros SQL
-            $cmd->bindParam(":idanimal", $this->idanimal);
-            
-            //Executando o comando SQL
-            $cmd->execute();
-        }
         
         //Método Atualizar
         function atualizar()
@@ -228,6 +214,22 @@
             
             //Parâmetros SQL
             $cmd->bindParam(":idcastracao", $this->idcastracao);
+
+            //Executando o comando SQL
+            $cmd->execute();
+
+            return $cmd->fetch(PDO::FETCH_OBJ);
+        }
+        function retornarid()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para retornar
+            $cmd = $con->prepare("SELECT idcastracao FROM castracao WHERE castracao.idanimal = :idanimal");
+            
+            //Parâmetros SQL
+            $cmd->bindParam(":idanimal", $this->idanimal);
 
             //Executando o comando SQL
             $cmd->execute();

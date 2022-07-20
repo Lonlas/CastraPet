@@ -520,15 +520,26 @@ class UsuarioController
             
             if($dadosUsuario->quantcastracoes >= 0)
             {
-                $castracao->idusuario = $usuario->idusuario;
-                $castracao->idanimal = $_POST["idAnimal"];
-                $castracao->observacao = $_POST["obsCastracao"];
-                $castracao->status = 0;
-                $_SESSION["dadosUsuario"]->quantcastracoes--;
-                $usuario->quantcastracoes = $_SESSION["dadosUsuario"]->quantcastracoes;
-    
-                $usuario->atualizarQuantCastracoes();
-                $castracao->cadastrar();
+
+                //Verificação de erros 
+                try
+                {
+                    $castracao->idusuario = $usuario->idusuario;
+                    $castracao->idanimal = $_POST["idAnimal"];
+                    $castracao->observacao = $_POST["obsCastracao"];
+                    $castracao->status = 0;
+                    $_SESSION["dadosUsuario"]->quantcastracoes--;
+                    $usuario->quantcastracoes = $_SESSION["dadosUsuario"]->quantcastracoes;
+        
+                    $castracao->cadastrar();
+                    $usuario->atualizarQuantCastracoes();
+
+                    header("Location:".URL."meus-animais");
+                }
+                catch (Exception $e)
+                {
+                    echo"<script>alert('Houve um erro na hora de solicitar a castração'); window.location='".URL."meus-animais'; </script>";
+                }
     
                 echo"<script>window.location='".URL."meus-animais'; </script>";
             }
