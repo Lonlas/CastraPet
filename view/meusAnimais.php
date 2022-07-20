@@ -163,11 +163,19 @@
                                                 echo "<span class='btn btn-sm bg-success w-100 my-3 text-white fw-bold' style='cursor: default;'>Animal Castrado</span>";
                                             break;
                                             case 3:
-                                                echo "<span class='btn btn-sm bg-danger w-100 my-3 text-white fw-bold' style='cursor: default;'>Solicitação recusada</span>";
+                                                echo "
+                                                <button class='btn btn-warning w-100 mb-2' id='btnEditar' type='button' data-bs-target='#modalEditar' data-bs-toggle='modal' 
+                                                    data-idanimal='$value->idanimal' data-idusuario='$value->idusuario' data-nome='$value->aninome' data-especie='$valorEspecie' 
+                                                    data-sexo='$valorSexo' data-cor='$value->cor' data-raca='$value->idraca' data-idade='$value->idade' data-pelagem='$valorPelagem' 
+                                                    data-porte='$valorPorte' data-comunitario='$valorComunitario' data-foto='$valorFoto'>
+                                                    Editar
+                                                </button>
+                                                <span class='btn btn-sm bg-danger w-100 my-3 text-white fw-bold' style='cursor: default;'>Solicitação recusada</span>
+                                                ";
                                                 if(isset($value->msgrecusa))
                                                 {
                                                     echo "
-                                                    <div class='alert alert-danger p-1'>$value->msgrecusa</div>
+                                                    <div class='alert alert-danger p-1'>$value->msgrecusa Para fazer uma nova solicitação, edite as informações do animal</div>
                                                     ";
                                                 }
 

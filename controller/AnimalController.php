@@ -1,5 +1,6 @@
 <?php
 include_once "model/Animal.php";
+include_once "model/Castracao.php";
 include_once "model/Raca.php";
 
 class AnimalController
@@ -144,6 +145,9 @@ class AnimalController
             else{$animal->foto = $dadosAnimal->foto;}
     
             $animal->atualizar();
+            $castracao = new Castracao();
+            $castracao->idanimal = $_POST["idanimal"];
+            $castracao->excluirCastracaoAnimal();
 
             if($_SESSION["dadosLogin"]->nivelacesso == 0){ header("Location:".URL."meus-animais"); }
             else{ header("Location:".URL."consulta-animais/".$_POST['idusuario']);}

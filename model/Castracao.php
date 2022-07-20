@@ -164,6 +164,20 @@
             //Executando o comando SQL
             $cmd->execute();
         }
+        function excluirCastracaoAnimal()
+        {
+            //Conectando ao banco de dados
+            $con = Conexao::conectar();
+
+            //Preparar comando SQL para deletar
+            $cmd = $con->prepare("DELETE FROM castracao WHERE idanimal = :idanimal");
+
+            //Parâmetros SQL
+            $cmd->bindParam(":idanimal", $this->idanimal);
+            
+            //Executando o comando SQL
+            $cmd->execute();
+        }
         
         //Método Atualizar
         function atualizar()
