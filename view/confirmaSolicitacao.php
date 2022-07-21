@@ -47,7 +47,18 @@
                                 </div>
                                 <div class="row container-fluid p-0 m-0 form-group mb-2">
                                     <label for="" class="form-label">CPF do responsável:</label>
-                                    <input type="text" name="cpf" readonly class="form-control" value="<?php echo $dadosCastracao->cpf;?>"> 
+                                    <?php 
+
+                                        if($_SESSION["dadosLogin"]->nivelacesso == 2)
+                                        {
+                                            echo "<a href='". URL ."consulta-usuario/$dadosCastracao->cpf' class='p-0'>
+                                                <input type='text' name='cpf' readonly class='form-control' value='$dadosCastracao->cpf' style='cursor:pointer;
+                                                '>
+                                            </a>";
+                                        }
+                                        else
+                                        echo "<input type='text' name='cpf' readonly class='form-control' value='$dadosCastracao->cpf'>";
+                                    ?>
                                 </div>
                                 <div class="row container-fluid p-0 m-0 form-group mb-2 ">
                                     <label for="" class="form-label">Observações do tutor: </label>
